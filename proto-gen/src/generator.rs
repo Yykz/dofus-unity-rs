@@ -1,10 +1,9 @@
-
-use std::io::{BufWriter, self};
+use std::io::{self, BufWriter};
 use std::path::{Path, PathBuf};
 
 use pest::Parser;
 
-use crate::parser_items::{FileContent, File};
+use crate::parser_items::{File, FileContent};
 use crate::{CSharpParser, ProtoEntity, Rule};
 
 struct CreateOnWriteFile<'a> {
@@ -47,27 +46,41 @@ pub struct Generator {
     outdir: PathBuf,
 }
 
+#[derive(Debug, thiserror::Error)]
+pub enum Error {
+    #[error("CSharpParser failed to parse {0}")]
+    FailedToParse(#[from] pest::error::Error<Rule>),
+    #[error("failed to read file {0} {1}")]
+    FailedToReadFile(PathBuf, io::Error),
+    #[error("failed to write to file {0}")]
+    FailedToWriteProto(io::Error),
+    #[error("failed to read dir {0} {1}")]
+    FailedToReadDir(PathBuf, io::Error),
+}
+
+pub type Result = std::result::Result<(), Error>;
+
 impl Generator {
-    pub fn from_source<P: AsRef<Path>>(source: P, outdir: PathBuf) {
-        let _ = Self {
+    pub fn from_source<P: AsRef<Path>>(source: P, outdir: PathBuf) -> Result {
+        Self {
             source: source.as_ref().into(),
             outdir,
         }
-        .process_dir_recu(source.as_ref());
+        .process_dir_recu(source.as_ref())
     }
 
-    fn process_dir_recu(&self, path: &Path) -> io::Result<()> {
+    fn process_dir_recu(&self, path: &Path) -> Result {
         let affix = path.strip_prefix(&self.source).unwrap();
-        let mut dir_out_filename = self.outdir.clone();
-        dir_out_filename.push(format!(
+        let mut path_outfile = self.outdir.clone();
+        path_outfile.push(format!(
             "{}.proto",
             affix.to_str().unwrap().to_lowercase().replace("/", "_")
         ));
 
-        let mut file = CreateOnWriteFile::new(&dir_out_filename);
+        let mut file = CreateOnWriteFile::new(&path_outfile);
 
-        for entry in std::fs::read_dir(path)? {
-            let entry = entry?;
+        for entry in std::fs::read_dir(path).map_err(|e| Error::FailedToReadDir(path.into(), e))? {
+            let entry = entry.map_err(|e| Error::FailedToReadDir(path.into(), e))?;
             let path = entry.path();
 
             match path.is_file() {
@@ -82,24 +95,19 @@ impl Generator {
         Ok(())
     }
 
-    fn process_file<W: io::Write>(path: &Path, mut out: W) -> io::Result<()> {
-        let content = std::fs::read_to_string(path)?;
-        match CSharpParser::parse(Rule::file, &content[3..]) {
-            Ok(mut parsed) => {
-                let file_pair = parsed.next().unwrap();
-                let parsed_file = File::try_from(file_pair).unwrap();
-                match parsed_file.content {
-                    FileContent::Class(_class) => {}
-                    FileContent::Namespace(namespace) => {
-                        if let Ok(proto) = ProtoEntity::try_from(namespace) {
-                            writeln!(out, "{}", proto)?;
-                        }
-                    }
+    fn process_file<W: io::Write>(path: &Path, mut out: W) -> Result {
+        let content = std::fs::read_to_string(path).map_err(|e| Error::FailedToReadFile(path.into(), e))?;
+        let mut parsed = CSharpParser::parse(Rule::file, &content[3..])?;
+        let file_pair = parsed.next().unwrap();
+        let parsed_file = File::try_from(file_pair).unwrap();
+        match parsed_file.content {
+            FileContent::Class(_class) => {}
+            FileContent::Namespace(namespace) => {
+                if let Ok(proto) = ProtoEntity::try_from(namespace) {
+                    writeln!(out, "{}", proto).map_err(|e| Error::FailedToWriteProto(e))?;
                 }
             }
-            Err(_e) => panic!("Failed to parse {:?}", path.to_str().unwrap()),
         }
         Ok(())
     }
 }
-
