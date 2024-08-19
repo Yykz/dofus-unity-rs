@@ -1,0 +1,8 @@
+[package]
+name = "proto_gen"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pest = {version = "2.7.11" }
+pest_derive = "2.7.11"

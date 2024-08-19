@@ -1,0 +1,51 @@
+file = { SOI ~ import* ~ (namespace|class) ~ EOI }
+
+import = { "using" ~ itemPath ~ ";" }
+
+namespace = { "namespace" ~ itemPath ~ namespaceBody }
+namespaceBody = { "{" ~ member ~ "}" }
+
+member = { property | constructor | method | field | class | enum }
+
+class = { attribute* ~ visibility ~ modifier* ~ "class" ~ identName ~ (":" ~ interfaces)? ~ classBody }
+  classBody = { "{" ~ member* ~ "}" }
+  interfaces = { interfaceName ~ ("," ~ interfaceName)* }
+  interfaceName = @{ ('a'..'z' | 'A'..'Z' | "<" | ">" | "." )+ }
+
+property = { attribute* ~ visibility ~ modifier? ~ propertyType ~ propertyName ~ propertyBody }
+  propertyType = @{ ('a'..'z' | 'A'..'Z' | ".")+ ~ Generic? }
+  propertyName = @{ ('a'..'z' | 'A'..'Z' | "." | ":" | "_")+ }
+  propertyBody = { "{" ~ accessors+ ~ "}" }
+  accessors = { attribute* ~ ("get"|"set") ~ "{" ~ (!"}" ~ ANY)* ~ "}" }
+
+constructor = { attribute* ~ visibility ~ identName ~ "(" ~ parameters? ~ ")" ~ constructorBody }
+  constructorBody = { "{" ~ (!"}" ~ ANY)* ~ "}" }
+
+method = { attribute* ~ visibility ~ "override"? ~ methodType ~ methodName ~ "(" ~ parameters? ~ ")" ~ methodBody }
+  methodType = @{ ('a'..'z' | 'A'..'Z' | ".")+ }
+  methodName = @{ ('a'..'z' | 'A'..'Z' | "." | ":")+ }
+  methodBody = { "{" ~ (!"}" ~ ANY)* ~ "}" }
+
+field = { attribute* ~ visibility ~ modifier* ~ fieldType ~ identName ~ assignValue? ~ ";"  }
+  modifier = { ("static" | "readonly" | "const" | "sealed") }
+  assignValue = { "=" ~ (!";" ~ ANY)* }
+  fieldType = @{ ('a'..'z' | 'A'..'Z' | "." | Generic )+ }
+
+enum = { attribute* ~ visibility ~ "enum" ~ identName ~ enumBody }
+  enumBody = { "{" ~ enumMember ~ ("," ~ enumMember)* ~ "}" }
+  enumMember = { attribute* ~ identName ~ assignEnum? }
+  assignEnum = { ("=" ~ '0'..'9'+) }
+
+parameters = { parameter ~ (parameter ~ ",")*}
+  parameter = { "ref"? ~ parameterType ~ identName }
+  parameterType = @{ ('a'..'z' | 'A'..'Z' | ".")+ }
+
+visibility = { "public" | "private" | "internal" }
+attribute = { "[" ~ (!"]" ~ ANY)* ~ "]" }
+
+itemPath = @{ identName ~ ("." ~ identName)* }
+identName = @{ ('a'..'z' | 'A'..'Z' | "_" | '0'..'9')+ }
+Generic = { "<" ~ (!">" ~ ANY)* ~ ">" }
+
+COMMENT = _{ "//" ~ (!"\n" ~ ANY)* ~ "\n" }
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
