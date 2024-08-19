@@ -1,6 +1,6 @@
-use std::fmt::Display;
-use crate::parser_items;
 use super::pascal_to_snake_case;
+use crate::parser_items;
+use std::fmt::Display;
 
 #[derive(Debug)]
 pub enum Field {
@@ -77,7 +77,7 @@ where
         let value: String = value.into();
 
         if value.starts_with("MapField") {
-            let value = &value[9..value.len()-1];
+            let value = &value[9..value.len() - 1];
             if let Some((key, value)) = value.split_once(", ") {
                 let key = Self::from(key);
                 let value = Self::from(value);

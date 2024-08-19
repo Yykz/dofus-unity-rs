@@ -48,7 +48,10 @@ impl TryFrom<Pair<'_, Rule>> for File {
             None => return Err(()),
         };
 
-        Ok(Self { _imports: imports, content })
+        Ok(Self {
+            _imports: imports,
+            content,
+        })
     }
 
     type Error = ();

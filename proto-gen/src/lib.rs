@@ -7,6 +7,6 @@ pub(crate) struct CSharpParser;
 mod protobuf;
 pub(crate) use protobuf::ProtoEntity;
 
-pub(crate) mod parser_items;
 mod generator;
+pub(crate) mod parser_items;
 pub use generator::Generator;

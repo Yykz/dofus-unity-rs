@@ -11,13 +11,19 @@ pub struct Enum {
 
 fn original_name(attribute: parser_items::Attribute) -> Option<String> {
     match attribute.0.starts_with("[OriginalName") {
-        true => Some((&attribute.0[15..attribute.0.len()-3]).to_string()),
+        true => Some((&attribute.0[15..attribute.0.len() - 3]).to_string()),
         false => None,
     }
 }
 
 fn variant_name(variant: parser_items::Variant) -> String {
-    match variant.attributes.into_iter().map(original_name).find(|a| a.is_some()).flatten() {
+    match variant
+        .attributes
+        .into_iter()
+        .map(original_name)
+        .find(|a| a.is_some())
+        .flatten()
+    {
         Some(original_name) => original_name,
         None => variant.name.to_ascii_uppercase(),
     }
@@ -27,11 +33,7 @@ impl Enum {
     pub fn new(value: parser_items::Enum, namespace: String) -> Self {
         Self {
             name: value.name,
-            variants: value
-                .variants
-                .into_iter()
-                .map(variant_name)
-                .collect(),
+            variants: value.variants.into_iter().map(variant_name).collect(),
             _namespace: namespace,
         }
     }
