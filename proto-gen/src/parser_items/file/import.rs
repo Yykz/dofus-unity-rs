@@ -2,7 +2,6 @@ use pest::iterators::Pair;
 
 use crate::Rule;
 
-#[allow(dead_code)]
 #[derive(Debug)]
 pub struct Import(pub String);
 

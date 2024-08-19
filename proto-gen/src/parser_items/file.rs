@@ -5,11 +5,11 @@ use crate::Rule;
 use super::{Class, Namespace};
 
 mod import;
-use import::Import;
+pub use import::Import;
 
 #[derive(Debug)]
 pub struct File {
-    pub _imports: Vec<Import>,
+    pub imports: Vec<Import>,
     pub content: FileContent,
 }
 
@@ -48,10 +48,7 @@ impl TryFrom<Pair<'_, Rule>> for File {
             None => return Err(()),
         };
 
-        Ok(Self {
-            _imports: imports,
-            content,
-        })
+        Ok(Self { imports, content })
     }
 
     type Error = ();

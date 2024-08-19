@@ -1,14 +1,16 @@
-use std::io::{self, BufWriter, Write};
+use std::collections::HashSet;
+use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
 use pest::Parser;
 
-use crate::parser_items::{File, FileContent};
+use crate::parser_items::{self, File, FileContent};
 use crate::{CSharpParser, ProtoEntity, Rule};
 
 #[derive(Debug, Default)]
 struct ProtoFileBuffer {
     content: Vec<u8>,
+    imports: HashSet<String>,
 }
 
 impl ProtoFileBuffer {
@@ -17,9 +19,28 @@ impl ProtoFileBuffer {
             return Ok(());
         }
         let mut file = std::fs::File::create(path)?;
-        writeln!(file, "syntax = \"proto3\";\n\npackage {};\n", package)?;
+        writeln!(file, "syntax = \"proto3\";\n")?;
+        for import in &self.imports {
+            writeln!(file, "import \"{}.proto\";", &import[1..])?;
+        }
+        writeln!(file, "package {};\n", package)?;
         file.write_all(&self.content)?;
         Ok(())
+    }
+
+    pub fn add_imports(&mut self, imports: Vec<parser_items::Import>, base_namespace: &str) {
+        self.imports.extend(
+            imports
+                .into_iter()
+                .filter(|import| import.0.starts_with(base_namespace))
+                .map(|import| {
+                    import
+                        .0
+                        .strip_prefix(base_namespace)
+                        .unwrap()
+                        .to_ascii_lowercase()
+                }),
+        )
     }
 }
 
@@ -37,6 +58,7 @@ pub struct Generator {
     source: PathBuf,
     outdir: PathBuf,
     package_prefix: String,
+    base_namespace: String,
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -56,15 +78,23 @@ pub enum Error {
 pub type Result = std::result::Result<(), Error>;
 
 impl Generator {
-    pub fn from_source<P: AsRef<Path>, O: Into<PathBuf>, S: Into<String>>(
+    pub fn from_source<P, O, S, S2>(
         source: P,
         outdir: O,
         package_prefix: S,
-    ) -> Result {
+        base_namespace: S2,
+    ) -> Result
+    where
+        P: AsRef<Path>,
+        O: Into<PathBuf>,
+        S: Into<String>,
+        S2: Into<String>,
+    {
         Self {
             source: source.as_ref().into(),
             outdir: outdir.into(),
             package_prefix: package_prefix.into(),
+            base_namespace: base_namespace.into(),
         }
         .process_dir_recu(source.as_ref())
     }
@@ -78,14 +108,14 @@ impl Generator {
         ));
 
         let mut protofile = ProtoFileBuffer::default();
-        
+
         for entry in std::fs::read_dir(path).map_err(|e| Error::FailedToReadDir(path.into(), e))? {
             let entry = entry.map_err(|e| Error::FailedToReadDir(path.into(), e))?;
             let path = entry.path();
 
             match path.is_file() {
                 true => {
-                    Self::process_file(&path, &mut protofile)?;
+                    self.process_file(&path, &mut protofile)?;
                 }
                 false => {
                     self.process_dir_recu(&path)?;
@@ -102,12 +132,13 @@ impl Generator {
             .map_err(|e| Error::FailedToWriteFile(path_outfile.into(), e))
     }
 
-    fn process_file<W: io::Write>(path: &Path, mut out: W) -> Result {
+    fn process_file(&self, path: &Path, out: &mut ProtoFileBuffer) -> Result {
         let content =
             std::fs::read_to_string(path).map_err(|e| Error::FailedToReadFile(path.into(), e))?;
         let mut parsed = CSharpParser::parse(Rule::file, &content[3..])?;
         let file_pair = parsed.next().unwrap();
         let parsed_file = File::try_from(file_pair).unwrap();
+        out.add_imports(parsed_file.imports, &self.base_namespace);
         match parsed_file.content {
             FileContent::Class(_class) => {}
             FileContent::Namespace(namespace) => {
