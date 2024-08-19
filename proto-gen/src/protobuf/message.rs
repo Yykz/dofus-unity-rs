@@ -60,9 +60,6 @@ impl Message {
 
     pub fn try_from_class(class: parser_items::Class, namespace: String) -> Result<Self, Error> {
         if !class.interfaces.iter().any(|i| i.0 == "IMessage") {
-            if class.name == "GuestLimitationEvent" {
-                println!("{:?}", class.interfaces);
-            }
             return Err(Error::ClassDontImplIMessage);
         }
 
@@ -157,7 +154,7 @@ impl Message {
                                 .clone();
                             cases.push(NormalField::new(name, r#type, index, Label::None).into())
                         } else {
-                            println!("cannot find corresponding field number {}", name);
+                            eprintln!("cannot find corresponding field number {}", name);
                         }
                     }
                     let oneof_name_pascal = &r#enum.name[..r#enum.name.len() - 9];
