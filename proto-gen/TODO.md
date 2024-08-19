@@ -2,3 +2,4 @@
 - namespace qualification ?
 - fix proto-types `sint32`, `sint64`, `fixed32`, `fixed64`, `sfixed32`, `sfixed64` not retrieved
 - enum original name eg. NameCompliance [OriginalName("NAME_OK")]
+- map fields
