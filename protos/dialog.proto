@@ -1,0 +1,7 @@
+message DialogLeaveEvent {
+	DialogType dialog_type = 1;
+}
+
+message DialogLeaveRequest {
+}
+

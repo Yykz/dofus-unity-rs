@@ -1,0 +1,30 @@
+message MimicryRequest {
+	int32 symbiont_uid = 1;
+	int32 host_uid = 2;
+}
+
+message WrapperObjectDissociateRequest {
+	int32 host_uid = 1;
+	int32 host_position = 2;
+}
+
+message MimicryResponse {
+	MimicryResponse.Types.Result result = 1;
+	enum Result {
+		ERROR = 0;
+		PLAYERBUSY = 1;
+		HOSTNOTMIMICKABLE = 2;
+		HOSTWRAPPED = 3;
+		DUPLICATE = 4;
+		SUCCESS = 5;
+	}
+}
+
+message MimicryFreeResponse {
+	bool success = 1;
+}
+
+message MimicryFreeRequest {
+	int32 host_uid = 1;
+}
+

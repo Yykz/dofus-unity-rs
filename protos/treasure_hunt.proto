@@ -1,0 +1,121 @@
+message TreasureHuntFlagAnswerEvent {
+	TreasureHuntType quest_type = 1;
+	TreasureHuntFlagAnswerEvent.Types.FlagResult result = 2;
+	int32 index = 3;
+	enum FlagResult {
+		ERRORUNDEFINED = 0;
+		OK = 1;
+		WRONG = 2;
+		TOOMANY = 3;
+		ERRORIMPOSSIBLE = 4;
+		WRONGINDEX = 5;
+		SAMEMAP = 6;
+	}
+}
+
+message TreasureHuntDigAnswerEvent {
+	TreasureHuntType quest_type = 1;
+	TreasureHuntDigAnswerEvent.Types.DigResult result = 2;
+	optional int32 wrong_flag_count = 3;
+	enum DigResult {
+		ERRORUNDEFINED = 0;
+		NEWHINT = 1;
+		FINISHED = 2;
+		WRONG = 3;
+		LOST = 4;
+		ERRORIMPOSSIBLE = 5;
+		WRONGANDYOUKNOWIT = 6;
+	}
+}
+
+message TreasureHuntEvent {
+	TreasureHuntType quest_type = 1;
+	int64 start_map_id = 2;
+	repeated TreasureHuntEvent.Types.TreasureHuntStep known_steps = 3;
+	int32 total_step_count = 4;
+	int32 current_check_point = 5;
+	int32 total_check_point = 6;
+	int32 available_retry_count = 7;
+	repeated TreasureHuntEvent.Types.TreasureHuntFlag flags = 8;
+	message TreasureHuntStep {
+		message FollowDirectionToPOI {
+			Direction direction = 1;
+			int32 poi_label_id = 2;
+		}
+		message FollowDirectionToHint {
+			Direction direction = 1;
+			int32 npc_id = 2;
+		}
+		message FollowDirection {
+			Direction direction = 1;
+			int32 map_count = 2;
+		}
+		message Fight {
+		}
+		message Dig {
+		}
+	}
+	message TreasureHuntFlag {
+		int64 map_id = 1;
+		TreasureHuntEvent.Types.TreasureHuntFlag.Types.FlagState state = 2;
+		enum FlagState {
+			UNKNOWN = 0;
+			OK = 1;
+			WRONG = 2;
+		}
+	}
+}
+
+message TreasureHuntLegendaryEvent {
+	repeated int32 available_legendary_ids = 1;
+}
+
+message TreasureHuntFlagRemoveRequest {
+	TreasureHuntType quest_type = 1;
+	int32 index = 2;
+}
+
+message TreasureHuntFlagRequest {
+	TreasureHuntType quest_type = 1;
+	int32 index = 2;
+}
+
+message TreasureHuntLegendaryRequest {
+	int32 legendary_id = 1;
+}
+
+message TreasureHuntGiveUpRequest {
+	TreasureHuntType quest_type = 1;
+}
+
+enum TreasureHuntType {
+	CLASSIC = 0;
+	PORTAL = 1;
+	LEGENDARY = 2;
+}
+
+message PortalUseRequest {
+	int32 portal_id = 1;
+}
+
+message TreasureHuntFinishedEvent {
+	TreasureHuntType quest_type = 1;
+}
+
+message TreasureHuntDigRequest {
+	TreasureHuntType quest_type = 1;
+}
+
+message TreasureHuntAnswerEvent {
+	TreasureHuntType quest_type = 1;
+	TreasureHuntAnswerEvent.Types.Result result = 2;
+	enum Result {
+		ERRORUNDEFINED = 0;
+		ERRORNOQUESTFOUND = 1;
+		ERRORALREADYHAVEQUEST = 2;
+		ERRORNOTAVAILABLE = 3;
+		ERRORDAILYLIMITEXCEEDED = 4;
+		OK = 5;
+	}
+}
+

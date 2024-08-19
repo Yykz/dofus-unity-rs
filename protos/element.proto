@@ -1,0 +1,45 @@
+message LockableCodeResultEvent {
+	LockableCodeResultEvent.Types.LockableResult result = 1;
+	enum LockableResult {
+		UNLOCKED = 0;
+		CODEERROR = 1;
+		UNLOCKFORBIDDEN = 2;
+	}
+}
+
+message LockableShowCodeDialogEvent {
+	LockableShowCodeDialogEvent.Types.Action action = 1;
+	int32 code_size = 2;
+	enum Action {
+		CHANGE = 0;
+		USE = 1;
+	}
+}
+
+message LockableChangeCodeRequest {
+	string code = 1;
+}
+
+message PurchasableDialogEvent {
+	PurchasableDialogEvent.Types.Action action = 1;
+	int64 purchasable_id = 2;
+	int32 purchasable_instance_id = 3;
+	bool second_hand = 4;
+	int64 price = 5;
+	enum Action {
+		BUY = 0;
+		SELL = 1;
+	}
+}
+
+message LockableStateUpdateHouseDoorEvent {
+	int32 house_id = 1;
+	int32 house_instance_id = 2;
+	bool second_hand = 3;
+	bool locked = 4;
+}
+
+message LockableUseCodeRequest {
+	string code = 1;
+}
+

@@ -1,0 +1,156 @@
+message ArenaLeagueRewardsEvent {
+	int32 season_id = 1;
+	int32 league_id = 2;
+	int32 ladder_position = 3;
+	bool end_season_reward = 4;
+}
+
+message SurrenderVoteCastRequest {
+	bool vote = 1;
+}
+
+message SurrenderInfoResponse {
+	SurrenderInfoResponse.Types.SurrenderResponse surrender_response = 1;
+	SurrenderInfoResponse.Types.SurrenderVoteResponse surrender_vote_response = 2;
+	bool has_sanction = 3;
+	message SurrenderResponse {
+		message SurrenderAccepted {
+		}
+		message SurrenderRefused {
+		}
+		message SurrenderBeforeTurn {
+			int32 min_turn_for_surrender = 1;
+		}
+		message SurrenderBeforeVote {
+		}
+	}
+	message SurrenderVoteResponse {
+		message SurrenderVoteAccepted {
+		}
+		message SurrenderVoteRefused {
+		}
+		message SurrenderVoteBeforeTurn {
+			int32 min_turn_for_surrender_vote = 1;
+		}
+		message SurrenderVoteAlreadyAsked {
+		}
+		message SurrenderVoteWaiting {
+			string vote_unlock_time_stamp = 1;
+		}
+	}
+}
+
+message SurrenderVoteStartEvent {
+	bool already_casted_vote = 1;
+	int32 participant_number = 2;
+	int32 casted_vote_number = 3;
+	int32 vote_duration = 4;
+}
+
+message ArenaRegisterRequest {
+	ArenaType arena_type = 1;
+}
+
+message ArenaFighterIdleEvent {
+}
+
+message ArenaFightAnswerResponse {
+	bool acknowledged = 1;
+}
+
+message SurrenderStateEvent {
+	bool permit_surrender = 1;
+	bool permit_vote = 2;
+}
+
+message ArenaUpdatePlayerInformationEvent {
+	repeated ArenaUpdatePlayerInformationEvent.Types.ArenaRank arena_ranks = 1;
+	string ban_end_date = 2;
+	message ArenaRank {
+		ArenaType arena_type = 1;
+		ArenaUpdatePlayerInformationEvent.Types.ArenaRank.Types.LeagueRanking league_ranking = 2;
+		int32 best_league_id = 3;
+		int32 best_rating = 4;
+		int32 daily_victory_count = 5;
+		int32 season_victory_count = 6;
+		int32 daily_fight_count = 7;
+		int32 season_fight_count = 8;
+		int32 fight_needed_for_ladder = 9;
+		message LeagueRanking {
+			int32 rating = 1;
+			int32 league_id = 2;
+			int32 ladder_position = 3;
+		}
+	}
+}
+
+message ArenaPlayerBehavioursEvent {
+	repeated string flags = 1;
+	repeated string sanctions = 2;
+	optional int32 ban_duration = 3;
+}
+
+message ArenaFighterStatusEvent {
+	int32 fight_id = 1;
+	int64 character_id = 2;
+	bool accepted = 3;
+}
+
+message ArenaFightPropositionEvent {
+	int32 fight_id = 1;
+	repeated int64 allies = 2;
+	int32 duration = 3;
+}
+
+enum ArenaType {
+	ONEVSONE = 0;
+	TWOVSTWO = 1;
+	THREEVSTHREE = 2;
+}
+
+message ArenaSwitchToFightServerEvent {
+	string address = 1;
+	repeated int32 ports = 2;
+	string token = 3;
+}
+
+message ArenaRegistrationWarningEvent {
+	ArenaType battle_mode = 1;
+}
+
+message SurrenderVoteUpdateEvent {
+}
+
+message ArenaRegistrationStatusEvent {
+	bool registered = 1;
+	ArenaRegistrationStatusEvent.Types.Step step = 2;
+	ArenaType battle_mode = 3;
+	enum Step {
+		REGISTERED = 0;
+		WAITINGFIGHT = 1;
+		STARTINGFIGHT = 2;
+		UNREGISTERED = 3;
+	}
+}
+
+message ArenaUnregisterRequest {
+}
+
+message ArenaSwitchXpRewardsModeRequest {
+	bool xp_rewards = 1;
+}
+
+message ArenaFightAnswerRequest {
+	bool accept = 1;
+}
+
+message OpponentSurrenderEvent {
+}
+
+message SurrenderVoteEndEvent {
+	bool vote_result = 1;
+}
+
+message SurrenderInfoRequest {
+}
+

@@ -1,0 +1,32 @@
+message AlterationsUpdateEvent {
+	repeated Alteration alterations = 1;
+}
+
+message AlterationAddedEvent {
+	Alteration alteration = 1;
+}
+
+message Alteration {
+	int64 alteration_id = 1;
+	int64 creation_time = 2;
+	Alteration.Types.AlterationExpirationType expiration_type = 3;
+	int64 expiration_value = 4;
+	repeated ObjectEffect effects = 5;
+	enum AlterationExpirationType {
+		UNKNOWN = 0;
+		INFINITE = 1;
+		DATE = 2;
+		FIGHTCOUNT = 3;
+		FIGHTSWONCOUNT = 4;
+		FIGHTSLOSTCOUNT = 5;
+	}
+}
+
+message AlterationRemovedEvent {
+	Alteration alteration = 1;
+}
+
+message AlterationsEvent {
+	repeated Alteration alterations = 1;
+}
+

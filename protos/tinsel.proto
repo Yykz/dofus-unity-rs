@@ -1,0 +1,46 @@
+message TitleGainedEvent {
+	int32 title_id = 1;
+}
+
+message OrnamentLostEvent {
+	int32 ornament_id = 1;
+}
+
+message TitlesAndOrnamentsEvent {
+	repeated int32 titles = 1;
+	repeated int32 ornaments = 2;
+}
+
+message TitleSelectedEvent {
+	int32 title_id = 1;
+}
+
+enum TinselSelectError {
+	UNDEFINED = 0;
+	INVALID = 1;
+	ALREADY = 2;
+}
+
+message OrnamentSelectErrorEvent {
+	TinselSelectError reason = 1;
+}
+
+message TitlesAndOrnamentsRequest {
+}
+
+message OrnamentGainedEvent {
+	int32 ornament_id = 1;
+}
+
+message TitleSelectErrorEvent {
+	TinselSelectError reason = 1;
+}
+
+message TitleLostEvent {
+	int32 title_id = 1;
+}
+
+message OrnamentSelectedEvent {
+	int32 ornament_id = 1;
+}
+

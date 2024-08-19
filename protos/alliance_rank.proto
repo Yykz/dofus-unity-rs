@@ -1,0 +1,36 @@
+message AllianceRanksEvent {
+	repeated RankInformation ranks = 1;
+}
+
+message AllianceRightsUpdateRequest {
+	int32 rank_id = 1;
+	repeated int32 rights = 2;
+}
+
+message AllianceRankDeletionRequest {
+	int32 rank_id = 1;
+	int32 replacement_rank_id = 2;
+}
+
+message AllianceRankChangeRequest {
+	int64 member_id = 1;
+	int32 rank_id = 2;
+}
+
+message AllianceRankCreationRequest {
+	int32 parent_rank_id = 1;
+	int32 gfx_id = 2;
+	string name = 3;
+}
+
+message AllianceRanksRequest {
+}
+
+message AllianceRankUpdateAllRequest {
+	repeated RankInformation ranks = 1;
+}
+
+message AllianceRankUpdateRequest {
+	RankInformation rank = 1;
+}
+

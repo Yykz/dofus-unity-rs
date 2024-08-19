@@ -1,0 +1,13 @@
+message ClientUIOpenedEvent {
+	ClientUIOpenedEvent.Types.UIType type = 1;
+	optional int32 object_uid = 2;
+	enum UIType {
+		UNDEFINED = 0;
+		TELEPORTGUILDHOUSE = 1;
+		TELEPORTGUILDPADDOCK = 2;
+		OBJECTMIMICRY = 3;
+		LEGENDARYTREASUREQUEST = 4;
+		TELEPORTHOUSE = 5;
+	}
+}
+

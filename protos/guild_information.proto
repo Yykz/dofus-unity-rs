@@ -1,0 +1,188 @@
+message GuildInformationRequest {
+	GuildInformationRequest.Types.InformationType information_type = 1;
+	enum InformationType {
+		INFOGENERAL = 0;
+		INFOMEMBERS = 1;
+		INFOBOOSTS = 2;
+		INFOPADDOCKS = 3;
+		INFOHOUSES = 4;
+		INFORECRUITMENT = 5;
+		INFOLOGBOOK = 6;
+	}
+}
+
+message GuildInvitationStateRecruiterEvent {
+	string recruited_name = 1;
+	SocialGroupInvitationState invitation_state = 2;
+}
+
+message GuildJoinAutomaticallyRequest {
+	int32 guild_id = 1;
+}
+
+message GuildMotdSetRequest {
+	string content = 1;
+}
+
+message GuildInvitationStateRecruitedEvent {
+	SocialGroupInvitationState invitation_state = 1;
+}
+
+message GuildMotdEvent {
+	SocialNoticeInformation motd = 1;
+}
+
+message GuildInvitationAnswerRequest {
+	bool accepted = 1;
+}
+
+message GuildInvitedEvent {
+	string recruiter_name = 1;
+	GuildInformation guild_information = 2;
+}
+
+message GuildLogbookEvent {
+	repeated GuildLogbookEntry global_activities = 1;
+	repeated GuildLogbookEntry chest_activities = 2;
+}
+
+message GuildKickRequest {
+	int64 kicked_id = 1;
+}
+
+message GuildModificationValidRequest {
+	string name = 1;
+	SocialEmblem emblem = 2;
+}
+
+message GuildCreationStartedEvent {
+}
+
+message GuildModificationStartedEvent {
+	bool can_change_name = 1;
+	bool can_change_emblem = 2;
+}
+
+message GuildSummaryRequest {
+	int64 offset = 1;
+	int32 count = 2;
+	string name_filter = 3;
+	bool hide_full_filter = 4;
+	bool following_guild_criteria = 5;
+	repeated int32 criterion_filter = 6;
+	repeated int32 languages_filter = 7;
+	repeated SocialRecruitmentType recruitment_type_filters = 8;
+	int32 min_level_filter = 9;
+	int32 max_level_filter = 10;
+	int32 min_player_level_filter = 11;
+	int32 max_player_level_filter = 12;
+	int32 min_success_filter = 13;
+	int32 max_success_filter = 14;
+	GuildSummaryRequest.Types.SummarySort sort_type = 15;
+	bool sort_descending = 16;
+	enum SummarySort {
+		SORTBYNAME = 0;
+		SORTBYLEVEL = 1;
+		SORTBYNBMEMBERS = 2;
+		SORTBYLASTACTIVITY = 3;
+	}
+}
+
+message GuildPaddockBoughtEvent {
+	PaddockInformation paddock = 1;
+}
+
+message GuildModificationNameValidRequest {
+	string name = 1;
+}
+
+message GuildModificationEmblemValidRequest {
+	SocialEmblem emblem = 1;
+}
+
+message GuildCreationValidRequest {
+	string name = 1;
+	SocialEmblem emblem = 2;
+}
+
+message GuildBulletinEvent {
+	SocialNoticeInformation bulletin = 1;
+}
+
+message GuildNoteUpdateRequest {
+	int64 player_id = 1;
+	string note = 2;
+}
+
+message GuildCreationResultEvent {
+	SocialGroupOperationResult result = 1;
+}
+
+message GuildPaddocksInformationEvent {
+	int32 max_paddock_number = 1;
+	repeated PaddockInformation paddock_information = 2;
+}
+
+message GuildSummaryEvent {
+	int64 offset = 1;
+	int64 count = 2;
+	int64 total = 3;
+	repeated GuildInformation guilds = 4;
+}
+
+message GuildGeneralInformationEvent {
+	bool abandoned_paddock = 1;
+	int32 level = 2;
+	int64 exp_level_floor = 3;
+	int64 experience = 4;
+	int64 exp_level_next_floor = 5;
+	string creation_date = 6;
+	int32 members_count = 7;
+	int32 score = 8;
+}
+
+message GuildCardErrorEvent {
+	int32 guild_id = 1;
+}
+
+message GuildBulletinSetRequest {
+	string content = 1;
+}
+
+message GuildCardRequest {
+	int32 guild_id = 1;
+}
+
+message GuildCardEvent {
+	GuildInformation info = 1;
+	int32 creation_date = 2;
+	repeated Character members = 3;
+}
+
+message GuildModificationResultEvent {
+	SocialGroupOperationResult result = 1;
+}
+
+message GuildPaddockRemovedEvent {
+	int64 paddock_id = 1;
+}
+
+message GuildBulletinSetErrorEvent {
+	SocialNoticeError error = 1;
+}
+
+message GuildMotdSetErrorEvent {
+	SocialNoticeError error = 1;
+}
+
+message GuildPaddockTeleportRequest {
+	int64 paddock_id = 1;
+}
+
+message GuildLogbookRequest {
+}
+
+message GuildInvitationRequest {
+	int64 target_id = 1;
+}
+

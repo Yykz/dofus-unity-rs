@@ -1,0 +1,123 @@
+message MountHarnessDissociateRequest {
+}
+
+message MountUnequippedEvent {
+}
+
+message MountSterilizedEvent {
+	int32 mount_id = 1;
+}
+
+message MountInformationInPaddockRequest {
+	int32 mount_id = 1;
+}
+
+message MountXpRatioEvent {
+	int32 ratio = 1;
+}
+
+message MountFeedRequest {
+	int32 mount_id = 1;
+	MountFeedRequest.Types.MountLocation mount_location = 2;
+	int32 mount_food_uid = 3;
+	int32 quantity = 4;
+	enum MountLocation {
+		EQUIPPED = 0;
+		INVENTORY = 1;
+		STABLED = 2;
+		MAP = 3;
+	}
+}
+
+message MountEquippedErrorEvent {
+	MountEquippedErrorEvent.Types.MountEquippedError error = 1;
+	enum MountEquippedError {
+		UNEQUIPPED = 0;
+		EQUIPPED = 1;
+		RIDING = 2;
+	}
+}
+
+message MountRidingEvent {
+	bool is_riding = 1;
+	bool is_auto_pilot = 2;
+}
+
+message MountRenamedEvent {
+	int32 mount_id = 1;
+	string name = 2;
+}
+
+message MountSetXpRatioRequest {
+	int32 xp_ratio = 1;
+}
+
+message MountDataErrorEvent {
+	MountDataErrorEvent.Types.MountDataError reason = 1;
+	enum MountDataError {
+		UNKNOWN = 0;
+		NOTFOUND = 1;
+		SOMEONEELSEPRIVATEFARM = 2;
+		SOMEONEELSEMOUNT = 3;
+	}
+}
+
+message MountUpdateCharacteristicsEvent {
+	int32 ride_id = 1;
+	repeated MountUpdateCharacteristicsEvent.Types.MountCharacteristicUpdate updated_characteristics = 2;
+	message MountCharacteristicUpdate {
+		MountCharacteristic characteristic = 1;
+		optional int32 int_value = 2;
+	}
+}
+
+message DisplayNumericalValuePaddockEvent {
+	int32 mount_id = 1;
+	int32 value = 2;
+	MountCharacteristic type = 3;
+}
+
+message MountDataEvent {
+	MountData mount_data = 1;
+}
+
+message MountEmoteIconUsedEvent {
+	int32 mount_id = 1;
+	int32 reaction = 2;
+}
+
+message MountHarnessColorsUpdateRequest {
+	bool use_harness_colors = 1;
+}
+
+message MountRenamedErrorEvent {
+	int32 mount_id = 1;
+}
+
+message MountInformationRequest {
+	int32 mount_id = 1;
+	int64 time = 2;
+}
+
+message MountToggleRidingRequest {
+}
+
+message MountSterilizeRequest {
+}
+
+message MountRenameRequest {
+	string name = 1;
+	int32 mount_id = 2;
+}
+
+message MountReleasedEvent {
+	int32 mount_id = 1;
+}
+
+message MountReleaseRequest {
+}
+
+message MountEquippedEvent {
+	MountData mount_data = 1;
+}
+

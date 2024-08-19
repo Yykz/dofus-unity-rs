@@ -1,0 +1,345 @@
+message PresetUseRequest {
+	string preset_uuid = 1;
+	PresetType preset_type = 2;
+}
+
+message CharacterPresetResetRequest {
+	string uuid = 1;
+}
+
+message SpellPreset {
+	MapField<int, SpellPositions> spell_positions_by_id = 1;
+}
+
+message CharacterPresetCreateRequest {
+	string name = 1;
+	int32 symbol_id = 2;
+	PresetOrigin origin = 3;
+}
+
+message PresetStatUpdateRequest {
+	string preset_uuid = 1;
+	MapField<int, int> stat_by_id = 2;
+}
+
+message PresetEquipmentUpdateRequest {
+	string character_preset_uuid = 1;
+	oneof action {
+		PresetEquipmentUpdateRequest.Types.SetItem set_item = 2;
+		PresetEquipmentUpdateRequest.Types.RemoveItem remove_item = 3;
+		PresetEquipmentUpdateRequest.Types.SetRide set_ride = 4;
+		PresetEquipmentUpdateRequest.Types.RemoveRide remove_ride = 5;
+	}
+	message SetItem {
+		int32 position = 1;
+		int32 item_uid = 2;
+	}
+	message RemoveItem {
+		int32 position = 1;
+	}
+	message SetRide {
+	}
+	message RemoveRide {
+	}
+}
+
+message ForgettableSpellPresetCreateRequest {
+	string name = 1;
+	int32 symbol_id = 2;
+	PresetOrigin origin = 3;
+}
+
+message PresetSymbolUpdateResponse {
+	bool is_success = 1;
+}
+
+message PresetOrigin {
+	oneof origin {
+		PresetOrigin.Types.EmptyPreset empty = 1;
+		PresetOrigin.Types.PlayerCopy player = 2;
+		PresetOrigin.Types.PresetClone clone_ = 3;
+	}
+	message EmptyPreset {
+	}
+	message PlayerCopy {
+	}
+	message PresetClone {
+		string preset_uuid_to_clone = 1;
+	}
+}
+
+message ForgettableSpellPresetResetRequest {
+	string uuid = 1;
+}
+
+message Equipment {
+	int32 gid = 1;
+	optional int32 uid = 2;
+	repeated ObjectEffect effects = 3;
+}
+
+message PresetListEvent {
+	MapField<string, CharacterPresetInfo> character_preset_info_by_id = 1;
+	MapField<string, ForgettableSpellPresetInfo> forgettable_spell_preset_info_by_id = 2;
+}
+
+message PresetSymbolUpdateRequest {
+	string preset_uuid = 1;
+	PresetType preset_type = 2;
+	int32 symbol_id = 3;
+}
+
+message CharacterPresetInfo {
+	string uuid = 1;
+	string name = 2;
+	int32 symbol_id = 3;
+	bool is_favorite = 4;
+	string last_modification_date = 5;
+	MapField<int, Equipment> equipment_by_position = 6;
+	SpellPreset spell_preset = 7;
+	CharacteristicsInfo characteristics_info = 8;
+	PresetLook preset_look = 9;
+	Ride ride = 10;
+	optional string outfit_uuid = 11;
+}
+
+message Ride {
+	int32 model_id = 1;
+	int32 level = 2;
+	bool is_current_ride = 3;
+}
+
+message CharacterPresetCreateResponse {
+	oneof result {
+		CharacterPresetCreateResponse.Types.Success success = 1;
+		CharacterPresetCreateResponse.Types.Error error = 2;
+	}
+	enum Error {
+		MAXQUANTITY = 0;
+		INVALIDNAMESIZE = 1;
+		PRESETNOTFOUND = 2;
+		UNKNOWN = 3;
+	}
+	message Success {
+		CharacterPresetInfo preset_info = 1;
+	}
+}
+
+message PresetStatUpdateResponse {
+	bool is_success = 1;
+	CharacteristicsInfo characteristics_info = 2;
+}
+
+message CharacterPresetInfoRequest {
+	string preset_uuid = 1;
+}
+
+message CharacterPresetSetRequest {
+	string uuid = 1;
+	PresetOrigin origin = 2;
+}
+
+message ForgettableSpellPresetSetRequest {
+	string uuid = 1;
+	PresetOrigin origin = 2;
+}
+
+message PresetSaveRequest {
+	PresetType type = 1;
+	string uuid = 2;
+}
+
+message SpellPositions {
+	repeated int32 positions = 1;
+}
+
+message ForgettableSpellPresetResetResponse {
+	bool is_success = 1;
+	ForgettableSpellPresetInfo preset_info = 2;
+}
+
+message PresetItemUpdateEvent {
+	bool is_linked = 1;
+	MapField<string, int> item_position_by_preset_uuid = 2;
+	int32 item_uid = 3;
+}
+
+message CharacterPresetCurrentStateRequest {
+}
+
+message PresetOutfitUpdateRequest {
+	string preset_uuid = 1;
+	optional string outfit_uuid = 2;
+}
+
+message ForgettableSpellPresetCreateResponse {
+	oneof result {
+		ForgettableSpellPresetCreateResponse.Types.Success success = 1;
+		ForgettableSpellPresetCreateResponse.Types.Error error = 2;
+	}
+	enum Error {
+		FEATUREDISABLED = 0;
+		MAXQUANTITY = 1;
+		INVALIDNAMESIZE = 2;
+		PRESETNOTFOUND = 3;
+		UNKNOWN = 4;
+	}
+	message Success {
+		ForgettableSpellPresetInfo preset_info = 1;
+	}
+}
+
+message PresetUseResponse {
+	oneof result {
+		PresetUseResponse.Types.ResultEnum result_enum = 1;
+		PresetUseResponse.Types.MissingEquipments missing_equipments = 2;
+	}
+	enum ResultEnum {
+		OK = 0;
+		ERRORCOOLDOWN = 1;
+		ERRORBADPRESETUUID = 2;
+		ERRORINVALIDSTATE = 3;
+		ERRORUNKNOWN = 4;
+		ERRORINVALIDDATA = 5;
+		MISSINGSPELLS = 6;
+	}
+	message MissingEquipments {
+		repeated int32 missing_item_gids = 1;
+		optional int32 missing_ride_model_id = 2;
+	}
+}
+
+message PresetDeleteRequest {
+	string preset_uuid = 1;
+	PresetType preset_type = 2;
+}
+
+message PresetLook {
+	EntityLook look_with_outfit = 1;
+	EntityLook look_without_outfit = 2;
+}
+
+message PresetRenameRequest {
+	string preset_uuid = 1;
+	PresetType preset_type = 2;
+	string name = 3;
+}
+
+message CharacterPresetInfoResponse {
+	bool is_success = 1;
+	CharacterPresetInfo info = 2;
+}
+
+message PresetSetFavoriteRequest {
+	string preset_uuid = 1;
+	PresetType preset_type = 2;
+	bool is_favorite = 3;
+}
+
+message ForgettableSpellPresetInfoResponse {
+	bool is_success = 1;
+	ForgettableSpellPresetInfo info = 2;
+}
+
+message ForgettableSpellPresetInfo {
+	string uuid = 1;
+	string name = 2;
+	int32 symbol_id = 3;
+	bool is_favorite = 4;
+	string last_modification_date = 5;
+	SpellPreset spell_preset = 6;
+	MapField<int, ForgettableSpellInfo> forgettable_spell_info_by_id = 7;
+}
+
+message CharacterPresetResetResponse {
+	bool is_success = 1;
+	CharacterPresetInfo preset_info = 2;
+}
+
+message PresetSaveResponse {
+	bool is_success = 1;
+}
+
+message CharacterPresetCurrentStateResponse {
+	CharacterPresetInfo preset = 1;
+}
+
+message PresetSpellUpdateResponse {
+	bool is_success = 1;
+}
+
+message PresetEquipmentUpdateResponse {
+	bool is_success = 1;
+	PresetEquipmentUpdateResponse.Types.EquipmentRefresh equipment_refresh = 2;
+	message EquipmentRefresh {
+		CharacteristicsInfo characteristics_info = 1;
+		PresetLook preset_look = 2;
+	}
+}
+
+message CharacterPresetSetResponse {
+	bool is_success = 1;
+	CharacterPresetInfo preset_info = 2;
+}
+
+message PresetOutfitUpdateResponse {
+	bool is_success = 1;
+	PresetLook updated_look = 2;
+}
+
+message PresetRenameResponse {
+	PresetRenameResponse.Types.Result result = 1;
+	enum Result {
+		SUCCESS = 0;
+		PRESETNOTFOUND = 1;
+		ERRORNAMESIZE = 2;
+		UNKNOWNERROR = 3;
+		FEATUREDISABLED = 4;
+	}
+}
+
+message PresetSpellUpdateRequest {
+	string preset_uuid = 1;
+	PresetSpellUpdateRequest.Types.Target target = 2;
+	SpellPreset spell_preset = 3;
+	enum Target {
+		CHARACTER = 0;
+		FORGETTABLEBASE = 1;
+		FORGETTABLESPELL = 2;
+	}
+}
+
+message CharacteristicsInfo {
+	MapField<int, CharacteristicsInfo.Types.CharacteristicsDetails> characteristic_details_by_id = 1;
+	message CharacteristicsDetails {
+		optional int32 limit = 1;
+		int32 from_base = 2;
+		int32 from_allocated = 3;
+		int32 from_equipment = 4;
+		int32 from_bonus = 5;
+		int32 from_initial_bonus = 6;
+	}
+}
+
+message PresetDeleteResponse {
+	bool is_success = 1;
+}
+
+message ForgettableSpellPresetInfoRequest {
+	string preset_uuid = 1;
+}
+
+message ForgettableSpellInfo {
+	SpellPositions spell_positions = 1;
+	bool is_missing = 2;
+}
+
+message ForgettableSpellPresetSetResponse {
+	bool is_success = 1;
+	ForgettableSpellPresetInfo preset_info = 2;
+}
+
+message PresetSetFavoriteResponse {
+	bool is_success = 1;
+}
+

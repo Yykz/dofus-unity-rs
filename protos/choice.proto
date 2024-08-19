@@ -1,0 +1,18 @@
+message ChoiceSelectedRequest {
+	int32 position = 1;
+}
+
+message ChoiceSelectedEvent {
+	int32 position = 1;
+}
+
+message ChoiceSelectionEvent {
+	int32 selection_id = 1;
+	repeated Choice choices = 2;
+}
+
+message Choice {
+	int32 id = 1;
+	int32 position = 2;
+}
+

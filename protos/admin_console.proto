@@ -1,0 +1,29 @@
+message ConsoleEnd {
+	bool success = 1;
+}
+
+message CommandSummary {
+	repeated Command command = 1;
+}
+
+message Command {
+	string alias = 1;
+	string arguments = 2;
+	string description = 3;
+}
+
+message ConsoleCommand {
+	string content = 1;
+	bool quiet = 2;
+}
+
+message ConsoleMessage {
+	string content = 1;
+	ConsoleMessage.Types.Type type = 2;
+	enum Type {
+		TEXT = 0;
+		INFO = 1;
+		ERROR = 2;
+	}
+}
+

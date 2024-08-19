@@ -1,0 +1,48 @@
+message AccountCapabilitiesEvent {
+	int64 account_id = 1;
+	bool tutorial_available = 2;
+	Hierarchy status = 3;
+	bool can_create_new_character = 4;
+}
+
+message GuestModeEvent {
+	bool effective = 1;
+}
+
+message GuestLimitationEvent {
+	GuestLimitationEvent.Types.GuestLimitation reason = 1;
+	enum GuestLimitation {
+		LIMITEDTOREGISTERED = 0;
+		LIMITONJOBXP = 1;
+		LIMITONJOBUSE = 2;
+		LIMITONMAP = 3;
+		LIMITONITEM = 4;
+		LIMITONCHAT = 5;
+		LIMITONGUILD = 6;
+	}
+}
+
+message AccountInformationUpdateEvent {
+	int64 subscription_end_date = 1;
+}
+
+message AccountSubscriptionElapsedDurationUpdateEvent {
+	int64 subscription_elapsed_duration = 1;
+}
+
+message SubscriptionZoneEvent {
+	bool effective = 1;
+}
+
+message SubscriptionLimitationEvent {
+	SubscriptionLimitationEvent.Types.SubscriptionRequired reason = 1;
+	enum SubscriptionRequired {
+		LIMITEDTOSUBSCRIBER = 0;
+		LIMITONJOBXP = 1;
+		LIMITONJOBUSE = 2;
+		LIMITONMAP = 3;
+		LIMITONITEM = 4;
+		LIMITONHAVENBAG = 5;
+	}
+}
+

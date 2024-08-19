@@ -1,0 +1,26 @@
+message DebugInClientEvent {
+	DebugInClientEvent.Types.DebugLevel level = 1;
+	string message = 2;
+	enum DebugLevel {
+		TRACE = 0;
+		DEBUG = 1;
+		INFO = 2;
+		WARN = 3;
+		ERROR = 4;
+		FATAL = 5;
+	}
+}
+
+message DumpedEntityStatsEvent {
+	int64 entity_id = 1;
+	repeated CharacterCharacteristic stats = 2;
+}
+
+message DebugClearHighlightCellsEvent {
+}
+
+message DebugHighlightCellsEvent {
+	int64 color = 1;
+	repeated int32 cells = 2;
+}
+

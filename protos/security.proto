@@ -1,0 +1,19 @@
+message TrustStatusEvent {
+	bool certified = 1;
+}
+
+message FileCheckEvent {
+	string file_name = 1;
+	CheckType check_type = 2;
+}
+
+message FileCheckRequest {
+	CheckType check_type = 1;
+	string value = 2;
+}
+
+enum CheckType {
+	LENGTH = 0;
+	HASHSUM = 1;
+}
+

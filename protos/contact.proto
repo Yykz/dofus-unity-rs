@@ -1,0 +1,242 @@
+message ContactLookRequest {
+	int32 request_id = 1;
+	ContactLookRequest.Types.SocialContactCategory contact_type = 2;
+	oneof complement {
+		string name = 3;
+		int64 id = 4;
+	}
+	enum SocialContactCategory {
+		FRIEND = 0;
+		SPOUSE = 1;
+		PARTY = 2;
+		GUILD = 3;
+		ALLIANCE = 4;
+		CRAFTER = 5;
+		INTERLOCUTOR = 6;
+		FIGHT = 7;
+	}
+}
+
+message FriendAddRequest {
+	PlayerSearch target = 1;
+}
+
+message FriendDeleteRequest {
+	int64 account_id = 1;
+}
+
+message FriendSetWarnOnLevelGainRequest {
+	bool enable = 1;
+}
+
+message FriendSetStatusShareRequest {
+	bool share = 1;
+}
+
+message ContactLevelUpEvent {
+	string name = 1;
+	int64 character_id = 2;
+	int32 level = 3;
+}
+
+message FriendListRequest {
+}
+
+message FriendListEvent {
+	repeated FriendInformation friend = 1;
+}
+
+message FriendAddFailureEvent {
+	AddFailureReason reason = 1;
+}
+
+message FriendInformation {
+	int64 account_id = 1;
+	AccountTag account_tag = 2;
+	CharacterState state = 3;
+	optional int64 duration_since_last_connection_hours = 4;
+	optional int32 achievement_points = 5;
+	optional int32 league_id = 6;
+	optional int32 ladder_position = 7;
+	FriendInformation.Types.FriendOnlineInformation online_information = 8;
+	message FriendOnlineInformation {
+		int64 character_id = 1;
+		string character_name = 2;
+		int32 character_level = 3;
+		Alignment alignment = 4;
+		int32 breed_id = 5;
+		Gender gender = 6;
+		int32 mood_smiley_id = 7;
+		bool haven_bag_shared = 8;
+		CharacterStatus status = 9;
+		GuildInformation guild = 10;
+	}
+}
+
+message ContactWarnOnAchievementCompleteStateEvent {
+	bool enable = 1;
+}
+
+message AddContactFailureEvent {
+	AddFailureReason reason = 1;
+}
+
+message IgnoreRequest {
+	PlayerSearch player_search = 1;
+}
+
+message AcquaintanceListRequest {
+}
+
+message ContactWarnOnAchievementCompleteSetRequest {
+	bool enable = 1;
+}
+
+message FriendWarnOnConnectionStateEvent {
+	bool enable = 1;
+}
+
+enum AddFailureReason {
+	UNKNOWN = 0;
+	OVERQUOTA = 1;
+	NOTFOUND = 2;
+	EGOCENTRIC = 3;
+	ISDOUBLE = 4;
+	ISCONFLICTINGDOUBLE = 5;
+}
+
+message FriendAddedEvent {
+	FriendInformation friend = 1;
+}
+
+message FriendStatusShareStateEvent {
+	bool share = 1;
+}
+
+message BlockListRequest {
+}
+
+message UnIgnoreRequest {
+	int64 account_id = 1;
+}
+
+message UnBlockRequest {
+	int64 account_id = 1;
+}
+
+message FriendWarnOnLevelGainStateEvent {
+	bool enable = 1;
+}
+
+message AcquaintanceAddedEvent {
+	AcquaintanceInformation acquaintance = 1;
+}
+
+message BlockEvent {
+	oneof result {
+		BlockEvent.Types.Error error = 1;
+		BlockEvent.Types.Success success = 2;
+	}
+	message Error {
+		AddFailureReason reason = 1;
+	}
+	message Success {
+		ContactInformation blocked = 1;
+	}
+}
+
+message FriendSetWarnOnConnectionRequest {
+	bool enable = 1;
+}
+
+message BlockListEvent {
+	repeated ContactInformation blocked = 1;
+}
+
+message IgnoreEvent {
+	oneof result {
+		IgnoreEvent.Types.Error error = 1;
+		IgnoreEvent.Types.Success success = 2;
+	}
+	message Error {
+		AddFailureReason reason = 1;
+	}
+	message Success {
+		ContactInformation ignored = 1;
+	}
+}
+
+message BlockRequest {
+	PlayerSearch player_search = 1;
+}
+
+message AcquaintanceListEvent {
+	repeated AcquaintanceInformation acquaintance = 1;
+}
+
+message FriendDeletionResultEvent {
+	bool success = 1;
+	AccountTag account_tag = 2;
+}
+
+message ContactLookEvent {
+	int32 request_id = 1;
+	string player_name = 2;
+	int64 player_id = 3;
+	EntityLook look = 4;
+}
+
+message UnBlockEvent {
+	oneof result {
+		UnBlockEvent.Types.Error error = 1;
+		UnBlockEvent.Types.Success success = 2;
+	}
+	message Error {
+	}
+	message Success {
+		AccountTag tag = 1;
+	}
+}
+
+message UnIgnoreEvent {
+	oneof result {
+		UnIgnoreEvent.Types.Error error = 1;
+		UnIgnoreEvent.Types.Success success = 2;
+	}
+	message Error {
+	}
+	message Success {
+		AccountTag ignored_tag = 1;
+	}
+}
+
+message ContactWarnOnPermanentDeathSetRequest {
+	bool enable = 1;
+}
+
+message ContactLookErrorEvent {
+	int32 request_id = 1;
+}
+
+message AcquaintanceInformation {
+	int64 account_id = 1;
+	AccountTag account_tag = 2;
+	CharacterState state = 3;
+	AcquaintanceInformation.Types.OnlineInformation online = 4;
+	message OnlineInformation {
+		int64 character_id = 1;
+		string character_name = 2;
+		int32 mood_smiley_id = 3;
+		CharacterStatus status = 4;
+	}
+}
+
+message ContactInformation {
+	int64 account_id = 1;
+	AccountTag account_tag = 2;
+}
+
+message WarnOnPermanentDeathStateEvent {
+	bool enable = 1;
+}
+

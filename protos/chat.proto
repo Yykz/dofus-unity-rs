@@ -1,0 +1,87 @@
+message ChatChannelMessageEvent {
+	string content = 1;
+	Channel channel = 2;
+	string date = 3;
+	int64 sender_character_id = 4;
+	int64 sender_account_id = 5;
+	string sender_prefix = 6;
+	string sender_name = 7;
+	bool from_admin = 8;
+	repeated ObjectItemInventory object = 9;
+	optional int32 origin_server_id = 10;
+}
+
+message ChatPrivateMessageRequest {
+	string content = 1;
+	repeated ObjectItemInventory object = 2;
+	oneof target {
+		string name = 3;
+		AccountTag tag = 4;
+	}
+}
+
+enum Channel {
+	GLOBAL = 0;
+	TEAM = 1;
+	GUILD = 2;
+	ALLIANCE = 3;
+	PARTY = 4;
+	SALES = 5;
+	SEEK = 6;
+	NOOB = 7;
+	ADMIN = 8;
+	ARENA = 9;
+	PRIVATE = 10;
+	INFO = 11;
+	FIGHTLOG = 12;
+	ADS = 13;
+	EVENT = 14;
+	EXCHANGE = 15;
+}
+
+message ChannelUpdateEvent {
+	Channel channel = 1;
+	bool enable = 2;
+}
+
+message SubscribeChannelRequest {
+	Channel channel = 1;
+	bool enable = 2;
+}
+
+message ChatChannelsEnabledEvent {
+	repeated Channel active_channels = 1;
+	repeated Channel disabled_channels = 2;
+}
+
+message ChatChannelMessageRequest {
+	string content = 1;
+	Channel channel = 2;
+	repeated ObjectItemInventory object = 3;
+}
+
+message ChatPrivateCopyMessageEvent {
+	string content = 1;
+	string date = 2;
+	int64 target_character_id = 3;
+	string target_name = 4;
+	repeated ObjectItemInventory object = 5;
+}
+
+message ChatErrorEvent {
+	ChatErrorEvent.Types.Error error = 1;
+	enum Error {
+		UNKNOWN = 0;
+		RECEIVERNOTFOUND = 1;
+		INTERIORMONOLOGUE = 2;
+		NOGUILD = 3;
+		NOPARTY = 4;
+		ALLIANCE = 5;
+		INVALIDMAP = 6;
+		NOPARTYARENA = 7;
+		NOTEAM = 8;
+		MALFORMEDCONTENT = 9;
+		NOEXCHANGE = 10;
+	}
+}
+

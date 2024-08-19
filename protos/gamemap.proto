@@ -1,0 +1,165 @@
+message MapRunningFightDetailsRequest {
+	int32 fight_id = 1;
+}
+
+message MapComplementaryInformationEvent {
+	int32 subarea_id = 1;
+	int64 map_id = 2;
+	repeated House houses = 3;
+	repeated ActorPositionInformation actors = 4;
+	repeated InteractiveElement interactive_elements = 5;
+	repeated StatedElement stated_elements = 6;
+	repeated MapObstacle obstacles = 7;
+	repeated FightCommonInformation fights = 8;
+	bool has_aggressive_monsters = 9;
+	oneof specific_complementary_information {
+		MapComplementaryInHouseInformation in_house_information = 10;
+		MapCoordinates coordinates = 11;
+		MapComplementaryBreachInformation breach_information = 12;
+		MapComplementaryAnomalyInformation anomaly_information = 13;
+		MapComplementaryHavenBagInformation haven_bag_information = 14;
+	}
+}
+
+message MapObstacleUpdateEvent {
+	repeated MapObstacle obstacles = 1;
+}
+
+message MapObstacle {
+	int32 cell_id = 1;
+	MapObstacle.Types.ObstacleState state = 2;
+	enum ObstacleState {
+		OBSTACLEOPENED = 0;
+		OBSTACLECLOSED = 1;
+	}
+}
+
+message MapCurrentEvent {
+	int64 map_id = 1;
+}
+
+message MapMovementConfirmRequest {
+}
+
+message MapComplementaryHavenBagInformation {
+	Character owner_information = 1;
+	int32 theme = 2;
+	int32 room_id = 3;
+	int32 max_room_id = 4;
+}
+
+message MapComplementaryWithCoordsInformation {
+	MapCoordinates coordinates = 1;
+}
+
+message MapRunningFightDetailsEvent {
+	int32 fight_id = 1;
+	repeated FighterLightInformation attackers = 2;
+	repeated FighterLightInformation defenders = 3;
+}
+
+message MapRunningFightDetailsExtendedEvent {
+	int32 fight_id = 1;
+	repeated FighterLightInformation attackers = 2;
+	repeated FighterLightInformation defenders = 3;
+	repeated NamedPartyTeam named_party_teams = 4;
+}
+
+message MapInformationRequest {
+	int32 map_id = 1;
+}
+
+message MapChangeOrientationEvent {
+	int64 actor_id = 1;
+	Direction direction = 2;
+}
+
+message MapRunningFightsRequest {
+}
+
+message MapRunningFightsEvent {
+	repeated FightExternalInformation fights = 1;
+}
+
+message MapChangeOrientationRequest {
+	Direction direction = 1;
+}
+
+message MapMovementRequest {
+	repeated int32 key_cells = 1;
+	int64 map_id = 2;
+	bool cautious = 3;
+}
+
+message FightMapInformationEvent {
+	int32 subarea_id = 1;
+	int64 map_id = 2;
+	oneof specific_complementary_information {
+		MapCoordinates coordinates = 3;
+		MapComplementaryBreachInformation breach_information = 4;
+		MapComplementaryAnomalyInformation anomaly_information = 5;
+	}
+}
+
+message MapRunningFightStopListeningRequest {
+}
+
+message MapMovementRefusedEvent {
+	int32 cell_x = 1;
+	int32 cell_y = 2;
+}
+
+message MapChangeRequest {
+	int32 map_id = 1;
+	bool auto_pilot = 2;
+}
+
+message MapComplementaryAnomalyInformation {
+	int32 level = 1;
+	int64 closing_time = 2;
+}
+
+message MapCurrentInstanceEvent {
+	int64 map_id = 1;
+	int64 instantiate_map_id = 2;
+}
+
+message MapMovementEvent {
+	repeated int32 cells = 1;
+	optional int32 direction = 2;
+	int64 character_id = 3;
+	bool cautious = 4;
+}
+
+message MapFightCountEvent {
+	int32 fight_count = 1;
+}
+
+message GameRolePlayShowActorsEvent {
+	repeated ActorPositionInformation actors = 1;
+}
+
+message MapComplementaryInHouseInformation {
+	House current_house = 1;
+}
+
+message MapTeleportOnSameEvent {
+	int64 player_id = 1;
+	int32 cell_id = 2;
+}
+
+message MapComplementaryBreachInformation {
+	int32 floor = 1;
+	int32 room = 2;
+	int32 infinity_mode = 3;
+	repeated BreachBranch branches = 4;
+}
+
+message MapErrorNotFoundRequest {
+	int32 map_id = 1;
+}
+
+message MapMovementCancelRequest {
+	int32 cell_id = 1;
+}
+

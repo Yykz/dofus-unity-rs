@@ -1,0 +1,25 @@
+message DebtsUpdateEvent {
+	DebtsUpdateEvent.Types.DebtsAction action = 1;
+	repeated DebtsUpdateEvent.Types.DebtInformation debts = 2;
+	enum DebtsAction {
+		DISPATCH = 0;
+		UPDATE = 1;
+	}
+	message DebtInformation {
+		int64 debt_id = 1;
+		int64 timestamp = 2;
+		optional int64 kamas = 3;
+	}
+}
+
+message DebtsDeleteEvent {
+	DebtsDeleteEvent.Types.DebtsDeletionReason reason = 1;
+	repeated int64 debts = 2;
+	enum DebtsDeletionReason {
+		UNKNOWN = 0;
+		ADMINCOMMANDREQUEST = 1;
+		PAYED = 2;
+		CANCELED = 3;
+	}
+}
+

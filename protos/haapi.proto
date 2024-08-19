@@ -1,0 +1,14 @@
+message HaapiTokenEvent {
+	string token = 1;
+}
+
+message HaapiTokenRequest {
+}
+
+message HaapiAuthenticationErrorEvent {
+}
+
+message HaapiSessionEvent {
+	string session_uid = 1;
+}
+

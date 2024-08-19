@@ -1,0 +1,74 @@
+message AchievementDetailsEvent {
+	Achievement achievement = 1;
+}
+
+message Achievement {
+	int32 achievement_id = 1;
+	repeated Achievement.Types.AchievementObjective achievement_objectives = 2;
+	message AchievementObjective {
+		int32 objective_id = 1;
+		int64 max_value = 2;
+		optional int64 current_value = 3;
+	}
+}
+
+message AchievementsDetailedEvent {
+	repeated Achievement achievements = 1;
+}
+
+message AchievementRewardRequest {
+	int32 achievement_id = 1;
+}
+
+message AchievedAchievement {
+	int32 achievement_id = 1;
+	int64 achieved_by = 2;
+	optional int32 finished_level = 3;
+	int32 pioneer_rank = 4;
+}
+
+message AchievementsDetailedRequest {
+	int32 category_id = 1;
+}
+
+message AchievementFinishedInformationEvent {
+	AchievedAchievement achievement = 1;
+	string player_name = 2;
+	int64 player_id = 3;
+}
+
+message AchievementsAlmostFinishedDetailedEvent {
+	repeated Achievement almost_finished_achievements = 1;
+}
+
+message AchievementDetailsRequest {
+	int32 achievement_id = 1;
+}
+
+message AchievementFinishedEvent {
+	AchievedAchievement achievement = 1;
+}
+
+message AchievementsAlmostFinishedDetailedRequest {
+}
+
+message AchievementRewardResultEvent {
+	int32 achievement_id = 1;
+	bool success = 2;
+}
+
+message AchievementsEvent {
+	repeated AchievedAchievement achieved_achievements = 1;
+}
+
+message AchievementsPioneerRanksResponse {
+	repeated AchievementsPioneerRanksResponse.Types.AchievementPioneerRank achievements_pioneer_ranks = 1;
+	message AchievementPioneerRank {
+		int32 achievement_id = 1;
+		int32 pioneer_rank = 2;
+	}
+}
+
+message AchievementsPioneerRanksRequest {
+}
+

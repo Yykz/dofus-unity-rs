@@ -1,0 +1,37 @@
+message PrismRecycleRequest {
+}
+
+message PrismListEvent {
+	repeated PrismLocalizedInformation prism_localized_information = 1;
+}
+
+message PrismAttackResultEvent {
+	PrismLocalizedInformation prism_localized_information = 1;
+	PrismAttackResultEvent.Types.PrismAttackResult prism_attack_result = 2;
+	enum PrismAttackResult {
+		DEFENDERSWIN = 0;
+		ATTACKERSWIN = 1;
+	}
+}
+
+message PrismAttackRequest {
+}
+
+message PrismAddOrUpdateEvent {
+	PrismLocalizedInformation prism_localized_information = 1;
+}
+
+message PrismExchangeRequest {
+}
+
+message PrismAttackedEvent {
+	PrismLocalizedInformation prism_localized_information = 1;
+}
+
+message PrismTeleportationRequest {
+}
+
+message PrismRemoveEvent {
+	PrismLocalizedInformation prism_localized_information = 1;
+}
+

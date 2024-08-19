@@ -1,0 +1,109 @@
+message ZaapKnownListEvent {
+	repeated int64 destinations = 1;
+}
+
+message TeleportToBuddyClosedEvent {
+	int32 dungeon_id = 1;
+	int64 buddy_id = 2;
+}
+
+message ZaapRespawnSaveRequest {
+}
+
+message TeleportDestinationsEvent {
+	Teleporter type = 1;
+	repeated TeleportDestination destinations = 2;
+	optional int64 spawn_map_id = 3;
+}
+
+message TeleportPlayerAnswerRequest {
+	bool accept = 1;
+}
+
+message TeleportToBuddyOfferEvent {
+	int32 dungeon_id = 1;
+	int64 buddy_id = 2;
+	int32 time_left = 3;
+}
+
+message TeleportBuddiesAnswerRequest {
+	bool accept = 1;
+}
+
+message TeleportPlayerOfferEvent {
+	int64 map_id = 1;
+	string message = 2;
+	int32 time_left = 3;
+	int64 requester_id = 4;
+}
+
+message TeleportDestination {
+	Teleporter type = 1;
+	int64 map_id = 2;
+	int32 subarea_id = 3;
+	int32 level = 4;
+	int32 cost = 5;
+	oneof complementary_information {
+		TeleportDestination.Types.Anomaly anomaly = 6;
+	}
+	message Anomaly {
+		int32 bonus_pourcentage = 1;
+		int64 remaining_time = 2;
+	}
+}
+
+message TeleportBuddiesEvent {
+	int32 dungeon_id = 1;
+}
+
+message ZaapRespawnUpdatedEvent {
+	int64 map_id = 1;
+}
+
+message TeleportRequest {
+	Teleporter source_type = 1;
+	Teleporter destination_type = 2;
+	int64 map_id = 3;
+}
+
+message TeleportPlayerClosedEvent {
+	int64 map_id = 1;
+	int64 requester_id = 2;
+}
+
+message TeleportToBuddyAnswerRequest {
+	bool accept = 1;
+}
+
+message GroupTeleportPlayerClosedEvent {
+	int64 map_id = 1;
+	int64 requester_id = 2;
+}
+
+message GroupTeleportPlayerAnswerRequest {
+	bool accept = 1;
+}
+
+message TeleportBuddiesRequestedEvent {
+	int32 dungeon_id = 1;
+	int64 inviter_id = 2;
+	repeated int64 invalid_buddies_id = 3;
+}
+
+message GroupTeleportPlayerOfferEvent {
+	int64 map_id = 1;
+	int32 world_x = 2;
+	int32 world_y = 3;
+	int32 time_left = 4;
+	int64 requester_id = 5;
+	string requester_name = 6;
+}
+
+enum Teleporter {
+	ZAAP = 0;
+	SUBWAY = 1;
+	PRISM = 2;
+	HAVENBAG = 3;
+	ANOMALY = 4;
+}
+

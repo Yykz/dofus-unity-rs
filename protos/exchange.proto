@@ -1,0 +1,595 @@
+message ExchangeObjectTransferExistingToInventoryRequest {
+}
+
+message ExchangeCraftPaymentModificationRequest {
+	int64 quantity = 1;
+}
+
+message ExchangeObjectTransferAllFromInventoryRequest {
+}
+
+message ExchangeRequestedTradeEvent {
+	ExchangeType exchange_type = 1;
+	int64 source_id = 2;
+	int64 target_id = 3;
+}
+
+message ExchangeCraftPaymentModifiedEvent {
+	int64 kamas = 1;
+}
+
+message ExchangeMountWithoutPaddockStartedEvent {
+	repeated MountData stabled_mounts = 1;
+	repeated MountData paddocked_mounts = 2;
+}
+
+message ExchangeBidHouseInListAddedEvent {
+	int32 object_uid = 1;
+	int32 object_gid = 2;
+	int32 object_type = 3;
+	repeated ObjectEffect effects = 4;
+	repeated int64 prices = 5;
+}
+
+message ExchangeObjectMovePricedRequest {
+	int32 object_uid = 1;
+	int32 quantity = 2;
+	int64 price = 3;
+}
+
+message ExchangeMountsPaddockRemoveEvent {
+	repeated int32 mounts_id = 1;
+}
+
+message ExchangeSoldEvent {
+}
+
+message ExchangeWeightEvent {
+	int32 current_weight = 1;
+	int32 max_weight = 2;
+}
+
+message ExchangeBidHouseTypeRequest {
+	int32 type_id = 1;
+	bool follow = 2;
+}
+
+message ExchangeLeaveEvent {
+	DialogType dialog_type = 1;
+	bool success = 2;
+}
+
+message ExchangeObjectTransferListFromInventoryRequest {
+	repeated int32 objects_uid = 1;
+}
+
+message ExchangeBidBuyerStartedEvent {
+	SellingConditions selling_conditions = 1;
+}
+
+message ExchangeObjectPutInBagEvent {
+	bool remote = 1;
+	ObjectItemInventory object = 2;
+}
+
+message ExchangeMultiCraftCrafterStartedEvent {
+	int32 skill_id = 1;
+}
+
+message ObjectAveragePricesErrorEvent {
+}
+
+message ExchangeTaxCollectorRequest {
+	string tax_collector_uuid = 1;
+}
+
+message ExchangeRecycleTradeStartedEvent {
+	int32 percent_to_prism = 1;
+	int32 percent_to_player = 2;
+	repeated int32 adjacent_subareas_possessed = 3;
+	repeated int32 adjacent_subareas_not_possessed = 4;
+}
+
+message ExchangeObjectModifiedInBagEvent {
+	bool remote = 1;
+	ObjectItemInventory object = 2;
+}
+
+message ExchangeBidHouseBuyRequest {
+	int32 object_uid = 1;
+	int32 quantity = 2;
+	int64 price = 3;
+}
+
+message ExchangeBidHouseOfflineSoldItemsEvent {
+	repeated ObjectGidWithQuantity bid_house_items = 1;
+}
+
+message ExchangeMountsPaddockAddedEvent {
+	repeated MountData mounts = 1;
+}
+
+message ExchangeCraftStartedEvent {
+	optional int32 skill_id = 1;
+}
+
+message ExchangeItemAutoCraftStoppedEvent {
+	ExchangeItemAutoCraftStoppedEvent.Types.ExchangeReplayStopReason reason = 1;
+	enum ExchangeReplayStopReason {
+		OK = 0;
+		USER = 1;
+		MISSINGRESSOURCE = 2;
+		IMPOSSIBLEMODIFICATION = 3;
+	}
+}
+
+message ExchangeStartedEvent {
+	ExchangeType exchange_type = 1;
+}
+
+message ExchangeMultiCraftCustomerStartedEvent {
+	int32 skill_id = 1;
+	int32 crafter_job_level = 2;
+}
+
+message ExchangeBoughtEvent {
+}
+
+message ExchangeObjectsModifiedEvent {
+	bool remote = 1;
+	repeated ObjectItemInventory objects = 2;
+}
+
+message JobBookSubscribeRequest {
+	repeated int32 jobs_id = 1;
+}
+
+message ExchangeStartedWithStorageEvent {
+	ExchangeType exchange_type = 1;
+	int32 storage_max_slot = 2;
+}
+
+message ExchangeObjectTransferAllToInventoryRequest {
+}
+
+message ExchangeBidHouseItemRemovedEvent {
+	int32 sell_id = 1;
+}
+
+message ExchangeBuyRequest {
+	int32 object_uid = 1;
+	int32 quantity = 2;
+}
+
+message ExchangeReplayStopRequest {
+}
+
+message ExchangeObjectUseInWorkshopRequest {
+	int32 object_uid = 1;
+	int32 quantity = 2;
+}
+
+message ExchangeBidHouseGenericItemAddedEvent {
+	int32 object_gid = 1;
+}
+
+message ExchangeStoppedEvent {
+	int64 character_id = 1;
+}
+
+message SellingConditions {
+	repeated int32 quantities = 1;
+	float tax_percentage = 3;
+	float tax_modification_percentage = 4;
+	int32 max_item_level = 5;
+	int32 max_item_per_account = 6;
+	int32 npc_contextual_id = 7;
+	int32 unsold_delay = 8;
+}
+
+message ExchangeObjectTransferListToInventoryRequest {
+	repeated int32 objects_uid = 1;
+}
+
+message ExchangeFocusedReadyRequest {
+	bool ready = 1;
+	int32 step = 2;
+	int32 focus_action_id = 3;
+}
+
+message ExchangeObjectsRemovedEvent {
+	bool remote = 1;
+	repeated int32 objects_uid = 2;
+}
+
+message ExchangeJobIndexStartedEvent {
+	repeated int32 jobs = 1;
+}
+
+message ExchangeBidHousePriceRequest {
+	int32 object_gid = 1;
+}
+
+message ExchangePodsModifiedEvent {
+	bool remote = 1;
+	int32 current_weight = 2;
+	int32 max_weight = 3;
+}
+
+message ExchangeObjectsSellRequest {
+	repeated ExchangeObjectsSellRequest.Types.ExchangeObject objects = 1;
+	message ExchangeObject {
+		int32 object_uid = 1;
+		int32 quantity = 2;
+	}
+}
+
+message ExchangeBidHouseGenericItemRemovedEvent {
+	int32 object_gid = 1;
+}
+
+message ExchangeObjectsAddedEvent {
+	bool remote = 1;
+	repeated ObjectItemInventory objects = 2;
+	optional int32 fm_power = 3;
+}
+
+message ExchangeObjectMoveToTabRequest {
+	int32 object_uid = 1;
+	int32 quantity = 2;
+	int32 tab_number = 3;
+}
+
+message ExchangeCraftCountModifiedEvent {
+	int32 count = 1;
+}
+
+message ExchangeObjectModifyPricedRequest {
+	int32 object_uid = 1;
+	int32 quantity = 2;
+	int64 price = 3;
+}
+
+message ObjectAveragePricesEvent {
+	repeated ObjectAveragePricesEvent.Types.ObjectAveragePrice objects_average_prices = 1;
+	message ObjectAveragePrice {
+		int32 object_gid = 1;
+		int64 average_price = 2;
+	}
+}
+
+message ExchangeBidHouseInListRemovedEvent {
+	int32 object_uid = 1;
+	int32 object_gid = 2;
+	int32 object_type = 3;
+}
+
+message ExchangeMountsStableRemoveEvent {
+	repeated int32 mounts_id = 1;
+}
+
+message ExchangeMultiCraftCrafterCanUseHisResourcesEvent {
+	bool allowed = 1;
+}
+
+message ExchangeSellRequest {
+	int32 object_uid = 1;
+	int32 quantity = 2;
+}
+
+message ExchangeErrorEvent {
+	ExchangeErrorEvent.Types.ExchangeError error_type = 1;
+	enum ExchangeError {
+		REQUESTIMPOSSIBLE = 0;
+		REQUESTCHARACTEROCCUPIED = 1;
+		REQUESTCHARACTERJOBNOTEQUIPPED = 2;
+		REQUESTCHARACTERTOOLTOOFAR = 3;
+		REQUESTCHARACTEROVERLOADED = 4;
+		REQUESTCHARACTERNOTSUBSCRIBER = 5;
+		REQUESTCHARACTERGUEST = 6;
+		MOUNTPADDOCKERROR = 7;
+		BIDSEARCHERROR = 8;
+		SELLERROR = 9;
+		BUYERROR = 10;
+	}
+}
+
+message ExchangeMoveKamaRequest {
+	int64 quantity = 1;
+}
+
+message ExchangeBidHouseBuyResultEvent {
+	int32 object_uid = 1;
+	bool bought = 2;
+}
+
+message ExchangeBidHouseItemAddedEvent {
+	ObjectItem item = 1;
+	int64 price = 2;
+	int64 unsold_delay = 3;
+}
+
+message ExchangeStartedWithMultiTabStorageEvent {
+	ExchangeType exchange_type = 1;
+	int32 storage_max_slot = 2;
+	int32 tab_number = 3;
+}
+
+message ExchangeAcceptRequest {
+}
+
+message ExchangeTaxCollectorEquipmentStartedEvent {
+	TaxCollectorInformation tax_collector_information = 1;
+}
+
+message ExchangeBidSellerStartedEvent {
+	SellingConditions selling_conditions = 1;
+	repeated ExchangeBidSellerStartedEvent.Types.ObjectItemToSelInBid objects = 2;
+	message ObjectItemToSelInBid {
+		ObjectItem object = 1;
+		int64 price = 2;
+		int32 unsold_delay = 3;
+	}
+}
+
+message ExchangeStartedWithPodsEvent {
+	ExchangeType exchange_type = 1;
+	int64 first_character_id = 2;
+	int32 first_character_current_weight = 3;
+	int32 first_character_max_weight = 4;
+	int64 second_character_id = 5;
+	int32 second_character_current_weight = 6;
+	int32 second_character_max_weight = 7;
+}
+
+message ExchangeReadyEvent {
+	int64 character_id = 1;
+	bool ready = 2;
+}
+
+message ExchangeMountFreeFromPaddockEvent {
+	string name = 1;
+	MapCoordinates coordinates = 2;
+	string liberator = 3;
+}
+
+message ExchangeBidHouseListRequest {
+	int32 object_gid = 1;
+	bool follow = 2;
+}
+
+message ExchangeObjectTransferTypeFromInventoryRequest {
+	int32 object_type = 1;
+}
+
+message ExchangeObjectRemovedFromBagEvent {
+	bool remote = 1;
+	int32 object_uid = 2;
+}
+
+message ExchangeBidHouseSearchRequest {
+	int32 object_gid = 1;
+	bool follow = 2;
+}
+
+message ExchangeBidHouseUnsoldItemsEvent {
+	repeated ObjectGidWithQuantity objects = 1;
+}
+
+message ExchangeCraftResultEvent {
+	ExchangeCraftResultEvent.Types.CraftResult result = 1;
+	oneof complement {
+		int32 object_gid = 2;
+		ExchangeCraftResultEvent.Types.ExchangeCraftResultWithObjectDescription object = 3;
+	}
+	enum CraftResult {
+		IMPOSSIBLE = 0;
+		FAILED = 1;
+		SUCCESS = 2;
+		NEUTRAL = 3;
+		FORBIDDEN = 4;
+	}
+	message ExchangeCraftResultWithObjectDescription {
+		ObjectItem object = 1;
+		optional ExchangeCraftResultEvent.Types.ExchangeCraftResultWithObjectDescription.Types.MagicPoolStatus magic_pool_status = 2;
+		int32 fm_power = 3;
+		enum MagicPoolStatus {
+			NOCHANGE = 0;
+			INCREASE = 1;
+			LOSS = 2;
+		}
+	}
+}
+
+message ExchangeKamaModifiedEvent {
+	bool remote = 1;
+	int64 quantity = 2;
+}
+
+message ExchangeNpcTradeStartedEvent {
+	int64 npc_id = 1;
+}
+
+message ExchangeMountStockStartedEvent {
+	repeated ObjectItemInventory objects = 1;
+}
+
+message ExchangeBidHouseInListUpdatedEvent {
+	int32 object_uid = 1;
+	int32 object_gid = 2;
+	int32 object_type = 3;
+	repeated ObjectEffect effects = 4;
+	repeated int64 prices = 5;
+}
+
+message ExchangeReadyRequest {
+	bool ready = 1;
+	int32 step = 2;
+}
+
+message ExchangeObjectTransferExistingFromInventoryRequest {
+}
+
+message ExchangeTypesItemsExchangerDescriptionForUserEvent {
+	int32 object_gid = 1;
+	int32 object_type = 2;
+	repeated ExchangeTypesItemsExchangerDescriptionForUserEvent.Types.BidExchangerObject item_descriptions = 3;
+	message BidExchangerObject {
+		int32 object_uid = 1;
+		int32 object_gid = 2;
+		int32 object_type = 3;
+		repeated ObjectEffect effects = 4;
+		repeated int64 prices = 5;
+	}
+}
+
+message ExchangePlayerRequest {
+	int64 target_id = 1;
+}
+
+message ExchangeTaxCollectorEquipmentRequest {
+	string tax_collector_uid = 1;
+}
+
+message ExchangeRunesTradeStartedEvent {
+}
+
+message ExchangeMountsStableAddedEvent {
+	repeated MountData mounts = 1;
+	bool new_born = 2;
+}
+
+message ExchangeCraftCountRequest {
+	int32 count = 1;
+}
+
+message RecycleResultEvent {
+	int32 prism_nuggets = 1;
+	int32 player_nuggets = 2;
+}
+
+message ExchangeMultiCraftOkEvent {
+	int64 initiator_id = 1;
+	int64 other_id = 2;
+	ExchangeType role = 3;
+}
+
+message DecraftResultEvent {
+	repeated DecraftResultEvent.Types.DecraftedItem results = 1;
+	message DecraftedItem {
+		int32 object_uid = 1;
+		float bonus_min = 2;
+		float bonus_max = 3;
+		repeated DecraftResultEvent.Types.DecraftedItem.Types.Rune runes = 4;
+		message Rune {
+			int32 rune_id = 1;
+			int32 quantity = 2;
+		}
+	}
+}
+
+message ExchangeNpcShopStartedEvent {
+	int64 npc_seller_id = 1;
+	int32 token_id = 2;
+	repeated ItemMinimalInformation objects = 3;
+}
+
+message ExchangeTaxCollectorGetEvent {
+	string collector_name = 1;
+	MapExtendedCoordinates coordinates = 2;
+	string user_name = 3;
+	int64 caller_id = 4;
+	string caller_name = 5;
+	int32 pods = 6;
+	repeated ObjectGidWithQuantity objects = 7;
+	EntityLook look = 8;
+}
+
+message ExchangeObjectMoveRequest {
+	int32 object_uid = 1;
+	int32 quantity = 2;
+}
+
+message ExchangeMultiCraftSetCrafterCanUseHisResourcesRequest {
+	bool allow = 1;
+}
+
+message ExchangeTaxCollectorShopStartedEvent {
+	repeated ObjectItemInventory objects = 1;
+	int64 kamas = 2;
+}
+
+message ExchangeCrafterJobLevelUpEvent {
+	int32 crafter_job_level = 1;
+}
+
+message ExchangeObjectTransferListWithQuantityToInventoryRequest {
+	repeated ObjectUidWithQuantity objects = 1;
+}
+
+message ExchangeMoneyMovementLimitEvent {
+	int64 limit = 1;
+}
+
+message ExchangeBidPriceEvent {
+	int32 object_gid = 1;
+	int64 average_price = 2;
+	ExchangeBidPriceEvent.Types.BidPriceForSeller bid_price_for_seller = 3;
+	message BidPriceForSeller {
+		bool all_identical = 1;
+		repeated int64 minimal_prices = 2;
+	}
+}
+
+message ExchangeObjectRemovedEvent {
+	bool remote = 1;
+	int32 object_uid = 2;
+}
+
+message ExchangeSetCraftRecipeRequest {
+	int32 object_uid = 1;
+}
+
+message ObjectAveragePricesRequest {
+}
+
+message ExchangeHandleMountsRequest {
+	ExchangeHandleMountsRequest.Types.ExchangeHandleMountStableType action_type = 1;
+	repeated int32 rides_id = 2;
+	enum ExchangeHandleMountStableType {
+		EXCHANGEMOUNTSTABLESPUT = 0;
+		EXCHANGEMOUNTSTABLESGET = 1;
+		EXCHANGEMOUNTSTABLESFREE = 2;
+		EXCHANGEMOUNTSTABLESCERTIF = 3;
+		EXCHANGEMOUNTSTABLESUNCERTIF = 4;
+		EXCHANGEMOUNTPADDOCKPUT = 5;
+		EXCHANGEMOUNTPADDOCKGET = 6;
+		EXCHANGEMOUNTPADDOCKFREE = 7;
+		EXCHANGEEQUIPPEDMOUNTPADDOCKPUT = 8;
+		EXCHANGEEQUIPPEDMOUNTPADDOCKGET = 9;
+		EXCHANGEEQUIPPEDFREE = 10;
+		EXCHANGECERTIFICATEFREE = 11;
+		EXCHANGEEQUIPPEDCERTIF = 12;
+		EXCHANGEMOUNTPADDOCKCERTIF = 13;
+		EXCHANGEUNCERTIFTOEQUIPPED = 14;
+		EXCHANGEUNCERTIFTOPADDOCK = 15;
+		EXCHANGEMOUNTSTABLESSTERILIZE = 16;
+		EXCHANGEEQUIPPEDSTERILIZE = 17;
+		EXCHANGEMOUNTPADDOCKSTERILIZE = 18;
+	}
+}
+
+message ExchangeMountRequest {
+}
+
+message ExchangePlayerMultiCraftRequest {
+	ExchangeType exchange_type = 1;
+	int64 target_id = 2;
+	int32 skill_id = 3;
+}
+
+message ExchangeTypesExchangerDescriptionForUserEvent {
+	int32 object_type = 1;
+	repeated int32 type_description = 2;
+}
+

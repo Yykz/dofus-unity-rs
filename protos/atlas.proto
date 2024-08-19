@@ -1,0 +1,29 @@
+message CompassUpdateEvent {
+	CompassType type = 1;
+	MapCoordinates coordinates = 2;
+	oneof complement {
+		CompassUpdateEvent.Types.PartyMember party_member = 3;
+		CompassUpdateEvent.Types.PvpSeek pvp_seek = 4;
+	}
+	message PartyMember {
+		int64 member_id = 1;
+		bool active = 2;
+	}
+	message PvpSeek {
+		int64 target_id = 1;
+		string target_name = 2;
+	}
+}
+
+enum CompassType {
+	SIMPLE = 0;
+	SPOUSE = 1;
+	PARTY = 2;
+	PVPSEEK = 3;
+	QUEST = 4;
+}
+
+message CompassResetEvent {
+	CompassType type = 1;
+}
+

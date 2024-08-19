@@ -1,0 +1,80 @@
+message PaddocksToSellFiltersRequest {
+	int32 area_id = 1;
+	int32 at_least_mount_number = 2;
+	int32 at_least_machine_number = 3;
+	int64 price_max = 4;
+	RealEstateOrder order_by = 5;
+}
+
+message PaddockRemoveItemRequest {
+	int32 cell_id = 1;
+}
+
+message PaddockPropertiesEvent {
+	PaddockInformation properties = 1;
+}
+
+message PaddockObjectRemovedEvent {
+	int32 cell_id = 1;
+}
+
+message PaddockBuyRequest {
+	int64 proposed_price = 1;
+}
+
+message PaddockTransactionDialogEvent {
+	PaddockTransactionDialogEvent.Types.Transaction transaction = 1;
+	int32 owner_id = 2;
+	int64 price = 3;
+	enum Transaction {
+		BUY = 0;
+		SELL = 1;
+	}
+}
+
+message PaddockMoveItemRequest {
+	int32 old_cell_id = 1;
+	int32 new_cell_id = 2;
+}
+
+message PaddockBuyResultEvent {
+	int64 paddock_id = 1;
+	bool bought = 2;
+	int64 price = 3;
+}
+
+message PaddockSellRequest {
+	int64 price = 1;
+	bool for_sale = 2;
+}
+
+message PaddocksToSellRequest {
+	int32 page_index = 1;
+}
+
+message PaddocksToSellEvent {
+	int32 page_index = 1;
+	int32 page_total = 2;
+	repeated PaddocksToSellEvent.Types.PaddockForSale paddocks = 3;
+	message PaddockForSale {
+		string guild_owner = 1;
+		MapCoordinates coordinates = 2;
+		int32 sub_area_id = 3;
+		int32 mount_number = 4;
+		int32 object_number = 5;
+		int64 price = 6;
+	}
+}
+
+message PaddockObjectAddedEvent {
+	ObjectInRolePlay paddock_item = 1;
+}
+
+message PaddockObjectsAddedEvent {
+	repeated ObjectInRolePlay paddock_item = 1;
+}
+
+message PaddockObjectAnimationPlayEvent {
+	repeated int32 cells_id = 1;
+}
+

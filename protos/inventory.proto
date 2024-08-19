@@ -1,0 +1,221 @@
+message ObjectUseOnCellRequest {
+	int32 object_uid = 1;
+	int32 cell_id = 2;
+}
+
+message ObjectErrorEvent {
+	ObjectError reason = 1;
+}
+
+message InventoryContentWatchEvent {
+	repeated ObjectItemInventory objects = 1;
+	int64 kamas = 2;
+}
+
+message StorageKamasUpdateEvent {
+	int64 kamas = 1;
+}
+
+message ObjectsQuantityEvent {
+	repeated ObjectUidWithQuantity object = 1;
+}
+
+message ObjectUseOnCharacterRequest {
+	int32 object_uid = 1;
+	int64 player_id = 2;
+}
+
+message ObjectUseMultipleRequest {
+	int32 object_uid = 1;
+	int32 quantity = 2;
+}
+
+message ObjectModifiedEvent {
+	ObjectItemInventory object = 1;
+}
+
+message ShortcutBarSwapRequest {
+	ShortcutBar bar_type = 1;
+	int32 first_slot_id = 2;
+	int32 second_slot_id = 3;
+}
+
+message ObjectDroppedEvent {
+	ObjectInRolePlay object = 1;
+}
+
+message ObjectSetPositionRequest {
+	int32 object_uid = 1;
+	int32 position = 2;
+	int32 quantity = 3;
+}
+
+message ShortcutBarAddRequest {
+	ShortcutBar bar_type = 1;
+	Shortcut shortcut = 2;
+}
+
+message ObjectFavoriteResponse {
+	bool result = 1;
+}
+
+message ObjectCellDeleteEvent {
+	int32 cell_id = 1;
+}
+
+message ObjectAddedEvent {
+	ObjectItemInventory object = 1;
+	ObjectOrigin origin = 2;
+}
+
+message StorageObjectUpdateEvent {
+	ObjectItemInventory object = 1;
+}
+
+message ObjectsDroppedEvent {
+	repeated ObjectInRolePlay object = 1;
+}
+
+message ObjectCellsDeleteEvent {
+	repeated int32 cells_id = 1;
+}
+
+message InventoryContentEvent {
+	repeated ObjectItemInventory objects = 1;
+	int64 kamas = 2;
+}
+
+message StorageTab {
+	string name = 1;
+	int32 tab_number = 2;
+	int32 picto = 3;
+	int32 open_right = 4;
+	int32 drop_right = 5;
+	int32 take_right = 6;
+	repeated int32 drop_type_limit = 7;
+}
+
+message ObjectsAddedEvent {
+	repeated ObjectItemInventory objects = 1;
+}
+
+message SetUpdateEvent {
+	int32 set_id = 1;
+	repeated int32 objects_uid = 2;
+	repeated ObjectEffect effects = 3;
+}
+
+message ObjectMovementEvent {
+	int32 object_uid = 1;
+	int32 position = 2;
+}
+
+message InventoryWeightEvent {
+	int32 inventory_weight = 1;
+	int32 weight_max = 2;
+}
+
+message ObjectHarvestedWithBonusEvent {
+	int32 object_gid = 1;
+	int32 quantity = 2;
+	int32 bonus_quantity = 3;
+}
+
+message StorageObjectsRemovedEvent {
+	repeated int32 objects_uid = 1;
+}
+
+message ShortcutBarRemovedEvent {
+	ShortcutBar bar_type = 1;
+	int32 slot_id = 2;
+}
+
+message ShortcutBarContentEvent {
+	ShortcutBar bar_type = 1;
+	repeated Shortcut shortcuts = 2;
+}
+
+message ObjectFeedRequest {
+	int32 object_uid = 1;
+	repeated ObjectUidWithQuantity meal = 2;
+}
+
+message ShortcutBarRemoveRequest {
+	ShortcutBar bar_type = 1;
+	int32 slot_id = 2;
+}
+
+message ObjectQuantityEvent {
+	ObjectUidWithQuantity object = 1;
+	ObjectOrigin origin = 2;
+}
+
+message StorageObjectRemovedEvent {
+	int32 object_uid = 1;
+}
+
+message ShortcutBarRefreshEvent {
+	ShortcutBar bar_type = 1;
+	Shortcut shortcut = 2;
+}
+
+message KamasUpdateEvent {
+	int64 quantity = 1;
+}
+
+message ObjectUseRequest {
+	int32 object_uid = 1;
+}
+
+message ObjectDeleteRequest {
+	ObjectUidWithQuantity object = 1;
+}
+
+message ObjectHarvestedEvent {
+	int32 object_gid = 1;
+	int32 quantity = 2;
+}
+
+message MultiTabStorageEvent {
+	repeated StorageTab tabs = 1;
+}
+
+message ObjectDropRequest {
+	ObjectUidWithQuantity object = 1;
+}
+
+message ObjectFavoriteRequest {
+	repeated ObjectFavoriteRequest.Types.ObjectFavorite objects = 1;
+	bool favorite = 2;
+	message ObjectFavorite {
+		int32 object_uid = 1;
+		int32 position = 2;
+	}
+}
+
+message StorageObjectsUpdateEvent {
+	repeated ObjectItemInventory objects = 1;
+}
+
+message ShortcutBarReplacedEvent {
+	ShortcutBar bar_type = 1;
+	Shortcut shortcut = 2;
+}
+
+message StorageInventoryContentEvent {
+	repeated ObjectItemInventory objects = 1;
+	int64 kamas = 2;
+}
+
+message ObjectsDeletedEvent {
+	repeated int32 objects_uid = 1;
+}
+
+message ObjectDeletedEvent {
+	int32 object_uid = 1;
+}
+
+message GoldAddedEvent {
+	int64 sum = 1;
+}
+

@@ -1,0 +1,85 @@
+message ExitRequest {
+}
+
+message PlayerFightFriendlyAnswerRequest {
+	int32 fight_id = 1;
+	bool accept = 2;
+}
+
+message MonsterNotAngryAtPlayerEvent {
+	int64 character_id = 1;
+	int64 monster_group_id = 2;
+}
+
+message DelayedActionCancelRequest {
+}
+
+message AggressionEvent {
+	int64 attacker_id = 1;
+	int64 defender_id = 2;
+}
+
+message SpellAnimEvent {
+	int64 caster_id = 1;
+	int32 target_cell_id = 2;
+	int32 spell_id = 3;
+	int32 spell_level = 4;
+	Direction direction = 5;
+}
+
+message PlayerFightFriendlyAnsweredEvent {
+	int32 fight_id = 1;
+	int64 source_id = 2;
+	int64 target_id = 3;
+	bool accept = 4;
+}
+
+message DelayedActionFinishedEvent {
+	int64 character_id = 1;
+	DelayedActionType delayed_action_type = 2;
+}
+
+message FightRequestCanceledEvent {
+	int32 fight_id = 1;
+	int64 source_id = 2;
+	int64 target_id = 3;
+}
+
+message RemoveChallengeEvent {
+	int32 fight_id = 1;
+}
+
+message ShowChallengeEvent {
+	FightCommonInformation fight_information = 1;
+}
+
+message PlayerFightFriendlyRequestedEvent {
+	int32 fight_id = 1;
+	int64 source_id = 2;
+	int64 target_id = 3;
+}
+
+message PlayerFightRequest {
+	int64 target_id = 1;
+	int32 target_cell_id = 2;
+	bool friendly = 3;
+}
+
+message MonsterAngryAtPlayerEvent {
+	int64 character_id = 1;
+	int64 monster_group_id = 2;
+	int64 angry_start_time = 3;
+	int64 attack_time = 4;
+}
+
+message DelayedActionEvent {
+	int64 character_id = 1;
+	DelayedActionType delayed_action_type = 2;
+	int64 delayed_end_time = 3;
+	optional int32 object_gid = 4;
+}
+
+message AttackMonsterRequest {
+	int64 monster_group_id = 1;
+}
+

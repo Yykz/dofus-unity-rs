@@ -1,0 +1,68 @@
+message ForgettableSpellEquipmentSlotsEvent {
+	int32 quantity = 1;
+}
+
+message ForgettableSpellsEvent {
+	ForgettableSpellsEvent.Types.Action action = 1;
+	repeated SpellItem spells = 2;
+	enum Action {
+		DISPATCH = 0;
+		UPDATE = 1;
+	}
+}
+
+message SpellItem {
+	int32 spell_id = 1;
+	int32 spell_level = 2;
+	optional bool available = 3;
+}
+
+message SpellsEvent {
+	bool spell_visualisation = 1;
+	repeated SpellItem human_spells = 2;
+	repeated SpellItem mutant_spells = 3;
+}
+
+message RemoveSpellModifierEvent {
+	int64 actor_id = 1;
+	SpellModifierActionType action_type = 2;
+	SpellModifierType modifier_type = 3;
+	int32 spell_id = 4;
+}
+
+message ForgettableSpellDeletionEvent {
+	ForgettableSpellDeletionEvent.Types.DeletionReason reason = 1;
+	repeated int32 spells = 2;
+	enum DeletionReason {
+		UNKNOWN = 0;
+		ADMINCOMMANDREQUEST = 1;
+		FORGOTTEN = 2;
+		DISABLED = 3;
+		NOTFOUND = 4;
+	}
+}
+
+message SpellVariantActivationRequest {
+	int32 spell_id = 1;
+}
+
+message ForgettableSpellActionRequest {
+	int32 spell_id = 1;
+	ForgettableSpellActionRequest.Types.ForgettableSpellAction action = 2;
+	enum ForgettableSpellAction {
+		FORGET = 0;
+		EQUIP = 1;
+		REMOVE = 2;
+	}
+}
+
+message ApplySpellModifierEvent {
+	int64 actor_id = 1;
+	SpellModifier modifier = 2;
+}
+
+message SpellVariantActivationEvent {
+	int32 spell_id = 1;
+	bool effective = 2;
+}
+

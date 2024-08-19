@@ -1,0 +1,95 @@
+message BreachCharactersEvent {
+	repeated int64 players = 1;
+}
+
+message BreachRoomUnlockResultEvent {
+	int32 room_id = 1;
+	BreachRoomUnlockResultEvent.Types.BreachRoomUnlockResult result = 2;
+	enum BreachRoomUnlockResult {
+		SUCCESS = 0;
+		FAILNOTENOUGHBUDGET = 1;
+	}
+}
+
+message BreachExitResultEvent {
+	bool exited = 1;
+}
+
+message BreachInvitationRequest {
+	repeated int64 guests = 1;
+}
+
+message BreachEnterEvent {
+	int64 owner = 1;
+}
+
+message BreachTeleportRequest {
+}
+
+message BreachRoomLockedEvent {
+}
+
+message BreachKickRequest {
+	int64 player_id = 1;
+}
+
+message BreachBranchesEvent {
+	repeated BreachBranch branches = 1;
+}
+
+message BreachInvitationCloseEvent {
+	Character host = 1;
+}
+
+message BreachInvitationOfferEvent {
+	Character host = 1;
+	int32 time_left_before_cancel = 2;
+}
+
+message BreachTeleportResultEvent {
+	bool teleported = 1;
+}
+
+message BreachExitRequest {
+}
+
+message BreachBonusEvent {
+	ObjectEffect bonus = 1;
+}
+
+message BreachRewardBoughtEvent {
+	int32 reward_id = 1;
+	bool bought = 2;
+}
+
+message BreachSavedEvent {
+	bool saved = 1;
+}
+
+message BreachRewardBuyRequest {
+	int32 reward_id = 1;
+}
+
+message BreachRoomUnlockRequest {
+	int32 room_id = 1;
+}
+
+message BreachStateEvent {
+	Character owner = 1;
+	repeated ObjectEffect bonuses = 2;
+	int32 budget = 3;
+	bool saved = 4;
+}
+
+message BreachInvitationAnswerRequest {
+	bool accepted = 1;
+}
+
+message BreachBudgetEvent {
+	int32 budget = 1;
+}
+
+message BreachRewardsEvent {
+	repeated BreachReward rewards = 1;
+}
+

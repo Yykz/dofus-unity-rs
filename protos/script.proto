@@ -1,0 +1,4 @@
+message CinematicEvent {
+	int32 cinematic_id = 1;
+}
+

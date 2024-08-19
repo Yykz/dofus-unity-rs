@@ -1,0 +1,99 @@
+message QuestStartRequest {
+	int32 quest_id = 1;
+}
+
+message QuestStepInformationEvent {
+	QuestActive information = 1;
+	optional int64 player_id = 2;
+}
+
+message GuideModReturnRequest {
+}
+
+message QuestValidatedEvent {
+	int32 quest_id = 1;
+}
+
+message QuestStepInformationRequest {
+	int32 quest_id = 1;
+}
+
+message QuestStepValidatedEvent {
+	int32 quest_id = 1;
+	int32 step_id = 2;
+}
+
+message QuestObjectiveValidatedEvent {
+	int32 quest_id = 1;
+	int32 objective_id = 2;
+}
+
+message GuideModQuitRequest {
+}
+
+message QuestStepStartedEvent {
+	int32 quest_id = 1;
+	int32 step_id = 2;
+}
+
+message QuestsFollowedEvent {
+	repeated QuestActive quests = 1;
+}
+
+message QuestActive {
+	int32 quest_id = 1;
+	QuestActive.Types.Details details = 2;
+	message Details {
+		int32 step_id = 1;
+		repeated QuestObjective objectives = 2;
+	}
+}
+
+message QuestObjectiveValidationRequest {
+	int32 quest_id = 1;
+	int32 objective_id = 2;
+}
+
+message QuestsFollowedOrderRefreshRequest {
+	repeated int32 quests = 1;
+}
+
+message QuestsEvent {
+	repeated QuestsEvent.Types.QuestFinished finished_quests = 1;
+	repeated QuestActive active_quests = 2;
+	repeated int32 reinitialized_done_quests_id = 3;
+	optional int64 player_id = 4;
+	message QuestFinished {
+		int32 quest_id = 1;
+		int32 finished_count = 2;
+	}
+}
+
+message QuestsRequest {
+}
+
+message QuestObjectiveUnfollowRequest {
+	int32 quest_id = 1;
+	int32 objective_id = 2;
+}
+
+message QuestStartedEvent {
+	int32 quest_id = 1;
+}
+
+message QuestObjectiveFollowRequest {
+	int32 quest_id = 1;
+	int32 objective_id = 2;
+}
+
+message QuestObjective {
+	int32 objective_id = 1;
+	bool objective_reached = 2;
+	repeated string dialog_params = 3;
+	QuestObjective.Types.Completion completion = 4;
+	message Completion {
+		int32 current_completion = 1;
+		int32 max_completion = 2;
+	}
+}
+

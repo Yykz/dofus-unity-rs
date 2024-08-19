@@ -1,0 +1,148 @@
+message FightStatisticsEvent {
+	int32 damage_done = 1;
+	int32 damage_taken = 2;
+	int32 blocked_damage = 3;
+	int32 applied_shield = 4;
+	int32 heal_done = 5;
+	int32 heal_taken = 6;
+	int32 kill_count = 7;
+}
+
+message FightSlaveSwitchContextEvent {
+	int64 master_id = 1;
+	int64 slave_id = 2;
+	int32 slave_turn = 3;
+	repeated SpellItem slave_spells = 4;
+	CharacterCharacteristics slave_stats = 5;
+	repeated Shortcut shortcuts = 6;
+}
+
+message FightNewWaveEvent {
+	int32 wave_id = 1;
+	Team team = 2;
+	int32 turn_left_before_next_wave = 3;
+}
+
+message FightJoinRunningEvent {
+	repeated FightRemovableEffectExtendedInformation effects = 1;
+	repeated FightMark marks = 2;
+	int32 game_turn = 3;
+	int32 fight_start = 4;
+	repeated FightEffectTriggerCount fx_trigger_counts = 5;
+	FightResume resume = 6;
+}
+
+message FightIsTurnReadyEvent {
+	int64 character_id = 1;
+}
+
+message FightTurnReadyRequest {
+	bool is_ready = 1;
+}
+
+message FightTurnEndEvent {
+	int64 character_id = 1;
+}
+
+message FightFighterShowEvent {
+	ActorPositionInformation information = 1;
+	bool static_pose = 2;
+}
+
+message FightNewRoundEvent {
+	int32 round_number = 1;
+}
+
+message FightTurnListEvent {
+	repeated int64 ids = 1;
+	repeated int64 slain = 2;
+}
+
+message FightResume {
+	repeated FightSpellCoolDown spells_cool_down = 1;
+	int32 summon_count = 2;
+	int32 bomb_count = 3;
+	repeated FightResumeSlaves slaves_information = 4;
+}
+
+message FightTurnFinishRequest {
+	bool is_afk = 1;
+}
+
+message FightTurnEvent {
+	int64 character_id = 1;
+	int32 wait_time = 2;
+	optional int32 remaining_time = 3;
+}
+
+message FightSlaveNoLongerControlledEvent {
+	int64 master_id = 1;
+	int64 slave_id = 2;
+}
+
+message FightChallengeJoinRefuseEvent {
+	int64 player_id = 1;
+	FightChallengeJoinRefuseEvent.Types.FighterRefusedReason reason = 2;
+	enum FighterRefusedReason {
+		FIGHTERREFUSED = 0;
+		FIGHTERACCEPTED = 1;
+		CHALLENGEFULL = 2;
+		TEAMFULL = 3;
+		WRONGALIGNMENT = 4;
+		WRONGGUILD = 5;
+		TOOLATE = 6;
+		MUTANTREFUSED = 7;
+		WRONGMAP = 8;
+		JUSTRESPAWNED = 9;
+		IMOCCUPIED = 10;
+		OPPONENTOCCUPIED = 11;
+		FIGHTMYSELF = 12;
+		INSUFFICIENTRIGHTS = 13;
+		MEMBERACCOUNTNEEDED = 14;
+		OPPONENTNOTMEMBER = 15;
+		TEAMLIMITEDBYMAINCHARACTER = 16;
+		MULTIACCOUNTNOTALLOWED = 17;
+		GHOSTREFUSED = 18;
+		WRONGALLIANCE = 19;
+		AVAZONE = 20;
+		ENTITYREFUSED = 21;
+		NOTENOUGHROOM = 22;
+		GUESTACCOUNT = 23;
+	}
+}
+
+message FightRefreshCharacterStatsEvent {
+	int64 fighter_id = 1;
+	FightCharacteristics stats = 2;
+}
+
+message FightSynchronizeEvent {
+	repeated ActorPositionInformation fighters = 1;
+}
+
+message FightMapInformationResponse {
+	int64 map_id = 1;
+	int64 fight_map_id = 2;
+	FightStartingPositions fight_start_positions = 3;
+}
+
+message FightEndEvent {
+	int32 duration = 1;
+	int32 reward_rate = 2;
+	int32 loot_share_limit_malus = 3;
+	repeated FightResultListEntry results = 4;
+	repeated NamedPartyTeamWithOutcome named_party_teams_outcomes = 5;
+	optional int32 budget = 6;
+}
+
+message FightFighterRefreshEvent {
+	ActorPositionInformation information = 1;
+}
+
+message FightPauseEvent {
+	bool is_paused = 1;
+}
+
+message FightTurnStartPlayingEvent {
+}
+

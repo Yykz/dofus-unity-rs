@@ -1,0 +1,257 @@
+message PartyNameSetRequest {
+	int32 party_id = 1;
+	string name = 2;
+}
+
+enum PartyMemberInFightCause {
+	UNKNOWN = 0;
+	MONSTERATTACK = 1;
+	PLAYERATTACK = 2;
+	MEMBERATTACKEDPLAYERS = 3;
+	MEMBERCHALLENGE = 4;
+}
+
+message PartyMemberInBreachFightEvent {
+	int32 party_id = 1;
+	PartyMemberInFightCause reason = 2;
+	int64 member_id = 3;
+	int64 member_account_id = 4;
+	string member_name = 5;
+	int32 fight_id = 6;
+	int32 time_before_fight_start = 7;
+	int32 floor = 8;
+	int32 room = 9;
+}
+
+message PartyNewMemberEvent {
+	int32 party_id = 1;
+	Character member = 2;
+}
+
+message PartyNameSetErrorEvent {
+	int32 party_id = 1;
+	PartyNameSetErrorEvent.Types.PartyNameError result = 2;
+	enum PartyNameError {
+		UNDEFINEDERROR = 0;
+		INVALID = 1;
+		ALREADYUSED = 2;
+		UNALLOWEDRIGHTS = 3;
+		UNALLOWEDNOW = 4;
+	}
+}
+
+message PartyFollowStatusUpdateEvent {
+	int32 party_id = 1;
+	bool success = 2;
+	bool is_followed = 3;
+	int64 followed_id = 4;
+}
+
+message PartyMemberUpdateEvent {
+	int32 party_id = 1;
+	Character member = 2;
+}
+
+message PartyNameUpdateEvent {
+	int32 party_id = 1;
+	string name = 2;
+}
+
+message PartyMemberUpdateLightEvent {
+	int32 party_id = 1;
+	int64 player_id = 2;
+	PartyUpdateCommonsInformation commons_information = 3;
+	optional int32 index = 4;
+}
+
+message PartyInvitationAcceptRequest {
+	int32 party_id = 1;
+}
+
+message PartyInvitationRefuseRequest {
+	int32 party_id = 1;
+}
+
+message PartyRestrictedEvent {
+	int32 party_id = 1;
+	bool restricted = 2;
+}
+
+message PartyMemberRemoveEvent {
+	int32 party_id = 1;
+	int64 leaving_player_id = 2;
+	optional int64 kicker_id = 3;
+}
+
+enum PartyType {
+	UNDEFINED = 0;
+	CLASSICAL = 1;
+	ARENA = 2;
+}
+
+message PartyLeaveRequest {
+	int32 party_id = 1;
+}
+
+message PartyInvitationCancelRequest {
+	int32 party_id = 1;
+	int64 guest_id = 2;
+}
+
+message PartyInvitationEvent {
+	int32 party_id = 1;
+	PartyType party_type = 2;
+	string party_name = 3;
+	int32 max_participants = 4;
+	int64 from_player_id = 5;
+	string from_player_name = 6;
+	int64 to_player_id = 7;
+}
+
+message PartyInvitationDetailsEvent {
+	int32 party_id = 1;
+	PartyType party_type = 2;
+	string party_name = 3;
+	int64 from_player_id = 4;
+	string from_player_name = 5;
+	int64 leader_id = 6;
+	repeated Character members = 7;
+	repeated PartyGuest guests = 8;
+}
+
+message PartyFollowMemberRequest {
+	int32 party_id = 1;
+	int64 player_id = 2;
+	optional bool enabled = 3;
+}
+
+message PartyKickedByEvent {
+	int32 party_id = 1;
+	int64 kicker_id = 2;
+}
+
+message PartyLoyaltyStatusEvent {
+	int32 party_id = 1;
+	bool loyal = 2;
+}
+
+message PartyInvitationRefusedEvent {
+	int32 party_id = 1;
+	int64 guest_id = 2;
+}
+
+message PartyInvitationDetailsRequest {
+	int32 party_id = 1;
+}
+
+message PartyLocateMembersRequest {
+	int32 party_id = 1;
+}
+
+message PartyLeaveEvent {
+	int32 party_id = 1;
+}
+
+message PartyDeletedEvent {
+	int32 party_id = 1;
+}
+
+message PartyMemberInFightEvent {
+	int32 party_id = 1;
+	PartyMemberInFightCause reason = 2;
+	int64 member_id = 3;
+	int64 member_account_id = 4;
+	string member_name = 5;
+	int32 fight_id = 6;
+	int32 time_before_fight_start = 7;
+	MapExtendedCoordinates standard_fight_map = 8;
+}
+
+message PartyAbdicateThroneRequest {
+	int32 party_id = 1;
+	int64 player_id = 2;
+}
+
+message PartyGuest {
+	int64 player_id = 1;
+	int64 host_id = 2;
+	string name = 3;
+	EntityLook look = 4;
+	int32 breed = 5;
+	Gender gender = 6;
+	CharacterStatus status = 7;
+	repeated PartyEntity entities = 8;
+}
+
+message PartyInvitationCancelledEvent {
+	int32 party_id = 1;
+	int64 canceller_id = 2;
+	int64 guest_id = 3;
+}
+
+message PartyKickRequest {
+	int32 party_id = 1;
+	int64 player_id = 2;
+}
+
+message PartyInvitationCancelledForGuestEvent {
+	int32 party_id = 1;
+	int64 canceller_id = 2;
+}
+
+message PartyJoinErrorEvent {
+	int32 party_id = 1;
+	PartyJoinErrorEvent.Types.PartyJoinError reason = 2;
+	enum PartyJoinError {
+		UNKNOWN = 0;
+		PLAYERNOTFOUND = 1;
+		PARTYNOTFOUND = 2;
+		PARTYFULL = 3;
+		PLAYERBUSY = 4;
+		PLAYERALREADYINVITED = 5;
+		PLAYERTOOSOLICITED = 6;
+		PLAYERLOYAL = 7;
+		UNMODIFIABLE = 8;
+		UNMETCRITERION = 9;
+		NOTENOUGHROOM = 10;
+		COMPOSITIONCHANGED = 11;
+		PLAYERINTUTORIAL = 12;
+	}
+}
+
+message PartyLeaderUpdateEvent {
+	int32 party_id = 1;
+	int64 party_leader_id = 2;
+}
+
+message PartyJoinEvent {
+	int32 party_id = 1;
+	PartyType party_type = 2;
+	int64 leader_id = 3;
+	int32 max_participants = 4;
+	repeated Character members = 5;
+	repeated PartyGuest guests = 6;
+	bool restricted = 7;
+	string party_name = 8;
+}
+
+message PartyStopFollowMemberRequest {
+	int32 party_id = 1;
+	int64 player_id = 2;
+}
+
+message PartyPledgeLoyaltyRequest {
+	int32 party_id = 1;
+	bool loyal = 2;
+}
+
+message PartyInvitationRequest {
+	PlayerSearch target = 1;
+	PartyType party_type = 2;
+}
+
+message PartyNewGuestEvent {
+	int32 party_id = 1;
+	PartyGuest guest = 2;
+}
+

@@ -1,0 +1,186 @@
+enum ObjectSlot {
+	AMULET = 0;
+	RINGLEFT = 1;
+	RINGRIGHT = 2;
+	BELT = 3;
+	BOOTS = 4;
+	PETMOUNT = 5;
+	DRAGOTURKEY = 6;
+	RHINEETLE = 7;
+	SEEMYOOL = 8;
+	CAPE = 9;
+	HAT = 10;
+	PET = 11;
+	SHIELD = 12;
+	BOW = 13;
+	WAND = 14;
+	STAFF = 15;
+	DAGGER = 16;
+	SCYTHE = 17;
+	AXE = 18;
+	LANCE = 19;
+	HAMMER = 20;
+	SHOVEL = 21;
+	SWORD = 22;
+	DISGUISE = 23;
+	WINGS = 24;
+	SHOULDERS = 25;
+}
+
+message OutfitDuplicateRequest {
+	string outfit_uuid = 1;
+	string name = 2;
+	int32 pictogram_id = 3;
+}
+
+message OutfitEquipResponse {
+	bool success = 1;
+}
+
+message OutfitEquipObjectRequest {
+	optional int32 gid = 1;
+	ObjectSlot slot = 2;
+	optional int32 skin_id = 3;
+}
+
+message CosmeticInventoryAddObjectResponse {
+	CosmeticInventoryAddObjectResponse.Types.Result result = 1;
+	enum Result {
+		ERROR = 0;
+		DUPLICATE = 1;
+		SUCCESS = 2;
+	}
+}
+
+message OutfitsLoadedEvent {
+	Outfit current = 1;
+	repeated Outfit outfits = 2;
+}
+
+message OutfitEquipOrnamentResponse {
+	bool success = 1;
+}
+
+message CosmeticInventoryPopObjectRequest {
+	int32 gid = 1;
+}
+
+message OutfitEquipObjectBestSlotResponse {
+	bool success = 1;
+	optional ObjectSlot slot = 2;
+}
+
+message Outfit {
+	string uuid = 1;
+	string name = 2;
+	int32 pictogram_id = 3;
+	MapField<int, Outfit.Types.SkinOutfit> objects = 4;
+	optional int32 aura_emote_id = 5;
+	optional int32 ornament_id = 6;
+	optional int32 title_id = 7;
+	EntityLook entity_look = 8;
+	bool favorite = 9;
+	string last_modified = 10;
+	message SkinOutfit {
+		int32 gid = 1;
+		optional int32 skin = 2;
+	}
+}
+
+message CosmeticInventoryLivingObjectFeedRequest {
+	int32 gid = 1;
+	int32 food_object_uid = 2;
+}
+
+message OutfitRemoveRequest {
+	string outfit_uuid = 1;
+}
+
+message CosmeticInventoryLoadedEvent {
+	repeated ObjectItem objects = 1;
+}
+
+message OutfitEquipTitleResponse {
+	bool success = 1;
+}
+
+message CosmeticInventoryPopObjectResponse {
+	bool success = 1;
+}
+
+message OutfitEquipTitleRequest {
+	optional int32 title_id = 1;
+}
+
+message OutfitEquipAuraRequest {
+	optional int32 emote_id = 1;
+}
+
+message OutfitCreateEmptyRequest {
+	string name = 1;
+	int32 pictogram_id = 2;
+}
+
+message OutfitEquipObjectBestSlotRequest {
+	int32 gid = 1;
+	optional int32 skin_id = 2;
+}
+
+message CosmeticInventoryLivingObjectFeedResponse {
+	bool success = 1;
+	ObjectItem living_object_fed = 2;
+}
+
+message OutfitAuraChangedEvent {
+	optional int32 emote_id = 1;
+}
+
+message OutfitUpdateRequest {
+	string outfit_uuid = 1;
+	string name = 2;
+	int32 pictogram_id = 3;
+	bool favorite = 4;
+}
+
+message OutfitEquipAuraResponse {
+	bool success = 1;
+}
+
+message OutfitUpdateResponse {
+	bool success = 1;
+}
+
+message CosmeticInventoryAddObjectRequest {
+	int32 uid = 1;
+}
+
+message CosmeticInventoryAddedEvent {
+	ObjectItem object = 1;
+}
+
+message OutfitCreationResponse {
+	bool success = 1;
+	Outfit outfit_created = 2;
+}
+
+message OutfitEquipRequest {
+	string outfit_uuid = 1;
+}
+
+message OutfitRemoveResponse {
+	bool success = 1;
+}
+
+message OutfitEntityLookChangedEvent {
+	string outfit_uuid = 1;
+	EntityLook entity_look = 2;
+}
+
+message OutfitEquipOrnamentRequest {
+	optional int32 ornament_id = 1;
+}
+
+message OutfitEquipObjectResponse {
+	bool success = 1;
+}
+

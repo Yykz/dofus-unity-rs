@@ -1,0 +1,21 @@
+message NotificationUpdateFlagRequest {
+	int32 index = 1;
+}
+
+message NotificationEvent {
+	int32 id = 1;
+	repeated string parameters = 2;
+	bool force = 3;
+}
+
+message NotificationsEvent {
+	repeated int32 flags = 1;
+}
+
+message NotificationResetRequest {
+}
+
+message RemoveNotificationEvent {
+	repeated int32 id = 1;
+}
+
