@@ -2,8 +2,8 @@ message LockableCodeResultEvent {
 	LockableCodeResultEvent.Types.LockableResult result = 1;
 	enum LockableResult {
 		UNLOCKED = 0;
-		CODEERROR = 1;
-		UNLOCKFORBIDDEN = 2;
+		CODE_ERROR = 1;
+		UNLOCK_FORBIDDEN = 2;
 	}
 }
 

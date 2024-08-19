@@ -32,8 +32,8 @@ message HavenBagRoomUpdateEvent {
 	HavenBagRoomUpdateEvent.Types.HavenBagRoomAction action = 1;
 	repeated HavenBagRoomUpdateEvent.Types.HavenBagRoomPreview preview = 2;
 	enum HavenBagRoomAction {
-		HAVENBAGROOMDISPATCH = 0;
-		HAVENBAGROOMUPDATE = 1;
+		HAVEN_BAG_ROOM_DISPATCH = 0;
+		HAVEN_BAG_ROOM_UPDATE = 1;
 	}
 	message HavenBagRoomPreview {
 		int32 room_id = 1;
@@ -74,9 +74,9 @@ message HavenBagDailyLotteryEvent {
 	HavenBagDailyLotteryEvent.Types.DailyLotteryResult result = 1;
 	optional int64 game_action_id = 2;
 	enum DailyLotteryResult {
-		HAVENBAGDAILYLOTTERYOK = 0;
-		HAVENBAGDAILYLOTTERYALREADYUSED = 1;
-		HAVENBAGDAILYLOTTERYERROR = 2;
+		HAVEN_BAG_DAILY_LOTTERY_OK = 0;
+		HAVEN_BAG_DAILY_LOTTERY_ALREADY_USED = 1;
+		HAVEN_BAG_DAILY_LOTTERY_ERROR = 2;
 	}
 }
 

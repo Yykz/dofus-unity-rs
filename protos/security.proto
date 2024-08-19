@@ -14,6 +14,6 @@ message FileCheckRequest {
 
 enum CheckType {
 	LENGTH = 0;
-	HASHSUM = 1;
+	HASH_SUM = 1;
 }
 

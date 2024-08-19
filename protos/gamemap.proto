@@ -29,8 +29,8 @@ message MapObstacle {
 	int32 cell_id = 1;
 	MapObstacle.Types.ObstacleState state = 2;
 	enum ObstacleState {
-		OBSTACLEOPENED = 0;
-		OBSTACLECLOSED = 1;
+		OBSTACLE_OPENED = 0;
+		OBSTACLE_CLOSED = 1;
 	}
 }
 

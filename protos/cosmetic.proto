@@ -1,7 +1,7 @@
 enum ObjectSlot {
 	AMULET = 0;
-	RINGLEFT = 1;
-	RINGRIGHT = 2;
+	RING_LEFT = 1;
+	RING_RIGHT = 2;
 	BELT = 3;
 	BOOTS = 4;
 	PETMOUNT = 5;
@@ -74,7 +74,7 @@ message Outfit {
 	string uuid = 1;
 	string name = 2;
 	int32 pictogram_id = 3;
-	MapField<int, Outfit.Types.SkinOutfit> objects = 4;
+	map<int32, Outfit.Types.SkinOutfit> objects = 4;
 	optional int32 aura_emote_id = 5;
 	optional int32 ornament_id = 6;
 	optional int32 title_id = 7;

@@ -12,9 +12,9 @@ message MimicryResponse {
 	MimicryResponse.Types.Result result = 1;
 	enum Result {
 		ERROR = 0;
-		PLAYERBUSY = 1;
-		HOSTNOTMIMICKABLE = 2;
-		HOSTWRAPPED = 3;
+		PLAYER_BUSY = 1;
+		HOST_NOT_MIMICKABLE = 2;
+		HOST_WRAPPED = 3;
 		DUPLICATE = 4;
 		SUCCESS = 5;
 	}

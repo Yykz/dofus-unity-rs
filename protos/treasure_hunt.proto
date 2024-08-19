@@ -3,13 +3,13 @@ message TreasureHuntFlagAnswerEvent {
 	TreasureHuntFlagAnswerEvent.Types.FlagResult result = 2;
 	int32 index = 3;
 	enum FlagResult {
-		ERRORUNDEFINED = 0;
+		ERROR_UNDEFINED = 0;
 		OK = 1;
 		WRONG = 2;
-		TOOMANY = 3;
-		ERRORIMPOSSIBLE = 4;
-		WRONGINDEX = 5;
-		SAMEMAP = 6;
+		TOO_MANY = 3;
+		ERROR_IMPOSSIBLE = 4;
+		WRONG_INDEX = 5;
+		SAME_MAP = 6;
 	}
 }
 
@@ -18,13 +18,13 @@ message TreasureHuntDigAnswerEvent {
 	TreasureHuntDigAnswerEvent.Types.DigResult result = 2;
 	optional int32 wrong_flag_count = 3;
 	enum DigResult {
-		ERRORUNDEFINED = 0;
-		NEWHINT = 1;
+		ERROR_UNDEFINED = 0;
+		NEW_HINT = 1;
 		FINISHED = 2;
 		WRONG = 3;
 		LOST = 4;
-		ERRORIMPOSSIBLE = 5;
-		WRONGANDYOUKNOWIT = 6;
+		ERROR_IMPOSSIBLE = 5;
+		WRONG_AND_YOU_KNOW_IT = 6;
 	}
 }
 
@@ -110,11 +110,11 @@ message TreasureHuntAnswerEvent {
 	TreasureHuntType quest_type = 1;
 	TreasureHuntAnswerEvent.Types.Result result = 2;
 	enum Result {
-		ERRORUNDEFINED = 0;
-		ERRORNOQUESTFOUND = 1;
-		ERRORALREADYHAVEQUEST = 2;
-		ERRORNOTAVAILABLE = 3;
-		ERRORDAILYLIMITEXCEEDED = 4;
+		ERROR_UNDEFINED = 0;
+		ERROR_NO_QUEST_FOUND = 1;
+		ERROR_ALREADY_HAVE_QUEST = 2;
+		ERROR_NOT_AVAILABLE = 3;
+		ERROR_DAILY_LIMIT_EXCEEDED = 4;
 		OK = 5;
 	}
 }

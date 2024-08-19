@@ -1,13 +1,13 @@
 message GuildInformationRequest {
 	GuildInformationRequest.Types.InformationType information_type = 1;
 	enum InformationType {
-		INFOGENERAL = 0;
-		INFOMEMBERS = 1;
-		INFOBOOSTS = 2;
-		INFOPADDOCKS = 3;
-		INFOHOUSES = 4;
-		INFORECRUITMENT = 5;
-		INFOLOGBOOK = 6;
+		INFO_GENERAL = 0;
+		INFO_MEMBERS = 1;
+		INFO_BOOSTS = 2;
+		INFO_PADDOCKS = 3;
+		INFO_HOUSES = 4;
+		INFO_RECRUITMENT = 5;
+		INFO_LOGBOOK = 6;
 	}
 }
 
@@ -81,10 +81,10 @@ message GuildSummaryRequest {
 	GuildSummaryRequest.Types.SummarySort sort_type = 15;
 	bool sort_descending = 16;
 	enum SummarySort {
-		SORTBYNAME = 0;
-		SORTBYLEVEL = 1;
-		SORTBYNBMEMBERS = 2;
-		SORTBYLASTACTIVITY = 3;
+		SORT_BY_NAME = 0;
+		SORT_BY_LEVEL = 1;
+		SORT_BY_NB_MEMBERS = 2;
+		SORT_BY_LAST_ACTIVITY = 3;
 	}
 }
 

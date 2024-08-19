@@ -103,9 +103,9 @@ message ArenaFightPropositionEvent {
 }
 
 enum ArenaType {
-	ONEVSONE = 0;
-	TWOVSTWO = 1;
-	THREEVSTHREE = 2;
+	ONE_VS_ONE = 0;
+	TWO_VS_TWO = 1;
+	THREE_VS_THREE = 2;
 }
 
 message ArenaSwitchToFightServerEvent {
@@ -127,8 +127,8 @@ message ArenaRegistrationStatusEvent {
 	ArenaType battle_mode = 3;
 	enum Step {
 		REGISTERED = 0;
-		WAITINGFIGHT = 1;
-		STARTINGFIGHT = 2;
+		WAITING_FIGHT = 1;
+		STARTING_FIGHT = 2;
 		UNREGISTERED = 3;
 	}
 }

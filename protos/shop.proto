@@ -7,8 +7,8 @@ message AccessoryPreviewErrorEvent {
 	AccessoryPreviewErrorEvent.Types.AccessoryPreviewError error = 1;
 	enum AccessoryPreviewError {
 		ERROR = 0;
-		COOLDOWN = 1;
-		BADITEM = 2;
+		COOL_DOWN = 1;
+		BAD_ITEM = 2;
 	}
 }
 

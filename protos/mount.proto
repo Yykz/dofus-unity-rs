@@ -56,9 +56,9 @@ message MountDataErrorEvent {
 	MountDataErrorEvent.Types.MountDataError reason = 1;
 	enum MountDataError {
 		UNKNOWN = 0;
-		NOTFOUND = 1;
-		SOMEONEELSEPRIVATEFARM = 2;
-		SOMEONEELSEMOUNT = 3;
+		NOT_FOUND = 1;
+		SOMEONE_ELSE_PRIVATE_FARM = 2;
+		SOMEONE_ELSE_MOUNT = 3;
 	}
 }
 

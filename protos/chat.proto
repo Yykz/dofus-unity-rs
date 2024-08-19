@@ -33,7 +33,7 @@ enum Channel {
 	ARENA = 9;
 	PRIVATE = 10;
 	INFO = 11;
-	FIGHTLOG = 12;
+	FIGHT_LOG = 12;
 	ADS = 13;
 	EVENT = 14;
 	EXCHANGE = 15;
@@ -72,16 +72,16 @@ message ChatErrorEvent {
 	ChatErrorEvent.Types.Error error = 1;
 	enum Error {
 		UNKNOWN = 0;
-		RECEIVERNOTFOUND = 1;
-		INTERIORMONOLOGUE = 2;
-		NOGUILD = 3;
-		NOPARTY = 4;
+		RECEIVER_NOT_FOUND = 1;
+		INTERIOR_MONOLOGUE = 2;
+		NO_GUILD = 3;
+		NO_PARTY = 4;
 		ALLIANCE = 5;
-		INVALIDMAP = 6;
-		NOPARTYARENA = 7;
-		NOTEAM = 8;
-		MALFORMEDCONTENT = 9;
-		NOEXCHANGE = 10;
+		INVALID_MAP = 6;
+		NO_PARTY_ARENA = 7;
+		NO_TEAM = 8;
+		MALFORMED_CONTENT = 9;
+		NO_EXCHANGE = 10;
 	}
 }
 

@@ -5,10 +5,10 @@ message PartyNameSetRequest {
 
 enum PartyMemberInFightCause {
 	UNKNOWN = 0;
-	MONSTERATTACK = 1;
-	PLAYERATTACK = 2;
-	MEMBERATTACKEDPLAYERS = 3;
-	MEMBERCHALLENGE = 4;
+	MONSTER_ATTACK = 1;
+	PLAYER_ATTACK = 2;
+	MEMBER_ATTACKED_PLAYERS = 3;
+	MEMBER_CHALLENGE = 4;
 }
 
 message PartyMemberInBreachFightEvent {
@@ -32,11 +32,11 @@ message PartyNameSetErrorEvent {
 	int32 party_id = 1;
 	PartyNameSetErrorEvent.Types.PartyNameError result = 2;
 	enum PartyNameError {
-		UNDEFINEDERROR = 0;
+		UNDEFINED_ERROR = 0;
 		INVALID = 1;
-		ALREADYUSED = 2;
-		UNALLOWEDRIGHTS = 3;
-		UNALLOWEDNOW = 4;
+		ALREADY_USED = 2;
+		UNALLOWED_RIGHTS = 3;
+		UNALLOWED_NOW = 4;
 	}
 }
 
@@ -204,18 +204,18 @@ message PartyJoinErrorEvent {
 	PartyJoinErrorEvent.Types.PartyJoinError reason = 2;
 	enum PartyJoinError {
 		UNKNOWN = 0;
-		PLAYERNOTFOUND = 1;
-		PARTYNOTFOUND = 2;
-		PARTYFULL = 3;
-		PLAYERBUSY = 4;
-		PLAYERALREADYINVITED = 5;
-		PLAYERTOOSOLICITED = 6;
-		PLAYERLOYAL = 7;
+		PLAYER_NOT_FOUND = 1;
+		PARTY_NOT_FOUND = 2;
+		PARTY_FULL = 3;
+		PLAYER_BUSY = 4;
+		PLAYER_ALREADY_INVITED = 5;
+		PLAYER_TOO_SOLICITED = 6;
+		PLAYER_LOYAL = 7;
 		UNMODIFIABLE = 8;
-		UNMETCRITERION = 9;
-		NOTENOUGHROOM = 10;
-		COMPOSITIONCHANGED = 11;
-		PLAYERINTUTORIAL = 12;
+		UNMET_CRITERION = 9;
+		NOT_ENOUGH_ROOM = 10;
+		COMPOSITION_CHANGED = 11;
+		PLAYER_IN_TUTORIAL = 12;
 	}
 }
 

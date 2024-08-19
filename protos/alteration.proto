@@ -16,9 +16,9 @@ message Alteration {
 		UNKNOWN = 0;
 		INFINITE = 1;
 		DATE = 2;
-		FIGHTCOUNT = 3;
-		FIGHTSWONCOUNT = 4;
-		FIGHTSLOSTCOUNT = 5;
+		FIGHT_COUNT = 3;
+		FIGHTS_WON_COUNT = 4;
+		FIGHTS_LOST_COUNT = 5;
 	}
 }
 

@@ -225,13 +225,13 @@ message GameActionFightCastRequest {
 enum SequenceType {
 	SPELL = 0;
 	WEAPON = 1;
-	GLYPHTRAP = 2;
+	GLYPH_TRAP = 2;
 	TRIGGERED = 3;
 	MOVE = 4;
-	CHARACTERDEATH = 5;
-	TURNSTART = 6;
-	TURNEND = 7;
-	FIGHTSTART = 8;
+	CHARACTER_DEATH = 5;
+	TURN_START = 6;
+	TURN_END = 7;
+	FIGHT_START = 8;
 }
 
 message SequenceStartEvent {
@@ -241,8 +241,8 @@ message SequenceStartEvent {
 
 enum FightSpellCastCritical {
 	NORMAL = 0;
-	CRITICALHIT = 1;
-	CRITICALFAIL = 2;
+	CRITICAL_HIT = 1;
+	CRITICAL_FAIL = 2;
 }
 
 message EntitySpawnInformation {

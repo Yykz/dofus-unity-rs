@@ -8,7 +8,7 @@ message CharacterPresetResetRequest {
 }
 
 message SpellPreset {
-	MapField<int, SpellPositions> spell_positions_by_id = 1;
+	map<int32, SpellPositions> spell_positions_by_id = 1;
 }
 
 message CharacterPresetCreateRequest {
@@ -19,7 +19,7 @@ message CharacterPresetCreateRequest {
 
 message PresetStatUpdateRequest {
 	string preset_uuid = 1;
-	MapField<int, int> stat_by_id = 2;
+	map<int32, int32> stat_by_id = 2;
 }
 
 message PresetEquipmentUpdateRequest {
@@ -79,8 +79,8 @@ message Equipment {
 }
 
 message PresetListEvent {
-	MapField<string, CharacterPresetInfo> character_preset_info_by_id = 1;
-	MapField<string, ForgettableSpellPresetInfo> forgettable_spell_preset_info_by_id = 2;
+	map<string, CharacterPresetInfo> character_preset_info_by_id = 1;
+	map<string, ForgettableSpellPresetInfo> forgettable_spell_preset_info_by_id = 2;
 }
 
 message PresetSymbolUpdateRequest {
@@ -95,7 +95,7 @@ message CharacterPresetInfo {
 	int32 symbol_id = 3;
 	bool is_favorite = 4;
 	string last_modification_date = 5;
-	MapField<int, Equipment> equipment_by_position = 6;
+	map<int32, Equipment> equipment_by_position = 6;
 	SpellPreset spell_preset = 7;
 	CharacteristicsInfo characteristics_info = 8;
 	PresetLook preset_look = 9;
@@ -115,9 +115,9 @@ message CharacterPresetCreateResponse {
 		CharacterPresetCreateResponse.Types.Error error = 2;
 	}
 	enum Error {
-		MAXQUANTITY = 0;
-		INVALIDNAMESIZE = 1;
-		PRESETNOTFOUND = 2;
+		MAX_QUANTITY = 0;
+		INVALID_NAME_SIZE = 1;
+		PRESET_NOT_FOUND = 2;
 		UNKNOWN = 3;
 	}
 	message Success {
@@ -160,7 +160,7 @@ message ForgettableSpellPresetResetResponse {
 
 message PresetItemUpdateEvent {
 	bool is_linked = 1;
-	MapField<string, int> item_position_by_preset_uuid = 2;
+	map<string, int32> item_position_by_preset_uuid = 2;
 	int32 item_uid = 3;
 }
 
@@ -178,10 +178,10 @@ message ForgettableSpellPresetCreateResponse {
 		ForgettableSpellPresetCreateResponse.Types.Error error = 2;
 	}
 	enum Error {
-		FEATUREDISABLED = 0;
-		MAXQUANTITY = 1;
-		INVALIDNAMESIZE = 2;
-		PRESETNOTFOUND = 3;
+		FEATURE_DISABLED = 0;
+		MAX_QUANTITY = 1;
+		INVALID_NAME_SIZE = 2;
+		PRESET_NOT_FOUND = 3;
 		UNKNOWN = 4;
 	}
 	message Success {
@@ -196,12 +196,12 @@ message PresetUseResponse {
 	}
 	enum ResultEnum {
 		OK = 0;
-		ERRORCOOLDOWN = 1;
-		ERRORBADPRESETUUID = 2;
-		ERRORINVALIDSTATE = 3;
-		ERRORUNKNOWN = 4;
-		ERRORINVALIDDATA = 5;
-		MISSINGSPELLS = 6;
+		ERROR_COOLDOWN = 1;
+		ERROR_BAD_PRESET_UUID = 2;
+		ERROR_INVALID_STATE = 3;
+		ERROR_UNKNOWN = 4;
+		ERROR_INVALID_DATA = 5;
+		MISSING_SPELLS = 6;
 	}
 	message MissingEquipments {
 		repeated int32 missing_item_gids = 1;
@@ -248,7 +248,7 @@ message ForgettableSpellPresetInfo {
 	bool is_favorite = 4;
 	string last_modification_date = 5;
 	SpellPreset spell_preset = 6;
-	MapField<int, ForgettableSpellInfo> forgettable_spell_info_by_id = 7;
+	map<int32, ForgettableSpellInfo> forgettable_spell_info_by_id = 7;
 }
 
 message CharacterPresetResetResponse {
@@ -291,10 +291,10 @@ message PresetRenameResponse {
 	PresetRenameResponse.Types.Result result = 1;
 	enum Result {
 		SUCCESS = 0;
-		PRESETNOTFOUND = 1;
-		ERRORNAMESIZE = 2;
-		UNKNOWNERROR = 3;
-		FEATUREDISABLED = 4;
+		PRESET_NOT_FOUND = 1;
+		ERROR_NAME_SIZE = 2;
+		UNKNOWN_ERROR = 3;
+		FEATURE_DISABLED = 4;
 	}
 }
 
@@ -304,13 +304,13 @@ message PresetSpellUpdateRequest {
 	SpellPreset spell_preset = 3;
 	enum Target {
 		CHARACTER = 0;
-		FORGETTABLEBASE = 1;
-		FORGETTABLESPELL = 2;
+		FORGETTABLE_BASE = 1;
+		FORGETTABLE_SPELL = 2;
 	}
 }
 
 message CharacteristicsInfo {
-	MapField<int, CharacteristicsInfo.Types.CharacteristicsDetails> characteristic_details_by_id = 1;
+	map<int32, CharacteristicsInfo.Types.CharacteristicsDetails> characteristic_details_by_id = 1;
 	message CharacteristicsDetails {
 		optional int32 limit = 1;
 		int32 from_base = 2;

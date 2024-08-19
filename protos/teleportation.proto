@@ -100,10 +100,10 @@ message GroupTeleportPlayerOfferEvent {
 }
 
 enum Teleporter {
-	ZAAP = 0;
-	SUBWAY = 1;
-	PRISM = 2;
-	HAVENBAG = 3;
-	ANOMALY = 4;
+	TELEPORTER_ZAAP = 0;
+	TELEPORTER_SUBWAY = 1;
+	TELEPORTER_PRISM = 2;
+	TELEPORTER_HAVEN_BAG = 3;
+	TELEPORTER_ANOMALY = 4;
 }
 

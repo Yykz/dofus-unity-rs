@@ -35,10 +35,10 @@ message ForgettableSpellDeletionEvent {
 	repeated int32 spells = 2;
 	enum DeletionReason {
 		UNKNOWN = 0;
-		ADMINCOMMANDREQUEST = 1;
+		ADMIN_COMMAND_REQUEST = 1;
 		FORGOTTEN = 2;
 		DISABLED = 3;
-		NOTFOUND = 4;
+		NOT_FOUND = 4;
 	}
 }
 

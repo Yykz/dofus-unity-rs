@@ -12,13 +12,13 @@ message GuestModeEvent {
 message GuestLimitationEvent {
 	GuestLimitationEvent.Types.GuestLimitation reason = 1;
 	enum GuestLimitation {
-		LIMITEDTOREGISTERED = 0;
-		LIMITONJOBXP = 1;
-		LIMITONJOBUSE = 2;
-		LIMITONMAP = 3;
-		LIMITONITEM = 4;
-		LIMITONCHAT = 5;
-		LIMITONGUILD = 6;
+		LIMITED_TO_REGISTERED = 0;
+		LIMIT_ON_JOB_XP = 1;
+		LIMIT_ON_JOB_USE = 2;
+		LIMIT_ON_MAP = 3;
+		LIMIT_ON_ITEM = 4;
+		LIMIT_ON_CHAT = 5;
+		LIMIT_ON_GUILD = 6;
 	}
 }
 
@@ -37,12 +37,12 @@ message SubscriptionZoneEvent {
 message SubscriptionLimitationEvent {
 	SubscriptionLimitationEvent.Types.SubscriptionRequired reason = 1;
 	enum SubscriptionRequired {
-		LIMITEDTOSUBSCRIBER = 0;
-		LIMITONJOBXP = 1;
-		LIMITONJOBUSE = 2;
-		LIMITONMAP = 3;
-		LIMITONITEM = 4;
-		LIMITONHAVENBAG = 5;
+		LIMITED_TO_SUBSCRIBER = 0;
+		LIMIT_ON_JOB_XP = 1;
+		LIMIT_ON_JOB_USE = 2;
+		LIMIT_ON_MAP = 3;
+		LIMIT_ON_ITEM = 4;
+		LIMIT_ON_HAVEN_BAG = 5;
 	}
 }
 

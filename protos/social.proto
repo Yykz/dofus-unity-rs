@@ -35,8 +35,8 @@ message SetMoodEvent {
 	int32 smiley_id = 2;
 	enum Result {
 		OK = 0;
-		ERRORUNKNOWN = 1;
-		ERRORFLOOD = 2;
+		ERROR_UNKNOWN = 1;
+		ERROR_FLOOD = 2;
 	}
 }
 

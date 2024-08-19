@@ -17,7 +17,7 @@ message DebtsDeleteEvent {
 	repeated int64 debts = 2;
 	enum DebtsDeletionReason {
 		UNKNOWN = 0;
-		ADMINCOMMANDREQUEST = 1;
+		ADMIN_COMMAND_REQUEST = 1;
 		PAYED = 2;
 		CANCELED = 3;
 	}

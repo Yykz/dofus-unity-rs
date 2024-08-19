@@ -40,11 +40,11 @@ message ResetCharacterCharacteristicsRequest {
 message CharacterOnConnectionEvent {
 	CharacterOnConnectionEvent.Types.ConnectionEvent connection_event = 1;
 	enum ConnectionEvent {
-		FIRSTACCOUNTCONNECTIONEVER = 0;
-		FIRSTACCOUNTCONNECTIONONSERVER = 1;
-		FIRSTACCOUNTCONNECTIONSINCEREBOOT = 2;
-		FIRSTCHARACTERCONNECTION = 3;
-		FIRSTCHARACTERCONNECTIONSINCEREBOOT = 4;
+		FIRST_ACCOUNT_CONNECTION_EVER = 0;
+		FIRST_ACCOUNT_CONNECTION_ON_SERVER = 1;
+		FIRST_ACCOUNT_CONNECTION_SINCE_REBOOT = 2;
+		FIRST_CHARACTER_CONNECTION = 3;
+		FIRST_CHARACTER_CONNECTION_SINCE_REBOOT = 4;
 	}
 }
 
@@ -55,8 +55,8 @@ message CharacterCharacteristicUpgradeResultEvent {
 		NONE = 0;
 		SUCCESS = 1;
 		GUEST = 2;
-		INFIGHT = 3;
-		NOTENOUGHPOINT = 4;
+		IN_FIGHT = 3;
+		NOT_ENOUGH_POINT = 4;
 	}
 }
 
@@ -74,7 +74,7 @@ message CharacterLifeStatusEvent {
 	CharacterLifeStatusEvent.Types.LifeStatus state = 1;
 	int64 phoenix_map_id = 2;
 	enum LifeStatus {
-		ALIVEANDKICKING = 0;
+		ALIVE_AND_KICKING = 0;
 		TOMBSTONE = 1;
 		PHANTOM = 2;
 	}
