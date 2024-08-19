@@ -16,7 +16,7 @@ pub use field::Field;
 pub use method::Method;
 pub use parameter::Parameter;
 pub use property::Property;
-pub use r#enum::Enum;
+pub use r#enum::{Enum, Variant};
 
 #[derive(Debug)]
 pub enum Member {

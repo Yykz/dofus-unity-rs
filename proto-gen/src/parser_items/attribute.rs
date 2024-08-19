@@ -3,7 +3,7 @@ use pest::iterators::Pair;
 use crate::Rule;
 
 #[derive(Debug)]
-pub struct Attribute(String);
+pub struct Attribute(pub String);
 
 impl From<Pair<'_, Rule>> for Attribute {
     fn from(value: Pair<'_, Rule>) -> Self {
