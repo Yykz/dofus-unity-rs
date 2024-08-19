@@ -77,6 +77,15 @@ where
 {
     fn from(value: T) -> Self {
         let value: String = value.into();
+
+        if value.starts_with("MapField") {
+            let value = &value[9..value.len()-1];
+            if let Some((key, value)) = value.split_once(", ") {
+                let key = Self::from(key);
+                let value = Self::from(value);
+                return Self(format!("map<{}, {}>", key.0, value.0));
+            }
+        }
         // sint32, sint64, fixed32, fixed64, sfixed32, sfixed64 ?
         match value.as_str() {
             "int" => Self(String::from("int32")),
