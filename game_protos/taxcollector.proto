@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.taxcollector;
+
 message TaxCollectorOrderedSpellRemoveRequest {
 	string tax_collector_uid = 1;
 	int32 slot_id = 2;

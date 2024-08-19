@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.element;
+
 message LockableCodeResultEvent {
 	LockableCodeResultEvent.Types.LockableResult result = 1;
 	enum LockableResult {

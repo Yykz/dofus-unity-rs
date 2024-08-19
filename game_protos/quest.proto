@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.quest;
+
 message QuestStartRequest {
 	int32 quest_id = 1;
 }

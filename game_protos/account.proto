@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.account;
+
 message AccountCapabilitiesEvent {
 	int64 account_id = 1;
 	bool tutorial_available = 2;

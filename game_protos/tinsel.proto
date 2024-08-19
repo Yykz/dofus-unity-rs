@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.tinsel;
+
 message TitleGainedEvent {
 	int32 title_id = 1;
 }

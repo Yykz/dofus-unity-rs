@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.character;
+
 message CharacterCharacteristicUpgradeRequest {
 	int32 strength = 1;
 	int32 vitality = 2;

@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.living.object;
+
 message LivingObjectDissociateRequest {
 	int32 object_uid = 1;
 	int32 position = 2;

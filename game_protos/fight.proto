@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.fight;
+
 message FightStatisticsEvent {
 	int32 damage_done = 1;
 	int32 damage_taken = 2;

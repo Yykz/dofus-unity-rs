@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.debt;
+
 message DebtsUpdateEvent {
 	DebtsUpdateEvent.Types.DebtsAction action = 1;
 	repeated DebtsUpdateEvent.Types.DebtInformation debts = 2;

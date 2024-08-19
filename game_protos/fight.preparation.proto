@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.fight.preparation;
+
 message FightHumanReadyStateEvent {
 	int64 character_id = 1;
 	bool is_ready = 2;

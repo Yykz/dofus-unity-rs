@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.alliance.member;
+
 message AllianceMembershipEvent {
 	AllianceInformation alliance_information = 1;
 	int32 rank_id = 2;

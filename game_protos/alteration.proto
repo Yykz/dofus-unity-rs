@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.alteration;
+
 message AlterationsUpdateEvent {
 	repeated Alteration alterations = 1;
 }

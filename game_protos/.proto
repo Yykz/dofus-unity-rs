@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game..proto;
+
 message Request {
 	int32 uid = 1;
 	Any content = 2;

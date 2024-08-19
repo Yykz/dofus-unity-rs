@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.context;
+
 message ShowCellRequest {
 	int32 cell_id = 1;
 }

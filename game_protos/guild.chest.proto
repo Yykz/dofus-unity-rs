@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.guild.chest;
+
 message GuildChestTabContributionEvent {
 	int32 tab_number = 1;
 	int64 required_amount = 2;

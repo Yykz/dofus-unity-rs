@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.shop;
+
 message AccessoryPreviewRequest {
 	repeated int32 object_gid = 1;
 	bool show_current_objects = 2;

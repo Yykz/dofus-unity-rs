@@ -8,14 +8,16 @@ use crate::{CSharpParser, ProtoEntity, Rule};
 
 struct CreateOnWriteFile<'a> {
     path: &'a Path,
+    package_prefix: &'a str,
     maybe_file: Option<BufWriter<std::fs::File>>,
 }
 
 impl<'a> CreateOnWriteFile<'a> {
-    fn new(path: &'a Path) -> Self {
+    fn new(path: &'a Path, s: &'a str) -> Self {
         Self {
             path,
             maybe_file: None,
+            package_prefix: s
         }
     }
 }
@@ -26,9 +28,11 @@ impl<'a> io::Write for CreateOnWriteFile<'a> {
             Some(ref mut bufwriter) => bufwriter.write(buf),
             None => {
                 let file = std::fs::File::create(self.path)?;
-                let bufwriter = BufWriter::new(file);
+                let mut bufwriter = BufWriter::new(file);
+                writeln!(bufwriter, "syntax = \"proto3\";\n\npackage {}.{};\n", self.package_prefix, self.path.file_stem().unwrap().to_str().unwrap())?;
+                let r = bufwriter.write(buf);
                 self.maybe_file = Some(bufwriter);
-                self.write(buf)
+                r
             }
         }
     }
@@ -44,6 +48,7 @@ impl<'a> io::Write for CreateOnWriteFile<'a> {
 pub struct Generator {
     source: PathBuf,
     outdir: PathBuf,
+    package_prefix: String
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -61,10 +66,11 @@ pub enum Error {
 pub type Result = std::result::Result<(), Error>;
 
 impl Generator {
-    pub fn from_source<P: AsRef<Path>>(source: P, outdir: PathBuf) -> Result {
+    pub fn from_source<P: AsRef<Path>, O: Into<PathBuf>, S: Into<String>>(source: P, outdir: O, package_prefix: S) -> Result {
         Self {
             source: source.as_ref().into(),
-            outdir,
+            outdir: outdir.into(),
+            package_prefix: package_prefix.into()
         }
         .process_dir_recu(source.as_ref())
     }
@@ -74,10 +80,10 @@ impl Generator {
         let mut path_outfile = self.outdir.clone();
         path_outfile.push(format!(
             "{}.proto",
-            affix.to_str().unwrap().to_lowercase().replace("/", "_")
+            affix.to_str().unwrap().to_lowercase().replace("/", ".")
         ));
 
-        let mut file = CreateOnWriteFile::new(&path_outfile);
+        let mut file = CreateOnWriteFile::new(&path_outfile, &self.package_prefix);
 
         for entry in std::fs::read_dir(path).map_err(|e| Error::FailedToReadDir(path.into(), e))? {
             let entry = entry.map_err(|e| Error::FailedToReadDir(path.into(), e))?;

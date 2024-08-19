@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.guild.application;
+
 message GuildApplicationSubmitRequest {
 	string apply_text = 1;
 	int32 guild_id = 2;

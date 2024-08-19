@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.area;
+
 message SubareaRewardRateEvent {
 	int32 subarea_rate = 1;
 }

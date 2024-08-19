@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.guild.information;
+
 message GuildInformationRequest {
 	GuildInformationRequest.Types.InformationType information_type = 1;
 	enum InformationType {

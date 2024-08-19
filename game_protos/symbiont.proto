@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.symbiont;
+
 message MimicryRequest {
 	int32 symbiont_uid = 1;
 	int32 host_uid = 2;

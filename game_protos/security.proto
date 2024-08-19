@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.security;
+
 message TrustStatusEvent {
 	bool certified = 1;
 }

@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.teleportation;
+
 message ZaapKnownListEvent {
 	repeated int64 destinations = 1;
 }

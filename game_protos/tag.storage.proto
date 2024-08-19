@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.tag.storage;
+
 message TagStorageData {
 	string tag_storage_uuid = 1;
 	string name = 2;

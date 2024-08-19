@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.chat;
+
 message ChatChannelMessageEvent {
 	string content = 1;
 	Channel channel = 2;

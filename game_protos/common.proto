@@ -1,3 +1,7 @@
+syntax = "proto3";
+
+package game.common;
+
 message GameActionItem {
 	int32 id = 1;
 	string title = 2;
