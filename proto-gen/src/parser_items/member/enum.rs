@@ -4,8 +4,8 @@ use crate::parser_items::{Attribute, Rule, Visibility};
 
 #[derive(Debug)]
 pub struct Enum {
-    pub attributes: Vec<Attribute>,
-    pub visibility: Visibility,
+    pub _attributes: Vec<Attribute>,
+    pub _visibility: Visibility,
     pub name: String,
     pub variants: Vec<Variant>,
 }
@@ -14,7 +14,7 @@ pub struct Enum {
 pub struct Variant {
     pub attributes: Vec<Attribute>,
     pub name: String,
-    pub value: Option<String>,
+    pub _value: Option<String>,
 }
 
 impl From<Pair<'_, Rule>> for Variant {
@@ -35,7 +35,7 @@ impl From<Pair<'_, Rule>> for Variant {
         Self {
             attributes,
             name: name.unwrap(),
-            value,
+            _value: value,
         }
     }
 }
@@ -64,8 +64,8 @@ impl From<Pair<'_, Rule>> for Enum {
             _ => unreachable!(),
         };
         Self {
-            attributes,
-            visibility,
+            _attributes: attributes,
+            _visibility: visibility,
             name,
             variants,
         }

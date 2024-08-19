@@ -1,8 +1,9 @@
 use crate::Rule;
 use pest::iterators::Pair;
 
+#[allow(dead_code)]
 #[derive(Debug)]
-pub struct Comment(String);
+pub struct Comment(pub String);
 
 impl From<Pair<'_, Rule>> for Comment {
     fn from(value: Pair<'_, Rule>) -> Self {

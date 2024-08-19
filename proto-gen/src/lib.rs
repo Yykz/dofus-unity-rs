@@ -1,15 +1,12 @@
-use std::{fmt::Debug, hash::Hash};
-
-use parser_items::{FileContent, File};
 use pest_derive::Parser;
 
 #[derive(Parser)]
 #[grammar = "grammar.pest"]
-pub struct CSharpParser;
+pub(crate) struct CSharpParser;
 
 mod protobuf;
-pub use protobuf::ProtoEntity;
+pub(crate) use protobuf::ProtoEntity;
 
-pub mod parser_items;
-pub mod generator;
+pub(crate) mod parser_items;
+mod generator;
 pub use generator::Generator;

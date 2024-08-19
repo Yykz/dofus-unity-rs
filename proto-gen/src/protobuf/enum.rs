@@ -6,7 +6,7 @@ use crate::parser_items;
 pub struct Enum {
     name: String,
     variants: Vec<String>,
-    namespace: String,
+    _namespace: String,
 }
 
 fn original_name(attribute: parser_items::Attribute) -> Option<String> {
@@ -32,7 +32,7 @@ impl Enum {
                 .into_iter()
                 .map(variant_name)
                 .collect(),
-            namespace,
+            _namespace: namespace,
         }
     }
 

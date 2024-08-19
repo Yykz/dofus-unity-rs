@@ -4,8 +4,8 @@ use crate::Rule;
 
 #[derive(Debug)]
 pub struct Parameter {
-    parameter_type: String,
-    ident: String,
+    _parameter_type: String,
+    _ident: String,
 }
 
 impl From<Pair<'_, Rule>> for Parameter {
@@ -24,8 +24,8 @@ impl From<Pair<'_, Rule>> for Parameter {
             _ => unreachable!(),
         };
         Self {
-            parameter_type,
-            ident,
+            _parameter_type: parameter_type,
+            _ident: ident,
         }
     }
 }

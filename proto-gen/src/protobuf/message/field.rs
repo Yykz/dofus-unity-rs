@@ -1,7 +1,5 @@
 use std::fmt::Display;
-
 use crate::parser_items;
-
 use super::pascal_to_snake_case;
 
 #[derive(Debug)]

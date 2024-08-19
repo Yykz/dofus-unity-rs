@@ -18,6 +18,7 @@ pub use parameter::Parameter;
 pub use property::Property;
 pub use r#enum::{Enum, Variant};
 
+#[allow(dead_code)]
 #[derive(Debug)]
 pub enum Member {
     Property(Property),

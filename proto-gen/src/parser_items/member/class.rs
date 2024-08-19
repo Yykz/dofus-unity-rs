@@ -9,9 +9,9 @@ use super::Member;
 
 #[derive(Debug)]
 pub struct Class {
-    pub attributes: Vec<Attribute>,
-    pub visibility: Visibility,
-    pub modifiers: Vec<Modifier>,
+    pub _attributes: Vec<Attribute>,
+    pub _visibility: Visibility,
+    pub _modifiers: Vec<Modifier>,
     pub name: String,
     pub interfaces: Vec<Interface>,
     pub body: Vec<Member>,
@@ -49,9 +49,9 @@ impl From<Pair<'_, Rule>> for Class {
             _ => unreachable!(),
         };
         Self {
-            attributes,
-            visibility,
-            modifiers,
+            _attributes: attributes,
+            _visibility: visibility,
+            _modifiers: modifiers,
             name,
             interfaces,
             body,

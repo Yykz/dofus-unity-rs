@@ -7,12 +7,12 @@ use crate::{
 
 #[derive(Debug)]
 pub struct Property {
-    pub attributes: Vec<Attribute>,
-    pub visibility: Visibility,
-    pub modifier: Option<Modifier>,
+    pub _attributes: Vec<Attribute>,
+    pub _visibility: Visibility,
+    pub _modifier: Option<Modifier>,
     pub property_type: String,
     pub name: String,
-    pub body: Vec<Accessor>,
+    pub _body: Vec<Accessor>,
 }
 
 #[derive(Debug)]
@@ -46,12 +46,12 @@ impl From<Pair<'_, Rule>> for Property {
                 _ => unreachable!(),
             };
         Self {
-            attributes,
-            visibility,
-            modifier,
+            _attributes: attributes,
+            _visibility: visibility,
+            _modifier: modifier,
             property_type,
             name: property_name,
-            body,
+            _body: body,
         }
     }
 }

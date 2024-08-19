@@ -9,11 +9,11 @@ use super::Parameter;
 
 #[derive(Debug)]
 pub struct Method {
-    pub attributes: Vec<Attribute>,
-    pub visibility: Visibility,
-    pub method_type: String,
-    pub name: String,
-    pub parameters: Vec<Parameter>,
+    pub _attributes: Vec<Attribute>,
+    pub _visibility: Visibility,
+    pub _method_type: String,
+    pub _name: String,
+    pub _parameters: Vec<Parameter>,
 }
 
 impl From<Pair<'_, Rule>> for Method {
@@ -44,11 +44,11 @@ impl From<Pair<'_, Rule>> for Method {
             _ => unreachable!(),
         };
         Self {
-            attributes,
-            visibility,
-            method_type,
-            name,
-            parameters,
+            _attributes: attributes,
+            _visibility: visibility,
+            _method_type: method_type,
+            _name: name,
+            _parameters: parameters,
         }
     }
 }

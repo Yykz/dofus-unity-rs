@@ -9,7 +9,7 @@ use import::Import;
 
 #[derive(Debug)]
 pub struct File {
-    pub imports: Vec<Import>,
+    pub _imports: Vec<Import>,
     pub content: FileContent,
 }
 
@@ -48,7 +48,7 @@ impl TryFrom<Pair<'_, Rule>> for File {
             None => return Err(()),
         };
 
-        Ok(Self { imports, content })
+        Ok(Self { _imports: imports, content })
     }
 
     type Error = ();

@@ -7,7 +7,7 @@ use crate::{
 
 #[derive(Debug)]
 pub struct Field {
-    pub attributes: Vec<Attribute>,
+    pub _attributes: Vec<Attribute>,
     pub visibility: Visibility,
     pub modifiers: Vec<Modifier>,
     pub field_type: String,
@@ -40,7 +40,7 @@ impl From<Pair<'_, Rule>> for Field {
             _ => unreachable!(),
         };
         Self {
-            attributes,
+            _attributes: attributes,
             visibility,
             modifiers,
             field_type,

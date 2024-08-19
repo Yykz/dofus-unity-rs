@@ -2,8 +2,9 @@ use pest::iterators::Pair;
 
 use crate::Rule;
 
+#[allow(dead_code)]
 #[derive(Debug)]
-pub struct Import(String);
+pub struct Import(pub String);
 
 impl From<Pair<'_, Rule>> for Import {
     fn from(value: Pair<'_, Rule>) -> Self {

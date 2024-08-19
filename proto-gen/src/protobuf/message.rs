@@ -9,7 +9,7 @@ use field::*;
 
 #[derive(Debug)]
 pub struct Message {
-    namespace: String,
+    _namespace: String,
     name: String,
     fields: Vec<Field>,
     inner: Vec<ProtoEntity>,
@@ -184,7 +184,7 @@ impl Message {
             name: class.name,
             fields,
             inner: inner_entities,
-            namespace,
+            _namespace: namespace,
         })
     }
 }

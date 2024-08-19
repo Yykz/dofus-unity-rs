@@ -1,15 +1,15 @@
 use pest::iterators::Pair;
 
-use crate::parser_items::{Attribute, Modifier, Rule, Visibility};
+use crate::parser_items::{Attribute, Rule, Visibility};
 
 use super::Parameter;
 
 #[derive(Debug)]
 pub struct Constructor {
-    attributes: Vec<Attribute>,
-    visibility: Visibility,
-    name: String,
-    parameters: Vec<Parameter>,
+    _attributes: Vec<Attribute>,
+    _visibility: Visibility,
+    _name: String,
+    _parameters: Vec<Parameter>,
 }
 
 impl From<Pair<'_, Rule>> for Constructor {
@@ -38,10 +38,10 @@ impl From<Pair<'_, Rule>> for Constructor {
             _ => unreachable!(),
         };
         Self {
-            attributes,
-            visibility,
-            name,
-            parameters,
+            _attributes: attributes,
+            _visibility: visibility,
+            _name: name,
+            _parameters: parameters,
         }
     }
 }

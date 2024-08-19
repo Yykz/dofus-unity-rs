@@ -1,20 +1,19 @@
 
-use std::io::{BufWriter, Read, Write};
+use std::io::{BufWriter, self};
 use std::path::{Path, PathBuf};
-use std::{fs, io};
 
 use pest::Parser;
 
 use crate::parser_items::{FileContent, File};
 use crate::{CSharpParser, ProtoEntity, Rule};
 
-pub struct CreateOnWriteFile<'a> {
+struct CreateOnWriteFile<'a> {
     path: &'a Path,
     maybe_file: Option<BufWriter<std::fs::File>>,
 }
 
 impl<'a> CreateOnWriteFile<'a> {
-    pub fn new(path: &'a Path) -> Self {
+    fn new(path: &'a Path) -> Self {
         Self {
             path,
             maybe_file: None,
@@ -22,7 +21,7 @@ impl<'a> CreateOnWriteFile<'a> {
     }
 }
 
-impl<'a> Write for CreateOnWriteFile<'a> {
+impl<'a> io::Write for CreateOnWriteFile<'a> {
     fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
         match self.maybe_file {
             Some(ref mut bufwriter) => bufwriter.write(buf),
@@ -83,14 +82,14 @@ impl Generator {
         Ok(())
     }
 
-    fn process_file<W: Write>(path: &Path, mut out: W) -> io::Result<()> {
+    fn process_file<W: io::Write>(path: &Path, mut out: W) -> io::Result<()> {
         let content = std::fs::read_to_string(path)?;
         match CSharpParser::parse(Rule::file, &content[3..]) {
             Ok(mut parsed) => {
                 let file_pair = parsed.next().unwrap();
                 let parsed_file = File::try_from(file_pair).unwrap();
                 match parsed_file.content {
-                    FileContent::Class(class) => {}
+                    FileContent::Class(_class) => {}
                     FileContent::Namespace(namespace) => {
                         if let Ok(proto) = ProtoEntity::try_from(namespace) {
                             writeln!(out, "{}", proto)?;
@@ -98,7 +97,7 @@ impl Generator {
                     }
                 }
             }
-            Err(e) => panic!("Failed to parse {:?}", path.to_str().unwrap()),
+            Err(_e) => panic!("Failed to parse {:?}", path.to_str().unwrap()),
         }
         Ok(())
     }
