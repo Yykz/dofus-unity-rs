@@ -73,6 +73,8 @@ pub enum Error {
     ReadDir(PathBuf, io::Error),
     #[error("failed to write to file {0} {1}")]
     WriteFile(PathBuf, io::Error),
+    #[error("failed to create dir {0} {1}")]
+    CreateDir(PathBuf, io::Error),
 }
 
 pub type Result = std::result::Result<(), Error>;
@@ -90,21 +92,31 @@ impl Generator {
         S: Into<String>,
         S2: Into<String>,
     {
+        let outdir: PathBuf = outdir.into();
+        let package_prefix = package_prefix.into();
+        let p = outdir.join(&package_prefix);
+        std::fs::create_dir_all(&p).map_err(|e| Error::CreateDir(p, e))?;
         Self {
             source: source.as_ref().into(),
-            outdir: outdir.into(),
-            package_prefix: package_prefix.into(),
+            outdir,
+            package_prefix,
             base_namespace: base_namespace.into(),
         }
         .process_dir_recu(source.as_ref())
     }
 
     fn process_dir_recu(&self, path: &Path) -> Result {
-        let affix = path.strip_prefix(&self.source).unwrap();
+        let mut affix = &path.strip_prefix(&self.source).unwrap().to_str().unwrap().to_lowercase().replace("/", ".");
         let mut path_outfile = self.outdir.clone();
+        if affix.is_empty() {
+            affix = &self.package_prefix;
+        } else {
+            path_outfile.push("game/")
+        }
+        
         path_outfile.push(format!(
             "{}.proto",
-            affix.to_str().unwrap().to_lowercase().replace("/", ".")
+            affix
         ));
 
         let mut protofile = ProtoFileBuffer::default();
@@ -122,11 +134,11 @@ impl Generator {
                 }
             }
         }
-        let package_file = path_outfile
+        let package_name = path_outfile
             .file_stem()
             .and_then(|stem| stem.to_str())
             .unwrap();
-        let package = format!("{}.{}", self.package_prefix, package_file);
+        let package = format!("{}.{}", self.package_prefix, package_name);
         protofile
             .write_to_file(&path_outfile, &package)
             .map_err(|e| Error::WriteFile(path_outfile, e))

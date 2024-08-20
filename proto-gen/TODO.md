@@ -1,3 +1,4 @@
 - custom type namespace qualification
 - incorrect custom type path eg. `BreachRoomUnlockResultEvent.Types.BreachRoomUnlockResult`
 - fix proto-types `sint32`, `sint64`, `fixed32`, `fixed64`, `sfixed32`, `sfixed64` not retrieved
+- wellknowtype import
