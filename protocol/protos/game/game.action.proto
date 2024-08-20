@@ -18,7 +18,7 @@ message GameActionItemConsumeAllRequest {
 }
 
 message GameActionUpdateEffectTriggerCountEvent {
-	repeated GameActionUpdateEffectTriggerCountEvent.Types.FightEffectTriggerCount effects_count_on_target = 1;
+	repeated GameActionUpdateEffectTriggerCountEvent.FightEffectTriggerCount effects_count_on_target = 1;
 	message FightEffectTriggerCount {
 		int32 effect_id = 1;
 		int64 target_id = 2;
@@ -30,39 +30,39 @@ message GameActionFightEvent {
 	int32 action_id = 1;
 	int64 source_id = 2;
 	oneof action {
-		GameActionFightEvent.Types.Slide slide = 3;
-		GameActionFightEvent.Types.DodgePointLoss dodge_point_loss = 4;
-		GameActionFightEvent.Types.ReflectDamages reflect_damages = 5;
-		GameActionFightEvent.Types.ReduceDamages reduce_damages = 6;
-		GameActionFightEvent.Types.ReflectSpell reflect_spell = 7;
-		GameActionFightEvent.Types.RemovableEffect removable_effect = 8;
-		GameActionFightEvent.Types.LifePointsLost life_points_lost = 9;
-		GameActionFightEvent.Types.LifePointsGain life_points_gain = 10;
-		GameActionFightEvent.Types.SpellImmunity spell_immunity = 11;
-		GameActionFightEvent.Types.SpellCoolDownVariation spell_cool_down_variation = 12;
-		GameActionFightEvent.Types.Vanish vanish = 13;
-		GameActionFightEvent.Types.Kill kill = 14;
-		GameActionFightEvent.Types.Death death = 15;
-		GameActionFightEvent.Types.TargetedAbility targeted_ability = 16;
-		GameActionFightEvent.Types.Tackled tackled = 17;
-		GameActionFightEvent.Types.PointsVariation points_variation = 18;
-		GameActionFightEvent.Types.InvisibleDetected invisible_detected = 19;
-		GameActionFightEvent.Types.TeleportOnSameMap teleport_on_same_map = 20;
-		GameActionFightEvent.Types.ExchangePositions exchange_positions = 21;
-		GameActionFightEvent.Types.SpellRemove spell_remove = 22;
-		GameActionFightEvent.Types.ModifyEffectsDuration modify_effects_duration = 23;
-		GameActionFightEvent.Types.StealKama steal_kama = 24;
-		GameActionFightEvent.Types.ChangeLook change_look = 25;
-		GameActionFightEvent.Types.Invisibility invisibility = 26;
-		GameActionFightEvent.Types.Summons summons = 27;
-		GameActionFightEvent.Types.MarkCells mark_cells = 28;
-		GameActionFightEvent.Types.UnmarkCells unmark_cells = 29;
-		GameActionFightEvent.Types.TriggerGlyphTrap trigger_glyph_trap = 30;
-		GameActionFightEvent.Types.ActivateGlyphTrap activate_glyph_trap = 31;
-		GameActionFightEvent.Types.CarryCharacter carry_character = 32;
-		GameActionFightEvent.Types.ThrowCharacter throw_character = 33;
-		GameActionFightEvent.Types.DropCharacter drop_character = 34;
-		GameActionFightEvent.Types.ExecuteScript execute_script = 35;
+		GameActionFightEvent.Slide slide = 3;
+		GameActionFightEvent.DodgePointLoss dodge_point_loss = 4;
+		GameActionFightEvent.ReflectDamages reflect_damages = 5;
+		GameActionFightEvent.ReduceDamages reduce_damages = 6;
+		GameActionFightEvent.ReflectSpell reflect_spell = 7;
+		GameActionFightEvent.RemovableEffect removable_effect = 8;
+		GameActionFightEvent.LifePointsLost life_points_lost = 9;
+		GameActionFightEvent.LifePointsGain life_points_gain = 10;
+		GameActionFightEvent.SpellImmunity spell_immunity = 11;
+		GameActionFightEvent.SpellCoolDownVariation spell_cool_down_variation = 12;
+		GameActionFightEvent.Vanish vanish = 13;
+		GameActionFightEvent.Kill kill = 14;
+		GameActionFightEvent.Death death = 15;
+		GameActionFightEvent.TargetedAbility targeted_ability = 16;
+		GameActionFightEvent.Tackled tackled = 17;
+		GameActionFightEvent.PointsVariation points_variation = 18;
+		GameActionFightEvent.InvisibleDetected invisible_detected = 19;
+		GameActionFightEvent.TeleportOnSameMap teleport_on_same_map = 20;
+		GameActionFightEvent.ExchangePositions exchange_positions = 21;
+		GameActionFightEvent.SpellRemove spell_remove = 22;
+		GameActionFightEvent.ModifyEffectsDuration modify_effects_duration = 23;
+		GameActionFightEvent.StealKama steal_kama = 24;
+		GameActionFightEvent.ChangeLook change_look = 25;
+		GameActionFightEvent.Invisibility invisibility = 26;
+		GameActionFightEvent.Summons summons = 27;
+		GameActionFightEvent.MarkCells mark_cells = 28;
+		GameActionFightEvent.UnmarkCells unmark_cells = 29;
+		GameActionFightEvent.TriggerGlyphTrap trigger_glyph_trap = 30;
+		GameActionFightEvent.ActivateGlyphTrap activate_glyph_trap = 31;
+		GameActionFightEvent.CarryCharacter carry_character = 32;
+		GameActionFightEvent.ThrowCharacter throw_character = 33;
+		GameActionFightEvent.DropCharacter drop_character = 34;
+		GameActionFightEvent.ExecuteScript execute_script = 35;
 	}
 	message CarryCharacter {
 		int64 target_id = 3;
@@ -104,7 +104,7 @@ message GameActionFightEvent {
 			repeated ActorPositionInformation summons = 1;
 		}
 		message SummonsByContextInformation {
-			repeated GameActionFightEvent.Types.Summons.Types.SummonsByContextInformation.Types.SummonContextInformation summons = 1;
+			repeated GameActionFightEvent.Summons.SummonsByContextInformation.SummonContextInformation summons = 1;
 			message SummonContextInformation {
 				EntitySpawnInformation spawn_information = 1;
 				int32 wave = 2;
@@ -252,9 +252,9 @@ enum FightSpellCastCritical {
 
 message EntitySpawnInformation {
 	oneof spawn_information {
-		EntitySpawnInformation.Types.Monster monster = 1;
-		EntitySpawnInformation.Types.Character character = 2;
-		EntitySpawnInformation.Types.Companion companion = 3;
+		EntitySpawnInformation.Monster monster = 1;
+		EntitySpawnInformation.Character character = 2;
+		EntitySpawnInformation.Companion companion = 3;
 	}
 	message Monster {
 		int32 monster_gid = 1;

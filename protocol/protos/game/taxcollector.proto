@@ -18,7 +18,7 @@ message TaxCollectorAttackResultEvent {
 }
 
 message TaxCollectorMovement {
-	TaxCollectorMovement.Types.TaxCollectorMovementType movement_type = 1;
+	TaxCollectorMovement.TaxCollectorMovementType movement_type = 1;
 	int32 first_name_id = 2;
 	int32 last_name_id = 3;
 	MapExtendedCoordinates coordinates = 4;
@@ -39,7 +39,7 @@ message TaxCollectorOrderedSpellUpdatedEvent {
 }
 
 message TaxCollectorErrorEvent {
-	TaxCollectorErrorEvent.Types.TaxCollectorErrorReason reason = 1;
+	TaxCollectorErrorEvent.TaxCollectorErrorReason reason = 1;
 	enum TaxCollectorErrorReason {
 		TAX_COLLECTOR_ERROR_UNKNOWN = 0;
 		TAX_COLLECTOR_NOT_FOUND = 1;

@@ -46,7 +46,7 @@ message QuestsFollowedEvent {
 
 message QuestActive {
 	int32 quest_id = 1;
-	QuestActive.Types.Details details = 2;
+	QuestActive.Details details = 2;
 	message Details {
 		int32 step_id = 1;
 		repeated QuestObjective objectives = 2;
@@ -63,7 +63,7 @@ message QuestsFollowedOrderRefreshRequest {
 }
 
 message QuestsEvent {
-	repeated QuestsEvent.Types.QuestFinished finished_quests = 1;
+	repeated QuestsEvent.QuestFinished finished_quests = 1;
 	repeated QuestActive active_quests = 2;
 	repeated int32 reinitialized_done_quests_id = 3;
 	optional int64 player_id = 4;
@@ -94,7 +94,7 @@ message QuestObjective {
 	int32 objective_id = 1;
 	bool objective_reached = 2;
 	repeated string dialog_params = 3;
-	QuestObjective.Types.Completion completion = 4;
+	QuestObjective.Completion completion = 4;
 	message Completion {
 		int32 current_completion = 1;
 		int32 max_completion = 2;

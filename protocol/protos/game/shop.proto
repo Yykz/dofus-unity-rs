@@ -9,7 +9,7 @@ message AccessoryPreviewRequest {
 }
 
 message AccessoryPreviewErrorEvent {
-	AccessoryPreviewErrorEvent.Types.AccessoryPreviewError error = 1;
+	AccessoryPreviewErrorEvent.AccessoryPreviewError error = 1;
 	enum AccessoryPreviewError {
 		ERROR = 0;
 		COOL_DOWN = 1;

@@ -16,7 +16,7 @@ message Challenge {
 	repeated ChallengeTarget targets = 2;
 	int32 drop_bonus = 3;
 	int32 xp_bonus = 4;
-	Challenge.Types.ChallengeState state = 5;
+	Challenge.ChallengeState state = 5;
 	enum ChallengeState {
 		CHALLENGE_COMPLETED = 0;
 		CHALLENGE_FAILED = 1;
@@ -57,8 +57,8 @@ enum FightOption {
 
 message PlayerSearch {
 	oneof player_search {
-		PlayerSearch.Types.SearchByCharacterName search_by_character_name = 1;
-		PlayerSearch.Types.SearchByAccount search_by_account = 2;
+		PlayerSearch.SearchByCharacterName search_by_character_name = 1;
+		PlayerSearch.SearchByAccount search_by_account = 2;
 	}
 	message SearchByCharacterName {
 		string name = 1;
@@ -89,7 +89,7 @@ message AlignmentInformation {
 	int32 alignment_grade = 3;
 	int64 character_id = 4;
 	int64 character_level = 5;
-	AlignmentInformation.Types.AlignmentExtendedInformation extended_information = 6;
+	AlignmentInformation.AlignmentExtendedInformation extended_information = 6;
 	message AlignmentExtendedInformation {
 		int32 honor = 1;
 		int32 honor_grade_floor = 2;
@@ -99,7 +99,7 @@ message AlignmentInformation {
 }
 
 message FightPhaseInfo {
-	FightPhaseInfo.Types.FightPhase phase = 1;
+	FightPhaseInfo.FightPhase phase = 1;
 	int64 phase_end_timestamp = 2;
 	enum FightPhase {
 		STARTED = 0;
@@ -165,7 +165,7 @@ message ObjectItem {
 message FightTeamMemberCharacter {
 	string name = 1;
 	int32 level = 2;
-	FightTeamMemberCharacter.Types.BasicAllianceInformation alliance_info = 3;
+	FightTeamMemberCharacter.BasicAllianceInformation alliance_info = 3;
 	message BasicAllianceInformation {
 		string alliance_uid = 1;
 		string alliance_tag = 2;
@@ -186,7 +186,7 @@ message AllianceInformation {
 	string tag = 2;
 	optional string name = 3;
 	SocialEmblem emblem = 4;
-	AllianceInformation.Types.AllianceCardInformation card_information = 5;
+	AllianceInformation.AllianceCardInformation card_information = 5;
 	message AllianceCardInformation {
 		int64 creation_date = 1;
 		int32 members_number = 2;
@@ -207,8 +207,8 @@ enum FightOutcome {
 message RankInformation {
 	int32 id = 1;
 	string name = 2;
-	RankInformation.Types.OrderAndGfx order_and_gfx = 3;
-	RankInformation.Types.PrivateInformation private_information = 4;
+	RankInformation.OrderAndGfx order_and_gfx = 3;
+	RankInformation.PrivateInformation private_information = 4;
 	message OrderAndGfx {
 		int32 order = 1;
 		int32 gfx_id = 2;
@@ -227,7 +227,7 @@ message SpellItem {
 
 message PrismModule {
 	ObjectItemInventory module_object = 1;
-	PrismModule.Types.PrismModuleType type = 2;
+	PrismModule.PrismModuleType type = 2;
 	enum PrismModuleType {
 		NO_MODULE = 0;
 		TELEPORTER = 1;
@@ -241,9 +241,9 @@ message FightMark {
 	int32 spell_id = 3;
 	int32 spell_level = 4;
 	int32 mark_id = 5;
-	FightMark.Types.MarkType mark_type = 6;
+	FightMark.MarkType mark_type = 6;
 	int32 mark_impact_cell = 7;
-	repeated FightMark.Types.MarkedCell cells = 8;
+	repeated FightMark.MarkedCell cells = 8;
 	bool active = 9;
 	enum MarkType {
 		GLYPH = 0;
@@ -256,7 +256,7 @@ message FightMark {
 		int32 id = 1;
 		int32 zone_size = 2;
 		int32 color = 3;
-		FightMark.Types.MarkedCell.Types.MarkCellsType cells_type = 4;
+		FightMark.MarkedCell.MarkCellsType cells_type = 4;
 		enum MarkCellsType {
 			CELLS_CIRCLE = 0;
 			CELLS_CROSS = 1;
@@ -270,13 +270,13 @@ message ObjectEffect {
 	oneof effect {
 		string value_string = 2;
 		int32 value_int = 3;
-		ObjectEffect.Types.ObjectEffectMinMaxValue min_max = 4;
-		ObjectEffect.Types.ObjectEffectDiceValue dice = 5;
+		ObjectEffect.ObjectEffectMinMaxValue min_max = 4;
+		ObjectEffect.ObjectEffectDiceValue dice = 5;
 		string date = 6;
 		int64 duration_minute = 7;
 		int32 creature_family = 8;
-		ObjectEffect.Types.MonsterCount monster_count = 9;
-		ObjectEffect.Types.ObjectEffectMountValue mount = 10;
+		ObjectEffect.MonsterCount monster_count = 9;
+		ObjectEffect.ObjectEffectMountValue mount = 10;
 	}
 	message ObjectEffectMinMaxValue {
 		int32 min = 1;
@@ -404,8 +404,8 @@ message ObjectInRolePlay {
 	int32 cell_id = 1;
 	int32 object_gid = 2;
 	oneof complement {
-		ObjectInRolePlay.Types.WithLook with_look = 3;
-		ObjectInRolePlay.Types.PaddockItem paddock_item = 4;
+		ObjectInRolePlay.WithLook with_look = 3;
+		ObjectInRolePlay.PaddockItem paddock_item = 4;
 	}
 	message WithLook {
 		EntityLook look = 1;
@@ -428,10 +428,10 @@ message GuildInformation {
 	int32 id = 1;
 	string name = 2;
 	int32 level = 3;
-	GuildInformation.Types.GuildSocialInformation social_information = 4;
+	GuildInformation.GuildSocialInformation social_information = 4;
 	message GuildSocialInformation {
 		SocialEmblem emblem = 1;
-		GuildInformation.Types.GuildSocialInformation.Types.GuildDetailedInformation detailed_information = 2;
+		GuildInformation.GuildSocialInformation.GuildDetailedInformation detailed_information = 2;
 		message GuildDetailedInformation {
 			int64 leader_id = 1;
 			int32 members_count = 2;
@@ -487,7 +487,7 @@ message CharacterCharacteristicDetailedUsable {
 message Character {
 	int64 id = 1;
 	oneof complement {
-		Character.Types.CharacterBasicInformation character_basic_information = 2;
+		Character.CharacterBasicInformation character_basic_information = 2;
 		CharacterRemodelingInformation character_remodeling_information = 3;
 	}
 	message CharacterBasicInformation {
@@ -503,7 +503,7 @@ message Character {
 			int32 rank_id = 7;
 			int64 enrollment_date = 8;
 			optional int32 ava_role_id = 9;
-			Character.Types.CharacterBasicInformation.Types.SocialMember.Types.GuildMember guild_member = 10;
+			Character.CharacterBasicInformation.SocialMember.GuildMember guild_member = 10;
 			message GuildMember {
 				int64 given_experience = 1;
 				int32 experience_given_percent = 2;
@@ -511,7 +511,7 @@ message Character {
 				int32 mood_smiley_id = 4;
 				int32 achievement_points = 5;
 				bool haven_bag_shared = 6;
-				Character.Types.CharacterBasicInformation.Types.SocialMember.Types.GuildMember.Types.PlayerNote note = 7;
+				Character.CharacterBasicInformation.SocialMember.GuildMember.PlayerNote note = 7;
 				message PlayerNote {
 					string content = 1;
 					int64 last_edit_date = 2;
@@ -524,7 +524,7 @@ message Character {
 			message CharacterBaseInformation {
 				Gender gender = 1;
 				message CharacterEpicInformation {
-					Character.Types.CharacterBasicInformation.Types.CharacterLook.Types.CharacterBaseInformation.Types.CharacterEpicInformation.Types.EpicDeathState death_state = 1;
+					Character.CharacterBasicInformation.CharacterLook.CharacterBaseInformation.CharacterEpicInformation.EpicDeathState death_state = 1;
 					int32 death_count = 2;
 					int32 death_max_level = 3;
 					enum EpicDeathState {
@@ -631,10 +631,10 @@ message House {
 	int32 house_id = 1;
 	int32 model_id = 2;
 	oneof information {
-		House.Types.HouseAccount house_account = 3;
-		House.Types.HouseOnMap house_on_map = 4;
-		House.Types.HouseInside house_inside = 5;
-		House.Types.HouseGuild house_guild = 6;
+		House.HouseAccount house_account = 3;
+		House.HouseOnMap house_on_map = 4;
+		House.HouseInside house_inside = 5;
+		House.HouseGuild house_guild = 6;
 	}
 	message HouseAccount {
 		HouseInstance house_information = 1;
@@ -662,7 +662,7 @@ message CharacterRemodelingInformation {
 	Gender gender = 3;
 	repeated int32 colors = 4;
 	int32 cosmetic_id = 5;
-	CharacterRemodelingInformation.Types.CharacterToRemodelInformation character_to_remodel_information = 6;
+	CharacterRemodelingInformation.CharacterToRemodelInformation character_to_remodel_information = 6;
 	message CharacterToRemodelInformation {
 		int32 possible_change_mask = 1;
 		int32 mandatory_change_mask = 2;
@@ -698,7 +698,7 @@ enum Direction {
 }
 
 message SubEntityInformation {
-	SubEntityInformation.Types.BindingPointCategoryEnum binding_point_category = 1;
+	SubEntityInformation.BindingPointCategoryEnum binding_point_category = 1;
 	int32 binding_point_index = 2;
 	EntityLook sub_entity_look = 3;
 	enum BindingPointCategoryEnum {
@@ -725,7 +725,7 @@ message NamedPartyTeamWithOutcome {
 
 message PrismCristal {
 	ObjectItemInventory cristal_object = 1;
-	PrismCristal.Types.PrismCristalType type = 2;
+	PrismCristal.PrismCristalType type = 2;
 	enum PrismCristalType {
 		NO_CRISTAL = 0;
 		PROTECTIVE = 1;
@@ -773,7 +773,7 @@ enum PresetType {
 
 message SocialFightInformation {
 	int32 fight_id = 1;
-	SocialFightInformation.Types.Type fight_type = 2;
+	SocialFightInformation.Type fight_type = 2;
 	int64 map_id = 3;
 	enum Type {
 		TAX_COLLECTOR = 0;
@@ -789,7 +789,7 @@ message BreachBranch {
 	int32 score = 5;
 	int32 relative_score = 6;
 	repeated MonsterInGroupInformation monsters = 7;
-	BreachBranch.Types.ExtendedBreachBranch extended_information = 8;
+	BreachBranch.ExtendedBreachBranch extended_information = 8;
 	message ExtendedBreachBranch {
 		repeated BreachReward rewards = 1;
 		int32 modifier = 2;
@@ -827,7 +827,7 @@ message FightRemovableEffect {
 	int32 uid = 1;
 	int64 target_id = 2;
 	int32 turn_duration = 3;
-	FightRemovableEffect.Types.EffectDissipationState dissipation_state = 4;
+	FightRemovableEffect.EffectDissipationState dissipation_state = 4;
 	int32 spell_id = 5;
 	int32 effect_id = 6;
 	int32 parent_boost_id = 7;
@@ -900,7 +900,7 @@ message FightTeamMemberInformation {
 }
 
 message CharacterStatus {
-	CharacterStatus.Types.Status status = 1;
+	CharacterStatus.Status status = 1;
 	optional string message = 2;
 	enum Status {
 		STATUS_OFFLINE = 0;
@@ -917,18 +917,18 @@ message GuildLogbookEntry {
 	int32 guild_id = 1;
 	int64 date = 2;
 	oneof activity {
-		GuildLogbookEntry.Types.ChestActivity chest_activity = 3;
-		GuildLogbookEntry.Types.PaddockActivity paddock_activity = 4;
-		GuildLogbookEntry.Types.PlayerFlowActivity player_flow_activity = 5;
-		GuildLogbookEntry.Types.LevelUpActivity level_up_activity = 6;
-		GuildLogbookEntry.Types.UnlockNewTabActivity unlock_new_tab_activity = 7;
-		GuildLogbookEntry.Types.RankActivity rank_activity = 8;
-		GuildLogbookEntry.Types.PlayerRankUpdateActivity player_rank_update_activity = 9;
+		GuildLogbookEntry.ChestActivity chest_activity = 3;
+		GuildLogbookEntry.PaddockActivity paddock_activity = 4;
+		GuildLogbookEntry.PlayerFlowActivity player_flow_activity = 5;
+		GuildLogbookEntry.LevelUpActivity level_up_activity = 6;
+		GuildLogbookEntry.UnlockNewTabActivity unlock_new_tab_activity = 7;
+		GuildLogbookEntry.RankActivity rank_activity = 8;
+		GuildLogbookEntry.PlayerRankUpdateActivity player_rank_update_activity = 9;
 	}
 	message ChestActivity {
 		int64 player_id = 1;
 		string player_name = 2;
-		GuildLogbookEntry.Types.ChestActivity.Types.ChestEventType event_type = 3;
+		GuildLogbookEntry.ChestActivity.ChestEventType event_type = 3;
 		int32 quantity = 4;
 		ObjectItem object = 5;
 		int32 source_tab_id = 6;
@@ -944,7 +944,7 @@ message GuildLogbookEntry {
 		string player_name = 2;
 		MapExtendedCoordinates paddock_coordinates = 3;
 		int64 farm_id = 4;
-		GuildLogbookEntry.Types.PaddockActivity.Types.PaddockCommercialEventType paddock_commercial_event_type = 5;
+		GuildLogbookEntry.PaddockActivity.PaddockCommercialEventType paddock_commercial_event_type = 5;
 		enum PaddockCommercialEventType {
 			BUY = 0;
 			PUT_ON_SELL = 1;
@@ -954,7 +954,7 @@ message GuildLogbookEntry {
 	message PlayerFlowActivity {
 		int64 player_id = 1;
 		string player_name = 2;
-		GuildLogbookEntry.Types.PlayerFlowActivity.Types.PlayerFlowEventType player_flow_event_type = 3;
+		GuildLogbookEntry.PlayerFlowActivity.PlayerFlowEventType player_flow_event_type = 3;
 		enum PlayerFlowEventType {
 			JOIN = 0;
 			LEAVE = 1;
@@ -967,7 +967,7 @@ message GuildLogbookEntry {
 	message UnlockNewTabActivity {
 	}
 	message RankActivity {
-		GuildLogbookEntry.Types.RankActivity.Types.RankActivityType rank_activity_type = 1;
+		GuildLogbookEntry.RankActivity.RankActivityType rank_activity_type = 1;
 		RankInformation rank_information = 2;
 		enum RankActivityType {
 			CREATION = 0;
@@ -987,7 +987,7 @@ message GuildLogbookEntry {
 message ActorPositionInformation {
 	int64 actor_id = 1;
 	EntityDisposition disposition = 2;
-	ActorPositionInformation.Types.ActorInformation actor_information = 3;
+	ActorPositionInformation.ActorInformation actor_information = 3;
 	message ActorInformation {
 		EntityLook look = 1;
 		message RolePlayActor {
@@ -996,13 +996,13 @@ message ActorPositionInformation {
 				message Humanoid {
 					repeated Restriction restrictions = 1;
 					Gender gender = 2;
-					repeated ActorPositionInformation.Types.ActorInformation.Types.RolePlayActor.Types.NamedActor.Types.Humanoid.Types.HumanOption options = 3;
+					repeated ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.HumanOption options = 3;
 					int64 account_id = 4;
 					AlignmentInformation alignment_information = 5;
-					ActorPositionInformation.Types.ActorInformation.Types.RolePlayActor.Types.NamedActor.Types.Humanoid.Types.MutantInformation mutant_information = 6;
+					ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.MutantInformation mutant_information = 6;
 					message HumanOption {
 						message FollowingCharactersOption {
-							repeated ActorPositionInformation.Types.ActorInformation.Types.RolePlayActor.Types.NamedActor.Types.Humanoid.Types.HumanOption.Types.FollowingCharactersOption.Types.IndexedEntityLook following_characters_looks = 1;
+							repeated ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.FollowingCharactersOption.IndexedEntityLook following_characters_looks = 1;
 							message IndexedEntityLook {
 								EntityLook look = 1;
 								int32 index = 2;
@@ -1055,7 +1055,7 @@ message ActorPositionInformation {
 				MonsterGroupStaticInformation identification = 1;
 				int32 loot_share = 2;
 				Alignment alignment = 3;
-				ActorPositionInformation.Types.ActorInformation.Types.RolePlayActor.Types.MonsterGroupActor.Types.WaveInformation wave_information = 4;
+				ActorPositionInformation.ActorInformation.RolePlayActor.MonsterGroupActor.WaveInformation wave_information = 4;
 				message WaveInformation {
 					optional int32 wave_count = 1;
 					repeated MonsterGroupStaticInformation alternatives = 2;
@@ -1065,7 +1065,7 @@ message ActorPositionInformation {
 				int32 npc_id = 1;
 				Gender gender = 2;
 				int32 special_artwork_id = 3;
-				ActorPositionInformation.Types.ActorInformation.Types.RolePlayActor.Types.NpcStaticInformation.Types.Quests quests = 4;
+				ActorPositionInformation.ActorInformation.RolePlayActor.NpcStaticInformation.Quests quests = 4;
 				message Quests {
 					repeated int32 quests_to_valid = 1;
 					repeated int32 quests_to_start = 2;
@@ -1201,7 +1201,7 @@ message FightExternalInformation {
 	FightType fight_type = 2;
 	int64 fight_start = 3;
 	bool fight_spectator_locked = 4;
-	repeated FightExternalInformation.Types.FightTeamsWithOptions fight_teams_with_options = 5;
+	repeated FightExternalInformation.FightTeamsWithOptions fight_teams_with_options = 5;
 	message FightTeamsWithOptions {
 		FightTeamInformation fight_team = 1;
 		FightOptionsInformation fight_team_options = 2;
@@ -1239,7 +1239,7 @@ message PartyEntity {
 	int32 index_id = 1;
 	int32 entity_model_id = 2;
 	EntityLook look = 3;
-	PartyEntity.Types.EntityMember entity_member = 4;
+	PartyEntity.EntityMember entity_member = 4;
 	message EntityMember {
 		int32 initiative = 1;
 		PartyUpdateCommonsInformation commons_information = 2;
@@ -1315,7 +1315,7 @@ message ItemMinimalInformation {
 	repeated ObjectEffect effects = 2;
 	oneof complement {
 		int32 quantity = 3;
-		ItemMinimalInformation.Types.ItemToSellInNpcShop item_to_sell_in_npc_shop = 4;
+		ItemMinimalInformation.ItemToSellInNpcShop item_to_sell_in_npc_shop = 4;
 	}
 	message ItemToSellInNpcShop {
 		int64 price = 1;
@@ -1330,10 +1330,10 @@ message ShortcutSpell {
 message FightResultListEntry {
 	FightOutcome outcome = 1;
 	int32 wave = 2;
-	FightResultListEntry.Types.FightLoot rewards = 3;
-	FightResultListEntry.Types.FighterListEntry fighter_list_entry = 4;
+	FightResultListEntry.FightLoot rewards = 3;
+	FightResultListEntry.FighterListEntry fighter_list_entry = 4;
 	message FightLoot {
-		repeated FightResultListEntry.Types.FightLoot.Types.Object objects = 1;
+		repeated FightResultListEntry.FightLoot.Object objects = 1;
 		int64 kamas = 2;
 		message Object {
 			int32 id = 1;
@@ -1346,7 +1346,7 @@ message FightResultListEntry {
 		bool alive = 2;
 		message PlayerListEntry {
 			int32 level = 1;
-			repeated FightResultListEntry.Types.FighterListEntry.Types.PlayerListEntry.Types.FightResultAdditionalData additional = 2;
+			repeated FightResultListEntry.FighterListEntry.PlayerListEntry.FightResultAdditionalData additional = 2;
 			message FightResultAdditionalData {
 				message ExperienceData {
 					int64 experience = 1;
@@ -1394,8 +1394,8 @@ message FightTeamMemberEntity {
 message InteractiveElement {
 	int32 element_id = 1;
 	int32 element_type_id = 2;
-	repeated InteractiveElement.Types.InteractiveElementSkill enabled_skills = 3;
-	repeated InteractiveElement.Types.InteractiveElementSkill disabled_skills = 4;
+	repeated InteractiveElement.InteractiveElementSkill enabled_skills = 3;
+	repeated InteractiveElement.InteractiveElementSkill disabled_skills = 4;
 	bool on_current_map = 5;
 	optional int32 age_bonus = 6;
 	message InteractiveElementSkill {
@@ -1408,7 +1408,7 @@ message InteractiveElement {
 message ObjectGidWithQuantity {
 	int32 object_gid = 1;
 	int32 quantity = 2;
-	ObjectGidWithQuantity.Types.ObjectPriceDateEffect price_date_effect = 3;
+	ObjectGidWithQuantity.ObjectPriceDateEffect price_date_effect = 3;
 	message ObjectPriceDateEffect {
 		int64 price = 1;
 		repeated ObjectEffect effects = 2;
@@ -1459,7 +1459,7 @@ message FightTemporaryBoostEffect {
 		int32 boosted_spell_id = 2;
 		int32 weapon_type_id = 3;
 		int32 state_id = 4;
-		FightTemporaryBoostEffect.Types.Details details = 5;
+		FightTemporaryBoostEffect.Details details = 5;
 	}
 	message Details {
 		int32 first_param = 1;
@@ -1525,7 +1525,7 @@ message TaxCollectorOrderedSpell {
 }
 
 message PrismInformation {
-	PrismInformation.Types.PrismState state = 1;
+	PrismInformation.PrismState state = 1;
 	int64 placement_date = 2;
 	int64 nuggets_count = 3;
 	int32 durability = 4;
@@ -1572,7 +1572,7 @@ message EntityDisposition {
 
 message BreachReward {
 	int32 id = 1;
-	repeated BreachReward.Types.BreachRewardLock buy_locks = 2;
+	repeated BreachReward.BreachRewardLock buy_locks = 2;
 	string buy_criterion = 3;
 	int32 remaining_quantity = 4;
 	int32 price = 5;
@@ -1617,14 +1617,14 @@ message PaddockInformation {
 	int32 max_outdoor_mount = 1;
 	int32 max_items = 2;
 	oneof information {
-		PaddockInformation.Types.PaddockContent content = 3;
-		PaddockInformation.Types.PaddockInstances instances = 4;
+		PaddockInformation.PaddockContent content = 3;
+		PaddockInformation.PaddockInstances instances = 4;
 	}
 	message PaddockContent {
 		int64 paddock_id = 1;
 		MapExtendedCoordinates coordinates = 2;
 		bool abandoned = 3;
-		repeated PaddockInformation.Types.PaddockContent.Types.MountForPaddock mounts_information = 4;
+		repeated PaddockInformation.PaddockContent.MountForPaddock mounts_information = 4;
 		message MountForPaddock {
 			int32 model_id = 1;
 			string name = 2;
@@ -1632,11 +1632,11 @@ message PaddockInformation {
 		}
 	}
 	message PaddockInstances {
-		repeated PaddockInformation.Types.PaddockInstances.Types.PaddockToSell paddocks_to_sell = 1;
+		repeated PaddockInformation.PaddockInstances.PaddockToSell paddocks_to_sell = 1;
 		message PaddockToSell {
 			int64 price = 1;
 			bool locked = 2;
-			PaddockInformation.Types.PaddockInstances.Types.PaddockToSell.Types.PaddockGuildInformation guild_information = 3;
+			PaddockInformation.PaddockInstances.PaddockToSell.PaddockGuildInformation guild_information = 3;
 			message PaddockGuildInformation {
 				bool deserted = 1;
 				GuildInformation guild_information = 2;

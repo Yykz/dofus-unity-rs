@@ -43,7 +43,7 @@ message ResetCharacterCharacteristicsRequest {
 }
 
 message CharacterOnConnectionEvent {
-	CharacterOnConnectionEvent.Types.ConnectionEvent connection_event = 1;
+	CharacterOnConnectionEvent.ConnectionEvent connection_event = 1;
 	enum ConnectionEvent {
 		FIRST_ACCOUNT_CONNECTION_EVER = 0;
 		FIRST_ACCOUNT_CONNECTION_ON_SERVER = 1;
@@ -54,7 +54,7 @@ message CharacterOnConnectionEvent {
 }
 
 message CharacterCharacteristicUpgradeResultEvent {
-	CharacterCharacteristicUpgradeResultEvent.Types.CharacteristicUpgradeResult result = 1;
+	CharacterCharacteristicUpgradeResultEvent.CharacteristicUpgradeResult result = 1;
 	int32 points = 2;
 	enum CharacteristicUpgradeResult {
 		NONE = 0;
@@ -76,7 +76,7 @@ message PlayerStatusUpdateRequest {
 }
 
 message CharacterLifeStatusEvent {
-	CharacterLifeStatusEvent.Types.LifeStatus state = 1;
+	CharacterLifeStatusEvent.LifeStatus state = 1;
 	int64 phoenix_map_id = 2;
 	enum LifeStatus {
 		ALIVE_AND_KICKING = 0;

@@ -15,7 +15,7 @@ message GuestModeEvent {
 }
 
 message GuestLimitationEvent {
-	GuestLimitationEvent.Types.GuestLimitation reason = 1;
+	GuestLimitationEvent.GuestLimitation reason = 1;
 	enum GuestLimitation {
 		LIMITED_TO_REGISTERED = 0;
 		LIMIT_ON_JOB_XP = 1;
@@ -40,7 +40,7 @@ message SubscriptionZoneEvent {
 }
 
 message SubscriptionLimitationEvent {
-	SubscriptionLimitationEvent.Types.SubscriptionRequired reason = 1;
+	SubscriptionLimitationEvent.SubscriptionRequired reason = 1;
 	enum SubscriptionRequired {
 		LIMITED_TO_SUBSCRIBER = 0;
 		LIMIT_ON_JOB_XP = 1;

@@ -87,7 +87,7 @@ message FightSlaveNoLongerControlledEvent {
 
 message FightChallengeJoinRefuseEvent {
 	int64 player_id = 1;
-	FightChallengeJoinRefuseEvent.Types.FighterRefusedReason reason = 2;
+	FightChallengeJoinRefuseEvent.FighterRefusedReason reason = 2;
 	enum FighterRefusedReason {
 		FIGHTER_REFUSED = 0;
 		FIGHTER_ACCEPTED = 1;

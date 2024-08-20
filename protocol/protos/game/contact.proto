@@ -5,7 +5,7 @@ package game.contact;
 
 message ContactLookRequest {
 	int32 request_id = 1;
-	ContactLookRequest.Types.SocialContactCategory contact_type = 2;
+	ContactLookRequest.SocialContactCategory contact_type = 2;
 	oneof complement {
 		string name = 3;
 		int64 id = 4;
@@ -63,7 +63,7 @@ message FriendInformation {
 	optional int32 achievement_points = 5;
 	optional int32 league_id = 6;
 	optional int32 ladder_position = 7;
-	FriendInformation.Types.FriendOnlineInformation online_information = 8;
+	FriendInformation.FriendOnlineInformation online_information = 8;
 	message FriendOnlineInformation {
 		int64 character_id = 1;
 		string character_name = 2;
@@ -139,8 +139,8 @@ message AcquaintanceAddedEvent {
 
 message BlockEvent {
 	oneof result {
-		BlockEvent.Types.Error error = 1;
-		BlockEvent.Types.Success success = 2;
+		BlockEvent.Error error = 1;
+		BlockEvent.Success success = 2;
 	}
 	message Error {
 		AddFailureReason reason = 1;
@@ -160,8 +160,8 @@ message BlockListEvent {
 
 message IgnoreEvent {
 	oneof result {
-		IgnoreEvent.Types.Error error = 1;
-		IgnoreEvent.Types.Success success = 2;
+		IgnoreEvent.Error error = 1;
+		IgnoreEvent.Success success = 2;
 	}
 	message Error {
 		AddFailureReason reason = 1;
@@ -193,8 +193,8 @@ message ContactLookEvent {
 
 message UnBlockEvent {
 	oneof result {
-		UnBlockEvent.Types.Error error = 1;
-		UnBlockEvent.Types.Success success = 2;
+		UnBlockEvent.Error error = 1;
+		UnBlockEvent.Success success = 2;
 	}
 	message Error {
 	}
@@ -205,8 +205,8 @@ message UnBlockEvent {
 
 message UnIgnoreEvent {
 	oneof result {
-		UnIgnoreEvent.Types.Error error = 1;
-		UnIgnoreEvent.Types.Success success = 2;
+		UnIgnoreEvent.Error error = 1;
+		UnIgnoreEvent.Success success = 2;
 	}
 	message Error {
 	}
@@ -227,7 +227,7 @@ message AcquaintanceInformation {
 	int64 account_id = 1;
 	AccountTag account_tag = 2;
 	CharacterState state = 3;
-	AcquaintanceInformation.Types.OnlineInformation online = 4;
+	AcquaintanceInformation.OnlineInformation online = 4;
 	message OnlineInformation {
 		int64 character_id = 1;
 		string character_name = 2;

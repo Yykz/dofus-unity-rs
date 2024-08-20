@@ -49,7 +49,7 @@ message OutfitEquipObjectRequest {
 }
 
 message CosmeticInventoryAddObjectResponse {
-	CosmeticInventoryAddObjectResponse.Types.Result result = 1;
+	CosmeticInventoryAddObjectResponse.Result result = 1;
 	enum Result {
 		ERROR = 0;
 		DUPLICATE = 1;
@@ -79,7 +79,7 @@ message Outfit {
 	string uuid = 1;
 	string name = 2;
 	int32 pictogram_id = 3;
-	map<int32, Outfit.Types.SkinOutfit> objects = 4;
+	map<int32, Outfit.SkinOutfit> objects = 4;
 	optional int32 aura_emote_id = 5;
 	optional int32 ornament_id = 6;
 	optional int32 title_id = 7;

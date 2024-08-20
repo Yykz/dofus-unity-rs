@@ -36,7 +36,7 @@ message SmileyEvent {
 }
 
 message SetMoodEvent {
-	SetMoodEvent.Types.Result result = 1;
+	SetMoodEvent.Result result = 1;
 	int32 smiley_id = 2;
 	enum Result {
 		OK = 0;
@@ -76,7 +76,7 @@ message SpouseInformationEvent {
 	AllianceInformation alliance = 8;
 	Alignment alignment = 9;
 	EntityLook entity_look = 10;
-	SpouseInformationEvent.Types.Online online = 11;
+	SpouseInformationEvent.Online online = 11;
 	message Online {
 		int64 map_id = 1;
 		int32 sub_area_id = 2;
@@ -99,7 +99,7 @@ message SpouseStatusEvent {
 }
 
 message PlayersMapAttackableStatusUpdateEvent {
-	repeated PlayersMapAttackableStatusUpdateEvent.Types.AttackableStatus pvp_players = 1;
+	repeated PlayersMapAttackableStatusUpdateEvent.AttackableStatus pvp_players = 1;
 	message AttackableStatus {
 		int64 character_id = 1;
 		Com.Ankama.Dofus.Server.Game.Protocol.Common.AttackableStatus status = 2;

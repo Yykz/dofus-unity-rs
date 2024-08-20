@@ -92,7 +92,7 @@ where
             "ulong" => Self(String::from("uint64")),
             "ByteString" => Self(String::from("string")),
             // double, bool, string, float is same
-            _ => Self(value),
+            _ => Self(value.replace(".Types.", ".")),
         }
     }
 }

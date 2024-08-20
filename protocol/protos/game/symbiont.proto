@@ -13,7 +13,7 @@ message WrapperObjectDissociateRequest {
 }
 
 message MimicryResponse {
-	MimicryResponse.Types.Result result = 1;
+	MimicryResponse.Result result = 1;
 	enum Result {
 		ERROR = 0;
 		PLAYER_BUSY = 1;

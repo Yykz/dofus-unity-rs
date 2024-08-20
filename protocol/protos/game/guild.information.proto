@@ -4,7 +4,7 @@ import "common.proto";
 package game.guild.information;
 
 message GuildInformationRequest {
-	GuildInformationRequest.Types.InformationType information_type = 1;
+	GuildInformationRequest.InformationType information_type = 1;
 	enum InformationType {
 		INFO_GENERAL = 0;
 		INFO_MEMBERS = 1;
@@ -83,7 +83,7 @@ message GuildSummaryRequest {
 	int32 max_player_level_filter = 12;
 	int32 min_success_filter = 13;
 	int32 max_success_filter = 14;
-	GuildSummaryRequest.Types.SummarySort sort_type = 15;
+	GuildSummaryRequest.SummarySort sort_type = 15;
 	bool sort_descending = 16;
 	enum SummarySort {
 		SORT_BY_NAME = 0;

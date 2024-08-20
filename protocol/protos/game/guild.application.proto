@@ -24,7 +24,7 @@ message GuildApplicationPresenceEvent {
 }
 
 message GuildApplicationPlayerEvent {
-	GuildApplicationPlayerEvent.Types.ApplicationInformation application = 1;
+	GuildApplicationPlayerEvent.ApplicationInformation application = 1;
 	message ApplicationInformation {
 		GuildInformation guild_information = 1;
 		SocialApplicationInformation apply = 2;

@@ -23,7 +23,7 @@ message ConsoleCommand {
 
 message ConsoleMessage {
 	string content = 1;
-	ConsoleMessage.Types.Type type = 2;
+	ConsoleMessage.Type type = 2;
 	enum Type {
 		TEXT = 0;
 		INFO = 1;

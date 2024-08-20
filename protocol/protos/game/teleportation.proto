@@ -48,7 +48,7 @@ message TeleportDestination {
 	int32 level = 4;
 	int32 cost = 5;
 	oneof complementary_information {
-		TeleportDestination.Types.Anomaly anomaly = 6;
+		TeleportDestination.Anomaly anomaly = 6;
 	}
 	message Anomaly {
 		int32 bonus_pourcentage = 1;

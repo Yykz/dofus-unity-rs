@@ -3,8 +3,8 @@ syntax = "proto3";
 package game.debt;
 
 message DebtsUpdateEvent {
-	DebtsUpdateEvent.Types.DebtsAction action = 1;
-	repeated DebtsUpdateEvent.Types.DebtInformation debts = 2;
+	DebtsUpdateEvent.DebtsAction action = 1;
+	repeated DebtsUpdateEvent.DebtInformation debts = 2;
 	enum DebtsAction {
 		DISPATCH = 0;
 		UPDATE = 1;
@@ -17,7 +17,7 @@ message DebtsUpdateEvent {
 }
 
 message DebtsDeleteEvent {
-	DebtsDeleteEvent.Types.DebtsDeletionReason reason = 1;
+	DebtsDeleteEvent.DebtsDeletionReason reason = 1;
 	repeated int64 debts = 2;
 	enum DebtsDeletionReason {
 		UNKNOWN = 0;

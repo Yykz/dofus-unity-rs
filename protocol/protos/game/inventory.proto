@@ -190,7 +190,7 @@ message ObjectDropRequest {
 }
 
 message ObjectFavoriteRequest {
-	repeated ObjectFavoriteRequest.Types.ObjectFavorite objects = 1;
+	repeated ObjectFavoriteRequest.ObjectFavorite objects = 1;
 	bool favorite = 2;
 	message ObjectFavorite {
 		int32 object_uid = 1;

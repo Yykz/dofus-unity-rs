@@ -32,7 +32,7 @@ message BakApiTokenRequest {
 
 message BakTransactionValidationEvent {
 	BidAction bid_action = 1;
-	BakTransactionValidationEvent.Types.BidValidation result = 2;
+	BakTransactionValidationEvent.BidValidation result = 2;
 	enum BidValidation {
 		BID_GENERIC_ERROR = 0;
 		BID_BUFFER_OVERLOAD = 1;
@@ -71,7 +71,7 @@ message BakShopTokenRequest {
 
 message BakCancelBidRequest {
 	int64 bid_id = 1;
-	BakCancelBidRequest.Types.BidCancellationType bid_cancellation_type = 2;
+	BakCancelBidRequest.BidCancellationType bid_cancellation_type = 2;
 	enum BidCancellationType {
 		UNKNOWN_TYPE = 0;
 		CLASSIC_TYPE = 1;

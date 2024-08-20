@@ -74,7 +74,7 @@ message ChatPrivateCopyMessageEvent {
 }
 
 message ChatErrorEvent {
-	ChatErrorEvent.Types.Error error = 1;
+	ChatErrorEvent.Error error = 1;
 	enum Error {
 		UNKNOWN = 0;
 		RECEIVER_NOT_FOUND = 1;

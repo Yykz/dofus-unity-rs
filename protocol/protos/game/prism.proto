@@ -12,7 +12,7 @@ message PrismListEvent {
 
 message PrismAttackResultEvent {
 	PrismLocalizedInformation prism_localized_information = 1;
-	PrismAttackResultEvent.Types.PrismAttackResult prism_attack_result = 2;
+	PrismAttackResultEvent.PrismAttackResult prism_attack_result = 2;
 	enum PrismAttackResult {
 		DEFENDERS_WIN = 0;
 		ATTACKERS_WIN = 1;

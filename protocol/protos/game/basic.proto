@@ -9,7 +9,7 @@ message WhoIsRequest {
 }
 
 message CurrentServerStatusUpdateEvent {
-	CurrentServerStatusUpdateEvent.Types.ServerStatus status = 1;
+	CurrentServerStatusUpdateEvent.ServerStatus status = 1;
 	enum ServerStatus {
 		UNKNOWN = 0;
 		OFFLINE = 1;
@@ -46,7 +46,7 @@ message AlmanachCalendarDateEvent {
 }
 
 message TextInformationEvent {
-	TextInformationEvent.Types.TextInformationType message_type = 1;
+	TextInformationEvent.TextInformationType message_type = 1;
 	int32 message_id = 2;
 	repeated string parameters = 3;
 	enum TextInformationType {

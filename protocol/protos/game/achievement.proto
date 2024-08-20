@@ -8,7 +8,7 @@ message AchievementDetailsEvent {
 
 message Achievement {
 	int32 achievement_id = 1;
-	repeated Achievement.Types.AchievementObjective achievement_objectives = 2;
+	repeated Achievement.AchievementObjective achievement_objectives = 2;
 	message AchievementObjective {
 		int32 objective_id = 1;
 		int64 max_value = 2;
@@ -66,7 +66,7 @@ message AchievementsEvent {
 }
 
 message AchievementsPioneerRanksResponse {
-	repeated AchievementsPioneerRanksResponse.Types.AchievementPioneerRank achievements_pioneer_ranks = 1;
+	repeated AchievementsPioneerRanksResponse.AchievementPioneerRank achievements_pioneer_ranks = 1;
 	message AchievementPioneerRank {
 		int32 achievement_id = 1;
 		int32 pioneer_rank = 2;

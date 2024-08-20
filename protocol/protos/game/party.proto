@@ -35,7 +35,7 @@ message PartyNewMemberEvent {
 
 message PartyNameSetErrorEvent {
 	int32 party_id = 1;
-	PartyNameSetErrorEvent.Types.PartyNameError result = 2;
+	PartyNameSetErrorEvent.PartyNameError result = 2;
 	enum PartyNameError {
 		UNDEFINED_ERROR = 0;
 		INVALID = 1;
@@ -206,7 +206,7 @@ message PartyInvitationCancelledForGuestEvent {
 
 message PartyJoinErrorEvent {
 	int32 party_id = 1;
-	PartyJoinErrorEvent.Types.PartyJoinError reason = 2;
+	PartyJoinErrorEvent.PartyJoinError reason = 2;
 	enum PartyJoinError {
 		UNKNOWN = 0;
 		PLAYER_NOT_FOUND = 1;

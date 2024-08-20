@@ -28,7 +28,7 @@ message PaddockBuyRequest {
 }
 
 message PaddockTransactionDialogEvent {
-	PaddockTransactionDialogEvent.Types.Transaction transaction = 1;
+	PaddockTransactionDialogEvent.Transaction transaction = 1;
 	int32 owner_id = 2;
 	int64 price = 3;
 	enum Transaction {
@@ -60,7 +60,7 @@ message PaddocksToSellRequest {
 message PaddocksToSellEvent {
 	int32 page_index = 1;
 	int32 page_total = 2;
-	repeated PaddocksToSellEvent.Types.PaddockForSale paddocks = 3;
+	repeated PaddocksToSellEvent.PaddockForSale paddocks = 3;
 	message PaddockForSale {
 		string guild_owner = 1;
 		MapCoordinates coordinates = 2;

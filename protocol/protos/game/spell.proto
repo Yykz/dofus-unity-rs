@@ -8,7 +8,7 @@ message ForgettableSpellEquipmentSlotsEvent {
 }
 
 message ForgettableSpellsEvent {
-	ForgettableSpellsEvent.Types.Action action = 1;
+	ForgettableSpellsEvent.Action action = 1;
 	repeated SpellItem spells = 2;
 	enum Action {
 		DISPATCH = 0;
@@ -36,7 +36,7 @@ message RemoveSpellModifierEvent {
 }
 
 message ForgettableSpellDeletionEvent {
-	ForgettableSpellDeletionEvent.Types.DeletionReason reason = 1;
+	ForgettableSpellDeletionEvent.DeletionReason reason = 1;
 	repeated int32 spells = 2;
 	enum DeletionReason {
 		UNKNOWN = 0;
@@ -53,7 +53,7 @@ message SpellVariantActivationRequest {
 
 message ForgettableSpellActionRequest {
 	int32 spell_id = 1;
-	ForgettableSpellActionRequest.Types.ForgettableSpellAction action = 2;
+	ForgettableSpellActionRequest.ForgettableSpellAction action = 2;
 	enum ForgettableSpellAction {
 		FORGET = 0;
 		EQUIP = 1;

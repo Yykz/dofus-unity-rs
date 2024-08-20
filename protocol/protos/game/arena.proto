@@ -14,8 +14,8 @@ message SurrenderVoteCastRequest {
 }
 
 message SurrenderInfoResponse {
-	SurrenderInfoResponse.Types.SurrenderResponse surrender_response = 1;
-	SurrenderInfoResponse.Types.SurrenderVoteResponse surrender_vote_response = 2;
+	SurrenderInfoResponse.SurrenderResponse surrender_response = 1;
+	SurrenderInfoResponse.SurrenderVoteResponse surrender_vote_response = 2;
 	bool has_sanction = 3;
 	message SurrenderResponse {
 		message SurrenderAccepted {
@@ -68,11 +68,11 @@ message SurrenderStateEvent {
 }
 
 message ArenaUpdatePlayerInformationEvent {
-	repeated ArenaUpdatePlayerInformationEvent.Types.ArenaRank arena_ranks = 1;
+	repeated ArenaUpdatePlayerInformationEvent.ArenaRank arena_ranks = 1;
 	string ban_end_date = 2;
 	message ArenaRank {
 		ArenaType arena_type = 1;
-		ArenaUpdatePlayerInformationEvent.Types.ArenaRank.Types.LeagueRanking league_ranking = 2;
+		ArenaUpdatePlayerInformationEvent.ArenaRank.LeagueRanking league_ranking = 2;
 		int32 best_league_id = 3;
 		int32 best_rating = 4;
 		int32 daily_victory_count = 5;
@@ -127,7 +127,7 @@ message SurrenderVoteUpdateEvent {
 
 message ArenaRegistrationStatusEvent {
 	bool registered = 1;
-	ArenaRegistrationStatusEvent.Types.Step step = 2;
+	ArenaRegistrationStatusEvent.Step step = 2;
 	ArenaType battle_mode = 3;
 	enum Step {
 		REGISTERED = 0;

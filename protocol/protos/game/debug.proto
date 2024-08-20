@@ -4,7 +4,7 @@ import "common.proto";
 package game.debug;
 
 message DebugInClientEvent {
-	DebugInClientEvent.Types.DebugLevel level = 1;
+	DebugInClientEvent.DebugLevel level = 1;
 	string message = 2;
 	enum DebugLevel {
 		TRACE = 0;

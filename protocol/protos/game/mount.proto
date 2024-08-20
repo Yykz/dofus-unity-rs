@@ -23,7 +23,7 @@ message MountXpRatioEvent {
 
 message MountFeedRequest {
 	int32 mount_id = 1;
-	MountFeedRequest.Types.MountLocation mount_location = 2;
+	MountFeedRequest.MountLocation mount_location = 2;
 	int32 mount_food_uid = 3;
 	int32 quantity = 4;
 	enum MountLocation {
@@ -35,7 +35,7 @@ message MountFeedRequest {
 }
 
 message MountEquippedErrorEvent {
-	MountEquippedErrorEvent.Types.MountEquippedError error = 1;
+	MountEquippedErrorEvent.MountEquippedError error = 1;
 	enum MountEquippedError {
 		UNEQUIPPED = 0;
 		EQUIPPED = 1;
@@ -58,7 +58,7 @@ message MountSetXpRatioRequest {
 }
 
 message MountDataErrorEvent {
-	MountDataErrorEvent.Types.MountDataError reason = 1;
+	MountDataErrorEvent.MountDataError reason = 1;
 	enum MountDataError {
 		UNKNOWN = 0;
 		NOT_FOUND = 1;
@@ -69,7 +69,7 @@ message MountDataErrorEvent {
 
 message MountUpdateCharacteristicsEvent {
 	int32 ride_id = 1;
-	repeated MountUpdateCharacteristicsEvent.Types.MountCharacteristicUpdate updated_characteristics = 2;
+	repeated MountUpdateCharacteristicsEvent.MountCharacteristicUpdate updated_characteristics = 2;
 	message MountCharacteristicUpdate {
 		MountCharacteristic characteristic = 1;
 		optional int32 int_value = 2;

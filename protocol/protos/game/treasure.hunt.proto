@@ -5,7 +5,7 @@ package game.treasure.hunt;
 
 message TreasureHuntFlagAnswerEvent {
 	TreasureHuntType quest_type = 1;
-	TreasureHuntFlagAnswerEvent.Types.FlagResult result = 2;
+	TreasureHuntFlagAnswerEvent.FlagResult result = 2;
 	int32 index = 3;
 	enum FlagResult {
 		ERROR_UNDEFINED = 0;
@@ -20,7 +20,7 @@ message TreasureHuntFlagAnswerEvent {
 
 message TreasureHuntDigAnswerEvent {
 	TreasureHuntType quest_type = 1;
-	TreasureHuntDigAnswerEvent.Types.DigResult result = 2;
+	TreasureHuntDigAnswerEvent.DigResult result = 2;
 	optional int32 wrong_flag_count = 3;
 	enum DigResult {
 		ERROR_UNDEFINED = 0;
@@ -36,12 +36,12 @@ message TreasureHuntDigAnswerEvent {
 message TreasureHuntEvent {
 	TreasureHuntType quest_type = 1;
 	int64 start_map_id = 2;
-	repeated TreasureHuntEvent.Types.TreasureHuntStep known_steps = 3;
+	repeated TreasureHuntEvent.TreasureHuntStep known_steps = 3;
 	int32 total_step_count = 4;
 	int32 current_check_point = 5;
 	int32 total_check_point = 6;
 	int32 available_retry_count = 7;
-	repeated TreasureHuntEvent.Types.TreasureHuntFlag flags = 8;
+	repeated TreasureHuntEvent.TreasureHuntFlag flags = 8;
 	message TreasureHuntStep {
 		message FollowDirectionToPOI {
 			Direction direction = 1;
@@ -62,7 +62,7 @@ message TreasureHuntEvent {
 	}
 	message TreasureHuntFlag {
 		int64 map_id = 1;
-		TreasureHuntEvent.Types.TreasureHuntFlag.Types.FlagState state = 2;
+		TreasureHuntEvent.TreasureHuntFlag.FlagState state = 2;
 		enum FlagState {
 			UNKNOWN = 0;
 			OK = 1;
@@ -113,7 +113,7 @@ message TreasureHuntDigRequest {
 
 message TreasureHuntAnswerEvent {
 	TreasureHuntType quest_type = 1;
-	TreasureHuntAnswerEvent.Types.Result result = 2;
+	TreasureHuntAnswerEvent.Result result = 2;
 	enum Result {
 		ERROR_UNDEFINED = 0;
 		ERROR_NO_QUEST_FOUND = 1;

@@ -30,10 +30,10 @@ message PresetStatUpdateRequest {
 message PresetEquipmentUpdateRequest {
 	string character_preset_uuid = 1;
 	oneof action {
-		PresetEquipmentUpdateRequest.Types.SetItem set_item = 2;
-		PresetEquipmentUpdateRequest.Types.RemoveItem remove_item = 3;
-		PresetEquipmentUpdateRequest.Types.SetRide set_ride = 4;
-		PresetEquipmentUpdateRequest.Types.RemoveRide remove_ride = 5;
+		PresetEquipmentUpdateRequest.SetItem set_item = 2;
+		PresetEquipmentUpdateRequest.RemoveItem remove_item = 3;
+		PresetEquipmentUpdateRequest.SetRide set_ride = 4;
+		PresetEquipmentUpdateRequest.RemoveRide remove_ride = 5;
 	}
 	message SetItem {
 		int32 position = 1;
@@ -60,9 +60,9 @@ message PresetSymbolUpdateResponse {
 
 message PresetOrigin {
 	oneof origin {
-		PresetOrigin.Types.EmptyPreset empty = 1;
-		PresetOrigin.Types.PlayerCopy player = 2;
-		PresetOrigin.Types.PresetClone clone_ = 3;
+		PresetOrigin.EmptyPreset empty = 1;
+		PresetOrigin.PlayerCopy player = 2;
+		PresetOrigin.PresetClone clone_ = 3;
 	}
 	message EmptyPreset {
 	}
@@ -116,8 +116,8 @@ message Ride {
 
 message CharacterPresetCreateResponse {
 	oneof result {
-		CharacterPresetCreateResponse.Types.Success success = 1;
-		CharacterPresetCreateResponse.Types.Error error = 2;
+		CharacterPresetCreateResponse.Success success = 1;
+		CharacterPresetCreateResponse.Error error = 2;
 	}
 	enum Error {
 		MAX_QUANTITY = 0;
@@ -179,8 +179,8 @@ message PresetOutfitUpdateRequest {
 
 message ForgettableSpellPresetCreateResponse {
 	oneof result {
-		ForgettableSpellPresetCreateResponse.Types.Success success = 1;
-		ForgettableSpellPresetCreateResponse.Types.Error error = 2;
+		ForgettableSpellPresetCreateResponse.Success success = 1;
+		ForgettableSpellPresetCreateResponse.Error error = 2;
 	}
 	enum Error {
 		FEATURE_DISABLED = 0;
@@ -196,8 +196,8 @@ message ForgettableSpellPresetCreateResponse {
 
 message PresetUseResponse {
 	oneof result {
-		PresetUseResponse.Types.ResultEnum result_enum = 1;
-		PresetUseResponse.Types.MissingEquipments missing_equipments = 2;
+		PresetUseResponse.ResultEnum result_enum = 1;
+		PresetUseResponse.MissingEquipments missing_equipments = 2;
 	}
 	enum ResultEnum {
 		OK = 0;
@@ -275,7 +275,7 @@ message PresetSpellUpdateResponse {
 
 message PresetEquipmentUpdateResponse {
 	bool is_success = 1;
-	PresetEquipmentUpdateResponse.Types.EquipmentRefresh equipment_refresh = 2;
+	PresetEquipmentUpdateResponse.EquipmentRefresh equipment_refresh = 2;
 	message EquipmentRefresh {
 		CharacteristicsInfo characteristics_info = 1;
 		PresetLook preset_look = 2;
@@ -293,7 +293,7 @@ message PresetOutfitUpdateResponse {
 }
 
 message PresetRenameResponse {
-	PresetRenameResponse.Types.Result result = 1;
+	PresetRenameResponse.Result result = 1;
 	enum Result {
 		SUCCESS = 0;
 		PRESET_NOT_FOUND = 1;
@@ -305,7 +305,7 @@ message PresetRenameResponse {
 
 message PresetSpellUpdateRequest {
 	string preset_uuid = 1;
-	PresetSpellUpdateRequest.Types.Target target = 2;
+	PresetSpellUpdateRequest.Target target = 2;
 	SpellPreset spell_preset = 3;
 	enum Target {
 		CHARACTER = 0;
@@ -315,7 +315,7 @@ message PresetSpellUpdateRequest {
 }
 
 message CharacteristicsInfo {
-	map<int32, CharacteristicsInfo.Types.CharacteristicsDetails> characteristic_details_by_id = 1;
+	map<int32, CharacteristicsInfo.CharacteristicsDetails> characteristic_details_by_id = 1;
 	message CharacteristicsDetails {
 		optional int32 limit = 1;
 		int32 from_base = 2;

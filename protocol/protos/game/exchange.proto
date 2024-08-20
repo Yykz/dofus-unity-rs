@@ -119,7 +119,7 @@ message ExchangeCraftStartedEvent {
 }
 
 message ExchangeItemAutoCraftStoppedEvent {
-	ExchangeItemAutoCraftStoppedEvent.Types.ExchangeReplayStopReason reason = 1;
+	ExchangeItemAutoCraftStoppedEvent.ExchangeReplayStopReason reason = 1;
 	enum ExchangeReplayStopReason {
 		OK = 0;
 		USER = 1;
@@ -222,7 +222,7 @@ message ExchangePodsModifiedEvent {
 }
 
 message ExchangeObjectsSellRequest {
-	repeated ExchangeObjectsSellRequest.Types.ExchangeObject objects = 1;
+	repeated ExchangeObjectsSellRequest.ExchangeObject objects = 1;
 	message ExchangeObject {
 		int32 object_uid = 1;
 		int32 quantity = 2;
@@ -256,7 +256,7 @@ message ExchangeObjectModifyPricedRequest {
 }
 
 message ObjectAveragePricesEvent {
-	repeated ObjectAveragePricesEvent.Types.ObjectAveragePrice objects_average_prices = 1;
+	repeated ObjectAveragePricesEvent.ObjectAveragePrice objects_average_prices = 1;
 	message ObjectAveragePrice {
 		int32 object_gid = 1;
 		int64 average_price = 2;
@@ -283,7 +283,7 @@ message ExchangeSellRequest {
 }
 
 message ExchangeErrorEvent {
-	ExchangeErrorEvent.Types.ExchangeError error_type = 1;
+	ExchangeErrorEvent.ExchangeError error_type = 1;
 	enum ExchangeError {
 		REQUEST_IMPOSSIBLE = 0;
 		REQUEST_CHARACTER_OCCUPIED = 1;
@@ -329,7 +329,7 @@ message ExchangeTaxCollectorEquipmentStartedEvent {
 
 message ExchangeBidSellerStartedEvent {
 	SellingConditions selling_conditions = 1;
-	repeated ExchangeBidSellerStartedEvent.Types.ObjectItemToSelInBid objects = 2;
+	repeated ExchangeBidSellerStartedEvent.ObjectItemToSelInBid objects = 2;
 	message ObjectItemToSelInBid {
 		ObjectItem object = 1;
 		int64 price = 2;
@@ -382,10 +382,10 @@ message ExchangeBidHouseUnsoldItemsEvent {
 }
 
 message ExchangeCraftResultEvent {
-	ExchangeCraftResultEvent.Types.CraftResult result = 1;
+	ExchangeCraftResultEvent.CraftResult result = 1;
 	oneof complement {
 		int32 object_gid = 2;
-		ExchangeCraftResultEvent.Types.ExchangeCraftResultWithObjectDescription object = 3;
+		ExchangeCraftResultEvent.ExchangeCraftResultWithObjectDescription object = 3;
 	}
 	enum CraftResult {
 		IMPOSSIBLE = 0;
@@ -396,7 +396,7 @@ message ExchangeCraftResultEvent {
 	}
 	message ExchangeCraftResultWithObjectDescription {
 		ObjectItem object = 1;
-		optional ExchangeCraftResultEvent.Types.ExchangeCraftResultWithObjectDescription.Types.MagicPoolStatus magic_pool_status = 2;
+		optional ExchangeCraftResultEvent.ExchangeCraftResultWithObjectDescription.MagicPoolStatus magic_pool_status = 2;
 		int32 fm_power = 3;
 		enum MagicPoolStatus {
 			NO_CHANGE = 0;
@@ -438,7 +438,7 @@ message ExchangeObjectTransferExistingFromInventoryRequest {
 message ExchangeTypesItemsExchangerDescriptionForUserEvent {
 	int32 object_gid = 1;
 	int32 object_type = 2;
-	repeated ExchangeTypesItemsExchangerDescriptionForUserEvent.Types.BidExchangerObject item_descriptions = 3;
+	repeated ExchangeTypesItemsExchangerDescriptionForUserEvent.BidExchangerObject item_descriptions = 3;
 	message BidExchangerObject {
 		int32 object_uid = 1;
 		int32 object_gid = 2;
@@ -480,12 +480,12 @@ message ExchangeMultiCraftOkEvent {
 }
 
 message DecraftResultEvent {
-	repeated DecraftResultEvent.Types.DecraftedItem results = 1;
+	repeated DecraftResultEvent.DecraftedItem results = 1;
 	message DecraftedItem {
 		int32 object_uid = 1;
 		float bonus_min = 2;
 		float bonus_max = 3;
-		repeated DecraftResultEvent.Types.DecraftedItem.Types.Rune runes = 4;
+		repeated DecraftResultEvent.DecraftedItem.Rune runes = 4;
 		message Rune {
 			int32 rune_id = 1;
 			int32 quantity = 2;
@@ -539,7 +539,7 @@ message ExchangeMoneyMovementLimitEvent {
 message ExchangeBidPriceEvent {
 	int32 object_gid = 1;
 	int64 average_price = 2;
-	ExchangeBidPriceEvent.Types.BidPriceForSeller bid_price_for_seller = 3;
+	ExchangeBidPriceEvent.BidPriceForSeller bid_price_for_seller = 3;
 	message BidPriceForSeller {
 		bool all_identical = 1;
 		repeated int64 minimal_prices = 2;
@@ -559,7 +559,7 @@ message ObjectAveragePricesRequest {
 }
 
 message ExchangeHandleMountsRequest {
-	ExchangeHandleMountsRequest.Types.ExchangeHandleMountStableType action_type = 1;
+	ExchangeHandleMountsRequest.ExchangeHandleMountStableType action_type = 1;
 	repeated int32 rides_id = 2;
 	enum ExchangeHandleMountStableType {
 		EXCHANGE_MOUNT_STABLES_PUT = 0;

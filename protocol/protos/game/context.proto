@@ -32,7 +32,7 @@ message ContextRemoveElementEvent {
 }
 
 message ContextCreationEvent {
-	ContextCreationEvent.Types.GameContext context = 1;
+	ContextCreationEvent.GameContext context = 1;
 	enum GameContext {
 		ROLE_PLAY = 0;
 		FIGHT = 1;

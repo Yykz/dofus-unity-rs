@@ -92,12 +92,12 @@ message AllianceMotdSetRequest {
 message AllianceSummaryRequest {
 	int64 offset = 1;
 	int64 count = 2;
-	AllianceSummaryRequest.Types.DirectoryTextFilter filter_type = 3;
+	AllianceSummaryRequest.DirectoryTextFilter filter_type = 3;
 	string text_filer = 4;
 	bool hide_full_filter = 5;
 	bool following_alliance_criteria = 6;
 	repeated int32 criterion_filter = 7;
-	AllianceSummaryRequest.Types.AllianceSummarySort sort_type = 8;
+	AllianceSummaryRequest.AllianceSummarySort sort_type = 8;
 	bool sort_descending = 9;
 	repeated int32 languages_filter = 10;
 	repeated SocialRecruitmentType recruitment_type_filter = 11;

@@ -23,7 +23,7 @@ message CharacterLoadingCompleteEvent {
 }
 
 message CharacterDeletionErrorEvent {
-	CharacterDeletionErrorEvent.Types.CharacterDeletionError reason = 1;
+	CharacterDeletionErrorEvent.CharacterDeletionError reason = 1;
 	enum CharacterDeletionError {
 		DELETE_ERROR_NO_REASON = 0;
 		DELETE_ERROR_TOO_MANY_CHAR_DELETED = 1;
@@ -45,8 +45,8 @@ message CharacterReplayRequest {
 
 message CharacterSelectionEvent {
 	oneof result {
-		CharacterSelectionEvent.Types.Error error = 1;
-		CharacterSelectionEvent.Types.Success success = 2;
+		CharacterSelectionEvent.Error error = 1;
+		CharacterSelectionEvent.Success success = 2;
 	}
 	message Error {
 	}
@@ -64,8 +64,8 @@ message CharacterDeletionPrepareEvent {
 }
 
 message CharacterCreationResultEvent {
-	CharacterCreationResultEvent.Types.CharacterCreationResult result = 1;
-	CharacterCreationResultEvent.Types.NameCompliance reason = 2;
+	CharacterCreationResultEvent.CharacterCreationResult result = 1;
+	CharacterCreationResultEvent.NameCompliance reason = 2;
 	enum CharacterCreationResult {
 		CREATE_OK = 0;
 		CREATE_ERROR_NO_REASON = 1;
@@ -143,7 +143,7 @@ message CharacterNameSuggestionRequest {
 }
 
 message CharacterNameGenerationFailedEvent {
-	CharacterNameGenerationFailedEvent.Types.NameGenerationFailureReason reason = 1;
+	CharacterNameGenerationFailedEvent.NameGenerationFailureReason reason = 1;
 	enum NameGenerationFailureReason {
 		NAME_GENERATOR_RETRY_TOO_SHORT = 0;
 		NAME_GENERATOR_UNAVAILABLE = 1;

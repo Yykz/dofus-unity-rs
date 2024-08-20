@@ -38,7 +38,7 @@ message EntityTalkEvent {
 message NpcDialogCreationEvent {
 	int64 map_id = 1;
 	int32 npc_id = 2;
-	optional NpcDialogCreationEvent.Types.PortalType portal_type = 3;
+	optional NpcDialogCreationEvent.PortalType portal_type = 3;
 	enum PortalType {
 		UNSUPPORTED = 0;
 		ENUTROSOR = 1;
@@ -49,10 +49,10 @@ message NpcDialogCreationEvent {
 }
 
 message NpcsMapQuestStatusUpdateEvent {
-	repeated NpcsMapQuestStatusUpdateEvent.Types.MapNpcQuest map_information = 1;
+	repeated NpcsMapQuestStatusUpdateEvent.MapNpcQuest map_information = 1;
 	message MapNpcQuest {
 		int64 map_id = 1;
-		repeated NpcsMapQuestStatusUpdateEvent.Types.MapNpcQuest.Types.NpcWithQuest npcs_with_quests = 2;
+		repeated NpcsMapQuestStatusUpdateEvent.MapNpcQuest.NpcWithQuest npcs_with_quests = 2;
 		message NpcWithQuest {
 			int32 npc_id = 1;
 			repeated int32 quests_to_validate = 2;
@@ -64,10 +64,10 @@ message NpcsMapQuestStatusUpdateEvent {
 message NpcDialogQuestionEvent {
 	int32 message_id = 1;
 	repeated string dialog_params = 2;
-	repeated NpcDialogQuestionEvent.Types.VisibleReply visible_replies = 3;
+	repeated NpcDialogQuestionEvent.VisibleReply visible_replies = 3;
 	message VisibleReply {
 		int32 reply_id = 1;
-		repeated NpcDialogQuestionEvent.Types.VisibleReply.Types.ActionInformation actions = 2;
+		repeated NpcDialogQuestionEvent.VisibleReply.ActionInformation actions = 2;
 		message ActionInformation {
 			int32 id = 1;
 			optional bool is_repeatable = 2;

@@ -29,7 +29,7 @@ message GuildChestCurrentListenersEvent {
 }
 
 message GuildChestTabContributionsEvent {
-	repeated GuildChestTabContributionsEvent.Types.Contribution contributions = 1;
+	repeated GuildChestTabContributionsEvent.Contribution contributions = 1;
 	message Contribution {
 		int64 contributor_id = 1;
 		string contributor_name = 2;

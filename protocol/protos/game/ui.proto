@@ -3,7 +3,7 @@ syntax = "proto3";
 package game.ui;
 
 message ClientUIOpenedEvent {
-	ClientUIOpenedEvent.Types.UIType type = 1;
+	ClientUIOpenedEvent.UIType type = 1;
 	optional int32 object_uid = 2;
 	enum UIType {
 		UNDEFINED = 0;

@@ -67,21 +67,21 @@ message AllianceFightListenStopRequest {
 }
 
 message KOTHUpdateEvent {
-	repeated KOTHUpdateEvent.Types.KOTHAllianceInformation koth_alliance_information = 1;
+	repeated KOTHUpdateEvent.KOTHAllianceInformation koth_alliance_information = 1;
 	string starting_ava_timestamp = 2;
 	int64 next_tick_time = 3;
 	message KOTHAllianceInformation {
 		AllianceInformation alliance = 1;
 		int64 member_count = 2;
-		repeated KOTHUpdateEvent.Types.KOTHAllianceInformation.Types.KOTHAllianceRoleNumber koth_roles = 3;
-		repeated KOTHUpdateEvent.Types.KOTHAllianceInformation.Types.KOTHScore scores = 4;
+		repeated KOTHUpdateEvent.KOTHAllianceInformation.KOTHAllianceRoleNumber koth_roles = 3;
+		repeated KOTHUpdateEvent.KOTHAllianceInformation.KOTHScore scores = 4;
 		int32 match_domination_scores = 5;
 		message KOTHAllianceRoleNumber {
 			int64 member_count = 1;
 			int32 koth_role = 2;
 		}
 		message KOTHScore {
-			KOTHUpdateEvent.Types.KOTHAllianceInformation.Types.KOTHScore.Types.KOTHScoreType score_type = 1;
+			KOTHUpdateEvent.KOTHAllianceInformation.KOTHScore.KOTHScoreType score_type = 1;
 			int32 round_scores = 2;
 			int32 cumulated_scores = 3;
 			enum KOTHScoreType {

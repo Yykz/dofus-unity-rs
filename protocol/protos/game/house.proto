@@ -106,7 +106,7 @@ message HouseSellRequest {
 message HousesToSellEvent {
 	int32 page_index = 1;
 	int32 total_page = 2;
-	repeated HousesToSellEvent.Types.HouseToSell houses = 3;
+	repeated HousesToSellEvent.HouseToSell houses = 3;
 	message HouseToSell {
 		int32 instance_id = 1;
 		bool second_hand = 2;

@@ -7,8 +7,8 @@ message CompassUpdateEvent {
 	CompassType type = 1;
 	MapCoordinates coordinates = 2;
 	oneof complement {
-		CompassUpdateEvent.Types.PartyMember party_member = 3;
-		CompassUpdateEvent.Types.PvpSeek pvp_seek = 4;
+		CompassUpdateEvent.PartyMember party_member = 3;
+		CompassUpdateEvent.PvpSeek pvp_seek = 4;
 	}
 	message PartyMember {
 		int64 member_id = 1;

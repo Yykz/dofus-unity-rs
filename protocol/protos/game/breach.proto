@@ -9,7 +9,7 @@ message BreachCharactersEvent {
 
 message BreachRoomUnlockResultEvent {
 	int32 room_id = 1;
-	BreachRoomUnlockResultEvent.Types.BreachRoomUnlockResult result = 2;
+	BreachRoomUnlockResultEvent.BreachRoomUnlockResult result = 2;
 	enum BreachRoomUnlockResult {
 		SUCCESS = 0;
 		FAIL_NOT_ENOUGH_BUDGET = 1;

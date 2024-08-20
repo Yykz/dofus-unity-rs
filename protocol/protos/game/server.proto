@@ -18,7 +18,7 @@ message ServerSettingsEvent {
 }
 
 message ServerSessionConstantsEvent {
-	repeated ServerSessionConstantsEvent.Types.ServerSessionConstant variables = 1;
+	repeated ServerSessionConstantsEvent.ServerSessionConstant variables = 1;
 	message ServerSessionConstant {
 		int32 id = 1;
 		int64 value = 2;

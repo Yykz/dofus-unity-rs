@@ -10,12 +10,12 @@ message JobCrafterDirectoryEntry {
 
 message JobDescription {
 	int32 job_id = 1;
-	repeated JobDescription.Types.SkillAction skills = 2;
+	repeated JobDescription.SkillAction skills = 2;
 	message SkillAction {
 		int32 skill_id = 1;
 		message Timed {
 			int32 time = 1;
-			JobDescription.Types.SkillAction.Types.Timed.Types.Collect collect = 2;
+			JobDescription.SkillAction.Timed.Collect collect = 2;
 			message Collect {
 				int32 min = 1;
 				int32 max = 2;
@@ -48,7 +48,7 @@ message JobCrafterDirectoryEntryEvent {
 
 message JobMultiCraftStateEvent {
 	bool enabled = 1;
-	JobMultiCraftStateEvent.Types.PlayerSkills player_skills = 2;
+	JobMultiCraftStateEvent.PlayerSkills player_skills = 2;
 	message PlayerSkills {
 		int64 player_id = 1;
 		repeated int32 skills = 2;
@@ -72,7 +72,7 @@ message JobCrafterDirectoryListEvent {
 }
 
 message JobBookSubscriptionEvent {
-	repeated JobBookSubscriptionEvent.Types.Subscription subscriptions = 1;
+	repeated JobBookSubscriptionEvent.Subscription subscriptions = 1;
 	message Subscription {
 		int32 job_id = 1;
 		bool subscribed = 2;
