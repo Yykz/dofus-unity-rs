@@ -114,18 +114,21 @@ impl Generator {
     }
 
     fn process_dir_recu(&self, path: &Path) -> Result {
-        let mut affix = &path.strip_prefix(&self.source).unwrap().to_str().unwrap().to_lowercase().replace("/", ".");
+        let mut affix = &path
+            .strip_prefix(&self.source)
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .to_lowercase()
+            .replace("/", ".");
         let mut path_outfile = self.outdir.clone();
         if affix.is_empty() {
             affix = &self.package_prefix;
         } else {
             path_outfile.push("game/")
         }
-        
-        path_outfile.push(format!(
-            "{}.proto",
-            affix
-        ));
+
+        path_outfile.push(format!("{}.proto", affix));
 
         let mut protofile = ProtoFileBuffer::default();
 
@@ -153,8 +156,7 @@ impl Generator {
     }
 
     fn process_file(&self, path: &Path, out: &mut ProtoFileBuffer) -> Result {
-        let content =
-            std::fs::read_to_string(path).map_err(|e| Error::ReadFile(path.into(), e))?;
+        let content = std::fs::read_to_string(path).map_err(|e| Error::ReadFile(path.into(), e))?;
         let mut parsed = CSharpParser::parse(Rule::file, &content[3..]).map_err(Box::new)?;
         let file_pair = parsed.next().unwrap();
         let parsed_file = File::try_from(file_pair).unwrap();
