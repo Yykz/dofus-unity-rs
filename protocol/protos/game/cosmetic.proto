@@ -1,7 +1,10 @@
 syntax = "proto3";
 
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/cosmetic";
+
 import "common.proto";
-package game.cosmetic;
+
+package com.ankama.dofus.server.game.protocol.cosmetic;
 
 enum ObjectSlot {
 	AMULET = 0;
@@ -32,64 +35,34 @@ enum ObjectSlot {
 	SHOULDERS = 25;
 }
 
-message OutfitDuplicateRequest {
-	string outfit_uuid = 1;
-	string name = 2;
-	int32 pictogram_id = 3;
+message CosmeticInventoryLoadedEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItem objects = 1;
 }
 
-message OutfitEquipResponse {
-	bool success = 1;
-}
-
-message OutfitEquipObjectRequest {
-	optional int32 gid = 1;
-	ObjectSlot slot = 2;
-	optional int32 skin_id = 3;
+message CosmeticInventoryAddObjectRequest {
+	int32 uid = 1;
 }
 
 message CosmeticInventoryAddObjectResponse {
-	CosmeticInventoryAddObjectResponse.Result result = 1;
+	.com.ankama.dofus.server.game.protocol.cosmetic.CosmeticInventoryAddObjectResponse.Result result = 1;
 	enum Result {
 		ERROR = 0;
 		DUPLICATE = 1;
 		SUCCESS = 2;
 	}
-}
 
-message OutfitsLoadedEvent {
-	Outfit current = 1;
-	repeated Outfit outfits = 2;
-}
-
-message OutfitEquipOrnamentResponse {
-	bool success = 1;
 }
 
 message CosmeticInventoryPopObjectRequest {
 	int32 gid = 1;
 }
 
-message OutfitEquipObjectBestSlotResponse {
+message CosmeticInventoryPopObjectResponse {
 	bool success = 1;
-	optional ObjectSlot slot = 2;
 }
 
-message Outfit {
-	string uuid = 1;
-	string name = 2;
-	int32 pictogram_id = 3;
-	map<int32, Outfit.SkinOutfit> objects = 4;
-	optional int32 aura_emote_id = 5;
-	optional int32 ornament_id = 6;
-	optional int32 title_id = 7;
-	.game.common.EntityLook entity_look = 8;
-	bool favorite = 9;
-	string last_modified = 10;
-	message SkinOutfit {
-		int32 gid = 1;
-		optional int32 skin = 2;
-	}
+message CosmeticInventoryAddedEvent {
+	.com.ankama.dofus.server.game.protocol.common.ObjectItem object = 1;
 }
 
 message CosmeticInventoryLivingObjectFeedRequest {
@@ -97,33 +70,47 @@ message CosmeticInventoryLivingObjectFeedRequest {
 	int32 food_object_uid = 2;
 }
 
-message OutfitRemoveRequest {
-	string outfit_uuid = 1;
-}
-
-message CosmeticInventoryLoadedEvent {
-	repeated .game.common.ObjectItem objects = 1;
-}
-
-message OutfitEquipTitleResponse {
+message CosmeticInventoryLivingObjectFeedResponse {
 	bool success = 1;
-}
-
-message CosmeticInventoryPopObjectResponse {
-	bool success = 1;
-}
-
-message OutfitEquipTitleRequest {
-	optional int32 title_id = 1;
+	optional .com.ankama.dofus.server.game.protocol.common.ObjectItem living_object_fed = 2;
 }
 
 message OutfitEquipAuraRequest {
 	optional int32 emote_id = 1;
 }
 
-message OutfitCreateEmptyRequest {
-	string name = 1;
-	int32 pictogram_id = 2;
+message OutfitEquipAuraResponse {
+	bool success = 1;
+}
+
+message OutfitAuraChangedEvent {
+	optional int32 emote_id = 1;
+}
+
+message OutfitEquipTitleRequest {
+	optional int32 title_id = 1;
+}
+
+message OutfitEquipTitleResponse {
+	bool success = 1;
+}
+
+message OutfitEquipOrnamentRequest {
+	optional int32 ornament_id = 1;
+}
+
+message OutfitEquipOrnamentResponse {
+	bool success = 1;
+}
+
+message OutfitEquipObjectRequest {
+	.com.ankama.dofus.server.game.protocol.cosmetic.ObjectSlot slot = 2;
+	optional int32 gid = 1;
+	optional int32 skin_id = 3;
+}
+
+message OutfitEquipObjectResponse {
+	bool success = 1;
 }
 
 message OutfitEquipObjectBestSlotRequest {
@@ -131,13 +118,9 @@ message OutfitEquipObjectBestSlotRequest {
 	optional int32 skin_id = 2;
 }
 
-message CosmeticInventoryLivingObjectFeedResponse {
+message OutfitEquipObjectBestSlotResponse {
 	bool success = 1;
-	.game.common.ObjectItem living_object_fed = 2;
-}
-
-message OutfitAuraChangedEvent {
-	optional int32 emote_id = 1;
+	optional .com.ankama.dofus.server.game.protocol.cosmetic.ObjectSlot slot = 2;
 }
 
 message OutfitUpdateRequest {
@@ -147,28 +130,27 @@ message OutfitUpdateRequest {
 	bool favorite = 4;
 }
 
-message OutfitEquipAuraResponse {
-	bool success = 1;
-}
-
 message OutfitUpdateResponse {
 	bool success = 1;
 }
 
-message CosmeticInventoryAddObjectRequest {
-	int32 uid = 1;
+message OutfitCreateEmptyRequest {
+	string name = 1;
+	int32 pictogram_id = 2;
 }
 
-message CosmeticInventoryAddedEvent {
-	.game.common.ObjectItem object = 1;
+message OutfitDuplicateRequest {
+	string outfit_uuid = 1;
+	string name = 2;
+	int32 pictogram_id = 3;
 }
 
 message OutfitCreationResponse {
 	bool success = 1;
-	Outfit outfit_created = 2;
+	optional .com.ankama.dofus.server.game.protocol.cosmetic.Outfit outfit_created = 2;
 }
 
-message OutfitEquipRequest {
+message OutfitRemoveRequest {
 	string outfit_uuid = 1;
 }
 
@@ -176,16 +158,44 @@ message OutfitRemoveResponse {
 	bool success = 1;
 }
 
+message OutfitEquipRequest {
+	string outfit_uuid = 1;
+}
+
+message OutfitEquipResponse {
+	bool success = 1;
+}
+
+message OutfitsLoadedEvent {
+	.com.ankama.dofus.server.game.protocol.cosmetic.Outfit current = 1;
+	repeated .com.ankama.dofus.server.game.protocol.cosmetic.Outfit outfits = 2;
+}
+
 message OutfitEntityLookChangedEvent {
 	string outfit_uuid = 1;
-	.game.common.EntityLook entity_look = 2;
+	.com.ankama.dofus.server.game.protocol.common.EntityLook entity_look = 2;
 }
 
-message OutfitEquipOrnamentRequest {
-	optional int32 ornament_id = 1;
-}
+message Outfit {
+	string uuid = 1;
+	string name = 2;
+	int32 pictogram_id = 3;
+	repeated .com.ankama.dofus.server.game.protocol.cosmetic.Outfit.ObjectsEntry objects = 4;
+	bool favorite = 9;
+	string last_modified = 10;
+	optional int32 title_id = 7;
+	optional .com.ankama.dofus.server.game.protocol.common.EntityLook entity_look = 8;
+	optional int32 aura_emote_id = 5;
+	optional int32 ornament_id = 6;
+	message ObjectsEntry {
+		int32 key = 1;
+		.com.ankama.dofus.server.game.protocol.cosmetic.Outfit.SkinOutfit value = 2;
+	}
 
-message OutfitEquipObjectResponse {
-	bool success = 1;
+	message SkinOutfit {
+		int32 gid = 1;
+		optional int32 skin = 2;
+	}
+
 }
 

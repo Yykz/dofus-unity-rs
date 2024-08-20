@@ -1,19 +1,21 @@
 syntax = "proto3";
 
-package game.symbiont;
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/symbiont";
 
-message MimicryRequest {
-	int32 symbiont_uid = 1;
-	int32 host_uid = 2;
-}
+package com.ankama.dofus.server.game.protocol.symbiont;
 
 message WrapperObjectDissociateRequest {
 	int32 host_uid = 1;
 	int32 host_position = 2;
 }
 
+message MimicryRequest {
+	int32 symbiont_uid = 1;
+	int32 host_uid = 2;
+}
+
 message MimicryResponse {
-	MimicryResponse.Result result = 1;
+	.com.ankama.dofus.server.game.protocol.symbiont.MimicryResponse.Result result = 1;
 	enum Result {
 		ERROR = 0;
 		PLAYER_BUSY = 1;
@@ -22,13 +24,14 @@ message MimicryResponse {
 		DUPLICATE = 4;
 		SUCCESS = 5;
 	}
-}
 
-message MimicryFreeResponse {
-	bool success = 1;
 }
 
 message MimicryFreeRequest {
 	int32 host_uid = 1;
+}
+
+message MimicryFreeResponse {
+	bool success = 1;
 }
 

@@ -149,6 +149,7 @@ dependencies = [
  "pcap",
  "pnet",
  "prost",
+ "prost-types",
 ]
 
 [[package]]

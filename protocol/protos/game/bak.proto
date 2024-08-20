@@ -1,38 +1,67 @@
 syntax = "proto3";
 
-package game.bak;
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/bak";
 
-message BakBuyValidationEvent {
-	BakTransactionValidationEvent transaction_validation = 1;
-	int64 amount = 2;
-	string email = 3;
+package com.ankama.dofus.server.game.protocol.bak;
+
+enum BidAction {
+	BID_INVALID_ACTION = 0;
+	BID_CONSUME_BUFF = 1;
+	BID_CANCEL = 2;
+	BID_CREATE_KAMA = 3;
+	BID_CREATE_OGRINE = 4;
+	BID_BUY_KAMA = 5;
+	BID_BUY_OGRINE = 6;
 }
 
-message BakApiKeyEvent {
-	string token = 1;
-}
-
-message BakActionEvent {
-	int64 kamas = 1;
-	int64 amount = 2;
-	int32 rate = 3;
-	BidAction bid_action = 4;
-	string transaction_uuid = 5;
+message BufferInformation {
+	int64 buffer_id = 1;
+	int64 buffer_amount = 2;
 }
 
 message BakBufferListRequest {
 }
 
 message BakBufferListEvent {
-	repeated BufferInformation buffers = 1;
+	repeated .com.ankama.dofus.server.game.protocol.bak.BufferInformation buffers = 1;
 }
 
-message BakApiTokenRequest {
+message BakConsumeBufferRequest {
+}
+
+message BakCancelBidRequest {
+	int64 bid_id = 1;
+	.com.ankama.dofus.server.game.protocol.bak.BakCancelBidRequest.BidCancellationType bid_cancellation_type = 2;
+	enum BidCancellationType {
+		UNKNOWN_TYPE = 0;
+		CLASSIC_TYPE = 1;
+		FRAUD_TYPE = 2;
+	}
+
+}
+
+message BakActionRequest {
+	int64 kamas = 1;
+	int64 ogrines = 2;
+	int32 rate = 3;
+	.com.ankama.dofus.server.game.protocol.bak.BidAction bid_action = 4;
+}
+
+message BakActionEvent {
+	int64 kamas = 1;
+	int64 amount = 2;
+	int32 rate = 3;
+	.com.ankama.dofus.server.game.protocol.bak.BidAction bid_action = 4;
+	string transaction_uuid = 5;
+}
+
+message BakTransactionValidationRequest {
+	string transaction_uuid = 1;
 }
 
 message BakTransactionValidationEvent {
-	BidAction bid_action = 1;
-	BakTransactionValidationEvent.BidValidation result = 2;
+	.com.ankama.dofus.server.game.protocol.bak.BidAction bid_action = 1;
+	.com.ankama.dofus.server.game.protocol.bak.BakTransactionValidationEvent.BidValidation result = 2;
 	enum BidValidation {
 		BID_GENERIC_ERROR = 0;
 		BID_BUFFER_OVERLOAD = 1;
@@ -45,51 +74,26 @@ message BakTransactionValidationEvent {
 		BID_OFFER_IS_YOURS = 8;
 		BID_VALIDATION_SUCCESS = 9;
 	}
+
 }
 
-message BufferInformation {
-	int64 buffer_id = 1;
-	int64 buffer_amount = 2;
+message BakBuyValidationEvent {
+	.com.ankama.dofus.server.game.protocol.bak.BakTransactionValidationEvent transaction_validation = 1;
+	int64 amount = 2;
+	string email = 3;
 }
 
-message BakShopTokenEvent {
+message BakApiTokenRequest {
+}
+
+message BakApiKeyEvent {
 	string token = 1;
-}
-
-message BakActionRequest {
-	int64 kamas = 1;
-	int64 ogrines = 2;
-	int32 rate = 3;
-	BidAction bid_action = 4;
-}
-
-message BakConsumeBufferRequest {
 }
 
 message BakShopTokenRequest {
 }
 
-message BakCancelBidRequest {
-	int64 bid_id = 1;
-	BakCancelBidRequest.BidCancellationType bid_cancellation_type = 2;
-	enum BidCancellationType {
-		UNKNOWN_TYPE = 0;
-		CLASSIC_TYPE = 1;
-		FRAUD_TYPE = 2;
-	}
-}
-
-message BakTransactionValidationRequest {
-	string transaction_uuid = 1;
-}
-
-enum BidAction {
-	BID_INVALID_ACTION = 0;
-	BID_CONSUME_BUFF = 1;
-	BID_CANCEL = 2;
-	BID_CREATE_KAMA = 3;
-	BID_CREATE_OGRINE = 4;
-	BID_BUY_KAMA = 5;
-	BID_BUY_OGRINE = 6;
+message BakShopTokenEvent {
+	string token = 1;
 }
 

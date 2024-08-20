@@ -1,22 +1,33 @@
 syntax = "proto3";
 
-import "common.proto";
-package game.alteration;
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/alteration";
 
-message AlterationsUpdateEvent {
-	repeated Alteration alterations = 1;
+import "common.proto";
+
+package com.ankama.dofus.server.game.protocol.alteration;
+
+message AlterationsEvent {
+	repeated .com.ankama.dofus.server.game.protocol.alteration.Alteration alterations = 1;
 }
 
 message AlterationAddedEvent {
-	Alteration alteration = 1;
+	.com.ankama.dofus.server.game.protocol.alteration.Alteration alteration = 1;
+}
+
+message AlterationRemovedEvent {
+	.com.ankama.dofus.server.game.protocol.alteration.Alteration alteration = 1;
+}
+
+message AlterationsUpdateEvent {
+	repeated .com.ankama.dofus.server.game.protocol.alteration.Alteration alterations = 1;
 }
 
 message Alteration {
 	int64 alteration_id = 1;
 	int64 creation_time = 2;
-	Alteration.AlterationExpirationType expiration_type = 3;
+	.com.ankama.dofus.server.game.protocol.alteration.Alteration.AlterationExpirationType expiration_type = 3;
 	int64 expiration_value = 4;
-	repeated .game.common.ObjectEffect effects = 5;
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectEffect effects = 5;
 	enum AlterationExpirationType {
 		UNKNOWN = 0;
 		INFINITE = 1;
@@ -25,13 +36,6 @@ message Alteration {
 		FIGHTS_WON_COUNT = 4;
 		FIGHTS_LOST_COUNT = 5;
 	}
-}
 
-message AlterationRemovedEvent {
-	Alteration alteration = 1;
-}
-
-message AlterationsEvent {
-	repeated Alteration alterations = 1;
 }
 

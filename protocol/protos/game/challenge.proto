@@ -1,10 +1,41 @@
 syntax = "proto3";
 
-import "common.proto";
-package game.challenge;
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/challenge";
 
-message ChallengeModSelectedEvent {
-	.game.common.ChallengeMod challenge_mod = 1;
+import "common.proto";
+
+package com.ankama.dofus.server.game.protocol.challenge;
+
+message ChallengeTargetsRequest {
+	int32 challenge_id = 1;
+}
+
+message ChallengeSelectionRequest {
+	int32 challenge_id = 1;
+}
+
+message ChallengeValidateRequest {
+	int32 challenge_id = 1;
+}
+
+message ChallengeModSelectRequest {
+	.com.ankama.dofus.server.game.protocol.common.ChallengeMod challenge_mod = 1;
+}
+
+message ChallengeReadyRequest {
+	.com.ankama.dofus.server.game.protocol.common.ChallengeMod challenge_mod = 1;
+}
+
+message ChallengeBonusChoiceRequest {
+	.com.ankama.dofus.server.game.protocol.common.ChallengeBonus challenge_bonus = 1;
+}
+
+message ChallengeListEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.Challenge challenges = 1;
+}
+
+message ChallengeTargetsEvent {
+	.com.ankama.dofus.server.game.protocol.common.Challenge challenge = 2;
 }
 
 message ChallengeResultEvent {
@@ -12,56 +43,28 @@ message ChallengeResultEvent {
 	bool success = 2;
 }
 
-message ChallengeProposalEvent {
-	repeated .game.common.Challenge challenge_proposals = 1;
-	int64 timer = 2;
-}
-
-message ChallengeReadyRequest {
-	.game.common.ChallengeMod challenge_mod = 1;
-}
-
-message ChallengeTargetsEvent {
-	.game.common.Challenge challenge = 2;
-}
-
-message ChallengeBonusChoiceSelectedEvent {
-	.game.common.ChallengeBonus challenge_bonus = 1;
-}
-
 message ChallengeNumberEvent {
 	int32 challenge_number = 1;
 }
 
-message ChallengeListEvent {
-	repeated .game.common.Challenge challenges = 1;
-}
-
-message ChallengeSelectionRequest {
-	int32 challenge_id = 1;
+message ChallengeProposalEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.Challenge challenge_proposals = 1;
+	int64 timer = 2;
 }
 
 message ChallengeSelectedEvent {
-	.game.common.Challenge challenge = 1;
-}
-
-message ChallengeValidateRequest {
-	int32 challenge_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.Challenge challenge = 1;
 }
 
 message ChallengeAddEvent {
-	.game.common.Challenge challenge = 1;
+	.com.ankama.dofus.server.game.protocol.common.Challenge challenge = 1;
 }
 
-message ChallengeModSelectRequest {
-	.game.common.ChallengeMod challenge_mod = 1;
+message ChallengeModSelectedEvent {
+	.com.ankama.dofus.server.game.protocol.common.ChallengeMod challenge_mod = 1;
 }
 
-message ChallengeTargetsRequest {
-	int32 challenge_id = 1;
-}
-
-message ChallengeBonusChoiceRequest {
-	.game.common.ChallengeBonus challenge_bonus = 1;
+message ChallengeBonusChoiceSelectedEvent {
+	.com.ankama.dofus.server.game.protocol.common.ChallengeBonus challenge_bonus = 1;
 }
 

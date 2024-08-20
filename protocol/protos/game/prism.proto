@@ -1,42 +1,46 @@
 syntax = "proto3";
 
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/prism";
+
 import "common.proto";
-package game.prism;
 
-message PrismRecycleRequest {
-}
+package com.ankama.dofus.server.game.protocol.prism;
 
-message PrismListEvent {
-	repeated .game.common.PrismLocalizedInformation prism_localized_information = 1;
-}
-
-message PrismAttackResultEvent {
-	.game.common.PrismLocalizedInformation prism_localized_information = 1;
-	PrismAttackResultEvent.PrismAttackResult prism_attack_result = 2;
-	enum PrismAttackResult {
-		DEFENDERS_WIN = 0;
-		ATTACKERS_WIN = 1;
-	}
+message PrismTeleportationRequest {
 }
 
 message PrismAttackRequest {
 }
 
-message PrismAddOrUpdateEvent {
-	.game.common.PrismLocalizedInformation prism_localized_information = 1;
-}
-
 message PrismExchangeRequest {
 }
 
-message PrismAttackedEvent {
-	.game.common.PrismLocalizedInformation prism_localized_information = 1;
+message PrismRecycleRequest {
 }
 
-message PrismTeleportationRequest {
+message PrismListEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
+}
+
+message PrismAddOrUpdateEvent {
+	.com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
 }
 
 message PrismRemoveEvent {
-	.game.common.PrismLocalizedInformation prism_localized_information = 1;
+	.com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
+}
+
+message PrismAttackedEvent {
+	.com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
+}
+
+message PrismAttackResultEvent {
+	.com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
+	.com.ankama.dofus.server.game.protocol.prism.PrismAttackResultEvent.PrismAttackResult prism_attack_result = 2;
+	enum PrismAttackResult {
+		DEFENDERS_WIN = 0;
+		ATTACKERS_WIN = 1;
+	}
+
 }
 

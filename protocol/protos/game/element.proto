@@ -1,23 +1,11 @@
 syntax = "proto3";
 
-package game.element;
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/element";
 
-message LockableCodeResultEvent {
-	LockableCodeResultEvent.LockableResult result = 1;
-	enum LockableResult {
-		UNLOCKED = 0;
-		CODE_ERROR = 1;
-		UNLOCK_FORBIDDEN = 2;
-	}
-}
+package com.ankama.dofus.server.game.protocol.element;
 
-message LockableShowCodeDialogEvent {
-	LockableShowCodeDialogEvent.Action action = 1;
-	int32 code_size = 2;
-	enum Action {
-		CHANGE = 0;
-		USE = 1;
-	}
+message LockableUseCodeRequest {
+	string code = 1;
 }
 
 message LockableChangeCodeRequest {
@@ -25,7 +13,7 @@ message LockableChangeCodeRequest {
 }
 
 message PurchasableDialogEvent {
-	PurchasableDialogEvent.Action action = 1;
+	.com.ankama.dofus.server.game.protocol.element.PurchasableDialogEvent.Action action = 1;
 	int64 purchasable_id = 2;
 	int32 purchasable_instance_id = 3;
 	bool second_hand = 4;
@@ -34,6 +22,27 @@ message PurchasableDialogEvent {
 		BUY = 0;
 		SELL = 1;
 	}
+
+}
+
+message LockableShowCodeDialogEvent {
+	.com.ankama.dofus.server.game.protocol.element.LockableShowCodeDialogEvent.Action action = 1;
+	int32 code_size = 2;
+	enum Action {
+		CHANGE = 0;
+		USE = 1;
+	}
+
+}
+
+message LockableCodeResultEvent {
+	.com.ankama.dofus.server.game.protocol.element.LockableCodeResultEvent.LockableResult result = 1;
+	enum LockableResult {
+		UNLOCKED = 0;
+		CODE_ERROR = 1;
+		UNLOCK_FORBIDDEN = 2;
+	}
+
 }
 
 message LockableStateUpdateHouseDoorEvent {
@@ -41,9 +50,5 @@ message LockableStateUpdateHouseDoorEvent {
 	int32 house_instance_id = 2;
 	bool second_hand = 3;
 	bool locked = 4;
-}
-
-message LockableUseCodeRequest {
-	string code = 1;
 }
 

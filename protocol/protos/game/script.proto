@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-package game.script;
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/script";
+
+package com.ankama.dofus.server.game.protocol.script;
 
 message CinematicEvent {
 	int32 cinematic_id = 1;

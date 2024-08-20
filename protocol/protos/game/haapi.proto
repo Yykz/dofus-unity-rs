@@ -1,12 +1,14 @@
 syntax = "proto3";
 
-package game.haapi;
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/haapi";
+
+package com.ankama.dofus.server.game.protocol.haapi;
+
+message HaapiTokenRequest {
+}
 
 message HaapiTokenEvent {
 	string token = 1;
-}
-
-message HaapiTokenRequest {
 }
 
 message HaapiAuthenticationErrorEvent {

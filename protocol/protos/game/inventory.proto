@@ -1,52 +1,25 @@
 syntax = "proto3";
 
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/inventory";
+
 import "common.proto";
-package game.inventory;
 
-message ObjectUseOnCellRequest {
-	int32 object_uid = 1;
-	int32 cell_id = 2;
+package com.ankama.dofus.server.game.protocol.inventory;
+
+message ShortcutBarAddRequest {
+	.com.ankama.dofus.server.game.protocol.common.ShortcutBar bar_type = 1;
+	.com.ankama.dofus.server.game.protocol.common.Shortcut shortcut = 2;
 }
 
-message ObjectErrorEvent {
-	.game.common.ObjectError reason = 1;
-}
-
-message InventoryContentWatchEvent {
-	repeated .game.common.ObjectItemInventory objects = 1;
-	int64 kamas = 2;
-}
-
-message StorageKamasUpdateEvent {
-	int64 kamas = 1;
-}
-
-message ObjectsQuantityEvent {
-	repeated .game.common.ObjectUidWithQuantity object = 1;
-}
-
-message ObjectUseOnCharacterRequest {
-	int32 object_uid = 1;
-	int64 player_id = 2;
-}
-
-message ObjectUseMultipleRequest {
-	int32 object_uid = 1;
-	int32 quantity = 2;
-}
-
-message ObjectModifiedEvent {
-	.game.common.ObjectItemInventory object = 1;
+message ShortcutBarRemoveRequest {
+	.com.ankama.dofus.server.game.protocol.common.ShortcutBar bar_type = 1;
+	int32 slot_id = 2;
 }
 
 message ShortcutBarSwapRequest {
-	.game.common.ShortcutBar bar_type = 1;
+	.com.ankama.dofus.server.game.protocol.common.ShortcutBar bar_type = 1;
 	int32 first_slot_id = 2;
 	int32 second_slot_id = 3;
-}
-
-message ObjectDroppedEvent {
-	.game.common.ObjectInRolePlay object = 1;
 }
 
 message ObjectSetPositionRequest {
@@ -55,39 +28,159 @@ message ObjectSetPositionRequest {
 	int32 quantity = 3;
 }
 
-message ShortcutBarAddRequest {
-	.game.common.ShortcutBar bar_type = 1;
-	.game.common.Shortcut shortcut = 2;
+message ObjectDropRequest {
+	.com.ankama.dofus.server.game.protocol.common.ObjectUidWithQuantity object = 1;
 }
 
-message ObjectFavoriteResponse {
-	bool result = 1;
+message ObjectDeleteRequest {
+	.com.ankama.dofus.server.game.protocol.common.ObjectUidWithQuantity object = 1;
+}
+
+message ObjectUseRequest {
+	int32 object_uid = 1;
+}
+
+message ObjectUseMultipleRequest {
+	int32 object_uid = 1;
+	int32 quantity = 2;
+}
+
+message ObjectUseOnCharacterRequest {
+	int32 object_uid = 1;
+	int64 player_id = 2;
+}
+
+message ObjectUseOnCellRequest {
+	int32 object_uid = 1;
+	int32 cell_id = 2;
+}
+
+message ObjectFeedRequest {
+	int32 object_uid = 1;
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectUidWithQuantity meal = 2;
+}
+
+message ObjectFavoriteRequest {
+	repeated .com.ankama.dofus.server.game.protocol.inventory.ObjectFavoriteRequest.ObjectFavorite objects = 1;
+	bool favorite = 2;
+	message ObjectFavorite {
+		int32 object_uid = 1;
+		int32 position = 2;
+	}
+
+}
+
+message KamasUpdateEvent {
+	int64 quantity = 1;
+}
+
+message ObjectDroppedEvent {
+	.com.ankama.dofus.server.game.protocol.common.ObjectInRolePlay object = 1;
+}
+
+message ObjectsDroppedEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectInRolePlay object = 1;
 }
 
 message ObjectCellDeleteEvent {
 	int32 cell_id = 1;
 }
 
-message ObjectAddedEvent {
-	.game.common.ObjectItemInventory object = 1;
-	.game.common.ObjectOrigin origin = 2;
-}
-
-message StorageObjectUpdateEvent {
-	.game.common.ObjectItemInventory object = 1;
-}
-
-message ObjectsDroppedEvent {
-	repeated .game.common.ObjectInRolePlay object = 1;
-}
-
 message ObjectCellsDeleteEvent {
 	repeated int32 cells_id = 1;
 }
 
+message ObjectMovementEvent {
+	int32 object_uid = 1;
+	int32 position = 2;
+}
+
+message ObjectAddedEvent {
+	.com.ankama.dofus.server.game.protocol.common.ObjectItemInventory object = 1;
+	.com.ankama.dofus.server.game.protocol.common.ObjectOrigin origin = 2;
+}
+
+message ObjectsAddedEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory objects = 1;
+}
+
+message GoldAddedEvent {
+	int64 sum = 1;
+}
+
+message ObjectErrorEvent {
+	.com.ankama.dofus.server.game.protocol.common.ObjectError reason = 1;
+}
+
+message ObjectDeletedEvent {
+	int32 object_uid = 1;
+}
+
+message ObjectsDeletedEvent {
+	repeated int32 objects_uid = 1;
+}
+
+message ObjectQuantityEvent {
+	.com.ankama.dofus.server.game.protocol.common.ObjectUidWithQuantity object = 1;
+	.com.ankama.dofus.server.game.protocol.common.ObjectOrigin origin = 2;
+}
+
+message ObjectsQuantityEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectUidWithQuantity object = 1;
+}
+
+message ObjectModifiedEvent {
+	.com.ankama.dofus.server.game.protocol.common.ObjectItemInventory object = 1;
+}
+
+message ObjectFavoriteResponse {
+	bool result = 1;
+}
+
+message ObjectHarvestedEvent {
+	int32 object_gid = 1;
+	int32 quantity = 2;
+}
+
+message ObjectHarvestedWithBonusEvent {
+	int32 object_gid = 1;
+	int32 quantity = 2;
+	int32 bonus_quantity = 3;
+}
+
 message InventoryContentEvent {
-	repeated .game.common.ObjectItemInventory objects = 1;
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory objects = 1;
 	int64 kamas = 2;
+}
+
+message InventoryContentWatchEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory objects = 1;
+	int64 kamas = 2;
+}
+
+message InventoryWeightEvent {
+	int32 inventory_weight = 1;
+	int32 weight_max = 2;
+}
+
+message ShortcutBarContentEvent {
+	.com.ankama.dofus.server.game.protocol.common.ShortcutBar bar_type = 1;
+	repeated .com.ankama.dofus.server.game.protocol.common.Shortcut shortcuts = 2;
+}
+
+message ShortcutBarRefreshEvent {
+	.com.ankama.dofus.server.game.protocol.common.ShortcutBar bar_type = 1;
+	.com.ankama.dofus.server.game.protocol.common.Shortcut shortcut = 2;
+}
+
+message ShortcutBarRemovedEvent {
+	.com.ankama.dofus.server.game.protocol.common.ShortcutBar bar_type = 1;
+	int32 slot_id = 2;
+}
+
+message ShortcutBarReplacedEvent {
+	.com.ankama.dofus.server.game.protocol.common.ShortcutBar bar_type = 1;
+	.com.ankama.dofus.server.game.protocol.common.Shortcut shortcut = 2;
 }
 
 message StorageTab {
@@ -100,127 +193,38 @@ message StorageTab {
 	repeated int32 drop_type_limit = 7;
 }
 
-message ObjectsAddedEvent {
-	repeated .game.common.ObjectItemInventory objects = 1;
+message MultiTabStorageEvent {
+	repeated .com.ankama.dofus.server.game.protocol.inventory.StorageTab tabs = 1;
 }
 
-message SetUpdateEvent {
-	int32 set_id = 1;
-	repeated int32 objects_uid = 2;
-	repeated .game.common.ObjectEffect effects = 3;
+message StorageInventoryContentEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory objects = 1;
+	int64 kamas = 2;
 }
 
-message ObjectMovementEvent {
-	int32 object_uid = 1;
-	int32 position = 2;
+message StorageKamasUpdateEvent {
+	int64 kamas = 1;
 }
 
-message InventoryWeightEvent {
-	int32 inventory_weight = 1;
-	int32 weight_max = 2;
+message StorageObjectUpdateEvent {
+	.com.ankama.dofus.server.game.protocol.common.ObjectItemInventory object = 1;
 }
 
-message ObjectHarvestedWithBonusEvent {
-	int32 object_gid = 1;
-	int32 quantity = 2;
-	int32 bonus_quantity = 3;
-}
-
-message StorageObjectsRemovedEvent {
-	repeated int32 objects_uid = 1;
-}
-
-message ShortcutBarRemovedEvent {
-	.game.common.ShortcutBar bar_type = 1;
-	int32 slot_id = 2;
-}
-
-message ShortcutBarContentEvent {
-	.game.common.ShortcutBar bar_type = 1;
-	repeated .game.common.Shortcut shortcuts = 2;
-}
-
-message ObjectFeedRequest {
-	int32 object_uid = 1;
-	repeated .game.common.ObjectUidWithQuantity meal = 2;
-}
-
-message ShortcutBarRemoveRequest {
-	.game.common.ShortcutBar bar_type = 1;
-	int32 slot_id = 2;
-}
-
-message ObjectQuantityEvent {
-	.game.common.ObjectUidWithQuantity object = 1;
-	.game.common.ObjectOrigin origin = 2;
+message StorageObjectsUpdateEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory objects = 1;
 }
 
 message StorageObjectRemovedEvent {
 	int32 object_uid = 1;
 }
 
-message ShortcutBarRefreshEvent {
-	.game.common.ShortcutBar bar_type = 1;
-	.game.common.Shortcut shortcut = 2;
-}
-
-message KamasUpdateEvent {
-	int64 quantity = 1;
-}
-
-message ObjectUseRequest {
-	int32 object_uid = 1;
-}
-
-message ObjectDeleteRequest {
-	.game.common.ObjectUidWithQuantity object = 1;
-}
-
-message ObjectHarvestedEvent {
-	int32 object_gid = 1;
-	int32 quantity = 2;
-}
-
-message MultiTabStorageEvent {
-	repeated StorageTab tabs = 1;
-}
-
-message ObjectDropRequest {
-	.game.common.ObjectUidWithQuantity object = 1;
-}
-
-message ObjectFavoriteRequest {
-	repeated ObjectFavoriteRequest.ObjectFavorite objects = 1;
-	bool favorite = 2;
-	message ObjectFavorite {
-		int32 object_uid = 1;
-		int32 position = 2;
-	}
-}
-
-message StorageObjectsUpdateEvent {
-	repeated .game.common.ObjectItemInventory objects = 1;
-}
-
-message ShortcutBarReplacedEvent {
-	.game.common.ShortcutBar bar_type = 1;
-	.game.common.Shortcut shortcut = 2;
-}
-
-message StorageInventoryContentEvent {
-	repeated .game.common.ObjectItemInventory objects = 1;
-	int64 kamas = 2;
-}
-
-message ObjectsDeletedEvent {
+message StorageObjectsRemovedEvent {
 	repeated int32 objects_uid = 1;
 }
 
-message ObjectDeletedEvent {
-	int32 object_uid = 1;
-}
-
-message GoldAddedEvent {
-	int64 sum = 1;
+message SetUpdateEvent {
+	int32 set_id = 1;
+	repeated int32 objects_uid = 2;
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectEffect effects = 3;
 }
 

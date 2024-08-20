@@ -1,9 +1,11 @@
 syntax = "proto3";
 
-package game.ui;
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/ui";
+
+package com.ankama.dofus.server.game.protocol.ui;
 
 message ClientUIOpenedEvent {
-	ClientUIOpenedEvent.UIType type = 1;
+	.com.ankama.dofus.server.game.protocol.ui.ClientUIOpenedEvent.UIType type = 1;
 	optional int32 object_uid = 2;
 	enum UIType {
 		UNDEFINED = 0;
@@ -13,5 +15,6 @@ message ClientUIOpenedEvent {
 		LEGENDARY_TREASURE_QUEST = 4;
 		TELEPORT_HOUSE = 5;
 	}
+
 }
 

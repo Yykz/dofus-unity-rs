@@ -1,61 +1,59 @@
 syntax = "proto3";
 
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/context";
+
 import "common.proto";
-package game.context;
 
-message ShowCellRequest {
-	int32 cell_id = 1;
-}
-
-message EntitiesDispositionEvent {
-	repeated .game.common.EntityDisposition dispositions = 1;
-}
-
-message RefreshMonsterBoostsEvent {
-	repeated MonsterBoosts monster_boosts = 1;
-	repeated MonsterBoosts family_boosts = 2;
-}
+package com.ankama.dofus.server.game.protocol.context;
 
 message ContextCreationRequest {
 }
 
-message EntityDispositionErrorEvent {
+message ContextReadyRequest {
+	int64 map_id = 1;
 }
 
-message ShowCellEvent {
-	int64 source_id = 1;
-	int32 cell_id = 2;
-}
-
-message ContextRemoveElementEvent {
-	int64 element_id = 1;
-}
-
-message ContextCreationEvent {
-	ContextCreationEvent.GameContext context = 1;
-	enum GameContext {
-		ROLE_PLAY = 0;
-		FIGHT = 1;
-	}
+message ContextQuitRequest {
 }
 
 message ContextKickRequest {
 	int64 target_id = 1;
 }
 
-message ContextRemoveElementsEvent {
-	repeated int64 element_id = 1;
+message ShowCellRequest {
+	int32 cell_id = 1;
 }
 
-message ContextQuitRequest {
+message ContextCreationEvent {
+	.com.ankama.dofus.server.game.protocol.context.ContextCreationEvent.GameContext context = 1;
+	enum GameContext {
+		ROLE_PLAY = 0;
+		FIGHT = 1;
+	}
+
 }
 
 message ContextDestroyEvent {
 }
 
+message ContextRemoveElementEvent {
+	int64 element_id = 1;
+}
+
+message ContextRemoveElementsEvent {
+	repeated int64 element_id = 1;
+}
+
 message ContextRefreshEntityLookEvent {
 	int64 entity_id = 1;
-	.game.common.EntityLook look = 2;
+	.com.ankama.dofus.server.game.protocol.common.EntityLook look = 2;
+}
+
+message EntitiesDispositionEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.EntityDisposition dispositions = 1;
+}
+
+message EntityDispositionErrorEvent {
 }
 
 message MonsterBoosts {
@@ -64,7 +62,13 @@ message MonsterBoosts {
 	int32 drop_boost = 3;
 }
 
-message ContextReadyRequest {
-	int64 map_id = 1;
+message RefreshMonsterBoostsEvent {
+	repeated .com.ankama.dofus.server.game.protocol.context.MonsterBoosts monster_boosts = 1;
+	repeated .com.ankama.dofus.server.game.protocol.context.MonsterBoosts family_boosts = 2;
+}
+
+message ShowCellEvent {
+	int64 source_id = 1;
+	int32 cell_id = 2;
 }
 

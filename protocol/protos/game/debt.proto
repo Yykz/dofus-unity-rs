@@ -1,23 +1,27 @@
 syntax = "proto3";
 
-package game.debt;
+option go_package = "go-xp-dofus-unity-proto-builder/src/protocol/game/debt";
+
+package com.ankama.dofus.server.game.protocol.debt;
 
 message DebtsUpdateEvent {
-	DebtsUpdateEvent.DebtsAction action = 1;
-	repeated DebtsUpdateEvent.DebtInformation debts = 2;
-	enum DebtsAction {
-		DISPATCH = 0;
-		UPDATE = 1;
-	}
+	.com.ankama.dofus.server.game.protocol.debt.DebtsUpdateEvent.DebtsAction action = 1;
+	repeated .com.ankama.dofus.server.game.protocol.debt.DebtsUpdateEvent.DebtInformation debts = 2;
 	message DebtInformation {
 		int64 debt_id = 1;
 		int64 timestamp = 2;
 		optional int64 kamas = 3;
 	}
+
+	enum DebtsAction {
+		DISPATCH = 0;
+		UPDATE = 1;
+	}
+
 }
 
 message DebtsDeleteEvent {
-	DebtsDeleteEvent.DebtsDeletionReason reason = 1;
+	.com.ankama.dofus.server.game.protocol.debt.DebtsDeleteEvent.DebtsDeletionReason reason = 1;
 	repeated int64 debts = 2;
 	enum DebtsDeletionReason {
 		UNKNOWN = 0;
@@ -25,5 +29,6 @@ message DebtsDeleteEvent {
 		PAYED = 2;
 		CANCELED = 3;
 	}
+
 }
 
