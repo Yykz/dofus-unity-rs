@@ -64,15 +64,15 @@ pub struct Generator {
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     #[error("CSharpParser failed to parse {0}")]
-    FailedToParse(#[from] pest::error::Error<Rule>),
+    Parse(#[from] Box<pest::error::Error<Rule>>),
     #[error("failed to read file {0} {1}")]
-    FailedToReadFile(PathBuf, io::Error),
+    ReadFile(PathBuf, io::Error),
     #[error("failed to write to proto buffer {0}")]
-    FailedToWriteProto(io::Error),
+    WriteProto(io::Error),
     #[error("failed to read dir {0} {1}")]
-    FailedToReadDir(PathBuf, io::Error),
+    ReadDir(PathBuf, io::Error),
     #[error("failed to write to file {0} {1}")]
-    FailedToWriteFile(PathBuf, io::Error),
+    WriteFile(PathBuf, io::Error),
 }
 
 pub type Result = std::result::Result<(), Error>;
@@ -109,8 +109,8 @@ impl Generator {
 
         let mut protofile = ProtoFileBuffer::default();
 
-        for entry in std::fs::read_dir(path).map_err(|e| Error::FailedToReadDir(path.into(), e))? {
-            let entry = entry.map_err(|e| Error::FailedToReadDir(path.into(), e))?;
+        for entry in std::fs::read_dir(path).map_err(|e| Error::ReadDir(path.into(), e))? {
+            let entry = entry.map_err(|e| Error::ReadDir(path.into(), e))?;
             let path = entry.path();
 
             match path.is_file() {
@@ -129,13 +129,13 @@ impl Generator {
         let package = format!("{}.{}", self.package_prefix, package_file);
         protofile
             .write_to_file(&path_outfile, &package)
-            .map_err(|e| Error::FailedToWriteFile(path_outfile.into(), e))
+            .map_err(|e| Error::WriteFile(path_outfile, e))
     }
 
     fn process_file(&self, path: &Path, out: &mut ProtoFileBuffer) -> Result {
         let content =
-            std::fs::read_to_string(path).map_err(|e| Error::FailedToReadFile(path.into(), e))?;
-        let mut parsed = CSharpParser::parse(Rule::file, &content[3..])?;
+            std::fs::read_to_string(path).map_err(|e| Error::ReadFile(path.into(), e))?;
+        let mut parsed = CSharpParser::parse(Rule::file, &content[3..]).map_err(Box::new)?;
         let file_pair = parsed.next().unwrap();
         let parsed_file = File::try_from(file_pair).unwrap();
         out.add_imports(parsed_file.imports, &self.base_namespace);
@@ -143,7 +143,7 @@ impl Generator {
             FileContent::Class(_class) => {}
             FileContent::Namespace(namespace) => {
                 if let Ok(proto) = ProtoEntity::try_from(namespace) {
-                    writeln!(out, "{}", proto).map_err(|e| Error::FailedToWriteProto(e))?;
+                    writeln!(out, "{}", proto).map_err(Error::WriteProto)?;
                 }
             }
         }

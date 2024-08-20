@@ -152,13 +152,13 @@ impl Message {
                                 .get(&variant.name)
                                 .unwrap_or(&variant.name)
                                 .clone();
-                            cases.push(NormalField::new(name, r#type, index, Label::None).into())
+                            cases.push(NormalField::new(name, r#type, index, Label::None))
                         } else {
                             eprintln!("cannot find corresponding field number {}", name);
                         }
                     }
                     let oneof_name_pascal = &r#enum.name[..r#enum.name.len() - 9];
-                    let oneof_name_snake = pascal_to_snake_case(&oneof_name_pascal);
+                    let oneof_name_snake = pascal_to_snake_case(oneof_name_pascal);
                     let object_field = unmatched_fields.remove(&oneof_name_snake);
                     let enum_field = unmatched_fields.remove(&format!("{}_case", oneof_name_snake));
 

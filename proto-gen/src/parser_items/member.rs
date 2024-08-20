@@ -31,17 +31,15 @@ pub enum Member {
 
 impl From<Pair<'_, Rule>> for Member {
     fn from(value: Pair<'_, Rule>) -> Self {
-        for pair in value.into_inner() {
-            match pair.as_rule() {
-                Rule::property => return Self::Property(Property::from(pair)),
-                Rule::constructor => return Self::Constructor(Constructor::from(pair)),
-                Rule::method => return Self::Method(Method::from(pair)),
-                Rule::field => return Self::Field(Field::from(pair)),
-                Rule::class => return Self::Class(Class::from(pair)),
-                Rule::r#enum => return Self::Enum(Enum::from(pair)),
-                _ => unreachable!(),
-            }
+        let pair = value.into_inner().next().unwrap();
+        match pair.as_rule() {
+            Rule::property => Self::Property(Property::from(pair)),
+            Rule::constructor => Self::Constructor(Constructor::from(pair)),
+            Rule::method => Self::Method(Method::from(pair)),
+            Rule::field => Self::Field(Field::from(pair)),
+            Rule::class => Self::Class(Class::from(pair)),
+            Rule::r#enum => Self::Enum(Enum::from(pair)),
+            _ => unreachable!(),
         }
-        unreachable!()
     }
 }

@@ -30,7 +30,7 @@ impl From<Pair<'_, Rule>> for Field {
                 Rule::modifier => modifiers.push(Modifier::from(pair)),
                 Rule::fieldType => field_type = Some(pair.as_str().to_string()),
                 Rule::identName => name = Some(pair.as_str().to_string()),
-                Rule::assignValue => assign_value = Some((&pair.as_str()[2..]).to_string()),
+                Rule::assignValue => assign_value = Some(pair.as_str()[2..].to_string()),
                 _ => unreachable!(),
             }
         }

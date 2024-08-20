@@ -11,7 +11,7 @@ pub struct Enum {
 
 fn original_name(attribute: parser_items::Attribute) -> Option<String> {
     match attribute.0.starts_with("[OriginalName") {
-        true => Some((&attribute.0[15..attribute.0.len() - 3]).to_string()),
+        true => Some(attribute.0[15..attribute.0.len() - 3].to_string()),
         false => None,
     }
 }
