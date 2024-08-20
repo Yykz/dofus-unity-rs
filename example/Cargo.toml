@@ -1,0 +1,13 @@
+[package]
+name = "example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+#protocol = { git = "https://github.com/Yykz/dofus-unity-rs.git" }
+dofus_protocol = { path = "../protocol" }
+bytes = "1.7.1"
+prost = "0.13.1"
+prost-types = "0.13.1"
+pcap = "2.0.0"
+pnet = "0.35.0"
