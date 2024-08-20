@@ -21,7 +21,7 @@ message AllianceApplicationDeletionRequest {
 
 message AllianceApplicationResponseEvent {
 	bool accepted = 1;
-	AllianceInformation alliance_information = 2;
+	.game.common.AllianceInformation alliance_information = 2;
 }
 
 message AllianceRecruitmentAutomaticJoinRequest {
@@ -40,11 +40,11 @@ message AllianceApplicationListEvent {
 	int64 offset = 1;
 	int64 count = 2;
 	int64 total = 3;
-	repeated SocialApplicationInformation applies = 4;
+	repeated .game.common.SocialApplicationInformation applies = 4;
 }
 
 message AllianceRecruitmentUpdateRequest {
-	AllianceRecruitmentInformation information = 1;
+	.game.common.AllianceRecruitmentInformation information = 1;
 }
 
 message AllianceApplicationListRequest {
@@ -62,23 +62,23 @@ message AllianceApplicationListenRequest {
 }
 
 message AllianceApplicationInformationEvent {
-	AllianceInformation alliance = 1;
-	SocialApplicationInformation application_information = 2;
+	.game.common.AllianceInformation alliance = 1;
+	.game.common.SocialApplicationInformation application_information = 2;
 }
 
 message AllianceApplicationRequest {
 }
 
 message AllianceRecruitmentInformationEvent {
-	AllianceRecruitmentInformation information = 1;
+	.game.common.AllianceRecruitmentInformation information = 1;
 }
 
 message AllianceApplicationNoInformationEvent {
 }
 
 message AllianceApplicationModifiedEvent {
-	SocialApplicationInformation apply = 1;
-	SocialApplicationState state = 2;
+	.game.common.SocialApplicationInformation apply = 1;
+	.game.common.SocialApplicationState state = 2;
 	int64 player_id = 3;
 }
 

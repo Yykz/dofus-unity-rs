@@ -30,7 +30,7 @@ message PartyMemberInBreachFightEvent {
 
 message PartyNewMemberEvent {
 	int32 party_id = 1;
-	Character member = 2;
+	.game.common.Character member = 2;
 }
 
 message PartyNameSetErrorEvent {
@@ -54,7 +54,7 @@ message PartyFollowStatusUpdateEvent {
 
 message PartyMemberUpdateEvent {
 	int32 party_id = 1;
-	Character member = 2;
+	.game.common.Character member = 2;
 }
 
 message PartyNameUpdateEvent {
@@ -65,7 +65,7 @@ message PartyNameUpdateEvent {
 message PartyMemberUpdateLightEvent {
 	int32 party_id = 1;
 	int64 player_id = 2;
-	PartyUpdateCommonsInformation commons_information = 3;
+	.game.common.PartyUpdateCommonsInformation commons_information = 3;
 	optional int32 index = 4;
 }
 
@@ -120,7 +120,7 @@ message PartyInvitationDetailsEvent {
 	int64 from_player_id = 4;
 	string from_player_name = 5;
 	int64 leader_id = 6;
-	repeated Character members = 7;
+	repeated .game.common.Character members = 7;
 	repeated PartyGuest guests = 8;
 }
 
@@ -169,7 +169,7 @@ message PartyMemberInFightEvent {
 	string member_name = 5;
 	int32 fight_id = 6;
 	int32 time_before_fight_start = 7;
-	MapExtendedCoordinates standard_fight_map = 8;
+	.game.common.MapExtendedCoordinates standard_fight_map = 8;
 }
 
 message PartyAbdicateThroneRequest {
@@ -181,11 +181,11 @@ message PartyGuest {
 	int64 player_id = 1;
 	int64 host_id = 2;
 	string name = 3;
-	EntityLook look = 4;
+	.game.common.EntityLook look = 4;
 	int32 breed = 5;
-	Gender gender = 6;
-	CharacterStatus status = 7;
-	repeated PartyEntity entities = 8;
+	.game.common.Gender gender = 6;
+	.game.common.CharacterStatus status = 7;
+	repeated .game.common.PartyEntity entities = 8;
 }
 
 message PartyInvitationCancelledEvent {
@@ -234,7 +234,7 @@ message PartyJoinEvent {
 	PartyType party_type = 2;
 	int64 leader_id = 3;
 	int32 max_participants = 4;
-	repeated Character members = 5;
+	repeated .game.common.Character members = 5;
 	repeated PartyGuest guests = 6;
 	bool restricted = 7;
 	string party_name = 8;
@@ -251,7 +251,7 @@ message PartyPledgeLoyaltyRequest {
 }
 
 message PartyInvitationRequest {
-	PlayerSearch target = 1;
+	.game.common.PlayerSearch target = 1;
 	PartyType party_type = 2;
 }
 

@@ -8,7 +8,7 @@ message PaddocksToSellFiltersRequest {
 	int32 at_least_mount_number = 2;
 	int32 at_least_machine_number = 3;
 	int64 price_max = 4;
-	RealEstateOrder order_by = 5;
+	.game.common.RealEstateOrder order_by = 5;
 }
 
 message PaddockRemoveItemRequest {
@@ -16,7 +16,7 @@ message PaddockRemoveItemRequest {
 }
 
 message PaddockPropertiesEvent {
-	PaddockInformation properties = 1;
+	.game.common.PaddockInformation properties = 1;
 }
 
 message PaddockObjectRemovedEvent {
@@ -63,7 +63,7 @@ message PaddocksToSellEvent {
 	repeated PaddocksToSellEvent.PaddockForSale paddocks = 3;
 	message PaddockForSale {
 		string guild_owner = 1;
-		MapCoordinates coordinates = 2;
+		.game.common.MapCoordinates coordinates = 2;
 		int32 sub_area_id = 3;
 		int32 mount_number = 4;
 		int32 object_number = 5;
@@ -72,11 +72,11 @@ message PaddocksToSellEvent {
 }
 
 message PaddockObjectAddedEvent {
-	ObjectInRolePlay paddock_item = 1;
+	.game.common.ObjectInRolePlay paddock_item = 1;
 }
 
 message PaddockObjectsAddedEvent {
-	repeated ObjectInRolePlay paddock_item = 1;
+	repeated .game.common.ObjectInRolePlay paddock_item = 1;
 }
 
 message PaddockObjectAnimationPlayEvent {

@@ -14,7 +14,7 @@ message PrismDialogQuestionEvent {
 }
 
 message TaxCollectorDialogQuestionEvent {
-	AllianceInformation alliance_information = 1;
+	.game.common.AllianceInformation alliance_information = 1;
 	int32 max_pods = 2;
 	int32 prospecting = 3;
 	int32 tax_collectors_count = 4;

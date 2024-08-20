@@ -4,7 +4,7 @@ import "common.proto";
 package game.character.management;
 
 message CharacterCreationRequest {
-	CharacterRemodelingInformation modeling_information = 1;
+	.game.common.CharacterRemodelingInformation modeling_information = 1;
 }
 
 message CharacterCapabilitiesEvent {
@@ -16,7 +16,7 @@ message CharacterListErrorEvent {
 
 message CharacterSelectionWithRemodelRequest {
 	int64 character_id = 1;
-	Character remodeling_information = 2;
+	.game.common.Character remodeling_information = 2;
 }
 
 message CharacterLoadingCompleteEvent {
@@ -36,7 +36,7 @@ message CharacterForceSelectionEvent {
 }
 
 message CharacterListEvent {
-	repeated Character characters = 1;
+	repeated .game.common.Character characters = 1;
 }
 
 message CharacterReplayRequest {
@@ -51,7 +51,7 @@ message CharacterSelectionEvent {
 	message Error {
 	}
 	message Success {
-		Character character = 1;
+		.game.common.Character character = 1;
 		bool collect_stats = 2;
 	}
 }
@@ -98,8 +98,8 @@ message CanCreateCharacterRequest {
 }
 
 message CharacterListWithRemodelingEvent {
-	repeated Character characters = 1;
-	repeated Character characters_to_remodel = 2;
+	repeated .game.common.Character characters = 1;
+	repeated .game.common.Character characters_to_remodel = 2;
 }
 
 message CharacterDeletionRequest {
@@ -112,7 +112,7 @@ message CharacterForceSelectionReadyRequest {
 
 message CharacterReplayWithRemodelRequest {
 	int64 character_id = 1;
-	Character remodeling_information = 2;
+	.game.common.Character remodeling_information = 2;
 }
 
 message CharacterFirstSelectionRequest {
@@ -122,7 +122,7 @@ message CharacterFirstSelectionRequest {
 
 message CharacterChangeBreedRequest {
 	int32 breed_id = 1;
-	Gender gender = 2;
+	.game.common.Gender gender = 2;
 	repeated int32 colors = 3;
 	int32 cosmetic_id = 4;
 	int32 object_id = 5;

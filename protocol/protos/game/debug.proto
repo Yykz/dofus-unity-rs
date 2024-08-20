@@ -18,7 +18,7 @@ message DebugInClientEvent {
 
 message DumpedEntityStatsEvent {
 	int64 entity_id = 1;
-	repeated CharacterCharacteristic stats = 2;
+	repeated .game.common.CharacterCharacteristic stats = 2;
 }
 
 message DebugClearHighlightCellsEvent {

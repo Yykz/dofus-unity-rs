@@ -1,4 +1,4 @@
-use std::{collections::HashMap, fmt::Display};
+use std::{collections::{HashMap, HashSet}, fmt::Display};
 
 use crate::parser_items;
 
@@ -10,7 +10,7 @@ use field::*;
 #[derive(Debug)]
 pub struct Message {
     _namespace: String,
-    name: String,
+    pub name: String,
     fields: Vec<Field>,
     inner: Vec<ProtoEntity>,
 }
@@ -26,6 +26,11 @@ pub enum Error {
 }
 
 impl Message {
+    pub fn resolve_types(&mut self, local: &HashSet<String>) {
+        self.fields.iter_mut().for_each(|field| field.resolve_type(local));
+        self.inner.iter_mut().for_each(|entity| entity.resolve_types(local));
+    }
+
     fn display_inner(
         &self,
         f: &mut std::fmt::Formatter<'_>,

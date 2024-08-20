@@ -9,11 +9,11 @@ message ObjectUseOnCellRequest {
 }
 
 message ObjectErrorEvent {
-	ObjectError reason = 1;
+	.game.common.ObjectError reason = 1;
 }
 
 message InventoryContentWatchEvent {
-	repeated ObjectItemInventory objects = 1;
+	repeated .game.common.ObjectItemInventory objects = 1;
 	int64 kamas = 2;
 }
 
@@ -22,7 +22,7 @@ message StorageKamasUpdateEvent {
 }
 
 message ObjectsQuantityEvent {
-	repeated ObjectUidWithQuantity object = 1;
+	repeated .game.common.ObjectUidWithQuantity object = 1;
 }
 
 message ObjectUseOnCharacterRequest {
@@ -36,17 +36,17 @@ message ObjectUseMultipleRequest {
 }
 
 message ObjectModifiedEvent {
-	ObjectItemInventory object = 1;
+	.game.common.ObjectItemInventory object = 1;
 }
 
 message ShortcutBarSwapRequest {
-	ShortcutBar bar_type = 1;
+	.game.common.ShortcutBar bar_type = 1;
 	int32 first_slot_id = 2;
 	int32 second_slot_id = 3;
 }
 
 message ObjectDroppedEvent {
-	ObjectInRolePlay object = 1;
+	.game.common.ObjectInRolePlay object = 1;
 }
 
 message ObjectSetPositionRequest {
@@ -56,8 +56,8 @@ message ObjectSetPositionRequest {
 }
 
 message ShortcutBarAddRequest {
-	ShortcutBar bar_type = 1;
-	Shortcut shortcut = 2;
+	.game.common.ShortcutBar bar_type = 1;
+	.game.common.Shortcut shortcut = 2;
 }
 
 message ObjectFavoriteResponse {
@@ -69,16 +69,16 @@ message ObjectCellDeleteEvent {
 }
 
 message ObjectAddedEvent {
-	ObjectItemInventory object = 1;
-	ObjectOrigin origin = 2;
+	.game.common.ObjectItemInventory object = 1;
+	.game.common.ObjectOrigin origin = 2;
 }
 
 message StorageObjectUpdateEvent {
-	ObjectItemInventory object = 1;
+	.game.common.ObjectItemInventory object = 1;
 }
 
 message ObjectsDroppedEvent {
-	repeated ObjectInRolePlay object = 1;
+	repeated .game.common.ObjectInRolePlay object = 1;
 }
 
 message ObjectCellsDeleteEvent {
@@ -86,7 +86,7 @@ message ObjectCellsDeleteEvent {
 }
 
 message InventoryContentEvent {
-	repeated ObjectItemInventory objects = 1;
+	repeated .game.common.ObjectItemInventory objects = 1;
 	int64 kamas = 2;
 }
 
@@ -101,13 +101,13 @@ message StorageTab {
 }
 
 message ObjectsAddedEvent {
-	repeated ObjectItemInventory objects = 1;
+	repeated .game.common.ObjectItemInventory objects = 1;
 }
 
 message SetUpdateEvent {
 	int32 set_id = 1;
 	repeated int32 objects_uid = 2;
-	repeated ObjectEffect effects = 3;
+	repeated .game.common.ObjectEffect effects = 3;
 }
 
 message ObjectMovementEvent {
@@ -131,28 +131,28 @@ message StorageObjectsRemovedEvent {
 }
 
 message ShortcutBarRemovedEvent {
-	ShortcutBar bar_type = 1;
+	.game.common.ShortcutBar bar_type = 1;
 	int32 slot_id = 2;
 }
 
 message ShortcutBarContentEvent {
-	ShortcutBar bar_type = 1;
-	repeated Shortcut shortcuts = 2;
+	.game.common.ShortcutBar bar_type = 1;
+	repeated .game.common.Shortcut shortcuts = 2;
 }
 
 message ObjectFeedRequest {
 	int32 object_uid = 1;
-	repeated ObjectUidWithQuantity meal = 2;
+	repeated .game.common.ObjectUidWithQuantity meal = 2;
 }
 
 message ShortcutBarRemoveRequest {
-	ShortcutBar bar_type = 1;
+	.game.common.ShortcutBar bar_type = 1;
 	int32 slot_id = 2;
 }
 
 message ObjectQuantityEvent {
-	ObjectUidWithQuantity object = 1;
-	ObjectOrigin origin = 2;
+	.game.common.ObjectUidWithQuantity object = 1;
+	.game.common.ObjectOrigin origin = 2;
 }
 
 message StorageObjectRemovedEvent {
@@ -160,8 +160,8 @@ message StorageObjectRemovedEvent {
 }
 
 message ShortcutBarRefreshEvent {
-	ShortcutBar bar_type = 1;
-	Shortcut shortcut = 2;
+	.game.common.ShortcutBar bar_type = 1;
+	.game.common.Shortcut shortcut = 2;
 }
 
 message KamasUpdateEvent {
@@ -173,7 +173,7 @@ message ObjectUseRequest {
 }
 
 message ObjectDeleteRequest {
-	ObjectUidWithQuantity object = 1;
+	.game.common.ObjectUidWithQuantity object = 1;
 }
 
 message ObjectHarvestedEvent {
@@ -186,7 +186,7 @@ message MultiTabStorageEvent {
 }
 
 message ObjectDropRequest {
-	ObjectUidWithQuantity object = 1;
+	.game.common.ObjectUidWithQuantity object = 1;
 }
 
 message ObjectFavoriteRequest {
@@ -199,16 +199,16 @@ message ObjectFavoriteRequest {
 }
 
 message StorageObjectsUpdateEvent {
-	repeated ObjectItemInventory objects = 1;
+	repeated .game.common.ObjectItemInventory objects = 1;
 }
 
 message ShortcutBarReplacedEvent {
-	ShortcutBar bar_type = 1;
-	Shortcut shortcut = 2;
+	.game.common.ShortcutBar bar_type = 1;
+	.game.common.Shortcut shortcut = 2;
 }
 
 message StorageInventoryContentEvent {
-	repeated ObjectItemInventory objects = 1;
+	repeated .game.common.ObjectItemInventory objects = 1;
 	int64 kamas = 2;
 }
 

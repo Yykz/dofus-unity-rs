@@ -14,7 +14,7 @@ message ExchangeObjectTransferAllFromInventoryRequest {
 }
 
 message ExchangeRequestedTradeEvent {
-	ExchangeType exchange_type = 1;
+	.game.common.ExchangeType exchange_type = 1;
 	int64 source_id = 2;
 	int64 target_id = 3;
 }
@@ -24,15 +24,15 @@ message ExchangeCraftPaymentModifiedEvent {
 }
 
 message ExchangeMountWithoutPaddockStartedEvent {
-	repeated MountData stabled_mounts = 1;
-	repeated MountData paddocked_mounts = 2;
+	repeated .game.common.MountData stabled_mounts = 1;
+	repeated .game.common.MountData paddocked_mounts = 2;
 }
 
 message ExchangeBidHouseInListAddedEvent {
 	int32 object_uid = 1;
 	int32 object_gid = 2;
 	int32 object_type = 3;
-	repeated ObjectEffect effects = 4;
+	repeated .game.common.ObjectEffect effects = 4;
 	repeated int64 prices = 5;
 }
 
@@ -60,7 +60,7 @@ message ExchangeBidHouseTypeRequest {
 }
 
 message ExchangeLeaveEvent {
-	DialogType dialog_type = 1;
+	.game.common.DialogType dialog_type = 1;
 	bool success = 2;
 }
 
@@ -74,7 +74,7 @@ message ExchangeBidBuyerStartedEvent {
 
 message ExchangeObjectPutInBagEvent {
 	bool remote = 1;
-	ObjectItemInventory object = 2;
+	.game.common.ObjectItemInventory object = 2;
 }
 
 message ExchangeMultiCraftCrafterStartedEvent {
@@ -97,7 +97,7 @@ message ExchangeRecycleTradeStartedEvent {
 
 message ExchangeObjectModifiedInBagEvent {
 	bool remote = 1;
-	ObjectItemInventory object = 2;
+	.game.common.ObjectItemInventory object = 2;
 }
 
 message ExchangeBidHouseBuyRequest {
@@ -107,11 +107,11 @@ message ExchangeBidHouseBuyRequest {
 }
 
 message ExchangeBidHouseOfflineSoldItemsEvent {
-	repeated ObjectGidWithQuantity bid_house_items = 1;
+	repeated .game.common.ObjectGidWithQuantity bid_house_items = 1;
 }
 
 message ExchangeMountsPaddockAddedEvent {
-	repeated MountData mounts = 1;
+	repeated .game.common.MountData mounts = 1;
 }
 
 message ExchangeCraftStartedEvent {
@@ -129,7 +129,7 @@ message ExchangeItemAutoCraftStoppedEvent {
 }
 
 message ExchangeStartedEvent {
-	ExchangeType exchange_type = 1;
+	.game.common.ExchangeType exchange_type = 1;
 }
 
 message ExchangeMultiCraftCustomerStartedEvent {
@@ -142,7 +142,7 @@ message ExchangeBoughtEvent {
 
 message ExchangeObjectsModifiedEvent {
 	bool remote = 1;
-	repeated ObjectItemInventory objects = 2;
+	repeated .game.common.ObjectItemInventory objects = 2;
 }
 
 message JobBookSubscribeRequest {
@@ -150,7 +150,7 @@ message JobBookSubscribeRequest {
 }
 
 message ExchangeStartedWithStorageEvent {
-	ExchangeType exchange_type = 1;
+	.game.common.ExchangeType exchange_type = 1;
 	int32 storage_max_slot = 2;
 }
 
@@ -235,7 +235,7 @@ message ExchangeBidHouseGenericItemRemovedEvent {
 
 message ExchangeObjectsAddedEvent {
 	bool remote = 1;
-	repeated ObjectItemInventory objects = 2;
+	repeated .game.common.ObjectItemInventory objects = 2;
 	optional int32 fm_power = 3;
 }
 
@@ -309,13 +309,13 @@ message ExchangeBidHouseBuyResultEvent {
 }
 
 message ExchangeBidHouseItemAddedEvent {
-	ObjectItem item = 1;
+	.game.common.ObjectItem item = 1;
 	int64 price = 2;
 	int64 unsold_delay = 3;
 }
 
 message ExchangeStartedWithMultiTabStorageEvent {
-	ExchangeType exchange_type = 1;
+	.game.common.ExchangeType exchange_type = 1;
 	int32 storage_max_slot = 2;
 	int32 tab_number = 3;
 }
@@ -324,21 +324,21 @@ message ExchangeAcceptRequest {
 }
 
 message ExchangeTaxCollectorEquipmentStartedEvent {
-	TaxCollectorInformation tax_collector_information = 1;
+	.game.common.TaxCollectorInformation tax_collector_information = 1;
 }
 
 message ExchangeBidSellerStartedEvent {
 	SellingConditions selling_conditions = 1;
 	repeated ExchangeBidSellerStartedEvent.ObjectItemToSelInBid objects = 2;
 	message ObjectItemToSelInBid {
-		ObjectItem object = 1;
+		.game.common.ObjectItem object = 1;
 		int64 price = 2;
 		int32 unsold_delay = 3;
 	}
 }
 
 message ExchangeStartedWithPodsEvent {
-	ExchangeType exchange_type = 1;
+	.game.common.ExchangeType exchange_type = 1;
 	int64 first_character_id = 2;
 	int32 first_character_current_weight = 3;
 	int32 first_character_max_weight = 4;
@@ -354,7 +354,7 @@ message ExchangeReadyEvent {
 
 message ExchangeMountFreeFromPaddockEvent {
 	string name = 1;
-	MapCoordinates coordinates = 2;
+	.game.common.MapCoordinates coordinates = 2;
 	string liberator = 3;
 }
 
@@ -378,7 +378,7 @@ message ExchangeBidHouseSearchRequest {
 }
 
 message ExchangeBidHouseUnsoldItemsEvent {
-	repeated ObjectGidWithQuantity objects = 1;
+	repeated .game.common.ObjectGidWithQuantity objects = 1;
 }
 
 message ExchangeCraftResultEvent {
@@ -395,7 +395,7 @@ message ExchangeCraftResultEvent {
 		FORBIDDEN = 4;
 	}
 	message ExchangeCraftResultWithObjectDescription {
-		ObjectItem object = 1;
+		.game.common.ObjectItem object = 1;
 		optional ExchangeCraftResultEvent.ExchangeCraftResultWithObjectDescription.MagicPoolStatus magic_pool_status = 2;
 		int32 fm_power = 3;
 		enum MagicPoolStatus {
@@ -416,14 +416,14 @@ message ExchangeNpcTradeStartedEvent {
 }
 
 message ExchangeMountStockStartedEvent {
-	repeated ObjectItemInventory objects = 1;
+	repeated .game.common.ObjectItemInventory objects = 1;
 }
 
 message ExchangeBidHouseInListUpdatedEvent {
 	int32 object_uid = 1;
 	int32 object_gid = 2;
 	int32 object_type = 3;
-	repeated ObjectEffect effects = 4;
+	repeated .game.common.ObjectEffect effects = 4;
 	repeated int64 prices = 5;
 }
 
@@ -443,7 +443,7 @@ message ExchangeTypesItemsExchangerDescriptionForUserEvent {
 		int32 object_uid = 1;
 		int32 object_gid = 2;
 		int32 object_type = 3;
-		repeated ObjectEffect effects = 4;
+		repeated .game.common.ObjectEffect effects = 4;
 		repeated int64 prices = 5;
 	}
 }
@@ -460,7 +460,7 @@ message ExchangeRunesTradeStartedEvent {
 }
 
 message ExchangeMountsStableAddedEvent {
-	repeated MountData mounts = 1;
+	repeated .game.common.MountData mounts = 1;
 	bool new_born = 2;
 }
 
@@ -476,7 +476,7 @@ message RecycleResultEvent {
 message ExchangeMultiCraftOkEvent {
 	int64 initiator_id = 1;
 	int64 other_id = 2;
-	ExchangeType role = 3;
+	.game.common.ExchangeType role = 3;
 }
 
 message DecraftResultEvent {
@@ -496,18 +496,18 @@ message DecraftResultEvent {
 message ExchangeNpcShopStartedEvent {
 	int64 npc_seller_id = 1;
 	int32 token_id = 2;
-	repeated ItemMinimalInformation objects = 3;
+	repeated .game.common.ItemMinimalInformation objects = 3;
 }
 
 message ExchangeTaxCollectorGetEvent {
 	string collector_name = 1;
-	MapExtendedCoordinates coordinates = 2;
+	.game.common.MapExtendedCoordinates coordinates = 2;
 	string user_name = 3;
 	int64 caller_id = 4;
 	string caller_name = 5;
 	int32 pods = 6;
-	repeated ObjectGidWithQuantity objects = 7;
-	EntityLook look = 8;
+	repeated .game.common.ObjectGidWithQuantity objects = 7;
+	.game.common.EntityLook look = 8;
 }
 
 message ExchangeObjectMoveRequest {
@@ -520,7 +520,7 @@ message ExchangeMultiCraftSetCrafterCanUseHisResourcesRequest {
 }
 
 message ExchangeTaxCollectorShopStartedEvent {
-	repeated ObjectItemInventory objects = 1;
+	repeated .game.common.ObjectItemInventory objects = 1;
 	int64 kamas = 2;
 }
 
@@ -529,7 +529,7 @@ message ExchangeCrafterJobLevelUpEvent {
 }
 
 message ExchangeObjectTransferListWithQuantityToInventoryRequest {
-	repeated ObjectUidWithQuantity objects = 1;
+	repeated .game.common.ObjectUidWithQuantity objects = 1;
 }
 
 message ExchangeMoneyMovementLimitEvent {
@@ -588,7 +588,7 @@ message ExchangeMountRequest {
 }
 
 message ExchangePlayerMultiCraftRequest {
-	ExchangeType exchange_type = 1;
+	.game.common.ExchangeType exchange_type = 1;
 	int64 target_id = 2;
 	int32 skill_id = 3;
 }

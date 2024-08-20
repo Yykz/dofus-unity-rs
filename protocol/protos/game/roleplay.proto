@@ -29,7 +29,7 @@ message SpellAnimEvent {
 	int32 target_cell_id = 2;
 	int32 spell_id = 3;
 	int32 spell_level = 4;
-	Direction direction = 5;
+	.game.common.Direction direction = 5;
 }
 
 message PlayerFightFriendlyAnsweredEvent {
@@ -41,7 +41,7 @@ message PlayerFightFriendlyAnsweredEvent {
 
 message DelayedActionFinishedEvent {
 	int64 character_id = 1;
-	DelayedActionType delayed_action_type = 2;
+	.game.common.DelayedActionType delayed_action_type = 2;
 }
 
 message FightRequestCanceledEvent {
@@ -55,7 +55,7 @@ message RemoveChallengeEvent {
 }
 
 message ShowChallengeEvent {
-	FightCommonInformation fight_information = 1;
+	.game.common.FightCommonInformation fight_information = 1;
 }
 
 message PlayerFightFriendlyRequestedEvent {
@@ -79,7 +79,7 @@ message MonsterAngryAtPlayerEvent {
 
 message DelayedActionEvent {
 	int64 character_id = 1;
-	DelayedActionType delayed_action_type = 2;
+	.game.common.DelayedActionType delayed_action_type = 2;
 	int64 delayed_end_time = 3;
 	optional int32 object_gid = 4;
 }

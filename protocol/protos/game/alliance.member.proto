@@ -4,12 +4,12 @@ import "common.proto";
 package game.alliance.member;
 
 message AllianceMembershipEvent {
-	AllianceInformation alliance_information = 1;
+	.game.common.AllianceInformation alliance_information = 1;
 	int32 rank_id = 2;
 }
 
 message AllianceInvitationStateRecruitedEvent {
-	SocialGroupInvitationState invitation_state = 1;
+	.game.common.SocialGroupInvitationState invitation_state = 1;
 }
 
 message AllianceInvitationRequest {
@@ -17,7 +17,7 @@ message AllianceInvitationRequest {
 }
 
 message AllianceJoinedEvent {
-	AllianceInformation alliance_information = 1;
+	.game.common.AllianceInformation alliance_information = 1;
 	int32 rank_id = 2;
 }
 
@@ -35,16 +35,16 @@ message AllianceMemberLeavingEvent {
 
 message AllianceInvitedEvent {
 	string recruiter_name = 1;
-	AllianceInformation alliance_information = 2;
+	.game.common.AllianceInformation alliance_information = 2;
 }
 
 message AllianceMemberUpdateEvent {
-	AllianceMemberInformation member = 1;
+	.game.common.AllianceMemberInformation member = 1;
 }
 
 message AllianceInvitationStateRecruiterEvent {
 	string recruited_name = 1;
-	SocialGroupInvitationState invitation_state = 2;
+	.game.common.SocialGroupInvitationState invitation_state = 2;
 }
 
 message AllianceInvitationAnswerRequest {

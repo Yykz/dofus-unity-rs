@@ -6,7 +6,7 @@ package game.account;
 message AccountCapabilitiesEvent {
 	int64 account_id = 1;
 	bool tutorial_available = 2;
-	Hierarchy status = 3;
+	.game.common.Hierarchy status = 3;
 	bool can_create_new_character = 4;
 }
 

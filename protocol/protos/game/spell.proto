@@ -30,8 +30,8 @@ message SpellsEvent {
 
 message RemoveSpellModifierEvent {
 	int64 actor_id = 1;
-	SpellModifierActionType action_type = 2;
-	SpellModifierType modifier_type = 3;
+	.game.common.SpellModifierActionType action_type = 2;
+	.game.common.SpellModifierType modifier_type = 3;
 	int32 spell_id = 4;
 }
 
@@ -63,7 +63,7 @@ message ForgettableSpellActionRequest {
 
 message ApplySpellModifierEvent {
 	int64 actor_id = 1;
-	SpellModifier modifier = 2;
+	.game.common.SpellModifier modifier = 2;
 }
 
 message SpellVariantActivationEvent {

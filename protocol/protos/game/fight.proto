@@ -17,23 +17,23 @@ message FightSlaveSwitchContextEvent {
 	int64 master_id = 1;
 	int64 slave_id = 2;
 	int32 slave_turn = 3;
-	repeated SpellItem slave_spells = 4;
-	CharacterCharacteristics slave_stats = 5;
-	repeated Shortcut shortcuts = 6;
+	repeated .game.common.SpellItem slave_spells = 4;
+	.game.common.CharacterCharacteristics slave_stats = 5;
+	repeated .game.common.Shortcut shortcuts = 6;
 }
 
 message FightNewWaveEvent {
 	int32 wave_id = 1;
-	Team team = 2;
+	.game.common.Team team = 2;
 	int32 turn_left_before_next_wave = 3;
 }
 
 message FightJoinRunningEvent {
-	repeated FightRemovableEffectExtendedInformation effects = 1;
-	repeated FightMark marks = 2;
+	repeated .game.common.FightRemovableEffectExtendedInformation effects = 1;
+	repeated .game.common.FightMark marks = 2;
 	int32 game_turn = 3;
 	int32 fight_start = 4;
-	repeated FightEffectTriggerCount fx_trigger_counts = 5;
+	repeated .game.common.FightEffectTriggerCount fx_trigger_counts = 5;
 	FightResume resume = 6;
 }
 
@@ -50,7 +50,7 @@ message FightTurnEndEvent {
 }
 
 message FightFighterShowEvent {
-	ActorPositionInformation information = 1;
+	.game.common.ActorPositionInformation information = 1;
 	bool static_pose = 2;
 }
 
@@ -64,10 +64,10 @@ message FightTurnListEvent {
 }
 
 message FightResume {
-	repeated FightSpellCoolDown spells_cool_down = 1;
+	repeated .game.common.FightSpellCoolDown spells_cool_down = 1;
 	int32 summon_count = 2;
 	int32 bomb_count = 3;
-	repeated FightResumeSlaves slaves_information = 4;
+	repeated .game.common.FightResumeSlaves slaves_information = 4;
 }
 
 message FightTurnFinishRequest {
@@ -118,30 +118,30 @@ message FightChallengeJoinRefuseEvent {
 
 message FightRefreshCharacterStatsEvent {
 	int64 fighter_id = 1;
-	FightCharacteristics stats = 2;
+	.game.common.FightCharacteristics stats = 2;
 }
 
 message FightSynchronizeEvent {
-	repeated ActorPositionInformation fighters = 1;
+	repeated .game.common.ActorPositionInformation fighters = 1;
 }
 
 message FightMapInformationResponse {
 	int64 map_id = 1;
 	int64 fight_map_id = 2;
-	FightStartingPositions fight_start_positions = 3;
+	.game.common.FightStartingPositions fight_start_positions = 3;
 }
 
 message FightEndEvent {
 	int32 duration = 1;
 	int32 reward_rate = 2;
 	int32 loot_share_limit_malus = 3;
-	repeated FightResultListEntry results = 4;
-	repeated NamedPartyTeamWithOutcome named_party_teams_outcomes = 5;
+	repeated .game.common.FightResultListEntry results = 4;
+	repeated .game.common.NamedPartyTeamWithOutcome named_party_teams_outcomes = 5;
 	optional int32 budget = 6;
 }
 
 message FightFighterRefreshEvent {
-	ActorPositionInformation information = 1;
+	.game.common.ActorPositionInformation information = 1;
 }
 
 message FightPauseEvent {

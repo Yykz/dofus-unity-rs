@@ -4,7 +4,7 @@ import "common.proto";
 package game.interactive.element;
 
 message StatedMapUpdateEvent {
-	repeated StatedElement stated_elements = 1;
+	repeated .game.common.StatedElement stated_elements = 1;
 }
 
 message InteractiveUsedEvent {
@@ -16,11 +16,11 @@ message InteractiveUsedEvent {
 }
 
 message StatedElementUpdatedEvent {
-	StatedElement stated_element = 1;
+	.game.common.StatedElement stated_element = 1;
 }
 
 message InteractiveMapUpdateEvent {
-	repeated InteractiveElement interactive_elements = 1;
+	repeated .game.common.InteractiveElement interactive_elements = 1;
 }
 
 message InteractiveUseRequest {
@@ -30,7 +30,7 @@ message InteractiveUseRequest {
 }
 
 message InteractiveElementUpdatedEvent {
-	InteractiveElement interactive_element = 1;
+	.game.common.InteractiveElement interactive_element = 1;
 }
 
 message InteractiveUseErrorEvent {

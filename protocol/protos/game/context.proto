@@ -8,7 +8,7 @@ message ShowCellRequest {
 }
 
 message EntitiesDispositionEvent {
-	repeated EntityDisposition dispositions = 1;
+	repeated .game.common.EntityDisposition dispositions = 1;
 }
 
 message RefreshMonsterBoostsEvent {
@@ -55,7 +55,7 @@ message ContextDestroyEvent {
 
 message ContextRefreshEntityLookEvent {
 	int64 entity_id = 1;
-	EntityLook look = 2;
+	.game.common.EntityLook look = 2;
 }
 
 message MonsterBoosts {

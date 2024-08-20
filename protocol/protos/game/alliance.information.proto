@@ -7,7 +7,7 @@ message AllianceMemberStopWarningOnConnectionRequest {
 }
 
 message AllianceMotdEvent {
-	SocialNoticeInformation motd_info = 1;
+	.game.common.SocialNoticeInformation motd_info = 1;
 }
 
 message AllianceCreationStartedEvent {
@@ -20,13 +20,13 @@ message AllianceInsiderInformationRequest {
 }
 
 message AllianceBulletinEvent {
-	SocialNoticeInformation bulletin_info = 1;
+	.game.common.SocialNoticeInformation bulletin_info = 1;
 }
 
 message AllianceModificationValidRequest {
 	string alliance_name = 1;
 	string alliance_tag = 2;
-	SocialEmblem alliance_emblem = 3;
+	.game.common.SocialEmblem alliance_emblem = 3;
 }
 
 message AllianceModificationStartedEvent {
@@ -43,18 +43,18 @@ message AllianceNameAndTagModificationValidRequest {
 message AllianceCreationValidRequest {
 	string alliance_name = 1;
 	string alliance_tag = 2;
-	SocialEmblem alliance_emblem = 3;
+	.game.common.SocialEmblem alliance_emblem = 3;
 }
 
 message AllianceEmblemModificationValidRequest {
-	SocialEmblem alliance_emblem = 1;
+	.game.common.SocialEmblem alliance_emblem = 1;
 }
 
 message AllianceInsiderInformationEvent {
-	AllianceInformation information = 1;
-	repeated AllianceMemberInformation members = 2;
-	repeated PrismLocalizedInformation prisms = 3;
-	repeated TaxCollectorInformation tax_collectors = 4;
+	.game.common.AllianceInformation information = 1;
+	repeated .game.common.AllianceMemberInformation members = 2;
+	repeated .game.common.PrismLocalizedInformation prisms = 3;
+	repeated .game.common.TaxCollectorInformation tax_collectors = 4;
 }
 
 message AllianceFactsRequest {
@@ -62,11 +62,11 @@ message AllianceFactsRequest {
 }
 
 message AllianceBulletinSetErrorEvent {
-	SocialNoticeError reason = 1;
+	.game.common.SocialNoticeError reason = 1;
 }
 
 message AllianceModificationResultEvent {
-	SocialGroupOperationResult result = 1;
+	.game.common.SocialGroupOperationResult result = 1;
 }
 
 message AllianceBulletinSetRequest {
@@ -78,8 +78,8 @@ message AllianceFactsErrorEvent {
 }
 
 message AllianceFactsEvent {
-	AllianceInformation alliance_information = 1;
-	repeated Character members = 2;
+	.game.common.AllianceInformation alliance_information = 1;
+	repeated .game.common.Character members = 2;
 	repeated int32 controlled_subarea_ids = 3;
 	int64 leader_id = 4;
 	string leader_name = 5;
@@ -100,7 +100,7 @@ message AllianceSummaryRequest {
 	AllianceSummaryRequest.AllianceSummarySort sort_type = 8;
 	bool sort_descending = 9;
 	repeated int32 languages_filter = 10;
-	repeated SocialRecruitmentType recruitment_type_filter = 11;
+	repeated .game.common.SocialRecruitmentType recruitment_type_filter = 11;
 	int32 min_player_level_filter = 12;
 	int32 max_player_level_filter = 13;
 	enum DirectoryTextFilter {
@@ -117,17 +117,17 @@ message AllianceSummaryRequest {
 }
 
 message AllianceMotdSetErrorEvent {
-	SocialNoticeError reason = 1;
+	.game.common.SocialNoticeError reason = 1;
 }
 
 message AllianceSummaryEvent {
 	int64 offset = 1;
 	int64 count = 2;
 	int64 total = 3;
-	repeated AllianceInformation alliances = 4;
+	repeated .game.common.AllianceInformation alliances = 4;
 }
 
 message AllianceCreationResultEvent {
-	SocialGroupOperationResult result = 1;
+	.game.common.SocialGroupOperationResult result = 1;
 }
 

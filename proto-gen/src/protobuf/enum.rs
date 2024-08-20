@@ -4,7 +4,7 @@ use crate::parser_items;
 
 #[derive(Debug)]
 pub struct Enum {
-    name: String,
+    pub name: String,
     variants: Vec<String>,
     _namespace: String,
 }

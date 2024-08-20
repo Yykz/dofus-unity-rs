@@ -1,25 +1,25 @@
 syntax = "proto3";
 
+import "source_context.proto";
 import "duration.proto";
-import "struct.proto";
+import "any.proto";
+import "empty.proto";
 import "api.proto";
-import "type.proto";
 import "timestamp.proto";
+import "struct.proto";
 import "field_mask.proto";
 import "wrappers.proto";
-import "source_context.proto";
-import "empty.proto";
-import "any.proto";
+import "type.proto";
 package game.game;
 
 message Request {
 	int32 uid = 1;
-	Any content = 2;
+	.google.protobuf.Any content = 2;
 }
 
 message Response {
 	int32 uid = 1;
-	Any content = 2;
+	.google.protobuf.Any content = 2;
 }
 
 message Message {
@@ -31,6 +31,6 @@ message Message {
 }
 
 message Event {
-	Any content = 1;
+	.google.protobuf.Any content = 1;
 }
 

@@ -5,7 +5,7 @@ package game.basic;
 
 message WhoIsRequest {
 	bool verbose = 1;
-	PlayerSearch target = 2;
+	.game.common.PlayerSearch target = 2;
 }
 
 message CurrentServerStatusUpdateEvent {
@@ -81,7 +81,7 @@ message WhoIsNumericEvent {
 
 message WhoIsEvent {
 	bool self = 1;
-	Hierarchy position = 2;
+	.game.common.Hierarchy position = 2;
 	string account_name = 3;
 	string account_tag = 4;
 	int64 account_id = 5;
@@ -90,10 +90,10 @@ message WhoIsEvent {
 	int32 area_id = 8;
 	int32 server_id = 9;
 	int32 origin_server_id = 10;
-	GuildInformation guild_information = 11;
-	AllianceInformation alliance_information = 12;
+	.game.common.GuildInformation guild_information = 11;
+	.game.common.AllianceInformation alliance_information = 12;
 	bool verbose = 13;
-	CharacterState state = 14;
+	.game.common.CharacterState state = 14;
 }
 
 message WhoIsNumericRequest {

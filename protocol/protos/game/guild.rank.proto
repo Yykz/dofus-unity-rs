@@ -10,18 +10,18 @@ message GuildRankCreateRequest {
 }
 
 message GuildRankUpdateRequest {
-	RankInformation rank = 1;
+	.game.common.RankInformation rank = 1;
 }
 
 message GuildRankUpdateAllRequest {
-	repeated RankInformation ranks = 1;
+	repeated .game.common.RankInformation ranks = 1;
 }
 
 message GuildRanksRequest {
 }
 
 message GuildRanksEvent {
-	repeated RankInformation ranks = 1;
+	repeated .game.common.RankInformation ranks = 1;
 }
 
 message GuildRightsUpdateRequest {

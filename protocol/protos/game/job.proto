@@ -13,6 +13,10 @@ message JobDescription {
 	repeated JobDescription.SkillAction skills = 2;
 	message SkillAction {
 		int32 skill_id = 1;
+		oneof action {
+			JobDescription.SkillAction.Timed timed = 2;
+			JobDescription.SkillAction.Craft craft = 3;
+		}
 		message Timed {
 			int32 time = 1;
 			JobDescription.SkillAction.Timed.Collect collect = 2;
@@ -43,7 +47,7 @@ message JobCrafterDirectoryAddEvent {
 message JobCrafterDirectoryEntryEvent {
 	JobCrafterDirectoryPlayerInformation player_information = 1;
 	repeated JobCrafterDirectoryJobInformation jobs_information = 2;
-	EntityLook look = 3;
+	.game.common.EntityLook look = 3;
 }
 
 message JobMultiCraftStateEvent {
@@ -100,13 +104,13 @@ message JobCrafterDirectoryRemoveEvent {
 message JobCrafterDirectoryPlayerInformation {
 	int64 player_id = 1;
 	string name = 2;
-	Alignment alignment = 3;
+	.game.common.Alignment alignment = 3;
 	int32 breed = 4;
-	Gender gender = 5;
+	.game.common.Gender gender = 5;
 	bool is_in_workshop = 6;
-	MapExtendedCoordinates coordinates = 7;
+	.game.common.MapExtendedCoordinates coordinates = 7;
 	bool can_craft_legendary = 8;
-	CharacterStatus status = 9;
+	.game.common.CharacterStatus status = 9;
 }
 
 message JobCrafterDirectorySettings {

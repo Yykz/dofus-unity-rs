@@ -4,7 +4,7 @@ import "common.proto";
 package game.dialog;
 
 message DialogLeaveEvent {
-	DialogType dialog_type = 1;
+	.game.common.DialogType dialog_type = 1;
 }
 
 message DialogLeaveRequest {

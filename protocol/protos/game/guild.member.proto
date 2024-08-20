@@ -18,14 +18,14 @@ message GuildMemberParametersChangeRequest {
 }
 
 message GuildMemberUpdateEvent {
-	Character member = 1;
+	.game.common.Character member = 1;
 }
 
 message GuildMemberWarnOnConnectionStartRequest {
 }
 
 message GuildJoinedEvent {
-	GuildInformation guild_information = 1;
+	.game.common.GuildInformation guild_information = 1;
 	int32 rank_id = 2;
 }
 
@@ -35,7 +35,7 @@ message GuildMemberLeaveEvent {
 }
 
 message GuildMembershipEvent {
-	GuildInformation guild_information = 1;
+	.game.common.GuildInformation guild_information = 1;
 	int32 rank_id = 2;
 }
 
@@ -43,6 +43,6 @@ message GuildMemberWarnOnConnectionStopRequest {
 }
 
 message GuildMembersEvent {
-	repeated Character members = 1;
+	repeated .game.common.Character members = 1;
 }
 

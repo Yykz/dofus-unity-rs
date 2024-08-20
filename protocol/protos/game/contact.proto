@@ -23,7 +23,7 @@ message ContactLookRequest {
 }
 
 message FriendAddRequest {
-	PlayerSearch target = 1;
+	.game.common.PlayerSearch target = 1;
 }
 
 message FriendDeleteRequest {
@@ -57,8 +57,8 @@ message FriendAddFailureEvent {
 
 message FriendInformation {
 	int64 account_id = 1;
-	AccountTag account_tag = 2;
-	CharacterState state = 3;
+	.game.common.AccountTag account_tag = 2;
+	.game.common.CharacterState state = 3;
 	optional int64 duration_since_last_connection_hours = 4;
 	optional int32 achievement_points = 5;
 	optional int32 league_id = 6;
@@ -68,13 +68,13 @@ message FriendInformation {
 		int64 character_id = 1;
 		string character_name = 2;
 		int32 character_level = 3;
-		Alignment alignment = 4;
+		.game.common.Alignment alignment = 4;
 		int32 breed_id = 5;
-		Gender gender = 6;
+		.game.common.Gender gender = 6;
 		int32 mood_smiley_id = 7;
 		bool haven_bag_shared = 8;
-		CharacterStatus status = 9;
-		GuildInformation guild = 10;
+		.game.common.CharacterStatus status = 9;
+		.game.common.GuildInformation guild = 10;
 	}
 }
 
@@ -87,7 +87,7 @@ message AddContactFailureEvent {
 }
 
 message IgnoreRequest {
-	PlayerSearch player_search = 1;
+	.game.common.PlayerSearch player_search = 1;
 }
 
 message AcquaintanceListRequest {
@@ -172,7 +172,7 @@ message IgnoreEvent {
 }
 
 message BlockRequest {
-	PlayerSearch player_search = 1;
+	.game.common.PlayerSearch player_search = 1;
 }
 
 message AcquaintanceListEvent {
@@ -181,14 +181,14 @@ message AcquaintanceListEvent {
 
 message FriendDeletionResultEvent {
 	bool success = 1;
-	AccountTag account_tag = 2;
+	.game.common.AccountTag account_tag = 2;
 }
 
 message ContactLookEvent {
 	int32 request_id = 1;
 	string player_name = 2;
 	int64 player_id = 3;
-	EntityLook look = 4;
+	.game.common.EntityLook look = 4;
 }
 
 message UnBlockEvent {
@@ -199,7 +199,7 @@ message UnBlockEvent {
 	message Error {
 	}
 	message Success {
-		AccountTag tag = 1;
+		.game.common.AccountTag tag = 1;
 	}
 }
 
@@ -211,7 +211,7 @@ message UnIgnoreEvent {
 	message Error {
 	}
 	message Success {
-		AccountTag ignored_tag = 1;
+		.game.common.AccountTag ignored_tag = 1;
 	}
 }
 
@@ -225,20 +225,20 @@ message ContactLookErrorEvent {
 
 message AcquaintanceInformation {
 	int64 account_id = 1;
-	AccountTag account_tag = 2;
-	CharacterState state = 3;
+	.game.common.AccountTag account_tag = 2;
+	.game.common.CharacterState state = 3;
 	AcquaintanceInformation.OnlineInformation online = 4;
 	message OnlineInformation {
 		int64 character_id = 1;
 		string character_name = 2;
 		int32 mood_smiley_id = 3;
-		CharacterStatus status = 4;
+		.game.common.CharacterStatus status = 4;
 	}
 }
 
 message ContactInformation {
 	int64 account_id = 1;
-	AccountTag account_tag = 2;
+	.game.common.AccountTag account_tag = 2;
 }
 
 message WarnOnPermanentDeathStateEvent {

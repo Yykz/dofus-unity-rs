@@ -71,7 +71,7 @@ message MountUpdateCharacteristicsEvent {
 	int32 ride_id = 1;
 	repeated MountUpdateCharacteristicsEvent.MountCharacteristicUpdate updated_characteristics = 2;
 	message MountCharacteristicUpdate {
-		MountCharacteristic characteristic = 1;
+		.game.common.MountCharacteristic characteristic = 1;
 		optional int32 int_value = 2;
 	}
 }
@@ -79,11 +79,11 @@ message MountUpdateCharacteristicsEvent {
 message DisplayNumericalValuePaddockEvent {
 	int32 mount_id = 1;
 	int32 value = 2;
-	MountCharacteristic type = 3;
+	.game.common.MountCharacteristic type = 3;
 }
 
 message MountDataEvent {
-	MountData mount_data = 1;
+	.game.common.MountData mount_data = 1;
 }
 
 message MountEmoteIconUsedEvent {
@@ -123,6 +123,6 @@ message MountReleaseRequest {
 }
 
 message MountEquippedEvent {
-	MountData mount_data = 1;
+	.game.common.MountData mount_data = 1;
 }
 

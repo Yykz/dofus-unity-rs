@@ -15,7 +15,7 @@ message NuggetsListenStartRequest {
 }
 
 message AllianceFightJoinRequest {
-	SocialFightInformation fight_information = 1;
+	.game.common.SocialFightInformation fight_information = 1;
 }
 
 message NuggetsBeneficiary {
@@ -24,31 +24,31 @@ message NuggetsBeneficiary {
 }
 
 message AllianceFightStartedEvent {
-	SocialFightInformation fight_information = 1;
-	FightPhaseInfo phase = 2;
+	.game.common.SocialFightInformation fight_information = 1;
+	.game.common.FightPhaseInfo phase = 2;
 }
 
 message AllianceFightFinishedEvent {
-	SocialFightInformation fight_information = 1;
+	.game.common.SocialFightInformation fight_information = 1;
 }
 
 message AllianceFightFighterRemovedEvent {
-	SocialFightInformation fight_information = 1;
+	.game.common.SocialFightInformation fight_information = 1;
 	int64 fighter_id = 2;
 }
 
 message KOTHEndEvent {
-	AllianceInformation winner = 1;
+	.game.common.AllianceInformation winner = 1;
 }
 
 message AllianceFightsInformationEvent {
-	repeated SocialFight alliance_fights = 1;
+	repeated .game.common.SocialFight alliance_fights = 1;
 }
 
 message AllianceFightFighterAddedEvent {
-	SocialFightInformation fight_information = 1;
-	Character fighter = 2;
-	Team team = 3;
+	.game.common.SocialFightInformation fight_information = 1;
+	.game.common.Character fighter = 2;
+	.game.common.Team team = 3;
 }
 
 message NuggetsDistributionRequest {
@@ -59,8 +59,8 @@ message AllianceFightListenStartRequest {
 }
 
 message AllianceFightPhaseUpdateEvent {
-	SocialFightInformation fight_information = 1;
-	FightPhaseInfo phase = 2;
+	.game.common.SocialFightInformation fight_information = 1;
+	.game.common.FightPhaseInfo phase = 2;
 }
 
 message AllianceFightListenStopRequest {
@@ -71,7 +71,7 @@ message KOTHUpdateEvent {
 	string starting_ava_timestamp = 2;
 	int64 next_tick_time = 3;
 	message KOTHAllianceInformation {
-		AllianceInformation alliance = 1;
+		.game.common.AllianceInformation alliance = 1;
 		int64 member_count = 2;
 		repeated KOTHUpdateEvent.KOTHAllianceInformation.KOTHAllianceRoleNumber koth_roles = 3;
 		repeated KOTHUpdateEvent.KOTHAllianceInformation.KOTHScore scores = 4;
@@ -97,11 +97,11 @@ message NuggetsListenStopRequest {
 }
 
 message AllianceFightLeaveRequest {
-	SocialFightInformation fight_information = 1;
+	.game.common.SocialFightInformation fight_information = 1;
 }
 
 message AllianceFightReplaceRequest {
-	SocialFightInformation fight_information = 1;
+	.game.common.SocialFightInformation fight_information = 1;
 	int64 to_replace_fighter_id = 2;
 }
 

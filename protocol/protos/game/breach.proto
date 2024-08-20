@@ -39,15 +39,15 @@ message BreachKickRequest {
 }
 
 message BreachBranchesEvent {
-	repeated BreachBranch branches = 1;
+	repeated .game.common.BreachBranch branches = 1;
 }
 
 message BreachInvitationCloseEvent {
-	Character host = 1;
+	.game.common.Character host = 1;
 }
 
 message BreachInvitationOfferEvent {
-	Character host = 1;
+	.game.common.Character host = 1;
 	int32 time_left_before_cancel = 2;
 }
 
@@ -59,7 +59,7 @@ message BreachExitRequest {
 }
 
 message BreachBonusEvent {
-	ObjectEffect bonus = 1;
+	.game.common.ObjectEffect bonus = 1;
 }
 
 message BreachRewardBoughtEvent {
@@ -80,8 +80,8 @@ message BreachRoomUnlockRequest {
 }
 
 message BreachStateEvent {
-	Character owner = 1;
-	repeated ObjectEffect bonuses = 2;
+	.game.common.Character owner = 1;
+	repeated .game.common.ObjectEffect bonuses = 2;
 	int32 budget = 3;
 	bool saved = 4;
 }
@@ -95,6 +95,6 @@ message BreachBudgetEvent {
 }
 
 message BreachRewardsEvent {
-	repeated BreachReward rewards = 1;
+	repeated .game.common.BreachReward rewards = 1;
 }
 

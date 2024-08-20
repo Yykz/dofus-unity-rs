@@ -493,6 +493,11 @@ message Character {
 	message CharacterBasicInformation {
 		string name = 1;
 		optional int32 level = 2;
+		oneof complement {
+			Character.CharacterBasicInformation.CharacterLook character_look = 4;
+			RankInformation rank = 5;
+			Character.CharacterBasicInformation.SocialMember social_member = 6;
+		}
 		message SocialMember {
 			int32 breed_id = 1;
 			Gender gender = 2;
@@ -521,8 +526,19 @@ message Character {
 		message CharacterLook {
 			EntityLook look = 1;
 			int32 breed_id = 2;
+			oneof complement {
+				GuildInformation guild_information = 3;
+				AllianceInformation alliance_information = 4;
+				int32 grade = 5;
+				Character.CharacterBasicInformation.CharacterLook.CharacterBaseInformation base_information = 6;
+			}
 			message CharacterBaseInformation {
 				Gender gender = 1;
+				oneof complement {
+					Character.CharacterBasicInformation.CharacterLook.CharacterBaseInformation.CharacterEpicInformation epic_information = 2;
+					Character.CharacterBasicInformation.CharacterLook.CharacterBaseInformation.PartyMemberInformation party_member_information = 3;
+					Character.CharacterBasicInformation.CharacterLook.CharacterBaseInformation.PartyInvitationMemberInformation party_invitation_member_information = 4;
+				}
 				message CharacterEpicInformation {
 					Character.CharacterBasicInformation.CharacterLook.CharacterBaseInformation.CharacterEpicInformation.EpicDeathState death_state = 1;
 					int32 death_count = 2;
@@ -990,9 +1006,26 @@ message ActorPositionInformation {
 	ActorPositionInformation.ActorInformation actor_information = 3;
 	message ActorInformation {
 		EntityLook look = 1;
+		oneof information {
+			ActorPositionInformation.ActorInformation.RolePlayActor role_play_actor = 2;
+			ActorPositionInformation.ActorInformation.FightFighterInformation fighter = 3;
+		}
 		message RolePlayActor {
+			oneof actor {
+				ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor named_actor = 4;
+				ActorPositionInformation.ActorInformation.RolePlayActor.TaxCollectorActor tax_collector_actor = 5;
+				ActorPositionInformation.ActorInformation.RolePlayActor.MonsterGroupActor monster_group_actor = 6;
+				ActorPositionInformation.ActorInformation.RolePlayActor.NpcStaticInformation npc_actor = 7;
+				PrismInformation prism_actor = 8;
+				PortalInformation portal_actor = 9;
+				int32 treasure_hunt_npc_id = 10;
+			}
 			message NamedActor {
 				string name = 1;
+				oneof actor {
+					ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid humanoid_information = 2;
+					ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Mount mount_information = 3;
+				}
 				message Humanoid {
 					repeated Restriction restrictions = 1;
 					Gender gender = 2;
@@ -1001,6 +1034,17 @@ message ActorPositionInformation {
 					AlignmentInformation alignment_information = 5;
 					ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.MutantInformation mutant_information = 6;
 					message HumanOption {
+						oneof option {
+							ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.FollowingCharactersOption followers = 3;
+							GuildInformation guild_information = 4;
+							ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.AllianceOption alliance_information = 5;
+							ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.EmoteOption emote_option = 6;
+							ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.TitleOption title_option = 7;
+							ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.OrnamentOption ornament_option = 8;
+							ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.ObjectUseOption object_use_option = 9;
+							ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.SkillUseOption skill_use_option = 10;
+							int32 speed_multiplier = 11;
+						}
 						message FollowingCharactersOption {
 							repeated ActorPositionInformation.ActorInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.FollowingCharactersOption.IndexedEntityLook following_characters_looks = 1;
 							message IndexedEntityLook {
@@ -1077,12 +1121,21 @@ message ActorPositionInformation {
 			int32 wave = 2;
 			FightCharacteristics stats = 3;
 			repeated int32 previous_positions = 4;
+			oneof fighter_information {
+				ActorPositionInformation.ActorInformation.FightFighterInformation.NamedFighterInformation named_fighter = 5;
+				ActorPositionInformation.ActorInformation.FightFighterInformation.AIFighterInformation ai_fighter = 6;
+				ActorPositionInformation.ActorInformation.FightFighterInformation.EntityFighterInformation entity_fighter = 7;
+			}
 			message NamedFighterInformation {
 				string name = 1;
 				CharacterStatus status = 2;
 				int32 league_id = 3;
 				int32 ladder_position = 4;
 				bool hidden_in_pre_fight = 5;
+				oneof fighter_information {
+					ActorPositionInformation.ActorInformation.FightFighterInformation.NamedFighterInformation.FightCharacterInformation character_information = 6;
+					ActorPositionInformation.ActorInformation.FightFighterInformation.NamedFighterInformation.FightMutantInformation mutant_information = 7;
+				}
 				message FightCharacterInformation {
 					int32 level = 1;
 					AlignmentInformation alignment_information = 2;
@@ -1094,6 +1147,10 @@ message ActorPositionInformation {
 				}
 			}
 			message AIFighterInformation {
+				oneof ai_fighter_information {
+					ActorPositionInformation.ActorInformation.FightFighterInformation.AIFighterInformation.MonsterFighter monster_fighter_information = 1;
+					ActorPositionInformation.ActorInformation.FightFighterInformation.AIFighterInformation.TaxCollectorFighter tax_collector_information = 2;
+				}
 				message MonsterFighter {
 					int32 monster_gid = 1;
 					int32 creature_grade = 2;
@@ -1344,10 +1401,19 @@ message FightResultListEntry {
 	message FighterListEntry {
 		int64 fighter_id = 1;
 		bool alive = 2;
+		oneof complement {
+			FightResultListEntry.FighterListEntry.PlayerListEntry player_list_entry = 3;
+			FightResultListEntry.FighterListEntry.MutantListEntry mutant_list_entry = 4;
+			FightResultListEntry.FighterListEntry.TaxCollectorListEntry tax_collector_list_entry = 5;
+		}
 		message PlayerListEntry {
 			int32 level = 1;
 			repeated FightResultListEntry.FighterListEntry.PlayerListEntry.FightResultAdditionalData additional = 2;
 			message FightResultAdditionalData {
+				oneof additional_data {
+					FightResultListEntry.FighterListEntry.PlayerListEntry.FightResultAdditionalData.ExperienceData experience_data = 1;
+					FightResultListEntry.FighterListEntry.PlayerListEntry.FightResultAdditionalData.PvpData pvp_data = 2;
+				}
 				message ExperienceData {
 					int64 experience = 1;
 					bool show_experience = 2;

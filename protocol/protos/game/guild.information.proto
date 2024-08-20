@@ -18,7 +18,7 @@ message GuildInformationRequest {
 
 message GuildInvitationStateRecruiterEvent {
 	string recruited_name = 1;
-	SocialGroupInvitationState invitation_state = 2;
+	.game.common.SocialGroupInvitationState invitation_state = 2;
 }
 
 message GuildJoinAutomaticallyRequest {
@@ -30,11 +30,11 @@ message GuildMotdSetRequest {
 }
 
 message GuildInvitationStateRecruitedEvent {
-	SocialGroupInvitationState invitation_state = 1;
+	.game.common.SocialGroupInvitationState invitation_state = 1;
 }
 
 message GuildMotdEvent {
-	SocialNoticeInformation motd = 1;
+	.game.common.SocialNoticeInformation motd = 1;
 }
 
 message GuildInvitationAnswerRequest {
@@ -43,12 +43,12 @@ message GuildInvitationAnswerRequest {
 
 message GuildInvitedEvent {
 	string recruiter_name = 1;
-	GuildInformation guild_information = 2;
+	.game.common.GuildInformation guild_information = 2;
 }
 
 message GuildLogbookEvent {
-	repeated GuildLogbookEntry global_activities = 1;
-	repeated GuildLogbookEntry chest_activities = 2;
+	repeated .game.common.GuildLogbookEntry global_activities = 1;
+	repeated .game.common.GuildLogbookEntry chest_activities = 2;
 }
 
 message GuildKickRequest {
@@ -57,7 +57,7 @@ message GuildKickRequest {
 
 message GuildModificationValidRequest {
 	string name = 1;
-	SocialEmblem emblem = 2;
+	.game.common.SocialEmblem emblem = 2;
 }
 
 message GuildCreationStartedEvent {
@@ -76,7 +76,7 @@ message GuildSummaryRequest {
 	bool following_guild_criteria = 5;
 	repeated int32 criterion_filter = 6;
 	repeated int32 languages_filter = 7;
-	repeated SocialRecruitmentType recruitment_type_filters = 8;
+	repeated .game.common.SocialRecruitmentType recruitment_type_filters = 8;
 	int32 min_level_filter = 9;
 	int32 max_level_filter = 10;
 	int32 min_player_level_filter = 11;
@@ -94,7 +94,7 @@ message GuildSummaryRequest {
 }
 
 message GuildPaddockBoughtEvent {
-	PaddockInformation paddock = 1;
+	.game.common.PaddockInformation paddock = 1;
 }
 
 message GuildModificationNameValidRequest {
@@ -102,16 +102,16 @@ message GuildModificationNameValidRequest {
 }
 
 message GuildModificationEmblemValidRequest {
-	SocialEmblem emblem = 1;
+	.game.common.SocialEmblem emblem = 1;
 }
 
 message GuildCreationValidRequest {
 	string name = 1;
-	SocialEmblem emblem = 2;
+	.game.common.SocialEmblem emblem = 2;
 }
 
 message GuildBulletinEvent {
-	SocialNoticeInformation bulletin = 1;
+	.game.common.SocialNoticeInformation bulletin = 1;
 }
 
 message GuildNoteUpdateRequest {
@@ -120,19 +120,19 @@ message GuildNoteUpdateRequest {
 }
 
 message GuildCreationResultEvent {
-	SocialGroupOperationResult result = 1;
+	.game.common.SocialGroupOperationResult result = 1;
 }
 
 message GuildPaddocksInformationEvent {
 	int32 max_paddock_number = 1;
-	repeated PaddockInformation paddock_information = 2;
+	repeated .game.common.PaddockInformation paddock_information = 2;
 }
 
 message GuildSummaryEvent {
 	int64 offset = 1;
 	int64 count = 2;
 	int64 total = 3;
-	repeated GuildInformation guilds = 4;
+	repeated .game.common.GuildInformation guilds = 4;
 }
 
 message GuildGeneralInformationEvent {
@@ -159,13 +159,13 @@ message GuildCardRequest {
 }
 
 message GuildCardEvent {
-	GuildInformation info = 1;
+	.game.common.GuildInformation info = 1;
 	int32 creation_date = 2;
-	repeated Character members = 3;
+	repeated .game.common.Character members = 3;
 }
 
 message GuildModificationResultEvent {
-	SocialGroupOperationResult result = 1;
+	.game.common.SocialGroupOperationResult result = 1;
 }
 
 message GuildPaddockRemovedEvent {
@@ -173,11 +173,11 @@ message GuildPaddockRemovedEvent {
 }
 
 message GuildBulletinSetErrorEvent {
-	SocialNoticeError error = 1;
+	.game.common.SocialNoticeError error = 1;
 }
 
 message GuildMotdSetErrorEvent {
-	SocialNoticeError error = 1;
+	.game.common.SocialNoticeError error = 1;
 }
 
 message GuildPaddockTeleportRequest {

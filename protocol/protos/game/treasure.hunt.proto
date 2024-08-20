@@ -43,16 +43,23 @@ message TreasureHuntEvent {
 	int32 available_retry_count = 7;
 	repeated TreasureHuntEvent.TreasureHuntFlag flags = 8;
 	message TreasureHuntStep {
+		oneof step {
+			TreasureHuntEvent.TreasureHuntStep.FollowDirectionToPOI follow_direction_to_poi = 1;
+			TreasureHuntEvent.TreasureHuntStep.FollowDirectionToHint follow_direction_to_hint = 2;
+			TreasureHuntEvent.TreasureHuntStep.FollowDirection follow_direction = 3;
+			TreasureHuntEvent.TreasureHuntStep.Fight fight = 4;
+			TreasureHuntEvent.TreasureHuntStep.Dig dig = 5;
+		}
 		message FollowDirectionToPOI {
-			Direction direction = 1;
+			.game.common.Direction direction = 1;
 			int32 poi_label_id = 2;
 		}
 		message FollowDirectionToHint {
-			Direction direction = 1;
+			.game.common.Direction direction = 1;
 			int32 npc_id = 2;
 		}
 		message FollowDirection {
-			Direction direction = 1;
+			.game.common.Direction direction = 1;
 			int32 map_count = 2;
 		}
 		message Fight {

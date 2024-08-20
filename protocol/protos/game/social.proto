@@ -22,7 +22,7 @@ message SubscribeSpouseCompassRequest {
 }
 
 message SelfAttackableStatusUpdateEvent {
-	AttackableStatus status = 1;
+	.game.common.AttackableStatus status = 1;
 	int64 probation_time = 2;
 	int32 koth_role = 3;
 	int32 picto_score = 4;
@@ -71,11 +71,11 @@ message SpouseInformationEvent {
 	string character_name = 3;
 	int32 character_level = 4;
 	int32 breed_id = 5;
-	Gender gender = 6;
-	GuildInformation guild = 7;
-	AllianceInformation alliance = 8;
-	Alignment alignment = 9;
-	EntityLook entity_look = 10;
+	.game.common.Gender gender = 6;
+	.game.common.GuildInformation guild = 7;
+	.game.common.AllianceInformation alliance = 8;
+	.game.common.Alignment alignment = 9;
+	.game.common.EntityLook entity_look = 10;
 	SpouseInformationEvent.Online online = 11;
 	message Online {
 		int64 map_id = 1;
@@ -102,7 +102,7 @@ message PlayersMapAttackableStatusUpdateEvent {
 	repeated PlayersMapAttackableStatusUpdateEvent.AttackableStatus pvp_players = 1;
 	message AttackableStatus {
 		int64 character_id = 1;
-		Com.Ankama.Dofus.Server.Game.Protocol.Common.AttackableStatus status = 2;
+		.game.common.Com.Ankama.Dofus.Server.Game.Protocol.Common.AttackableStatus status = 2;
 		int32 koth_role = 3;
 		optional int32 picto_score = 4;
 	}

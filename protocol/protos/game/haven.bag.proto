@@ -22,11 +22,11 @@ message HavenBagChangeRoomRequest {
 }
 
 message HavenBagInvitationClosedEvent {
-	Character host_information = 1;
+	.game.common.Character host_information = 1;
 }
 
 message HavenBagInvitationOfferedEvent {
-	Character host_information = 1;
+	.game.common.Character host_information = 1;
 	int64 time_before_cancel = 2;
 }
 
@@ -47,7 +47,7 @@ message HavenBagRoomUpdateEvent {
 }
 
 message HavenBagInvitationEvent {
-	Character guest_information = 1;
+	.game.common.Character guest_information = 1;
 	bool accepted = 2;
 }
 

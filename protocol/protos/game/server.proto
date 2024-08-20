@@ -10,7 +10,7 @@ message ServerExperienceModifierEvent {
 message ServerSettingsEvent {
 	string language = 1;
 	int32 community = 2;
-	ServerType game_type = 3;
+	.game.common.ServerType game_type = 3;
 	bool is_mono_account = 4;
 	int32 arena_leave_ban_time = 5;
 	int32 item_max_level = 6;

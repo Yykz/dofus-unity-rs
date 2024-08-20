@@ -18,6 +18,12 @@ message SurrenderInfoResponse {
 	SurrenderInfoResponse.SurrenderVoteResponse surrender_vote_response = 2;
 	bool has_sanction = 3;
 	message SurrenderResponse {
+		oneof response {
+			SurrenderInfoResponse.SurrenderResponse.SurrenderAccepted accepted = 1;
+			SurrenderInfoResponse.SurrenderResponse.SurrenderRefused refused = 2;
+			SurrenderInfoResponse.SurrenderResponse.SurrenderBeforeTurn before_turn = 3;
+			SurrenderInfoResponse.SurrenderResponse.SurrenderBeforeVote before_vote = 4;
+		}
 		message SurrenderAccepted {
 		}
 		message SurrenderRefused {
@@ -29,6 +35,13 @@ message SurrenderInfoResponse {
 		}
 	}
 	message SurrenderVoteResponse {
+		oneof response {
+			SurrenderInfoResponse.SurrenderVoteResponse.SurrenderVoteAccepted accepted = 1;
+			SurrenderInfoResponse.SurrenderVoteResponse.SurrenderVoteRefused refused = 2;
+			SurrenderInfoResponse.SurrenderVoteResponse.SurrenderVoteBeforeTurn before_turn = 3;
+			SurrenderInfoResponse.SurrenderVoteResponse.SurrenderVoteAlreadyAsked already_asked = 4;
+			SurrenderInfoResponse.SurrenderVoteResponse.SurrenderVoteWaiting waiting = 5;
+		}
 		message SurrenderVoteAccepted {
 		}
 		message SurrenderVoteRefused {

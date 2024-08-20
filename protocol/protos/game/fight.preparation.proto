@@ -9,8 +9,8 @@ message FightHumanReadyStateEvent {
 }
 
 message FightPlacementPossiblePositionsEvent {
-	FightStartingPositions starting_positions = 1;
-	Team team = 2;
+	.game.common.FightStartingPositions starting_positions = 1;
+	.game.common.Team team = 2;
 }
 
 message FightPlacementPositionRequest {
@@ -22,7 +22,7 @@ message FightStartEvent {
 }
 
 message FightPlacementSwapPositionsEvent {
-	repeated EntityDisposition dispositions = 1;
+	repeated .game.common.EntityDisposition dispositions = 1;
 }
 
 message FightReadyRequest {
@@ -30,23 +30,23 @@ message FightReadyRequest {
 }
 
 message FightOptionToggleRequest {
-	FightOption option = 1;
+	.game.common.FightOption option = 1;
 }
 
 message FightTeamUpdateEvent {
 	int32 fight_id = 1;
-	FightTeamInformation team = 2;
+	.game.common.FightTeamInformation team = 2;
 }
 
 message FightOptionUpdateEvent {
 	int32 fight_id = 1;
-	Team team = 2;
-	FightOption option = 3;
+	.game.common.Team team = 2;
+	.game.common.FightOption option = 3;
 	bool state = 4;
 }
 
 message FightStartingEvent {
-	FightType fight_type = 1;
+	.game.common.FightType fight_type = 1;
 	int32 fight_id = 2;
 	int64 attacker_id = 3;
 	int64 defender_id = 4;
@@ -61,7 +61,7 @@ message FightPlacementSwapPositionsCancelledEvent {
 
 message FightTeamRemoveMemberEvent {
 	int32 fight_id = 1;
-	Team team = 2;
+	.game.common.Team team = 2;
 	int64 character_id = 3;
 }
 
@@ -87,7 +87,7 @@ message FightJoinEvent {
 	bool can_say_ready = 3;
 	bool is_fight_started = 4;
 	int64 time_max_before_fight_start = 5;
-	FightType fight_type = 6;
+	.game.common.FightType fight_type = 6;
 }
 
 message FightMapRequest {
@@ -107,7 +107,7 @@ message FightPlacementSwapPositionsErrorEvent {
 
 message FightSpectatorJoinEvent {
 	FightJoinEvent fight_join_event = 1;
-	repeated NamedPartyTeam named_party_teams = 2;
+	repeated .game.common.NamedPartyTeam named_party_teams = 2;
 }
 
 message FightPlacementSwapPositionsAcceptRequest {

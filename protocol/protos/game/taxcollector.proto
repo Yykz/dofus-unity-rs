@@ -12,7 +12,7 @@ message TaxCollectorAttackResultEvent {
 	bool dead = 1;
 	int32 first_name_id = 2;
 	int32 last_name_id = 3;
-	MapExtendedCoordinates coordinates = 4;
+	.game.common.MapExtendedCoordinates coordinates = 4;
 	string alliance_uid = 5;
 	string alliance_tag = 6;
 }
@@ -21,7 +21,7 @@ message TaxCollectorMovement {
 	TaxCollectorMovement.TaxCollectorMovementType movement_type = 1;
 	int32 first_name_id = 2;
 	int32 last_name_id = 3;
-	MapExtendedCoordinates coordinates = 4;
+	.game.common.MapExtendedCoordinates coordinates = 4;
 	int64 player_id = 5;
 	string player_name = 6;
 	enum TaxCollectorMovementType {
@@ -35,7 +35,7 @@ message TaxCollectorMovement {
 
 message TaxCollectorOrderedSpellUpdatedEvent {
 	string tax_collector_uid = 1;
-	repeated TaxCollectorOrderedSpell spells = 2;
+	repeated .game.common.TaxCollectorOrderedSpell spells = 2;
 }
 
 message TaxCollectorErrorEvent {
@@ -62,13 +62,13 @@ message TaxCollectorFightRequest {
 message TaxCollectorAttackedEvent {
 	int32 first_name_id = 1;
 	int32 last_name_id = 2;
-	MapExtendedCoordinates coordinates = 3;
+	.game.common.MapExtendedCoordinates coordinates = 3;
 	string alliance_uid = 4;
 	string alliance_tag = 5;
 }
 
 message TaxCollectorPresetsEvent {
-	repeated TaxCollectorPreset presets = 1;
+	repeated .game.common.TaxCollectorPreset presets = 1;
 }
 
 message TaxCollectorUpdatesListenStartRequest {
@@ -77,9 +77,9 @@ message TaxCollectorUpdatesListenStartRequest {
 
 message TaxCollectorEquipmentUpdateEvent {
 	string tax_collector_uid = 1;
-	ObjectItemInventory object = 2;
+	.game.common.ObjectItemInventory object = 2;
 	bool added = 3;
-	repeated CharacterCharacteristic characteristics = 4;
+	repeated .game.common.CharacterCharacteristic characteristics = 4;
 }
 
 message TaxCollectorRemovedEvent {
@@ -91,12 +91,12 @@ message TaxCollectorPresetsUpdatesListenStartRequest {
 
 message TaxCollectorAddedEvent {
 	int64 caller_id = 1;
-	TaxCollectorInformation tax_collector = 2;
+	.game.common.TaxCollectorInformation tax_collector = 2;
 }
 
 message TaxCollectorPresetSpellUpdatedEvent {
 	string preset_uid = 1;
-	repeated TaxCollectorOrderedSpell spells = 2;
+	repeated .game.common.TaxCollectorOrderedSpell spells = 2;
 }
 
 message TaxCollectorOrderedSpellMoveRequest {
@@ -106,12 +106,12 @@ message TaxCollectorOrderedSpellMoveRequest {
 }
 
 message TaxCollectorUpdatesListeningConfirmationEvent {
-	TaxCollectorInformation information = 1;
+	.game.common.TaxCollectorInformation information = 1;
 }
 
 message TaxCollectorStateUpdateEvent {
 	string tax_collector_uid = 1;
-	TaxCollectorState state = 2;
+	.game.common.TaxCollectorState state = 2;
 }
 
 message TaxCollectorPresetSpellRemoveRequest {
@@ -130,8 +130,8 @@ message TaxCollectorMovementsOfflineEvent {
 }
 
 message TaxCollectorTopListEvent {
-	repeated TaxCollectorInformation dungeon_tax_collectors_information = 1;
-	repeated TaxCollectorInformation world_tax_collectors_information = 2;
+	repeated .game.common.TaxCollectorInformation dungeon_tax_collectors_information = 1;
+	repeated .game.common.TaxCollectorInformation world_tax_collectors_information = 2;
 }
 
 message TaxCollectorUpdatesListenStopRequest {
@@ -140,12 +140,12 @@ message TaxCollectorUpdatesListenStopRequest {
 
 message TaxCollectorPresetSpellAddRequest {
 	string preset_uid = 1;
-	TaxCollectorOrderedSpell spell = 2;
+	.game.common.TaxCollectorOrderedSpell spell = 2;
 }
 
 message TaxCollectorOrderedSpellAddRequest {
 	string tax_collector_uid = 1;
-	TaxCollectorOrderedSpell added_spell = 2;
+	.game.common.TaxCollectorOrderedSpell added_spell = 2;
 }
 
 message TaxCollectorHarvestedEvent {

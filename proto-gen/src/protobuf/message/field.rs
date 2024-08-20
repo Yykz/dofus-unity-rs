@@ -1,11 +1,26 @@
 use super::pascal_to_snake_case;
 use crate::parser_items;
-use std::fmt::Display;
+use std::{collections::HashSet, fmt::Display};
 
 #[derive(Debug)]
 pub enum Field {
     Normal(NormalField),
     OneOf(String, Vec<NormalField>),
+}
+
+impl Field {
+    pub fn resolve_type(&mut self, local: &HashSet<String>) {
+        match self {
+            Field::Normal(field) => field.resolve_type(local),
+            Field::OneOf(_s, oneof) => oneof.iter_mut().for_each(|field| field.resolve_type(local)),
+        }
+    }
+}
+
+impl NormalField {
+    pub fn resolve_type(&mut self, local: &HashSet<String>) {
+        self.r#type.resolve(local)
+    }
 }
 
 impl From<NormalField> for Field {
@@ -67,7 +82,37 @@ impl Display for Label {
 }
 
 #[derive(Debug)]
-pub struct Type(String);
+enum Type {
+    Map(String, String),
+    Normal(String)
+}
+
+fn resolve_type(s: &mut String, local: &HashSet<String>) {
+    if s == "Any" {
+        *s = format!(".google.protobuf.{}", s)
+    } else if !Type::is_primitive(s) && !local.contains(s.split(".").next().unwrap()) {
+        *s = format!(".game.common.{}", s)
+    }
+}
+
+impl Type {
+    pub fn resolve(&mut self, local: &HashSet<String>) {
+        match self {
+            Type::Map(s, s1) => {
+                resolve_type(s, local);
+
+                resolve_type(s1, local)
+            },
+            Type::Normal(s) => {
+                resolve_type(s, local)
+            },
+        }
+    }
+
+    fn is_primitive(s: &str) -> bool {
+        ["int32", "int64", "uint32", "uint64", "string", "double", "bool", "string", "float"].contains(&s)
+    }
+}
 
 impl<T> From<T> for Type
 where
@@ -81,25 +126,28 @@ where
             if let Some((key, value)) = value.split_once(", ") {
                 let key = Self::from(key);
                 let value = Self::from(value);
-                return Self(format!("map<{}, {}>", key.0, value.0));
+                return Self::Map(key.to_string(), value.to_string());
             }
         }
         // sint32, sint64, fixed32, fixed64, sfixed32, sfixed64 ?
-        match value.as_str() {
-            "int" => Self(String::from("int32")),
-            "long" => Self(String::from("int64")),
-            "uint" => Self(String::from("uint32")),
-            "ulong" => Self(String::from("uint64")),
-            "ByteString" => Self(String::from("string")),
-            // double, bool, string, float is same
-            _ => Self(value.replace(".Types.", ".")),
-        }
+        Self::Normal(match value.as_str() {
+            "int" => String::from("int32"),
+            "long" => String::from("int64"),
+            "uint" => String::from("uint32"),
+            "ulong" => String::from("uint64"),
+            "ByteString" => String::from("string"),
+            "double" | "bool" | "string" | "float" => value,
+            _ => value.replace(".Types.", "."),
+        })
     }
 }
 
 impl Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.0)
+        match self {
+            Type::Map(k, v) => write!(f, "map<{}, {}>", k, v),
+            Type::Normal(s) => write!(f, "{}", s),
+        }
     }
 }
 

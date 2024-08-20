@@ -4,7 +4,7 @@ import "common.proto";
 package game.challenge;
 
 message ChallengeModSelectedEvent {
-	ChallengeMod challenge_mod = 1;
+	.game.common.ChallengeMod challenge_mod = 1;
 }
 
 message ChallengeResultEvent {
@@ -13,20 +13,20 @@ message ChallengeResultEvent {
 }
 
 message ChallengeProposalEvent {
-	repeated Challenge challenge_proposals = 1;
+	repeated .game.common.Challenge challenge_proposals = 1;
 	int64 timer = 2;
 }
 
 message ChallengeReadyRequest {
-	ChallengeMod challenge_mod = 1;
+	.game.common.ChallengeMod challenge_mod = 1;
 }
 
 message ChallengeTargetsEvent {
-	Challenge challenge = 2;
+	.game.common.Challenge challenge = 2;
 }
 
 message ChallengeBonusChoiceSelectedEvent {
-	ChallengeBonus challenge_bonus = 1;
+	.game.common.ChallengeBonus challenge_bonus = 1;
 }
 
 message ChallengeNumberEvent {
@@ -34,7 +34,7 @@ message ChallengeNumberEvent {
 }
 
 message ChallengeListEvent {
-	repeated Challenge challenges = 1;
+	repeated .game.common.Challenge challenges = 1;
 }
 
 message ChallengeSelectionRequest {
@@ -42,7 +42,7 @@ message ChallengeSelectionRequest {
 }
 
 message ChallengeSelectedEvent {
-	Challenge challenge = 1;
+	.game.common.Challenge challenge = 1;
 }
 
 message ChallengeValidateRequest {
@@ -50,11 +50,11 @@ message ChallengeValidateRequest {
 }
 
 message ChallengeAddEvent {
-	Challenge challenge = 1;
+	.game.common.Challenge challenge = 1;
 }
 
 message ChallengeModSelectRequest {
-	ChallengeMod challenge_mod = 1;
+	.game.common.ChallengeMod challenge_mod = 1;
 }
 
 message ChallengeTargetsRequest {
@@ -62,6 +62,6 @@ message ChallengeTargetsRequest {
 }
 
 message ChallengeBonusChoiceRequest {
-	ChallengeBonus challenge_bonus = 1;
+	.game.common.ChallengeBonus challenge_bonus = 1;
 }
 

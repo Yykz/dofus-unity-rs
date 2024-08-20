@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use std::fmt::Display;
 
 use super::message::{Error, Message};
@@ -8,6 +9,22 @@ use crate::parser_items;
 pub enum ProtoEntity {
     Message(Message),
     Enum(Enum),
+}
+
+impl ProtoEntity {
+    pub fn name(&self) -> String {
+        match self {
+            ProtoEntity::Message(message) => message.name.clone(),
+            ProtoEntity::Enum(e) => e.name.clone(),
+        }
+    }
+
+    pub fn resolve_types(&mut self, local: &HashSet<String>) {
+        match self {
+            ProtoEntity::Message(mesage) => { mesage.resolve_types(local) },
+            ProtoEntity::Enum(_enum) => {},
+        }
+    }
 }
 
 impl TryFrom<parser_items::Namespace> for ProtoEntity {

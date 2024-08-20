@@ -97,25 +97,29 @@ message GameActionFightEvent {
 	}
 	message Invisibility {
 		int64 target_id = 1;
-		FightInvisibilityState invisibility_state = 2;
+		.game.common.FightInvisibilityState invisibility_state = 2;
 	}
 	message Summons {
+		oneof summons {
+			GameActionFightEvent.Summons.SummonsByActor summons_by_actor = 1;
+			GameActionFightEvent.Summons.SummonsByContextInformation summons_by_context_information = 2;
+		}
 		message SummonsByActor {
-			repeated ActorPositionInformation summons = 1;
+			repeated .game.common.ActorPositionInformation summons = 1;
 		}
 		message SummonsByContextInformation {
 			repeated GameActionFightEvent.Summons.SummonsByContextInformation.SummonContextInformation summons = 1;
 			message SummonContextInformation {
 				EntitySpawnInformation spawn_information = 1;
 				int32 wave = 2;
-				EntityLook look = 3;
-				FightCharacteristics characteristics = 4;
-				repeated SpawnInformation summons = 5;
+				.game.common.EntityLook look = 3;
+				.game.common.FightCharacteristics characteristics = 4;
+				repeated .game.common.SpawnInformation summons = 5;
 			}
 		}
 	}
 	message MarkCells {
-		FightMark mark = 1;
+		.game.common.FightMark mark = 1;
 	}
 	message ModifyEffectsDuration {
 		int64 target_id = 3;
@@ -127,7 +131,7 @@ message GameActionFightEvent {
 	}
 	message ChangeLook {
 		int64 target_id = 3;
-		EntityLook look = 4;
+		.game.common.EntityLook look = 4;
 	}
 	message TeleportOnSameMap {
 		int64 target_id = 1;
@@ -141,6 +145,10 @@ message GameActionFightEvent {
 	message SpellRemove {
 		int64 target_id = 1;
 		bool verbose_cast = 2;
+		oneof complement {
+			GameActionFightEvent.SpellRemove.EffectRemove effect_remove = 3;
+			int32 spell_id = 4;
+		}
 		message EffectRemove {
 			int32 effect = 1;
 			bool trigger = 2;
@@ -163,6 +171,10 @@ message GameActionFightEvent {
 		FightSpellCastCritical critical = 3;
 		bool silent_cast = 4;
 		bool verbose_cast = 5;
+		oneof fight {
+			GameActionFightEvent.TargetedAbility.SpellCast spell_cast = 6;
+			int32 weapon_generic_id = 7;
+		}
 		message SpellCast {
 			int32 spell_id = 1;
 			int32 spell_level = 2;
@@ -199,7 +211,7 @@ message GameActionFightEvent {
 		int32 delta = 2;
 	}
 	message RemovableEffect {
-		FightRemovableEffect effect = 1;
+		.game.common.FightRemovableEffect effect = 1;
 	}
 	message Slide {
 		int64 target_id = 1;
@@ -258,6 +270,10 @@ message EntitySpawnInformation {
 	}
 	message Monster {
 		int32 monster_gid = 1;
+		oneof invocation_information {
+			int32 grade = 2;
+			int32 level = 3;
+		}
 	}
 	message Character {
 		string name = 1;
@@ -293,6 +309,6 @@ message SequenceEndEvent {
 }
 
 message GameActionItemListEvent {
-	repeated GameActionItem actions = 1;
+	repeated .game.common.GameActionItem actions = 1;
 }
 

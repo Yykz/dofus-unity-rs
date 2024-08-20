@@ -12,16 +12,16 @@ message ChatChannelMessageEvent {
 	string sender_prefix = 6;
 	string sender_name = 7;
 	bool from_admin = 8;
-	repeated ObjectItemInventory object = 9;
+	repeated .game.common.ObjectItemInventory object = 9;
 	optional int32 origin_server_id = 10;
 }
 
 message ChatPrivateMessageRequest {
 	string content = 1;
-	repeated ObjectItemInventory object = 2;
+	repeated .game.common.ObjectItemInventory object = 2;
 	oneof target {
 		string name = 3;
-		AccountTag tag = 4;
+		.game.common.AccountTag tag = 4;
 	}
 }
 
@@ -62,7 +62,7 @@ message ChatChannelsEnabledEvent {
 message ChatChannelMessageRequest {
 	string content = 1;
 	Channel channel = 2;
-	repeated ObjectItemInventory object = 3;
+	repeated .game.common.ObjectItemInventory object = 3;
 }
 
 message ChatPrivateCopyMessageEvent {
@@ -70,7 +70,7 @@ message ChatPrivateCopyMessageEvent {
 	string date = 2;
 	int64 target_character_id = 3;
 	string target_name = 4;
-	repeated ObjectItemInventory object = 5;
+	repeated .game.common.ObjectItemInventory object = 5;
 }
 
 message ChatErrorEvent {

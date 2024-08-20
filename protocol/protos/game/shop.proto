@@ -18,6 +18,6 @@ message AccessoryPreviewErrorEvent {
 }
 
 message AccessoryPreviewEvent {
-	EntityLook look = 1;
+	.game.common.EntityLook look = 1;
 }
 

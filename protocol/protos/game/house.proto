@@ -8,7 +8,7 @@ message HouseKickRequest {
 }
 
 message HouseInformationResponse {
-	HouseInstance house_information = 1;
+	.game.common.HouseInstance house_information = 1;
 }
 
 message HousesToSellRequest {
@@ -16,13 +16,13 @@ message HousesToSellRequest {
 }
 
 message HouseAccountEvent {
-	repeated House houses = 1;
+	repeated .game.common.House houses = 1;
 }
 
 message HousePropertiesEvent {
 	int32 house_id = 1;
 	repeated int32 doors_on_map = 2;
-	HouseInstance properties = 3;
+	.game.common.HouseInstance properties = 3;
 }
 
 message HouseBuyResultEvent {
@@ -51,7 +51,7 @@ message HouseGuildRightsEvent {
 	int32 house_id = 1;
 	int32 instance_id = 2;
 	bool second_hand = 3;
-	GuildInformation guild_information = 4;
+	.game.common.GuildInformation guild_information = 4;
 	int32 rights = 5;
 	bool is_locked = 6;
 }
@@ -93,7 +93,7 @@ message HousesToSellFiltersRequest {
 	int32 at_least_chest_number = 3;
 	int32 skill_requested = 4;
 	int64 price_max = 5;
-	RealEstateOrder order_by = 6;
+	.game.common.RealEstateOrder order_by = 6;
 }
 
 message HouseSellRequest {
@@ -115,7 +115,7 @@ message HousesToSellEvent {
 		string owner_account_tag = 5;
 		bool has_owner = 6;
 		string owner_name = 7;
-		MapCoordinates coordinates = 8;
+		.game.common.MapCoordinates coordinates = 8;
 		int32 sub_area_id = 9;
 		int32 room_number = 10;
 		int32 chest_number = 11;

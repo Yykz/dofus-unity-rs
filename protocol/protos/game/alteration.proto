@@ -16,7 +16,7 @@ message Alteration {
 	int64 creation_time = 2;
 	Alteration.AlterationExpirationType expiration_type = 3;
 	int64 expiration_value = 4;
-	repeated ObjectEffect effects = 5;
+	repeated .game.common.ObjectEffect effects = 5;
 	enum AlterationExpirationType {
 		UNKNOWN = 0;
 		INFINITE = 1;

@@ -83,7 +83,7 @@ message Outfit {
 	optional int32 aura_emote_id = 5;
 	optional int32 ornament_id = 6;
 	optional int32 title_id = 7;
-	EntityLook entity_look = 8;
+	.game.common.EntityLook entity_look = 8;
 	bool favorite = 9;
 	string last_modified = 10;
 	message SkinOutfit {
@@ -102,7 +102,7 @@ message OutfitRemoveRequest {
 }
 
 message CosmeticInventoryLoadedEvent {
-	repeated ObjectItem objects = 1;
+	repeated .game.common.ObjectItem objects = 1;
 }
 
 message OutfitEquipTitleResponse {
@@ -133,7 +133,7 @@ message OutfitEquipObjectBestSlotRequest {
 
 message CosmeticInventoryLivingObjectFeedResponse {
 	bool success = 1;
-	ObjectItem living_object_fed = 2;
+	.game.common.ObjectItem living_object_fed = 2;
 }
 
 message OutfitAuraChangedEvent {
@@ -160,7 +160,7 @@ message CosmeticInventoryAddObjectRequest {
 }
 
 message CosmeticInventoryAddedEvent {
-	ObjectItem object = 1;
+	.game.common.ObjectItem object = 1;
 }
 
 message OutfitCreationResponse {
@@ -178,7 +178,7 @@ message OutfitRemoveResponse {
 
 message OutfitEntityLookChangedEvent {
 	string outfit_uuid = 1;
-	EntityLook entity_look = 2;
+	.game.common.EntityLook entity_look = 2;
 }
 
 message OutfitEquipOrnamentRequest {

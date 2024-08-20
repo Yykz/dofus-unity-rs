@@ -5,7 +5,7 @@ package game.preset;
 
 message PresetUseRequest {
 	string preset_uuid = 1;
-	PresetType preset_type = 2;
+	.game.common.PresetType preset_type = 2;
 }
 
 message CharacterPresetResetRequest {
@@ -80,7 +80,7 @@ message ForgettableSpellPresetResetRequest {
 message Equipment {
 	int32 gid = 1;
 	optional int32 uid = 2;
-	repeated ObjectEffect effects = 3;
+	repeated .game.common.ObjectEffect effects = 3;
 }
 
 message PresetListEvent {
@@ -90,7 +90,7 @@ message PresetListEvent {
 
 message PresetSymbolUpdateRequest {
 	string preset_uuid = 1;
-	PresetType preset_type = 2;
+	.game.common.PresetType preset_type = 2;
 	int32 symbol_id = 3;
 }
 
@@ -150,7 +150,7 @@ message ForgettableSpellPresetSetRequest {
 }
 
 message PresetSaveRequest {
-	PresetType type = 1;
+	.game.common.PresetType type = 1;
 	string uuid = 2;
 }
 
@@ -216,17 +216,17 @@ message PresetUseResponse {
 
 message PresetDeleteRequest {
 	string preset_uuid = 1;
-	PresetType preset_type = 2;
+	.game.common.PresetType preset_type = 2;
 }
 
 message PresetLook {
-	EntityLook look_with_outfit = 1;
-	EntityLook look_without_outfit = 2;
+	.game.common.EntityLook look_with_outfit = 1;
+	.game.common.EntityLook look_without_outfit = 2;
 }
 
 message PresetRenameRequest {
 	string preset_uuid = 1;
-	PresetType preset_type = 2;
+	.game.common.PresetType preset_type = 2;
 	string name = 3;
 }
 
@@ -237,7 +237,7 @@ message CharacterPresetInfoResponse {
 
 message PresetSetFavoriteRequest {
 	string preset_uuid = 1;
-	PresetType preset_type = 2;
+	.game.common.PresetType preset_type = 2;
 	bool is_favorite = 3;
 }
 

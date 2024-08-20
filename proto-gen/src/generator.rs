@@ -9,24 +9,34 @@ use crate::{CSharpParser, ProtoEntity, Rule};
 
 #[derive(Debug, Default)]
 struct ProtoFileBuffer {
-    content: Vec<u8>,
+    content: Vec<ProtoEntity>,
     imports: HashSet<String>,
 }
 
 impl ProtoFileBuffer {
-    const WELL_KNOWN_TYPES: &'static str = "Google.Protobuf.WellKnownTypes";
+    const WKT_NAMESPACE: &'static str = "Google.Protobuf.WellKnownTypes";
 
-    pub fn write_to_file(&self, path: &Path, package: &str) -> io::Result<()> {
+    pub fn add_entity(&mut self, entity: ProtoEntity) {
+        self.content.push(entity);
+    }
+
+    pub fn write_to_file(self, path: &Path, package: &str) -> io::Result<()> {
         if self.content.is_empty() {
             return Ok(());
         }
+
+        let local_names: HashSet<String> = self.content.iter().map(|entity| entity.name()).collect();
+
         let mut file = std::fs::File::create(path)?;
         writeln!(file, "syntax = \"proto3\";\n")?;
         for import in &self.imports {
             writeln!(file, "import \"{}.proto\";", import)?;
         }
         writeln!(file, "package {};\n", package)?;
-        file.write_all(&self.content)?;
+        for mut entity in self.content.into_iter() {
+            entity.resolve_types(&local_names);
+            writeln!(file, "{entity}")?;
+        }
         Ok(())
     }
 
@@ -34,7 +44,7 @@ impl ProtoFileBuffer {
         for import in imports {
             if let Some(namespace) = import.0.strip_prefix(base_namespace) {
                 self.imports.insert(namespace[1..].to_lowercase());
-            } else if import.0.starts_with(Self::WELL_KNOWN_TYPES) {
+            } else if import.0.starts_with(Self::WKT_NAMESPACE) {
                 self.imports.extend([
                     String::from("any"),
                     String::from("api"),
@@ -52,16 +62,6 @@ impl ProtoFileBuffer {
     }
 }
 
-impl io::Write for ProtoFileBuffer {
-    fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
-        self.content.write(buf)
-    }
-
-    fn flush(&mut self) -> io::Result<()> {
-        self.content.flush()
-    }
-}
-
 pub struct Generator {
     source: PathBuf,
     outdir: PathBuf,
@@ -75,8 +75,6 @@ pub enum Error {
     Parse(#[from] Box<pest::error::Error<Rule>>),
     #[error("failed to read file {0} {1}")]
     ReadFile(PathBuf, io::Error),
-    #[error("failed to write to proto buffer {0}")]
-    WriteProto(io::Error),
     #[error("failed to read dir {0} {1}")]
     ReadDir(PathBuf, io::Error),
     #[error("failed to write to file {0} {1}")]
@@ -164,8 +162,8 @@ impl Generator {
         match parsed_file.content {
             FileContent::Class(_class) => {}
             FileContent::Namespace(namespace) => {
-                if let Ok(proto) = ProtoEntity::try_from(namespace) {
-                    writeln!(out, "{}", proto).map_err(Error::WriteProto)?;
+                if let Ok(entity) = ProtoEntity::try_from(namespace) {
+                    out.add_entity(entity);
                 }
             }
         }

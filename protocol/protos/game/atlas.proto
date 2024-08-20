@@ -5,7 +5,7 @@ package game.atlas;
 
 message CompassUpdateEvent {
 	CompassType type = 1;
-	MapCoordinates coordinates = 2;
+	.game.common.MapCoordinates coordinates = 2;
 	oneof complement {
 		CompassUpdateEvent.PartyMember party_member = 3;
 		CompassUpdateEvent.PvpSeek pvp_seek = 4;

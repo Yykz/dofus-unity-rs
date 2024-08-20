@@ -7,11 +7,11 @@ message PrismRecycleRequest {
 }
 
 message PrismListEvent {
-	repeated PrismLocalizedInformation prism_localized_information = 1;
+	repeated .game.common.PrismLocalizedInformation prism_localized_information = 1;
 }
 
 message PrismAttackResultEvent {
-	PrismLocalizedInformation prism_localized_information = 1;
+	.game.common.PrismLocalizedInformation prism_localized_information = 1;
 	PrismAttackResultEvent.PrismAttackResult prism_attack_result = 2;
 	enum PrismAttackResult {
 		DEFENDERS_WIN = 0;
@@ -23,20 +23,20 @@ message PrismAttackRequest {
 }
 
 message PrismAddOrUpdateEvent {
-	PrismLocalizedInformation prism_localized_information = 1;
+	.game.common.PrismLocalizedInformation prism_localized_information = 1;
 }
 
 message PrismExchangeRequest {
 }
 
 message PrismAttackedEvent {
-	PrismLocalizedInformation prism_localized_information = 1;
+	.game.common.PrismLocalizedInformation prism_localized_information = 1;
 }
 
 message PrismTeleportationRequest {
 }
 
 message PrismRemoveEvent {
-	PrismLocalizedInformation prism_localized_information = 1;
+	.game.common.PrismLocalizedInformation prism_localized_information = 1;
 }
 
