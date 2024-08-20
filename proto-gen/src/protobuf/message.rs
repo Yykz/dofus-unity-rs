@@ -164,8 +164,10 @@ impl Message {
 
                     if let (Some(object_field), Some(enum_field)) = (object_field, enum_field) {
                         if !(is_object_field(&object_field)
-                            && enum_field.field_type
-                                == format!("{}.{}OneofCase", class.name, oneof_name_pascal)
+                            && enum_field.field_type.ends_with(&format!(
+                                "{}.{}OneofCase",
+                                class.name, oneof_name_pascal
+                            ))
                             && enum_field.visibility == parser_items::Visibility::Private)
                         {
                             continue;
