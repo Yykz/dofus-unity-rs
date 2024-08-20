@@ -14,6 +14,8 @@ struct ProtoFileBuffer {
 }
 
 impl ProtoFileBuffer {
+    const WELL_KNOWN_TYPES: &'static str = "Google.Protobuf.WellKnownTypes";
+
     pub fn write_to_file(&self, path: &Path, package: &str) -> io::Result<()> {
         if self.content.is_empty() {
             return Ok(());
@@ -21,7 +23,7 @@ impl ProtoFileBuffer {
         let mut file = std::fs::File::create(path)?;
         writeln!(file, "syntax = \"proto3\";\n")?;
         for import in &self.imports {
-            writeln!(file, "import \"{}.proto\";", &import[1..])?;
+            writeln!(file, "import \"{}.proto\";", import)?;
         }
         writeln!(file, "package {};\n", package)?;
         file.write_all(&self.content)?;
@@ -29,18 +31,24 @@ impl ProtoFileBuffer {
     }
 
     pub fn add_imports(&mut self, imports: Vec<parser_items::Import>, base_namespace: &str) {
-        self.imports.extend(
-            imports
-                .into_iter()
-                .filter(|import| import.0.starts_with(base_namespace))
-                .map(|import| {
-                    import
-                        .0
-                        .strip_prefix(base_namespace)
-                        .unwrap()
-                        .to_ascii_lowercase()
-                }),
-        )
+        for import in imports {
+            if let Some(namespace) = import.0.strip_prefix(base_namespace) {
+                self.imports.insert(namespace[1..].to_lowercase());
+            } else if import.0.starts_with(Self::WELL_KNOWN_TYPES) {
+                self.imports.extend([
+                    String::from("any"),
+                    String::from("api"),
+                    String::from("duration"),
+                    String::from("empty"),
+                    String::from("field_mask"),
+                    String::from("source_context"),
+                    String::from("struct"),
+                    String::from("timestamp"),
+                    String::from("type"),
+                    String::from("wrappers"),
+                ])
+            }
+        }
     }
 }
 
