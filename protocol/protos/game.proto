@@ -1,5 +1,15 @@
 syntax = "proto3";
 
+import "duration.proto";
+import "struct.proto";
+import "api.proto";
+import "type.proto";
+import "timestamp.proto";
+import "field_mask.proto";
+import "wrappers.proto";
+import "source_context.proto";
+import "empty.proto";
+import "any.proto";
 package game.game;
 
 message Request {
