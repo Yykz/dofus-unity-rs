@@ -25,7 +25,8 @@ impl ProtoFileBuffer {
             return Ok(());
         }
 
-        let local_names: HashSet<String> = self.content.iter().map(|entity| entity.name()).collect();
+        let local_names: HashSet<String> =
+            self.content.iter().map(|entity| entity.name()).collect();
 
         let mut file = std::fs::File::create(path)?;
         writeln!(file, "syntax = \"proto3\";\n")?;
@@ -46,16 +47,16 @@ impl ProtoFileBuffer {
                 self.imports.insert(namespace[1..].to_lowercase());
             } else if import.0.starts_with(Self::WKT_NAMESPACE) {
                 self.imports.extend([
-                    String::from("any"),
-                    String::from("api"),
-                    String::from("duration"),
-                    String::from("empty"),
-                    String::from("field_mask"),
-                    String::from("source_context"),
-                    String::from("struct"),
-                    String::from("timestamp"),
-                    String::from("type"),
-                    String::from("wrappers"),
+                    String::from("google/protobuf/any"),
+                    /*String::from("google/protobuf/api"),
+                    String::from("google/protobuf/duration"),
+                    String::from("google/protobuf/empty"),
+                    String::from("google/protobuf/field_mask"),
+                    String::from("google/protobuf/source_context"),
+                    String::from("google/protobuf/struct"),
+                    String::from("google/protobuf/timestamp"),
+                    String::from("google/protobuf/type"),
+                    String::from("google/protobuf/wrappers"),*/
                 ])
             }
         }
@@ -120,13 +121,27 @@ impl Generator {
             .to_lowercase()
             .replace("/", ".");
         let mut path_outfile = self.outdir.clone();
+        let mut isroot = false;
         if affix.is_empty() {
             affix = &self.package_prefix;
+            isroot = true;
         } else {
             path_outfile.push("game/")
         }
 
         path_outfile.push(format!("{}.proto", affix));
+
+        let package_name = path_outfile
+            .file_stem()
+            .and_then(|stem| stem.to_str())
+            .unwrap();
+
+        let package;
+        if isroot {
+            package = self.package_prefix.to_string();
+        } else {
+            package = format!("{}.{}", &self.package_prefix, package_name);
+        }
 
         let mut protofile = ProtoFileBuffer::default();
 
@@ -143,11 +158,7 @@ impl Generator {
                 }
             }
         }
-        let package_name = path_outfile
-            .file_stem()
-            .and_then(|stem| stem.to_str())
-            .unwrap();
-        let package = format!("{}.{}", self.package_prefix, package_name);
+
         protofile
             .write_to_file(&path_outfile, &package)
             .map_err(|e| Error::WriteFile(path_outfile, e))

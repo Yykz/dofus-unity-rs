@@ -84,11 +84,16 @@ impl Display for Label {
 #[derive(Debug)]
 enum Type {
     Map(String, String),
-    Normal(String)
+    Normal(String),
 }
 
 fn resolve_type(s: &mut String, local: &HashSet<String>) {
-    if s == "Any" {
+    if s.starts_with("Com.Ankama.Dofus.Server.Game.Protocol.Common") {
+        *s = s.replace(
+            "Com.Ankama.Dofus.Server.Game.Protocol.Common",
+            ".game.common",
+        )
+    } else if s == "Any" {
         *s = format!(".google.protobuf.{}", s)
     } else if !Type::is_primitive(s) && !local.contains(s.split(".").next().unwrap()) {
         *s = format!(".game.common.{}", s)
@@ -102,15 +107,16 @@ impl Type {
                 resolve_type(s, local);
 
                 resolve_type(s1, local)
-            },
-            Type::Normal(s) => {
-                resolve_type(s, local)
-            },
+            }
+            Type::Normal(s) => resolve_type(s, local),
         }
     }
 
     fn is_primitive(s: &str) -> bool {
-        ["int32", "int64", "uint32", "uint64", "string", "double", "bool", "string", "float"].contains(&s)
+        [
+            "int32", "int64", "uint32", "uint64", "string", "double", "bool", "string", "float",
+        ]
+        .contains(&s)
     }
 }
 

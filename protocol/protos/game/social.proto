@@ -102,7 +102,7 @@ message PlayersMapAttackableStatusUpdateEvent {
 	repeated PlayersMapAttackableStatusUpdateEvent.AttackableStatus pvp_players = 1;
 	message AttackableStatus {
 		int64 character_id = 1;
-		.game.common.Com.Ankama.Dofus.Server.Game.Protocol.Common.AttackableStatus status = 2;
+		.game.common.AttackableStatus status = 2;
 		int32 koth_role = 3;
 		optional int32 picto_score = 4;
 	}

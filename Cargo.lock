@@ -321,13 +321,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "prototest"
+name = "protocol"
 version = "0.1.0"
 dependencies = [
  "prost",
  "prost-build",
  "prost-types",
- "proto-gen",
 ]
 
 [[package]]

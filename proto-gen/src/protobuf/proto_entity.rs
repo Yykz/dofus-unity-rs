@@ -21,8 +21,8 @@ impl ProtoEntity {
 
     pub fn resolve_types(&mut self, local: &HashSet<String>) {
         match self {
-            ProtoEntity::Message(mesage) => { mesage.resolve_types(local) },
-            ProtoEntity::Enum(_enum) => {},
+            ProtoEntity::Message(mesage) => mesage.resolve_types(local),
+            ProtoEntity::Enum(_enum) => {}
         }
     }
 }

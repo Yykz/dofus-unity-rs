@@ -1,16 +1,7 @@
 syntax = "proto3";
 
-import "source_context.proto";
-import "duration.proto";
-import "any.proto";
-import "empty.proto";
-import "api.proto";
-import "timestamp.proto";
-import "struct.proto";
-import "field_mask.proto";
-import "wrappers.proto";
-import "type.proto";
-package game.game;
+import "google/protobuf/any.proto";
+package game;
 
 message Request {
 	int32 uid = 1;
