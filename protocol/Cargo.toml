@@ -6,6 +6,11 @@ edition = "2021"
 [dependencies]
 prost = "0.13.1"
 prost-types = "0.13.1"
+phf = { version = "0.11.2", default-features = false }
+bytes = "1.7.1"
 
 [build-dependencies]
 prost-build = "0.13.1"
+phf_codegen = "0.11.2"
+prost-types = "0.13.1"
+prost = "0.13.1"

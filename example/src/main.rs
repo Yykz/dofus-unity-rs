@@ -1,13 +1,10 @@
-use std::{
-    collections::HashMap,
-    net::SocketAddrV4,
-};
+use std::{collections::HashMap, net::SocketAddrV4};
 
 use bytes::BytesMut;
 use pnet::packet::{ethernet::EthernetPacket, ipv4::Ipv4Packet, tcp::TcpPacket, Packet};
-use prost::{DecodeError, Message};
+use prost::{DecodeError, Message, Name};
 
-use dofus_protocol::game;
+use dofus_protocol::{connection, game, unpack_any};
 
 #[derive(Debug, Default)]
 pub struct Connection {
@@ -27,14 +24,14 @@ impl Connection {
 #[derive(Debug, Clone, Copy)]
 pub enum Source {
     Server,
-    Client
+    Client,
 }
 
 fn source(src: SocketAddrV4, dst: SocketAddrV4) -> Option<Source> {
     match (src.port() == 5555, dst.port() == 5555) {
         (true, false) => Some(Source::Server),
         (false, true) => Some(Source::Client),
-        _ => None
+        _ => None,
     }
 }
 
@@ -79,9 +76,29 @@ fn main() {
 
         let connection = connections.entry((src_addr, dest_addr)).or_default();
         connection.recv_data(payload);
-        
-        while let Ok(message) = connection.try_parse() {
-            println!("{:?}: {:?}", src.unwrap(), message);
+
+        while let Ok(game::Message { content }) = connection.try_parse() {
+            process_content(content, src);
         }
     }
+}
+
+fn process_content(content: Option<game::message::Content>, src: Option<Source>) -> Option<String> {
+    if let Some(content) = content {
+        match content {
+            game::message::Content::Request(game::Request {
+                uid: _,
+                content: Some(any),
+            })
+            | game::message::Content::Response(game::Response {
+                uid: _,
+                content: Some(any),
+            })
+            | game::message::Content::Event(game::Event { content: Some(any) }) => {
+                println!("{:?} {:?}", src.unwrap(), unpack_any(any).unwrap().unwrap());
+            }
+            _ => {}
+        }
+    }
+    None
 }
