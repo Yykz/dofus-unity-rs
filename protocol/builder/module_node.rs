@@ -78,7 +78,11 @@ impl Display for EnumBuilder {
         let mut decode_map = phf_codegen::Map::new();
         let mut codegen = vec![];
 
-        writeln!(f, "#[allow(non_camel_case_types)]\n#[derive(Debug)]\npub enum {} {{", self.name)?;
+        writeln!(
+            f,
+            "#[allow(non_camel_case_types)]\n#[derive(Debug)]\npub enum {} {{",
+            self.name
+        )?;
         for (name, namespaces) in &self.variants {
             let index = longest_common_prefix_len(namespaces);
 
@@ -86,7 +90,8 @@ impl Display for EnumBuilder {
                 let rust_path = namespace
                     .iter()
                     .map(|part| escape_ident(part))
-                    .collect::<Vec<String>>().join("::");
+                    .collect::<Vec<String>>()
+                    .join("::");
                 let rust_name = convert_case(name);
                 let rust_struct = format!("{rust_path}::{rust_name}");
 
@@ -96,22 +101,33 @@ impl Display for EnumBuilder {
                 //let decode_path = format!("|bytes| Ok({}::{variant_name}({rust_struct}::decode(bytes)?))", self.name);
                 let type_url = format!("{}.{name}", namespace.join("."));
                 //decode_map.entry(type_url, &decode_path);
-                writeln!(
-                    f,
-                    "{variant_name}({rust_struct}),"
-                )?;
+                writeln!(f, "{variant_name}({rust_struct}),")?;
                 codegen.push((type_url, variant_name, rust_struct));
             }
         }
         writeln!(f, "}}")?;
-        
-        writeln!(f, "pub fn unpack_any_match(any: &Any) -> Result<{}, AnyUnpackError> {{", self.name)?;
-        writeln!(f, "let (type_url, bytes) = (&any.type_url, &any.value[..]);")?;
+
+        writeln!(
+            f,
+            "pub fn unpack_any_match(any: &Any) -> Result<{}, AnyUnpackError> {{",
+            self.name
+        )?;
+        writeln!(
+            f,
+            "let (type_url, bytes) = (&any.type_url, &any.value[..]);"
+        )?;
         writeln!(f, "match type_url.as_str() {{")?;
         for (type_url, variant_name, rust_struct) in codegen.into_iter() {
             let type_url = format!("type.ankama.com/{type_url}");
-            let decode_path = format!("|bytes| Ok({}::{variant_name}({rust_struct}::decode(bytes)?))", self.name);
-            writeln!(f, "\"{type_url}\" => Ok({}::{variant_name}({rust_struct}::decode(bytes)?)),", self.name)?;
+            let decode_path = format!(
+                "|bytes| Ok({}::{variant_name}({rust_struct}::decode(bytes)?))",
+                self.name
+            );
+            writeln!(
+                f,
+                "\"{type_url}\" => Ok({}::{variant_name}({rust_struct}::decode(bytes)?)),",
+                self.name
+            )?;
             decode_map.entry(type_url, &decode_path);
         }
         writeln!(f, " _ => Err(AnyUnpackError::InvalidTypeUrl)")?;
@@ -122,8 +138,7 @@ impl Display for EnumBuilder {
             "static {}_MAP: phf::Map<&'static str, fn(&[u8]) -> Result<{}, DecodeError>> = {};",
             self.name.to_ascii_uppercase(),
             self.name,
-            decode_map
-                .build()
+            decode_map.build()
         )
     }
 }

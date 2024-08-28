@@ -1,4 +1,8 @@
 [workspace]
-members = [ "decode", "example",
-	"proto-gen"
-, "protocol", "server"]
+members = [ 
+	"decode", 
+	"example",
+	"proto-gen", 
+	"protocol", 
+	"server"
+]

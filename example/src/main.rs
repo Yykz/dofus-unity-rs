@@ -39,9 +39,7 @@ fn source(src: SocketAddrV4, dst: SocketAddrV4) -> Option<Source> {
 }
 
 fn vec_to_hex_string(vec: &Vec<u8>) -> String {
-    vec.iter()
-       .map(|byte| format!("{:02x}", byte))
-       .collect()
+    vec.iter().map(|byte| format!("{:02x}", byte)).collect()
 }
 
 fn main() {
@@ -103,7 +101,9 @@ fn process_content(content: Option<game::message::Content>, src: Option<Source>)
                 uid: _,
                 content: Some(ref any),
             })
-            | game::message::Content::Event(game::Event { content: Some(ref any) }) => {
+            | game::message::Content::Event(game::Event {
+                content: Some(ref any),
+            }) => {
                 println!("{:?}", unpack_any(any).unwrap());
             }
             _ => {}
