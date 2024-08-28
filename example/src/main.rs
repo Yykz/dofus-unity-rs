@@ -1,10 +1,10 @@
-use std::{collections::HashMap, net::SocketAddrV4};
+use std::{collections::HashMap, io::Cursor, net::SocketAddrV4, time::Instant};
 
-use bytes::BytesMut;
+use bytes::{Buf, BytesMut};
 use pnet::packet::{ethernet::EthernetPacket, ipv4::Ipv4Packet, tcp::TcpPacket, Packet};
 use prost::{DecodeError, Message, Name};
 
-use dofus_protocol::{connection, game, unpack_any};
+use dofus_protocol::{connection, game, unpack_any, unpack_any_match};
 
 #[derive(Debug, Default)]
 pub struct Connection {
@@ -17,7 +17,10 @@ impl Connection {
     }
 
     fn try_parse(&mut self) -> Result<game::Message, DecodeError> {
-        game::Message::decode_length_delimited(&mut self.data)
+        let mut cursor = Cursor::new(&self.data);
+        let message = game::Message::decode_length_delimited(&mut cursor)?;
+        self.data.advance(cursor.position() as usize);
+        Ok(message)
     }
 }
 
@@ -33,6 +36,12 @@ fn source(src: SocketAddrV4, dst: SocketAddrV4) -> Option<Source> {
         (false, true) => Some(Source::Client),
         _ => None,
     }
+}
+
+fn vec_to_hex_string(vec: &Vec<u8>) -> String {
+    vec.iter()
+       .map(|byte| format!("{:02x}", byte))
+       .collect()
 }
 
 fn main() {
@@ -88,14 +97,14 @@ fn process_content(content: Option<game::message::Content>, src: Option<Source>)
         match content {
             game::message::Content::Request(game::Request {
                 uid: _,
-                content: Some(any),
+                content: Some(ref any),
             })
             | game::message::Content::Response(game::Response {
                 uid: _,
-                content: Some(any),
+                content: Some(ref any),
             })
-            | game::message::Content::Event(game::Event { content: Some(any) }) => {
-                println!("{:?} {:?}", src.unwrap(), unpack_any(any).unwrap().unwrap());
+            | game::message::Content::Event(game::Event { content: Some(ref any) }) => {
+                println!("{:?}", unpack_any(any).unwrap());
             }
             _ => {}
         }
