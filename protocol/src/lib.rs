@@ -1,17 +1,27 @@
 use prost::{DecodeError, Message};
 use prost_types::Any;
 
-pub fn unpack_any(any: Any) -> Option<Result<Box<dyn Message>, DecodeError>> {
-	let Any { type_url, value } = any;    
-	DECODE_MAP.get(&type_url).map(move |func| func(&value))
+#[derive(Debug)]
+pub enum AnyUnpackError {
+    InvalidTypeUrl,
+    DecodeError(DecodeError),
 }
 
-include!(concat!(env!("OUT_DIR"), "/codegen.rs"));
+impl From<DecodeError> for AnyUnpackError {
+    fn from(value: DecodeError) -> Self {
+        Self::DecodeError(value)
+    }
+}
+
+pub fn unpack_any(any: &Any) -> Result<AnyMessage, AnyUnpackError> {
+    let (type_url, value) = (&any.type_url, &any.value);
+    match ANYMESSAGE_MAP.get(type_url).map(move |func| func(value)) {
+        None => Err(AnyUnpackError::InvalidTypeUrl),
+        Some(r) => r.map_err(|e| AnyUnpackError::DecodeError(e))
+    }
+}
 
 include!(concat!(env!("OUT_DIR"), "/_include.rs"));
 
-pub use com::ankama::dofus::server::game::protocol as game;
 pub use com::ankama::dofus::server::connection::protocol as connection;
-
-
-
+pub use com::ankama::dofus::server::game::protocol as game;

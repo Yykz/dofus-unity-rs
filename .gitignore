@@ -1,3 +1,7 @@
 target/
 output/
 Ankama.Dofus.Protocol.Game/
+/decode
+/server
+protocol/benches
+stderr
