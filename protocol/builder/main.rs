@@ -30,7 +30,7 @@ fn main() {
 
 fn prost_gen(file_descriptor_set_path: PathBuf) {
     let out_dir = env::var_os("OUT_DIR").unwrap();
-    let Crawler { dirs, files } = Crawler::start("./protos/");
+    let Crawler { dirs, files } = Crawler::start("../protos/");
     let mut prost_build = prost_build::Config::new();
     let protos_out = PathBuf::from(&out_dir).join("protos/");
     std::fs::create_dir_all(&protos_out).unwrap();
