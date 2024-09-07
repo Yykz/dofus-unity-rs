@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["AlreadyConnectedEvent","AuthenticationTicketAcceptedEvent","AuthenticationTicketRefusedEvent","IdentificationRequest","OptionalFeaturesEvent","PingRequest","PongEvent","QueueStatusEvent","ReconnectToGameServerEvent","ReloginRequest","ReloginTokenEvent"]};

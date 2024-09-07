@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["AllianceInvitationAnswerRequest","AllianceInvitationRequest","AllianceInvitationStateRecruitedEvent","AllianceInvitationStateRecruiterEvent","AllianceInvitedEvent","AllianceJoinedEvent","AllianceKickRequest","AllianceLeftEvent","AllianceMemberLeavingEvent","AllianceMemberUpdateEvent","AllianceMembershipEvent"]};

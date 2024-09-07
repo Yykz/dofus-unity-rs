@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["guild_member"],"struct":["GuildMember"]};

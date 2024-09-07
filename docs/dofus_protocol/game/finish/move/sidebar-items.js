@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["finish_moves_event"],"struct":["FinishMoveSetRequest","FinishMovesEvent","FinishMovesRequest"]};

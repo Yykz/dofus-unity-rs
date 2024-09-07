@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["Choice","ChoiceSelectedEvent","ChoiceSelectedRequest","ChoiceSelectionEvent","CurrentGlobalChoiceSelectionEvent","GlobalChoiceSelectedEvent","GlobalChoiceSelectedRequest","GlobalChoiceSelectionEvent","GlobalChoiceVoteEvent","VotedChoice"]};

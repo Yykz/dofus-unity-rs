@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Channel"],"mod":["chat_error_event","chat_private_message_request"],"struct":["ChannelUpdateEvent","ChatChannelMessageEvent","ChatChannelMessageRequest","ChatChannelsEnabledEvent","ChatErrorEvent","ChatPrivateCopyMessageEvent","ChatPrivateMessageRequest","SubscribeMultipleChannelRequest"]};

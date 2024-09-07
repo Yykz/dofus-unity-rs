@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["guest_limitation_event","subscription_limitation_event"],"struct":["AccountCapabilitiesEvent","AccountInformationUpdateEvent","AccountSubscriptionElapsedDurationUpdateEvent","GuestLimitationEvent","GuestModeEvent","SubscriptionLimitationEvent","SubscriptionZoneEvent"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["surrender_response","surrender_vote_response"],"struct":["SurrenderResponse","SurrenderVoteResponse"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Complement"],"mod":["player_list_entry"],"struct":["MutantListEntry","PlayerListEntry","TaxCollectorListEntry"]};

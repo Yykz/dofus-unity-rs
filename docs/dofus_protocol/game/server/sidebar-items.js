@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["server_session_constants_event"],"struct":["ServerExperienceModifierEvent","ServerSessionConstantsEvent","ServerSettingsEvent"]};

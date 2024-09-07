@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Complement"],"mod":["character_look","social_member"],"struct":["CharacterLook","SocialMember"]};

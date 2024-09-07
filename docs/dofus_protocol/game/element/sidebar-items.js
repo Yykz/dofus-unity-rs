@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["lockable_code_result_event","lockable_show_code_dialog_event","purchasable_dialog_event"],"struct":["LockableChangeCodeRequest","LockableCodeResultEvent","LockableShowCodeDialogEvent","LockableStateUpdateHouseDoorEvent","LockableUseCodeRequest","PurchasableDialogEvent"]};

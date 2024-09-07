@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["debug_in_client_event"],"struct":["DebugClearHighlightCellsEvent","DebugHighlightCellsEvent","DebugInClientEvent","DumpedEntityStatsEvent"]};

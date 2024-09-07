@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["anomaly_subarea_information_event"],"struct":["AnomalyOpenedEvent","AnomalyStateEvent","AnomalySubareaInformationEvent","AnomalySubareaInformationRequest"]};

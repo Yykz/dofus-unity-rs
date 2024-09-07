@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["SpawnInformation"],"mod":["monster"],"struct":["Character","Companion","Monster"]};

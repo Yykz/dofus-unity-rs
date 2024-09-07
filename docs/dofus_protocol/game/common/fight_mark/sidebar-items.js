@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["MarkType"],"mod":["marked_cell"],"struct":["MarkedCell"]};

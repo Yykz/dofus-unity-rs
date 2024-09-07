@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Actor"],"mod":["monster_group_actor","named_actor","npc_static_information"],"struct":["MonsterGroupActor","NamedActor","NpcStaticInformation","TaxCollectorActor"]};

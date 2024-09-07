@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["console_message"],"struct":["Command","CommandSummary","ConsoleCommand","ConsoleEnd","ConsoleMessage"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["GuildRankCreateRequest","GuildRankRemoveRequest","GuildRankUpdateAllRequest","GuildRankUpdateRequest","GuildRanksEvent","GuildRanksRequest","GuildRightsUpdateRequest"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["koth_score"],"struct":["KothAllianceRoleNumber","KothScore"]};
