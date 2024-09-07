@@ -4,7 +4,7 @@ use bytes::{Buf, BytesMut};
 use pnet::packet::{ethernet::EthernetPacket, ipv4::Ipv4Packet, tcp::TcpPacket, Packet};
 use prost::{DecodeError, Message, Name};
 
-use dofus_protocol::{connection, game, unpack_any, unpack_any_match};
+use dofus_protocol::{connection, game};
 
 #[derive(Debug, Default)]
 pub struct Connection {
@@ -90,24 +90,6 @@ fn main() {
     }
 }
 
-fn process_content(content: Option<game::message::Content>, src: Option<Source>) -> Option<String> {
-    if let Some(content) = content {
-        match content {
-            game::message::Content::Request(game::Request {
-                uid: _,
-                content: Some(ref any),
-            })
-            | game::message::Content::Response(game::Response {
-                uid: _,
-                content: Some(ref any),
-            })
-            | game::message::Content::Event(game::Event {
-                content: Some(ref any),
-            }) => {
-                println!("{:?}", unpack_any(any).unwrap());
-            }
-            _ => {}
-        }
-    }
-    None
+fn process_content(content: Option<game::message::Content>, src: Option<Source>) {
+    todo!()
 }
