@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.ankama.dofus.server.game.protocol.finish.move;
+
+message FinishMovesEvent {
+	repeated .com.ankama.dofus.server.game.protocol.finish.move.FinishMovesEvent.FinishMove finish_moves = 1;
+
+	message FinishMove {
+		int32 finish_move_id = 1;
+		bool effective = 2;
+	}
+}
+
+message FinishMovesRequest {
+}
+
+message FinishMoveSetRequest {
+	int32 finish_move_id = 1;
+	bool effective = 2;
+}
+

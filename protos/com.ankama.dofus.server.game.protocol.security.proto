@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package com.ankama.dofus.server.game.protocol.security;
+
+message TrustStatusEvent {
+	bool certified = 1;
+}
+
+enum CheckType {
+	LENGTH = 0;
+	HASH_SUM = 1;
+}
+
+message FileCheckEvent {
+	string file_name = 1;
+	.com.ankama.dofus.server.game.protocol.security.CheckType check_type = 2;
+}
+
+message FileCheckRequest {
+	.com.ankama.dofus.server.game.protocol.security.CheckType check_type = 1;
+	string value = 2;
+}
+

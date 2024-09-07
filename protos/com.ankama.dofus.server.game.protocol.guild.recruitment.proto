@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "com.ankama.dofus.server.game.protocol.common.proto";
+
+package com.ankama.dofus.server.game.protocol.guild.recruitment;
+
+message GuildRecruitmentInvalidateEvent {
+}
+
+message GuildRecruitmentUpdateRequest {
+	.com.ankama.dofus.server.game.protocol.common.GuildRecruitmentInformation recruitment = 1;
+}
+
+message GuildRecruitmentEvent {
+	.com.ankama.dofus.server.game.protocol.common.GuildRecruitmentInformation recruitment = 1;
+}
+
