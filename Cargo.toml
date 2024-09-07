@@ -1,8 +1,7 @@
 [workspace]
 members = [ 
-	"decode", 
-	"example",
-	"proto-gen", 
+	#"decode", 
+	#"example",
+	#"proto-gen", 
 	"protocol", 
-	"server"
 ]
