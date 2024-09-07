@@ -164,13 +164,14 @@ impl ModuleNode {
         let mut module_path = vec![];
         let mut decode_map = phf_codegen::Map::new();
         let mut enum_builder = EnumBuilder::new("AnyMessage");
+        writeln!(out, "#[doc(hidden)]").unwrap();
         self.generate_include_inner(
             &mut out,
             &mut enum_builder,
             &mut decode_map,
             &mut module_path,
         );
-        writeln!(&mut out, "{}", enum_builder).unwrap();
+        /*writeln!(&mut out, "{}", enum_builder).unwrap();*/
         /*writeln!(
             &mut out,
             "static DECODE_MAP: phf::Map<&'static str, fn(&[u8]) -> Result<Box<dyn ::prost::Message>, DecodeError>> = {};",
@@ -187,7 +188,7 @@ impl ModuleNode {
         mut module_path: &mut Vec<&'a String>,
     ) {
         // DECODE_MAP entries
-        if !self.messages.is_empty() {
+        /*if !self.messages.is_empty() {
             /*let rust_namespace = module_path.iter().fold(String::new(), |mut out, s| {
                 if !out.is_empty() {
                     out.push_str("::")
@@ -203,7 +204,7 @@ impl ModuleNode {
                 out
             });*/
             let path: Vec<String> = module_path.iter().map(|&s| s.clone()).collect();
-            for message_name in self.messages.iter() {
+            /*for message_name in self.messages.iter() {
                 //let message_name_idiom_case = convert_case(message_name);
                 //let struct_path = format!("{rust_namespace}::{message_name_idiom_case}");
                 //let type_url = format!("type.ankama.com/{mpath}.{message_name}");
@@ -211,8 +212,8 @@ impl ModuleNode {
 
                 enum_builder.add(message_name.clone(), path.clone());
                 //decode_map.entry(type_url, &func);
-            }
-        }
+            }*/
+        }*/
 
         for (child_name, child_node) in self.child.iter() {
             if child_name == "google" {

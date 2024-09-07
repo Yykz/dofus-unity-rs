@@ -1,6 +1,6 @@
 use prost::{DecodeError, Message};
 use prost_types::Any;
-
+/*
 #[derive(Debug)]
 pub enum AnyUnpackError {
     InvalidTypeUrl,
@@ -19,9 +19,11 @@ pub fn unpack_any(any: &Any) -> Result<AnyMessage, AnyUnpackError> {
         None => Err(AnyUnpackError::InvalidTypeUrl),
         Some(r) => r.map_err(|e| AnyUnpackError::DecodeError(e)),
     }
-}
+}*/
 
 include!(concat!(env!("OUT_DIR"), "/_include.rs"));
 
+#[doc(inline)]
 pub use com::ankama::dofus::server::connection::protocol as connection;
+#[doc(inline)]
 pub use com::ankama::dofus::server::game::protocol as game;

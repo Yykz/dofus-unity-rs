@@ -15,10 +15,3 @@ prost-build = "0.13.1"
 phf_codegen = "0.11.2"
 prost-types = "0.13.1"
 prost = "0.13.1"
-
-[dev-dependencies]
-criterion = "0.5.1"
-
-[[bench]]
-name = "unpack_any"
-harness = false
