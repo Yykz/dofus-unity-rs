@@ -2,6 +2,6 @@
 members = [ 
 	#"decode", 
 	#"example",
-	#"proto-gen", 
+	"proto-gen", 
 	"protocol", 
 ]
