@@ -15,5 +15,4 @@ The `proto-gen` crate generates protobuf definitions (protos).
 The `protocol` library contains rust implementation of dofus unity protocol.
 
 - **[Project README](./protocol/README.md)**
-- **[TODO List](./protocol/TODO.md)**
-
+- **[Docs](https://yykz.github.io/dofus-unity-rs/dofus_protocol)**
