@@ -1,7 +1,0 @@
-[workspace]
-members = [ 
-	#"decode", 
-	#"example",
-	"proto-gen", 
-	"protocol", 
-]

@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package com.ankama.dofus.server.game.protocol.script;
-
-message CinematicEvent {
-	int32 cinematic_id = 1;
-}
-
