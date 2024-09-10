@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["connection","game"]};
+window.SIDEBAR_ITEMS = {"enum":["AnyUnpackError"],"fn":["unpack_any"],"mod":["connection","game"],"type":["AnyMessage"]};

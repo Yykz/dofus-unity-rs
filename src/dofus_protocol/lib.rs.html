@@ -27,30 +27,34 @@
 <a href="#27" id="27">27</a>
 <a href="#28" id="28">28</a>
 <a href="#29" id="29">29</a>
+<a href="#30" id="30">30</a>
+<a href="#31" id="31">31</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>prost::{DecodeError, Message};
 <span class="kw">use </span>prost_types::Any;
-<span class="comment">/*
-#[derive(Debug)]
-pub enum AnyUnpackError {
+
+<span class="attr">#[derive(Debug)]
+</span><span class="kw">pub enum </span>AnyUnpackError {
     InvalidTypeUrl,
     DecodeError(DecodeError),
 }
 
-impl From&lt;DecodeError&gt; for AnyUnpackError {
-    fn from(value: DecodeError) -&gt; Self {
-        Self::DecodeError(value)
+<span class="kw">impl </span>From&lt;DecodeError&gt; <span class="kw">for </span>AnyUnpackError {
+    <span class="kw">fn </span>from(value: DecodeError) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::DecodeError(value)
     }
 }
 
-pub fn unpack_any(any: &amp;Any) -&gt; Result&lt;AnyMessage, AnyUnpackError&gt; {
-    let (type_url, value) = (&amp;any.type_url, &amp;any.value);
-    match ANYMESSAGE_MAP.get(type_url).map(move |func| func(value)) {
-        None =&gt; Err(AnyUnpackError::InvalidTypeUrl),
-        Some(r) =&gt; r.map_err(|e| AnyUnpackError::DecodeError(e)),
-    }
-}*/
+<span class="kw">pub type </span>AnyMessage = Box&lt;<span class="kw">dyn </span>::prost::Message&gt;;
 
-</span><span class="macro">include!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">"OUT_DIR"</span>), <span class="string">"/_include.rs"</span>));
+<span class="kw">pub fn </span>unpack_any(any: <span class="kw-2">&amp;</span>Any) -&gt; <span class="prelude-ty">Result</span>&lt;AnyMessage, AnyUnpackError&gt; {
+    <span class="kw">let </span>(type_url, value) = (<span class="kw-2">&amp;</span>any.type_url, <span class="kw-2">&amp;</span>any.value);
+    <span class="kw">match </span>DECODE_MAP.get(type_url).map(<span class="kw">move </span>|func| func(value)) {
+        <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Err</span>(AnyUnpackError::InvalidTypeUrl),
+        <span class="prelude-val">Some</span>(r) =&gt; r.map_err(|e| AnyUnpackError::DecodeError(e)),
+    }
+}
+
+<span class="macro">include!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">"OUT_DIR"</span>), <span class="string">"/_include.rs"</span>));
 
 <span class="attr">#[doc(inline)]
 </span><span class="kw">pub use </span>com::ankama::dofus::server::connection::protocol <span class="kw">as </span>connection;

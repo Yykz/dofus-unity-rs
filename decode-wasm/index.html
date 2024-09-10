@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASM Decoder</title>
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <select id="protocolSelect">
+            <option value="game">Game</option>
+            <option value="connection">Connection</option>
+        </select>
+        <textarea id="inputText" placeholder="Hexstream eg: 571a550a530a51747970652e616e6b616d612e636f6d2f636f6d2e616e6b616d612e646f6675732e7365727665722e67616d652e70726f746f636f6c2e636f6e6e656374696f6e2e51756575655374617475734576656e74"></textarea>
+        <button id="decodeButton">Decode</button>
+        <div id="outputText"></div>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+</body>
+</html>
