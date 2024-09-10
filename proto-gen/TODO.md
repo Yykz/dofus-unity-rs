@@ -1,3 +1,5 @@
 - nested extern type
-- cli more options
-- update the warnings messages to be more descriptive
+- cli more options (custom extern type, manual type disambiguation)
+- duplicate warning
+- Ambiguous namespace priority not deterministic
+- better way to handle Ambiguous Type
