@@ -2,6 +2,10 @@
 
 This crate use [dofus_protocol](../protocol/) to decodes dofus messages and print it.
 
+## Online version
+
+[Online wasm version](https://yykz.github.io/dofus-unity-rs/decode-wasm/)
+
 ## Usage
 ```
 Usage: decode <PROTOCOL> <HEX|--stdin>
