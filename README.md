@@ -16,3 +16,11 @@ The `protocol` library contains rust implementation of dofus unity protocol.
 
 - **[Project README](./protocol/README.md)**
 - **[Docs](https://yykz.github.io/dofus-unity-rs/dofus_protocol)**
+
+### [decode](./decode)
+
+The `decode` crate use [protocol](.protocol) implementation to decode and dofus message.
+
+- **[Project README](./decode/README.md)**
+- **[Online Version](https://yykz.github.io/dofus-unity-rs/decode-wasm/)**
+
