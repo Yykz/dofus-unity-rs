@@ -2,8 +2,6 @@ syntax = "proto3";
 
 import "com.ankama.dofus.server.game.protocol.common.proto";
 
-import "com.ankama.dofus.server.game.protocol.spell.proto";
-
 package com.ankama.dofus.server.game.protocol.fight;
 
 message FightChallengeJoinRefuseEvent {
@@ -120,7 +118,7 @@ message FightSlaveSwitchContextEvent {
 	int64 slave_id = 2;
 	int32 slave_turn = 3;
 	.com.ankama.dofus.server.game.protocol.common.CharacterCharacteristics slave_stats = 5;
-	repeated .com.ankama.dofus.server.game.protocol.spell.SpellItem slave_spells = 4;
+	repeated .com.ankama.dofus.server.game.protocol.common.SpellItem slave_spells = 4;
 	repeated .com.ankama.dofus.server.game.protocol.common.Shortcut shortcuts = 6;
 }
 
