@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Error","Result"],"mod":["friend_list"],"struct":["FriendList"]};

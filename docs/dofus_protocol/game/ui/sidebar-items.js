@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["client_ui_opened_event"],"struct":["ClientUiOpenedEvent"]};

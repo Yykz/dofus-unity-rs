@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["TinselSelectError"],"struct":["OrnamentGainedEvent","OrnamentLostEvent","OrnamentSelectErrorEvent","OrnamentSelectedEvent","TitleGainedEvent","TitleLostEvent","TitleSelectErrorEvent","TitleSelectedEvent","TitlesAndOrnamentsEvent","TitlesAndOrnamentsRequest"]};

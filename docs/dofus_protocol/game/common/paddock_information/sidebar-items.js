@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Information"],"mod":["paddock_content","paddock_instances"],"struct":["PaddockContent","PaddockInstances"]};

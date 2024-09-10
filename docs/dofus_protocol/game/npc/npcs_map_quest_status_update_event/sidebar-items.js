@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["map_npc_quest"],"struct":["MapNpcQuest"]};

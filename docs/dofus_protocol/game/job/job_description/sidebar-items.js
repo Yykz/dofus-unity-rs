@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["skill_action"],"struct":["SkillAction"]};

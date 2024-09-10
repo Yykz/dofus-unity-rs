@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["fight_loot","fighter_list_entry"],"struct":["FightLoot","FighterListEntry"]};

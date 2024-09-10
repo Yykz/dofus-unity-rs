@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["conquest","information","member","rank","recruitment"]};

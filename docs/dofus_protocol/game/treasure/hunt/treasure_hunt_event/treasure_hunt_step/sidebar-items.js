@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Step"],"struct":["Dig","Fight","FollowDirection","FollowDirectionToHint","FollowDirectionToPoi"]};

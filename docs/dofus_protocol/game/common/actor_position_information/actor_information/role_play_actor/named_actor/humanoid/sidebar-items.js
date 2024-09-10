@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["human_option"],"struct":["HumanOption","MutantInformation"]};

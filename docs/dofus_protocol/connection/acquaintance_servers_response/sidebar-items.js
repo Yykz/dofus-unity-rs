@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Result"],"mod":["error"],"struct":["Error","Servers"]};

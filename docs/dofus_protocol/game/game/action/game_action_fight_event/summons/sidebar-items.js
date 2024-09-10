@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Summons"],"mod":["summons_by_context_information"],"struct":["SummonsByActor","SummonsByContextInformation"]};

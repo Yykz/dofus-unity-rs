@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Option"],"mod":["following_characters_option"],"struct":["AllianceOption","EmoteOption","FollowingCharactersOption","ObjectUseOption","OrnamentOption","SkillUseOption","TitleOption"]};

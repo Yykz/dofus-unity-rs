@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Response"],"struct":["SurrenderVoteAccepted","SurrenderVoteAlreadyAsked","SurrenderVoteBeforeTurn","SurrenderVoteRefused","SurrenderVoteWaiting"]};

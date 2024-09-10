@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["mimicry_response"],"struct":["MimicryFreeRequest","MimicryFreeResponse","MimicryRequest","MimicryResponse","WrapperObjectDissociateRequest"]};

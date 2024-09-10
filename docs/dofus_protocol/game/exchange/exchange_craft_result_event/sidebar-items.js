@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Complement","CraftResult"],"mod":["exchange_craft_result_with_object_description"],"struct":["ExchangeCraftResultWithObjectDescription"]};

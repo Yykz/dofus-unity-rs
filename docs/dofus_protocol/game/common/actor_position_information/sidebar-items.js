@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["actor_information"],"struct":["ActorInformation"]};

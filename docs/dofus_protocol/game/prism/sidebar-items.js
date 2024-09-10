@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["prism_attack_result_event"],"struct":["PrismAddOrUpdateEvent","PrismAttackRequest","PrismAttackResultEvent","PrismAttackedEvent","PrismExchangeRequest","PrismListEvent","PrismRecycleRequest","PrismRemoveEvent","PrismTeleportationRequest"]};

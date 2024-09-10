@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["debts_delete_event","debts_update_event"],"struct":["DebtsDeleteEvent","DebtsUpdateEvent"]};

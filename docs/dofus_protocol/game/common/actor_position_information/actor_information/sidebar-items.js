@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Information"],"mod":["fight_fighter_information","role_play_actor"],"struct":["FightFighterInformation","RolePlayActor"]};

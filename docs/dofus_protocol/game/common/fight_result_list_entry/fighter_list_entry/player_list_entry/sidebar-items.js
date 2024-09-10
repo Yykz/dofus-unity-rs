@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["fight_result_additional_data"],"struct":["FightResultAdditionalData"]};

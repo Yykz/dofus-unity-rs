@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":["AllianceRankChangeRequest","AllianceRankCreationRequest","AllianceRankDeletionRequest","AllianceRankUpdateAllRequest","AllianceRankUpdateRequest","AllianceRanksEvent","AllianceRanksRequest","AllianceRightsUpdateRequest"]};

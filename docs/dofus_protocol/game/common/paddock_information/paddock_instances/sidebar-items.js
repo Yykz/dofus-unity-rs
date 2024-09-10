@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["paddock_to_sell"],"struct":["PaddockToSell"]};
