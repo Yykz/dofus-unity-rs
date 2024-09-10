@@ -1,2 +1,4 @@
 - nested extern type
-- cli
+- cli more options
+- update the warnings messages to be more descriptive
+- sort messages into protos so that they are in a deterministic order

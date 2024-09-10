@@ -9,6 +9,8 @@ pest = "2.7.11"
 thiserror = "1.0.63"
 derive_builder = "0.20.1"
 convert_case = "0.6.0"
+clap = { features = ["derive"], version = "4.5.17"}
+regex = "1.10.6"
 
 [profile.dev]
 opt-level = 1

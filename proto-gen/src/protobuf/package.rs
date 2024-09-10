@@ -12,10 +12,11 @@ mod import;
 mod member;
 pub use import::{ExternTypeMap, ProtoImport};
 pub use member::PackageMember;
+use regex::Regex;
 
 use super::{
     builders::package::{NestedMembers, TopLevelMembers},
-    message::{NamespacePath, Resolved, Unresolved},
+    message::{Resolved, TypePath, Unresolved},
 };
 
 #[derive(Debug, Clone)]
@@ -76,7 +77,7 @@ impl ProtoPackages {
         }
     }
 
-    pub fn from_parsed(parsed: parser::file::ParsedFile, filter_namespace: &str) -> Self {
+    pub fn from_parsed(parsed: parser::file::ParsedFile, filter_namespace: Regex) -> Self {
         let mut extern_ty_map = ExternTypeMap::default();
         extern_ty_map.insert(".google.protobuf.Any", "google/protobuf/any.proto");
 
@@ -91,11 +92,11 @@ impl ProtoPackages {
                         continue;
                     }
                     if let Some(namespace) = member.namespace {
-                        if !namespace.starts_with(filter_namespace) {
+                        if !filter_namespace.is_match(&namespace) {
                             continue;
                         }
                         top_level_map.insert_top(class, namespace)
-                    } else if let Ok(namespace) = NamespacePath::try_from_str(&class.name) {
+                    } else if let Ok(namespace) = TypePath::try_from_str(&class.name) {
                         if namespace.is_nested() {
                             nested_members.insert(namespace.to_owned(), class);
                         }
@@ -103,11 +104,11 @@ impl ProtoPackages {
                 }
                 DataStructInner::Enum(enumm) => {
                     if let Some(namespace) = member.namespace {
-                        if !namespace.starts_with(filter_namespace) {
+                        if !filter_namespace.is_match(&namespace) {
                             continue;
                         }
                         top_level_map.insert_top(enumm, namespace)
-                    } else if let Ok(path) = NamespacePath::try_from_str(&enumm.name) {
+                    } else if let Ok(path) = TypePath::try_from_str(&enumm.name) {
                         if path.is_onecase() {
                             oneof.push((path.to_owned(), enumm))
                         } else if path.is_nested() {

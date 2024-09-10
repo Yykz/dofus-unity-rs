@@ -3,6 +3,7 @@ mod field;
 use std::{
     collections::{HashMap, HashSet},
     marker::PhantomData,
+    ops::{Index, Range},
 };
 
 pub use field::*;
@@ -30,11 +31,21 @@ pub struct ProtoMessage<State> {
 }
 
 #[derive(Debug, Clone)]
-pub struct NamespacePath<'a> {
+pub struct TypePath<'a> {
     inner: Vec<&'a str>,
 }
 
-impl<'a> NamespacePath<'a> {
+impl<'a> TypePath<'a> {
+    pub fn index_range(&self, range: Range<usize>) -> Self {
+        Self {
+            inner: (&self.inner[range]).to_vec(),
+        }
+    }
+
+    pub fn joined(&self) -> String {
+        self.as_slice().join(".")
+    }
+
     pub fn as_slice(&self) -> &[&str] {
         self.inner.as_slice()
     }
@@ -44,6 +55,7 @@ impl<'a> NamespacePath<'a> {
     }
 
     pub fn is_onecase(&self) -> bool {
+        // TODO empty ?
         self.inner.last().unwrap().ends_with("OneofCase")
     }
 
@@ -76,6 +88,14 @@ impl<'a> NamespacePath<'a> {
         }
 
         Ok(path)
+    }
+}
+
+impl<'a> Index<usize> for TypePath<'a> {
+    type Output = str;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        self.as_slice().index(index)
     }
 }
 
@@ -121,7 +141,7 @@ impl MessageUnresolve {
             .into_iter()
             .map(|mut f| {
                 f.custom_types().into_iter().for_each(|ty| {
-                    let ty_path = NamespacePath::try_from_str(ty).unwrap();
+                    let ty_path = TypePath::try_from_str(ty).unwrap();
 
                     let mut possibles_path: Vec<PathKind> = vec![];
                     for (namespace, members) in top_map.iter() {
@@ -132,7 +152,7 @@ impl MessageUnresolve {
                         }
                     }
 
-                    if let Some((path, import)) = extern_ty.get(ty_path.as_slice()[0]).cloned() {
+                    if let Some((path, import)) = extern_ty.get(&ty_path[0]).cloned() {
                         possibles_path.push(PathKind::Extern(path, import));
                     }
 
@@ -143,7 +163,7 @@ impl MessageUnresolve {
                             let namespace = find_closest(paths, &current_namespace);
                             println!(
                                 "Ambiguous Type ref {} in namespace: \"{current_namespace}\"",
-                                ty_path.as_slice().join(".")
+                                ty_path.joined()
                             );
                             println!("\tassuming \"{namespace:?}\"");
                             println!("\tpossibles paths: {paths:?}");
@@ -161,7 +181,7 @@ impl MessageUnresolve {
                             if *namespace != current_namespace {
                                 imports.insert(ProtoImport::Local(namespace.to_string()));
                             }
-                            *ty = format!(".{namespace}.{}", ty_path.as_slice().join("."));
+                            *ty = format!(".{namespace}.{}", ty_path.joined());
                         }
                     }
                 });
@@ -236,10 +256,10 @@ impl PathSim {
             PathKind::Extern(_, _) => PathSim::Ext,
             PathKind::Local(n) => {
                 if n == current_namespace {
-                    return PathSim::Eq
+                    return PathSim::Eq;
                 }
                 PathSim::Sim(calc_namespace_similarity(n, current_namespace))
-            },
+            }
         }
     }
 }
@@ -254,11 +274,14 @@ impl Ord for PathSim {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         match (self, other) {
             (PathSim::Sim(this), PathSim::Sim(other)) => this.cmp(other),
-            _ => self.value().cmp(&other.value())
+            _ => self.value().cmp(&other.value()),
         }
     }
 }
 
-pub fn find_closest<'a>(paths: &'a [PathKind], current_namespace: &str) -> &'a PathKind {    
-    paths.iter().max_by_key(|path| PathSim::sim(path, current_namespace)).unwrap()
+pub fn find_closest<'a>(paths: &'a [PathKind], current_namespace: &str) -> &'a PathKind {
+    paths
+        .iter()
+        .max_by_key(|path| PathSim::sim(path, current_namespace))
+        .unwrap()
 }

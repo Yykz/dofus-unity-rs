@@ -4,6 +4,26 @@ This crate generates [.proto](../protos) files for the Dofus Unity protocol base
 
 It should also work with minor adjustments for other Unity games using the IL2CPP backend that utilize protobuf.
 
+## Usage
+```
+Usage: proto-gen [OPTIONS] <DUMP_FILE_PATH> <NAMESPACE_FILTER>
+
+Arguments:
+  <DUMP_FILE_PATH>    Path to dump.cs file
+  <NAMESPACE_FILTER>  Regex to match namespace(s) to filter
+
+Options:
+  -o, --output <OUTPUT>  Output directory for .proto files [default: ./protos/]
+  -h, --help             Print help
+```
+
+
+### Example Usage
+
+```./proto-gen dump.cs "^Com\.Ankama\.Dofus\.Server\.(\w+)\.Protocol"```
+
+
+
 ## Known Limitations
 <details>
 <summary><b>Not all protobuf <a href="https://protobuf.dev/programming-guides/proto3/#scalar">scalar value types</a> are retrieved</b></summary>
