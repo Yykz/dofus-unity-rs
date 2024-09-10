@@ -1,6 +1,6 @@
 use prost::{DecodeError, Message};
 use prost_types::Any;
-/*
+
 #[derive(Debug)]
 pub enum AnyUnpackError {
     InvalidTypeUrl,
@@ -13,13 +13,15 @@ impl From<DecodeError> for AnyUnpackError {
     }
 }
 
+pub type AnyMessage = Box<dyn ::prost::Message>;
+
 pub fn unpack_any(any: &Any) -> Result<AnyMessage, AnyUnpackError> {
     let (type_url, value) = (&any.type_url, &any.value);
-    match ANYMESSAGE_MAP.get(type_url).map(move |func| func(value)) {
+    match DECODE_MAP.get(type_url).map(move |func| func(value)) {
         None => Err(AnyUnpackError::InvalidTypeUrl),
         Some(r) => r.map_err(|e| AnyUnpackError::DecodeError(e)),
     }
-}*/
+}
 
 include!(concat!(env!("OUT_DIR"), "/_include.rs"));
 
