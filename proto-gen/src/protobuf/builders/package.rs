@@ -1,6 +1,6 @@
 use std::{collections::HashMap, iter::FlatMap, vec::IntoIter};
 
-use crate::parser;
+use crate::{parser, protobuf::message::TypePath};
 
 use super::message::MessageBuilder;
 mod member;
@@ -35,21 +35,24 @@ impl TopLevelMembers {
             .push(ProtoMemberBuilder::new(member, namespace))
     }
 
-    pub fn insert_inner(&mut self, path: Vec<String>, member: ProtoMemberBuilderInner) {
+    pub fn insert_nested(&mut self, path: TypePath, member: ProtoMemberBuilderInner) {
         if let Some(messages) = self.0.get_mut(&path[0]) {
             let message = unambiguous_messages(messages, member.type_index());
-            message.insert(&path[1..], member);
+            message.insert(path.index_range(1..), member);
         } else {
-            println!("failed to find path for nested type {:?}", path)
+            println!("Warning: Failed to find the declaring type for the nested class implementing IMessage: {}", path.joined())
         }
     }
 
-    pub fn insert_inner_oneof(&mut self, path: Vec<String>, member: parser::data_structs::Enum) {
+    pub fn insert_nested_oneof(&mut self, path: TypePath, member: parser::data_structs::Enum) {
         if let Some(messages) = self.0.get_mut(&path[0]) {
             let message = unambiguous_messages(messages, member.type_index.unwrap());
-            message.insert_oneof(&path[1..], member);
+            message.insert_oneof(path.index_range(1..), member);
         } else {
-            println!("failed to find path for oneof {:?}", path)
+            println!(
+                "Warning: Failed to find the declaring type path for oneof: {}",
+                path.joined()
+            )
         }
     }
 }

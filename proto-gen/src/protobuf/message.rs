@@ -3,7 +3,8 @@ mod field;
 use std::{
     collections::{HashMap, HashSet},
     marker::PhantomData,
-    ops::{Index, Range},
+    ops::Index,
+    slice::SliceIndex,
 };
 
 pub use field::*;
@@ -36,9 +37,12 @@ pub struct TypePath<'a> {
 }
 
 impl<'a> TypePath<'a> {
-    pub fn index_range(&self, range: Range<usize>) -> Self {
+    pub fn index_range<R>(self, range: R) -> Self
+    where
+        R: SliceIndex<[&'a str], Output = [&'a str]>,
+    {
         Self {
-            inner: (&self.inner[range]).to_vec(),
+            inner: (self.inner[range]).to_vec(),
         }
     }
 
@@ -52,6 +56,10 @@ impl<'a> TypePath<'a> {
 
     pub fn is_nested(&self) -> bool {
         self.inner.len() >= 2
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.inner.is_empty()
     }
 
     pub fn is_onecase(&self) -> bool {
@@ -88,6 +96,14 @@ impl<'a> TypePath<'a> {
         }
 
         Ok(path)
+    }
+}
+
+impl<'a> From<&'a Vec<String>> for TypePath<'a> {
+    fn from(value: &'a Vec<String>) -> Self {
+        Self {
+            inner: value.iter().map(String::as_str).collect(),
+        }
     }
 }
 
@@ -161,13 +177,13 @@ impl MessageUnresolve {
                         &[p] => p,
                         paths => {
                             let namespace = find_closest(paths, &current_namespace);
-                            println!(
-                                "Ambiguous Type ref {} in namespace: \"{current_namespace}\"",
-                                ty_path.joined()
-                            );
-                            println!("\tassuming \"{namespace:?}\"");
-                            println!("\tpossibles paths: {paths:?}");
-
+                            let ty_name = ty_path.joined();
+                            println!("Warning: Ambiguous type reference for '{ty_name}' in namespace \"{current_namespace}\".");
+                            println!("  The type '{ty_name}' could refer to multiple namespaces:");
+                            for p in paths.iter() {
+                                println!("    - {p:?}");
+                            }
+                            println!("  Assuming type from namespace: {namespace:?}");
                             namespace
                         }
                     };

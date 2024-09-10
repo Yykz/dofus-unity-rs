@@ -4,7 +4,7 @@ use convert_case::{Case, Casing};
 
 use crate::{
     parser::{self, data_structs::Class},
-    protobuf::message::{Field, MapField, NormalField, ProtoMessage, Unresolved},
+    protobuf::message::{Field, MapField, NormalField, ProtoMessage, TypePath, Unresolved},
 };
 
 use super::{field::GenField, package::ProtoMemberBuilderInner, property::GenProperty};
@@ -150,11 +150,11 @@ impl MessageBuilder {
         ProtoMessage::new(name, fields, inner_members)
     }
 
-    pub fn insert_oneof(&mut self, path: &[String], mut member: parser::data_structs::Enum) {
+    pub fn insert_oneof(&mut self, path: TypePath, mut member: parser::data_structs::Enum) {
         assert!(!path.is_empty());
 
-        if path.len() == 1 {
-            member.name = path[0].clone();
+        if !path.is_nested() {
+            member.name = path[0].to_string();
             self.oneof.push(member);
             return;
         }
@@ -162,19 +162,19 @@ impl MessageBuilder {
         for inner in self.inner_members.iter_mut() {
             if let ProtoMemberBuilderInner::Message(message) = inner {
                 if message.class.name == path[0] {
-                    message.insert_oneof(&path[1..], member);
+                    message.insert_oneof(path.index_range(1..), member);
                     return;
                 }
             }
         }
         unreachable!()
     }
-
-    pub fn insert(&mut self, path: &[String], mut member: ProtoMemberBuilderInner) {
+    //TODO remove duplicated code for insert/insert_oneof
+    pub fn insert(&mut self, path: TypePath, mut member: ProtoMemberBuilderInner) {
         assert!(!path.is_empty());
 
-        if path.len() == 1 {
-            *member.name() = path[0].clone();
+        if !path.is_nested() {
+            *member.name() = path[0].to_string();
             self.inner_members.push(member);
             return;
         }
@@ -182,7 +182,7 @@ impl MessageBuilder {
         for inner in self.inner_members.iter_mut() {
             if let ProtoMemberBuilderInner::Message(message) = inner {
                 if message.class.name == path[0] {
-                    message.insert(&path[1..], member);
+                    message.insert(path.index_range(1..), member);
                     return;
                 }
             }

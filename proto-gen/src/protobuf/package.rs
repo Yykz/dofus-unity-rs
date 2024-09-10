@@ -123,11 +123,11 @@ impl ProtoPackages {
         }
 
         for (path, member) in nested_members.into_iter() {
-            top_level_map.insert_inner(path, member)
+            top_level_map.insert_nested(TypePath::from(&path), member)
         }
 
         for (path, member) in oneof.into_iter() {
-            top_level_map.insert_inner_oneof(path, member)
+            top_level_map.insert_nested_oneof(TypePath::from(&path), member)
         }
 
         let mut map: HashMap<String, Vec<PackageMember<Unresolved>>> = HashMap::new();
