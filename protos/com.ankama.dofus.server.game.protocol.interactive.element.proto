@@ -4,8 +4,23 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.interactive.element;
 
-message StatedMapUpdateEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.StatedElement stated_elements = 1;
+message StatedElementUpdatedEvent {
+	.com.ankama.dofus.server.game.protocol.common.StatedElement stated_element = 1;
+}
+
+message InteractiveUseRequest {
+	int32 element_id = 1;
+	int32 skill_instance_uid = 2;
+	optional int32 specific_instance_id = 3;
+}
+
+message InteractiveUseErrorEvent {
+	int32 element_id = 1;
+	int32 skill_instance_uid = 2;
+}
+
+message InteractiveMapUpdateEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.InteractiveElement interactive_elements = 1;
 }
 
 message InteractiveUsedEvent {
@@ -16,21 +31,8 @@ message InteractiveUsedEvent {
 	bool can_move = 5;
 }
 
-message InteractiveElementUpdatedEvent {
-	.com.ankama.dofus.server.game.protocol.common.InteractiveElement interactive_element = 1;
-}
-
-message InteractiveMapUpdateEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.InteractiveElement interactive_elements = 1;
-}
-
-message InteractiveUseErrorEvent {
-	int32 element_id = 1;
-	int32 skill_instance_uid = 2;
-}
-
-message StatedElementUpdatedEvent {
-	.com.ankama.dofus.server.game.protocol.common.StatedElement stated_element = 1;
+message StatedMapUpdateEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.StatedElement stated_elements = 1;
 }
 
 message InteractiveUseEndedEvent {
@@ -38,9 +40,7 @@ message InteractiveUseEndedEvent {
 	int32 skill_id = 2;
 }
 
-message InteractiveUseRequest {
-	int32 element_id = 1;
-	int32 skill_instance_uid = 2;
-	optional int32 specific_instance_id = 3;
+message InteractiveElementUpdatedEvent {
+	.com.ankama.dofus.server.game.protocol.common.InteractiveElement interactive_element = 1;
 }
 

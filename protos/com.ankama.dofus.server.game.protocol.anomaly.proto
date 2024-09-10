@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.anomaly;
 
+message AnomalyOpenedEvent {
+	int32 subarea_id = 1;
+}
+
 message AnomalySubareaInformationRequest {
 }
 
@@ -20,9 +24,5 @@ message AnomalyStateEvent {
 	int32 subarea_id = 1;
 	bool open = 2;
 	int64 closing_time = 3;
-}
-
-message AnomalyOpenedEvent {
-	int32 subarea_id = 1;
 }
 

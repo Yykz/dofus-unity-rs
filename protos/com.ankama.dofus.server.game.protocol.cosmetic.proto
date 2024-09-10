@@ -4,8 +4,12 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.cosmetic;
 
-message OutfitEquipOrnamentRequest {
-	optional int32 ornament_id = 1;
+message OutfitEquipAuraResponse {
+	bool success = 1;
+}
+
+message OutfitEquipAuraRequest {
+	optional int32 emote_id = 1;
 }
 
 message OutfitUpdateRequest {
@@ -15,14 +19,79 @@ message OutfitUpdateRequest {
 	bool favorite = 4;
 }
 
-message OutfitDuplicateRequest {
-	string outfit_uuid = 1;
-	string name = 2;
-	int32 pictogram_id = 3;
+message CosmeticInventoryLivingObjectFeedResponse {
+	bool success = 1;
+	.com.ankama.dofus.server.game.protocol.common.ObjectItem living_object_fed = 2;
+}
+
+message CosmeticInventoryPopObjectRequest {
+	int32 gid = 1;
+}
+
+message OutfitEquipOrnamentRequest {
+	optional int32 ornament_id = 1;
 }
 
 message OutfitEquipTitleRequest {
 	optional int32 title_id = 1;
+}
+
+message OutfitCreateEmptyRequest {
+	string name = 1;
+	int32 pictogram_id = 2;
+}
+
+message OutfitEquipOrnamentResponse {
+	bool success = 1;
+}
+
+message OutfitEquipObjectResponse {
+	bool success = 1;
+}
+
+message OutfitUpdateResponse {
+	bool success = 1;
+}
+
+message OutfitEquipObjectRequest {
+	optional int32 gid = 1;
+	.com.ankama.dofus.server.game.protocol.cosmetic.ObjectSlot slot = 2;
+	optional int32 skin_id = 3;
+}
+
+message OutfitEquipResponse {
+	bool success = 1;
+}
+
+message Outfit {
+	string uuid = 1;
+	string name = 2;
+	int32 pictogram_id = 3;
+	optional int32 aura_emote_id = 5;
+	optional int32 ornament_id = 6;
+	optional int32 title_id = 7;
+	.com.ankama.dofus.server.game.protocol.common.EntityLook entity_look = 8;
+	bool favorite = 9;
+	string last_modified = 10;
+	map<int32, .com.ankama.dofus.server.game.protocol.cosmetic.Outfit.SkinOutfit> objects = 4;
+
+	message SkinOutfit {
+		int32 gid = 1;
+		optional int32 skin = 2;
+	}
+}
+
+message OutfitRemoveRequest {
+	string outfit_uuid = 1;
+}
+
+message OutfitEquipRequest {
+	string outfit_uuid = 1;
+}
+
+message OutfitEquipObjectBestSlotRequest {
+	int32 gid = 1;
+	optional int32 skin_id = 2;
 }
 
 message CosmeticInventoryAddObjectResponse {
@@ -35,60 +104,27 @@ message CosmeticInventoryAddObjectResponse {
 	}
 }
 
-message OutfitEquipObjectBestSlotRequest {
+message CosmeticInventoryLivingObjectFeedRequest {
 	int32 gid = 1;
-	optional int32 skin_id = 2;
+	int32 food_object_uid = 2;
 }
 
-message CosmeticInventoryPopObjectResponse {
+message OutfitEquipTitleResponse {
 	bool success = 1;
 }
 
-message CosmeticInventoryPopObjectRequest {
-	int32 gid = 1;
-}
-
-message OutfitAuraChangedEvent {
-	optional int32 emote_id = 1;
-}
-
-message CosmeticInventoryAddedEvent {
-	.com.ankama.dofus.server.game.protocol.common.ObjectItem object = 1;
-}
-
-message CosmeticInventoryLoadedEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItem objects = 1;
-}
-
-message OutfitUpdateResponse {
+message OutfitRemoveResponse {
 	bool success = 1;
 }
 
-message OutfitEquipResponse {
+message OutfitCreationResponse {
 	bool success = 1;
+	.com.ankama.dofus.server.game.protocol.cosmetic.Outfit outfit_created = 2;
 }
 
-message OutfitEquipObjectResponse {
-	bool success = 1;
-}
-
-message OutfitEquipObjectRequest {
-	optional int32 gid = 1;
-	.com.ankama.dofus.server.game.protocol.cosmetic.ObjectSlot slot = 2;
-	optional int32 skin_id = 3;
-}
-
-message OutfitEquipRequest {
+message OutfitEntityLookChangedEvent {
 	string outfit_uuid = 1;
-}
-
-message OutfitEquipOrnamentResponse {
-	bool success = 1;
-}
-
-message OutfitsLoadedEvent {
-	.com.ankama.dofus.server.game.protocol.cosmetic.Outfit current = 1;
-	repeated .com.ankama.dofus.server.game.protocol.cosmetic.Outfit outfits = 2;
+	.com.ankama.dofus.server.game.protocol.common.EntityLook entity_look = 2;
 }
 
 enum ObjectSlot {
@@ -120,31 +156,12 @@ enum ObjectSlot {
 	SHOULDERS = 25;
 }
 
-message OutfitCreateEmptyRequest {
-	string name = 1;
-	int32 pictogram_id = 2;
+message OutfitAuraChangedEvent {
+	optional int32 emote_id = 1;
 }
 
-message OutfitEquipTitleResponse {
-	bool success = 1;
-}
-
-message CosmeticInventoryLivingObjectFeedResponse {
-	bool success = 1;
-	.com.ankama.dofus.server.game.protocol.common.ObjectItem living_object_fed = 2;
-}
-
-message OutfitRemoveRequest {
-	string outfit_uuid = 1;
-}
-
-message CosmeticInventoryAddObjectRequest {
-	int32 uid = 1;
-}
-
-message OutfitCreationResponse {
-	bool success = 1;
-	.com.ankama.dofus.server.game.protocol.cosmetic.Outfit outfit_created = 2;
+message CosmeticInventoryAddedEvent {
+	.com.ankama.dofus.server.game.protocol.common.ObjectItem object = 1;
 }
 
 message OutfitEquipObjectBestSlotResponse {
@@ -152,43 +169,26 @@ message OutfitEquipObjectBestSlotResponse {
 	optional .com.ankama.dofus.server.game.protocol.cosmetic.ObjectSlot slot = 2;
 }
 
-message OutfitEntityLookChangedEvent {
-	string outfit_uuid = 1;
-	.com.ankama.dofus.server.game.protocol.common.EntityLook entity_look = 2;
+message OutfitsLoadedEvent {
+	.com.ankama.dofus.server.game.protocol.cosmetic.Outfit current = 1;
+	repeated .com.ankama.dofus.server.game.protocol.cosmetic.Outfit outfits = 2;
 }
 
-message Outfit {
-	string uuid = 1;
+message CosmeticInventoryPopObjectResponse {
+	bool success = 1;
+}
+
+message OutfitDuplicateRequest {
+	string outfit_uuid = 1;
 	string name = 2;
 	int32 pictogram_id = 3;
-	optional int32 aura_emote_id = 5;
-	optional int32 ornament_id = 6;
-	optional int32 title_id = 7;
-	.com.ankama.dofus.server.game.protocol.common.EntityLook entity_look = 8;
-	bool favorite = 9;
-	string last_modified = 10;
-	map<int32, .com.ankama.dofus.server.game.protocol.cosmetic.Outfit.SkinOutfit> objects = 4;
-
-	message SkinOutfit {
-		int32 gid = 1;
-		optional int32 skin = 2;
-	}
 }
 
-message OutfitEquipAuraResponse {
-	bool success = 1;
+message CosmeticInventoryLoadedEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItem objects = 1;
 }
 
-message OutfitEquipAuraRequest {
-	optional int32 emote_id = 1;
-}
-
-message OutfitRemoveResponse {
-	bool success = 1;
-}
-
-message CosmeticInventoryLivingObjectFeedRequest {
-	int32 gid = 1;
-	int32 food_object_uid = 2;
+message CosmeticInventoryAddObjectRequest {
+	int32 uid = 1;
 }
 

@@ -4,15 +4,19 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.roleplay;
 
-message MonsterAngryAtPlayerEvent {
-	int64 character_id = 1;
-	int64 monster_group_id = 2;
-	int64 angry_start_time = 3;
-	int64 attack_time = 4;
+message PlayerFightFriendlyAnsweredEvent {
+	int32 fight_id = 1;
+	int64 source_id = 2;
+	int64 target_id = 3;
+	bool accept = 4;
 }
 
-message RemoveChallengeEvent {
-	int32 fight_id = 1;
+message DelayedActionCancelRequest {
+}
+
+message DelayedActionFinishedEvent {
+	int64 character_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.DelayedActionType delayed_action_type = 2;
 }
 
 message FightRequestCanceledEvent {
@@ -21,57 +25,18 @@ message FightRequestCanceledEvent {
 	int64 target_id = 3;
 }
 
-message AggressionEvent {
-	int64 attacker_id = 1;
-	int64 defender_id = 2;
-}
-
 message PlayerFightRequest {
 	int64 target_id = 1;
 	int32 target_cell_id = 2;
 	bool friendly = 3;
 }
 
-message AttackMonsterRequest {
-	int64 monster_group_id = 1;
+message AggressionEvent {
+	int64 attacker_id = 1;
+	int64 defender_id = 2;
 }
 
-message PlayerFightFriendlyAnswerRequest {
-	int32 fight_id = 1;
-	bool accept = 2;
-}
-
-message DelayedActionFinishedEvent {
-	int64 character_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.DelayedActionType delayed_action_type = 2;
-}
-
-message PlayerFightFriendlyRequestedEvent {
-	int32 fight_id = 1;
-	int64 source_id = 2;
-	int64 target_id = 3;
-}
-
-message DelayedActionEvent {
-	int64 character_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.DelayedActionType delayed_action_type = 2;
-	int64 delayed_end_time = 3;
-	optional int32 object_gid = 4;
-}
-
-message DelayedActionCancelRequest {
-}
-
-message PlayerFightFriendlyAnsweredEvent {
-	int32 fight_id = 1;
-	int64 source_id = 2;
-	int64 target_id = 3;
-	bool accept = 4;
-}
-
-message MonsterNotAngryAtPlayerEvent {
-	int64 character_id = 1;
-	int64 monster_group_id = 2;
+message ExitRequest {
 }
 
 message SpellAnimEvent {
@@ -82,10 +47,45 @@ message SpellAnimEvent {
 	.com.ankama.dofus.server.game.protocol.common.Direction direction = 5;
 }
 
-message ExitRequest {
+message PlayerFightFriendlyAnswerRequest {
+	int32 fight_id = 1;
+	bool accept = 2;
 }
 
 message ShowChallengeEvent {
 	.com.ankama.dofus.server.game.protocol.common.FightCommonInformation fight_information = 1;
+}
+
+message DelayedActionEvent {
+	int64 character_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.DelayedActionType delayed_action_type = 2;
+	int64 delayed_end_time = 3;
+	optional int32 object_gid = 4;
+}
+
+message PlayerFightFriendlyRequestedEvent {
+	int32 fight_id = 1;
+	int64 source_id = 2;
+	int64 target_id = 3;
+}
+
+message MonsterNotAngryAtPlayerEvent {
+	int64 character_id = 1;
+	int64 monster_group_id = 2;
+}
+
+message AttackMonsterRequest {
+	int64 monster_group_id = 1;
+}
+
+message MonsterAngryAtPlayerEvent {
+	int64 character_id = 1;
+	int64 monster_group_id = 2;
+	int64 angry_start_time = 3;
+	int64 attack_time = 4;
+}
+
+message RemoveChallengeEvent {
+	int32 fight_id = 1;
 }
 

@@ -29,11 +29,11 @@ message AlterationsEvent {
 	repeated .com.ankama.dofus.server.game.protocol.alteration.Alteration alterations = 1;
 }
 
-message AlterationAddedEvent {
-	.com.ankama.dofus.server.game.protocol.alteration.Alteration alteration = 1;
-}
-
 message AlterationsUpdateEvent {
 	repeated .com.ankama.dofus.server.game.protocol.alteration.Alteration alterations = 1;
+}
+
+message AlterationAddedEvent {
+	.com.ankama.dofus.server.game.protocol.alteration.Alteration alteration = 1;
 }
 

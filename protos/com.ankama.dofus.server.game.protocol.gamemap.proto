@@ -4,6 +4,31 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.gamemap;
 
+message MapMovementEvent {
+	optional int32 direction = 2;
+	int64 character_id = 3;
+	bool cautious = 4;
+	repeated int32 cells = 1;
+}
+
+message MapComplementaryInHouseInformation {
+	.com.ankama.dofus.server.game.protocol.common.House current_house = 1;
+}
+
+message MapCurrentEvent {
+	int64 map_id = 1;
+}
+
+message MapRunningFightStopListeningRequest {
+}
+
+message MapRunningFightDetailsExtendedEvent {
+	int32 fight_id = 1;
+	repeated .com.ankama.dofus.server.game.protocol.common.FighterLightInformation attackers = 2;
+	repeated .com.ankama.dofus.server.game.protocol.common.FighterLightInformation defenders = 3;
+	repeated .com.ankama.dofus.server.game.protocol.common.NamedPartyTeam named_party_teams = 4;
+}
+
 message FightMapInformationEvent {
 	int32 subarea_id = 1;
 	int64 map_id = 2;
@@ -14,45 +39,19 @@ message FightMapInformationEvent {
 	}
 }
 
-message MapComplementaryInHouseInformation {
-	.com.ankama.dofus.server.game.protocol.common.House current_house = 1;
-}
-
-message MapInformationRequest {
-	int32 map_id = 1;
-}
-
-message MapMovementRequest {
-	int64 map_id = 2;
-	bool cautious = 3;
-	repeated int32 key_cells = 1;
-}
-
-message MapMovementRefusedEvent {
-	int32 cell_x = 1;
-	int32 cell_y = 2;
-}
-
-message MapCurrentInstanceEvent {
-	int64 map_id = 1;
-	int64 instantiate_map_id = 2;
-}
-
-message MapRunningFightDetailsExtendedEvent {
-	int32 fight_id = 1;
-	repeated .com.ankama.dofus.server.game.protocol.common.FighterLightInformation attackers = 2;
-	repeated .com.ankama.dofus.server.game.protocol.common.FighterLightInformation defenders = 3;
-	repeated .com.ankama.dofus.server.game.protocol.common.NamedPartyTeam named_party_teams = 4;
-}
-
 message MapChangeRequest {
 	int32 map_id = 1;
 	bool auto_pilot = 2;
 }
 
-message MapChangeOrientationEvent {
-	int64 actor_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.Direction direction = 2;
+message MapRunningFightsRequest {
+}
+
+message MapComplementaryHavenBagInformation {
+	.com.ankama.dofus.server.game.protocol.common.Character owner_information = 1;
+	int32 theme = 2;
+	int32 room_id = 3;
+	int32 max_room_id = 4;
 }
 
 message MapObstacle {
@@ -65,7 +64,14 @@ message MapObstacle {
 	}
 }
 
-message MapMovementConfirmRequest {
+message MapComplementaryWithCoordsInformation {
+	.com.ankama.dofus.server.game.protocol.common.MapCoordinates coordinates = 1;
+}
+
+message MapMovementRequest {
+	int64 map_id = 2;
+	bool cautious = 3;
+	repeated int32 key_cells = 1;
 }
 
 message MapComplementaryBreachInformation {
@@ -75,75 +81,14 @@ message MapComplementaryBreachInformation {
 	repeated .com.ankama.dofus.server.game.protocol.common.BreachBranch branches = 4;
 }
 
-message MapMovementCancelRequest {
-	int32 cell_id = 1;
-}
-
-message MapFightCountEvent {
-	int32 fight_count = 1;
-}
-
 message MapTeleportOnSameEvent {
 	int64 player_id = 1;
 	int32 cell_id = 2;
 }
 
-message MapChangeOrientationRequest {
-	.com.ankama.dofus.server.game.protocol.common.Direction direction = 1;
-}
-
-message GameRolePlayShowActorsEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.ActorPositionInformation actors = 1;
-}
-
-message MapMovementEvent {
-	optional int32 direction = 2;
-	int64 character_id = 3;
-	bool cautious = 4;
-	repeated int32 cells = 1;
-}
-
-message MapCurrentEvent {
-	int64 map_id = 1;
-}
-
-message MapObstacleUpdateEvent {
-	repeated .com.ankama.dofus.server.game.protocol.gamemap.MapObstacle obstacles = 1;
-}
-
-message MapErrorNotFoundRequest {
-	int32 map_id = 1;
-}
-
-message MapRunningFightStopListeningRequest {
-}
-
-message MapComplementaryHavenBagInformation {
-	.com.ankama.dofus.server.game.protocol.common.Character owner_information = 1;
-	int32 theme = 2;
-	int32 room_id = 3;
-	int32 max_room_id = 4;
-}
-
-message MapRunningFightsEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.FightExternalInformation fights = 1;
-}
-
-message MapRunningFightDetailsEvent {
-	int32 fight_id = 1;
-	repeated .com.ankama.dofus.server.game.protocol.common.FighterLightInformation attackers = 2;
-	repeated .com.ankama.dofus.server.game.protocol.common.FighterLightInformation defenders = 3;
-}
-
-message MapRunningFightsRequest {
-}
-
-message MapRunningFightDetailsRequest {
-	int32 fight_id = 1;
-}
-
-message MapComplementaryWithCoordsInformation {
-	.com.ankama.dofus.server.game.protocol.common.MapCoordinates coordinates = 1;
+message MapComplementaryAnomalyInformation {
+	int32 level = 1;
+	int64 closing_time = 2;
 }
 
 message MapComplementaryInformationEvent {
@@ -165,8 +110,63 @@ message MapComplementaryInformationEvent {
 	}
 }
 
-message MapComplementaryAnomalyInformation {
-	int32 level = 1;
-	int64 closing_time = 2;
+message MapMovementRefusedEvent {
+	int32 cell_x = 1;
+	int32 cell_y = 2;
+}
+
+message MapMovementConfirmRequest {
+}
+
+message MapRunningFightDetailsEvent {
+	int32 fight_id = 1;
+	repeated .com.ankama.dofus.server.game.protocol.common.FighterLightInformation attackers = 2;
+	repeated .com.ankama.dofus.server.game.protocol.common.FighterLightInformation defenders = 3;
+}
+
+message MapObstacleUpdateEvent {
+	repeated .com.ankama.dofus.server.game.protocol.gamemap.MapObstacle obstacles = 1;
+}
+
+message MapChangeOrientationEvent {
+	int64 actor_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.Direction direction = 2;
+}
+
+message MapFightCountEvent {
+	int32 fight_count = 1;
+}
+
+message GameRolePlayShowActorsEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.ActorPositionInformation actors = 1;
+}
+
+message MapErrorNotFoundRequest {
+	int32 map_id = 1;
+}
+
+message MapRunningFightsEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.FightExternalInformation fights = 1;
+}
+
+message MapCurrentInstanceEvent {
+	int64 map_id = 1;
+	int64 instantiate_map_id = 2;
+}
+
+message MapMovementCancelRequest {
+	int32 cell_id = 1;
+}
+
+message MapChangeOrientationRequest {
+	.com.ankama.dofus.server.game.protocol.common.Direction direction = 1;
+}
+
+message MapInformationRequest {
+	int32 map_id = 1;
+}
+
+message MapRunningFightDetailsRequest {
+	int32 fight_id = 1;
 }
 

@@ -2,8 +2,7 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.bak;
 
-message BakShopTokenEvent {
-	string token = 1;
+message BakConsumeBufferRequest {
 }
 
 message BakCancelBidRequest {
@@ -17,16 +16,8 @@ message BakCancelBidRequest {
 	}
 }
 
-message BufferInformation {
-	int64 buffer_id = 1;
-	int64 buffer_amount = 2;
-}
-
 message BakApiKeyEvent {
 	string token = 1;
-}
-
-message BakConsumeBufferRequest {
 }
 
 message BakActionEvent {
@@ -37,21 +28,34 @@ message BakActionEvent {
 	string transaction_uuid = 5;
 }
 
-message BakBufferListEvent {
-	repeated .com.ankama.dofus.server.game.protocol.bak.BufferInformation buffers = 1;
+message BakBufferListRequest {
 }
 
 message BakApiTokenRequest {
 }
 
-message BakShopTokenRequest {
+message BakActionRequest {
+	int64 kamas = 1;
+	int64 ogrines = 2;
+	int32 rate = 3;
+	.com.ankama.dofus.server.game.protocol.bak.BidAction bid_action = 4;
+}
+
+message BufferInformation {
+	int64 buffer_id = 1;
+	int64 buffer_amount = 2;
+}
+
+message BakShopTokenEvent {
+	string token = 1;
 }
 
 message BakTransactionValidationRequest {
 	string transaction_uuid = 1;
 }
 
-message BakBufferListRequest {
+message BakBufferListEvent {
+	repeated .com.ankama.dofus.server.game.protocol.bak.BufferInformation buffers = 1;
 }
 
 message BakTransactionValidationEvent {
@@ -72,19 +76,6 @@ message BakTransactionValidationEvent {
 	}
 }
 
-message BakActionRequest {
-	int64 kamas = 1;
-	int64 ogrines = 2;
-	int32 rate = 3;
-	.com.ankama.dofus.server.game.protocol.bak.BidAction bid_action = 4;
-}
-
-message BakBuyValidationEvent {
-	.com.ankama.dofus.server.game.protocol.bak.BakTransactionValidationEvent transaction_validation = 1;
-	int64 amount = 2;
-	string email = 3;
-}
-
 enum BidAction {
 	BID_INVALID_ACTION = 0;
 	BID_CONSUME_BUFF = 1;
@@ -93,5 +84,14 @@ enum BidAction {
 	BID_CREATE_OGRINE = 4;
 	BID_BUY_KAMA = 5;
 	BID_BUY_OGRINE = 6;
+}
+
+message BakShopTokenRequest {
+}
+
+message BakBuyValidationEvent {
+	.com.ankama.dofus.server.game.protocol.bak.BakTransactionValidationEvent transaction_validation = 1;
+	int64 amount = 2;
+	string email = 3;
 }
 

@@ -4,10 +4,67 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.character;
 
+message CharacterExperienceGainEvent {
+	int64 character_experience = 1;
+	int64 mount_experience = 2;
+	int64 guild_experience = 3;
+}
+
+message PlayerStatusUpdateErrorEvent {
+}
+
+message LifePointsRegenBeginEvent {
+	int32 regen_rate = 1;
+}
+
 message UpdateLifePointsEvent {
 	int32 life_points = 1;
 	int32 max_life_points = 2;
 	optional int32 life_points_gained = 3;
+}
+
+message CharacterLevelUpEvent {
+	int32 new_level = 1;
+}
+
+message GameOverEvent {
+}
+
+message FreeSoulRequest {
+}
+
+message PlayerStatusUpdatedEvent {
+	int32 account_id = 1;
+	int64 player_id = 2;
+	.com.ankama.dofus.server.game.protocol.common.CharacterStatus status = 3;
+}
+
+message CharacterLifeStatusEvent {
+	.com.ankama.dofus.server.game.protocol.character.CharacterLifeStatusEvent.LifeStatus state = 1;
+	int64 phoenix_map_id = 2;
+
+	enum LifeStatus {
+		ALIVE_AND_KICKING = 0;
+		TOMBSTONE = 1;
+		PHANTOM = 2;
+	}
+}
+
+message CharacterCharacteristicUpgradeRequest {
+	int32 strength = 1;
+	int32 vitality = 2;
+	int32 wisdom = 3;
+	int32 chance = 4;
+	int32 agility = 5;
+	int32 intelligence = 6;
+}
+
+message ResetCharacterCharacteristicsRequest {
+}
+
+message CharacterRestrictionsEvent {
+	int64 character_id = 1;
+	repeated .com.ankama.dofus.server.game.protocol.common.Restriction restrictions = 2;
 }
 
 message CharacterOnConnectionEvent {
@@ -22,65 +79,8 @@ message CharacterOnConnectionEvent {
 	}
 }
 
-message FreeSoulRequest {
-}
-
-message LifePointsRegenBeginEvent {
-	int32 regen_rate = 1;
-}
-
-message CharacterCharacteristicUpgradeRequest {
-	int32 strength = 1;
-	int32 vitality = 2;
-	int32 wisdom = 3;
-	int32 chance = 4;
-	int32 agility = 5;
-	int32 intelligence = 6;
-}
-
 message CharacterCharacteristicsEvent {
 	.com.ankama.dofus.server.game.protocol.common.CharacterCharacteristics stats = 1;
-}
-
-message CharacterLevelUpEvent {
-	int32 new_level = 1;
-}
-
-message PlayerStatusUpdateErrorEvent {
-}
-
-message CharacterRestrictionsEvent {
-	int64 character_id = 1;
-	repeated .com.ankama.dofus.server.game.protocol.common.Restriction restrictions = 2;
-}
-
-message CharacterLifeStatusEvent {
-	.com.ankama.dofus.server.game.protocol.character.CharacterLifeStatusEvent.LifeStatus state = 1;
-	int64 phoenix_map_id = 2;
-
-	enum LifeStatus {
-		ALIVE_AND_KICKING = 0;
-		TOMBSTONE = 1;
-		PHANTOM = 2;
-	}
-}
-
-message GameOverEvent {
-}
-
-message ResetCharacterCharacteristicsRequest {
-}
-
-message CharacterExperienceGainEvent {
-	int64 character_experience = 1;
-	int64 mount_experience = 2;
-	int64 guild_experience = 3;
-}
-
-message PlayerStatusUpdatedEvent {
-	int32 account_id = 1;
-	int64 player_id = 2;
-	.com.ankama.dofus.server.game.protocol.common.CharacterStatus status = 3;
 }
 
 message CharacterCharacteristicUpgradeResultEvent {

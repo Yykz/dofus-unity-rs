@@ -4,69 +4,24 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.guild.information;
 
-message GuildJoinAutomaticallyRequest {
-	int32 guild_id = 1;
+message GuildModificationEmblemValidRequest {
+	.com.ankama.dofus.server.game.protocol.common.SocialEmblem emblem = 1;
 }
 
-message GuildInvitationAnswerRequest {
-	bool accepted = 1;
+message GuildInvitationRequest {
+	int64 target_id = 1;
 }
 
-message GuildCreationResultEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialGroupOperationResult result = 1;
+message GuildLogbookEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.GuildLogbookEntry global_activities = 1;
+	repeated .com.ankama.dofus.server.game.protocol.common.GuildLogbookEntry chest_activities = 2;
 }
 
-message GuildBulletinEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialNoticeInformation bulletin = 1;
-}
-
-message GuildCardEvent {
-	.com.ankama.dofus.server.game.protocol.common.GuildInformation info = 1;
-	int32 creation_date = 2;
-	repeated .com.ankama.dofus.server.game.protocol.common.Character members = 3;
-}
-
-message GuildBulletinSetErrorEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialNoticeError error = 1;
+message GuildPaddockTeleportRequest {
+	int64 paddock_id = 1;
 }
 
 message GuildLogbookRequest {
-}
-
-message GuildKickRequest {
-	int64 kicked_id = 1;
-}
-
-message GuildPaddockBoughtEvent {
-	.com.ankama.dofus.server.game.protocol.common.PaddockInformation paddock = 1;
-}
-
-message GuildCardRequest {
-	int32 guild_id = 1;
-}
-
-message GuildInvitedEvent {
-	string recruiter_name = 1;
-	.com.ankama.dofus.server.game.protocol.common.GuildInformation guild_information = 2;
-}
-
-message GuildPaddocksInformationEvent {
-	int32 max_paddock_number = 1;
-	repeated .com.ankama.dofus.server.game.protocol.common.PaddockInformation paddock_information = 2;
-}
-
-message GuildNoteUpdateRequest {
-	int64 player_id = 1;
-	string note = 2;
-}
-
-message GuildBulletinSetRequest {
-	string content = 1;
-}
-
-message GuildModificationValidRequest {
-	string name = 1;
-	.com.ankama.dofus.server.game.protocol.common.SocialEmblem emblem = 2;
 }
 
 message GuildInvitationStateRecruiterEvent {
@@ -74,9 +29,75 @@ message GuildInvitationStateRecruiterEvent {
 	.com.ankama.dofus.server.game.protocol.common.SocialGroupInvitationState invitation_state = 2;
 }
 
+message GuildCardErrorEvent {
+	int32 guild_id = 1;
+}
+
+message GuildJoinAutomaticallyRequest {
+	int32 guild_id = 1;
+}
+
+message GuildCardRequest {
+	int32 guild_id = 1;
+}
+
+message GuildBulletinEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialNoticeInformation bulletin = 1;
+}
+
+message GuildPaddockRemovedEvent {
+	int64 paddock_id = 1;
+}
+
+message GuildBulletinSetErrorEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialNoticeError error = 1;
+}
+
+message GuildMotdSetErrorEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialNoticeError error = 1;
+}
+
 message GuildCreationValidRequest {
 	string name = 1;
 	.com.ankama.dofus.server.game.protocol.common.SocialEmblem emblem = 2;
+}
+
+message GuildInvitationAnswerRequest {
+	bool accepted = 1;
+}
+
+message GuildSummaryEvent {
+	int64 offset = 1;
+	int64 count = 2;
+	int64 total = 3;
+	repeated .com.ankama.dofus.server.game.protocol.common.GuildInformation guilds = 4;
+}
+
+message GuildCreationStartedEvent {
+}
+
+message GuildBulletinSetRequest {
+	string content = 1;
+}
+
+message GuildPaddockBoughtEvent {
+	.com.ankama.dofus.server.game.protocol.common.PaddockInformation paddock = 1;
+}
+
+message GuildInvitationStateRecruitedEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialGroupInvitationState invitation_state = 1;
+}
+
+message GuildMotdEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialNoticeInformation motd = 1;
+}
+
+message GuildMotdSetRequest {
+	string content = 1;
+}
+
+message GuildKickRequest {
+	int64 kicked_id = 1;
 }
 
 message GuildSummaryRequest {
@@ -105,73 +126,24 @@ message GuildSummaryRequest {
 	}
 }
 
-message GuildCreationStartedEvent {
+message GuildNoteUpdateRequest {
+	int64 player_id = 1;
+	string note = 2;
 }
 
-message GuildMotdEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialNoticeInformation motd = 1;
+message GuildCreationResultEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialGroupOperationResult result = 1;
 }
 
-message GuildCardErrorEvent {
-	int32 guild_id = 1;
+message GuildInvitedEvent {
+	string recruiter_name = 1;
+	.com.ankama.dofus.server.game.protocol.common.GuildInformation guild_information = 2;
 }
 
-message GuildLogbookEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.GuildLogbookEntry global_activities = 1;
-	repeated .com.ankama.dofus.server.game.protocol.common.GuildLogbookEntry chest_activities = 2;
-}
-
-message GuildInvitationStateRecruitedEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialGroupInvitationState invitation_state = 1;
-}
-
-message GuildModificationEmblemValidRequest {
-	.com.ankama.dofus.server.game.protocol.common.SocialEmblem emblem = 1;
-}
-
-message GuildMotdSetErrorEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialNoticeError error = 1;
-}
-
-message GuildInformationRequest {
-	.com.ankama.dofus.server.game.protocol.guild.information.GuildInformationRequest.InformationType information_type = 1;
-
-	enum InformationType {
-		INFO_GENERAL = 0;
-		INFO_MEMBERS = 1;
-		INFO_BOOSTS = 2;
-		INFO_PADDOCKS = 3;
-		INFO_HOUSES = 4;
-		INFO_RECRUITMENT = 5;
-		INFO_LOGBOOK = 6;
-	}
-}
-
-message GuildInvitationRequest {
-	int64 target_id = 1;
-}
-
-message GuildSummaryEvent {
-	int64 offset = 1;
-	int64 count = 2;
-	int64 total = 3;
-	repeated .com.ankama.dofus.server.game.protocol.common.GuildInformation guilds = 4;
-}
-
-message GuildPaddockTeleportRequest {
-	int64 paddock_id = 1;
-}
-
-message GuildMotdSetRequest {
-	string content = 1;
-}
-
-message GuildPaddockRemovedEvent {
-	int64 paddock_id = 1;
-}
-
-message GuildModificationNameValidRequest {
-	string name = 1;
+message GuildCardEvent {
+	.com.ankama.dofus.server.game.protocol.common.GuildInformation info = 1;
+	int32 creation_date = 2;
+	repeated .com.ankama.dofus.server.game.protocol.common.Character members = 3;
 }
 
 message GuildGeneralInformationEvent {
@@ -190,7 +162,35 @@ message GuildModificationStartedEvent {
 	bool can_change_emblem = 2;
 }
 
+message GuildModificationValidRequest {
+	string name = 1;
+	.com.ankama.dofus.server.game.protocol.common.SocialEmblem emblem = 2;
+}
+
+message GuildInformationRequest {
+	.com.ankama.dofus.server.game.protocol.guild.information.GuildInformationRequest.InformationType information_type = 1;
+
+	enum InformationType {
+		INFO_GENERAL = 0;
+		INFO_MEMBERS = 1;
+		INFO_BOOSTS = 2;
+		INFO_PADDOCKS = 3;
+		INFO_HOUSES = 4;
+		INFO_RECRUITMENT = 5;
+		INFO_LOGBOOK = 6;
+	}
+}
+
+message GuildPaddocksInformationEvent {
+	int32 max_paddock_number = 1;
+	repeated .com.ankama.dofus.server.game.protocol.common.PaddockInformation paddock_information = 2;
+}
+
 message GuildModificationResultEvent {
 	.com.ankama.dofus.server.game.protocol.common.SocialGroupOperationResult result = 1;
+}
+
+message GuildModificationNameValidRequest {
+	string name = 1;
 }
 

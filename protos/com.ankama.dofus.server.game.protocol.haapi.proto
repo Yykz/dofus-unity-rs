@@ -2,17 +2,17 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.haapi;
 
-message HaapiSessionEvent {
-	string session_uid = 1;
+message HaapiTokenEvent {
+	string token = 1;
 }
 
-message HaapiTokenRequest {
+message HaapiSessionEvent {
+	string session_uid = 1;
 }
 
 message HaapiAuthenticationErrorEvent {
 }
 
-message HaapiTokenEvent {
-	string token = 1;
+message HaapiTokenRequest {
 }
 

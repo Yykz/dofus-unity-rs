@@ -2,6 +2,16 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.notification;
 
+message NotificationUpdateFlagRequest {
+	int32 index = 1;
+}
+
+message NotificationEvent {
+	int32 id = 1;
+	bool force = 3;
+	repeated string parameters = 2;
+}
+
 message NotificationResetRequest {
 }
 
@@ -11,15 +21,5 @@ message NotificationsEvent {
 
 message RemoveNotificationEvent {
 	repeated int32 id = 1;
-}
-
-message NotificationEvent {
-	int32 id = 1;
-	bool force = 3;
-	repeated string parameters = 2;
-}
-
-message NotificationUpdateFlagRequest {
-	int32 index = 1;
 }
 

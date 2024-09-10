@@ -2,6 +2,11 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.quest;
 
+message QuestObjectiveFollowRequest {
+	int32 quest_id = 1;
+	int32 objective_id = 2;
+}
+
 message QuestObjective {
 	int32 objective_id = 1;
 	bool objective_reached = 2;
@@ -14,7 +19,25 @@ message QuestObjective {
 	}
 }
 
-message GuideModQuitRequest {
+message QuestActive {
+	int32 quest_id = 1;
+	.com.ankama.dofus.server.game.protocol.quest.QuestActive.Details details = 2;
+
+	message Details {
+		int32 step_id = 1;
+		repeated .com.ankama.dofus.server.game.protocol.quest.QuestObjective objectives = 2;
+	}
+}
+
+message GuideModReturnRequest {
+}
+
+message QuestStepInformationRequest {
+	int32 quest_id = 1;
+}
+
+message QuestsFollowedEvent {
+	repeated .com.ankama.dofus.server.game.protocol.quest.QuestActive quests = 1;
 }
 
 message QuestsEvent {
@@ -29,43 +52,18 @@ message QuestsEvent {
 	}
 }
 
-message QuestObjectiveValidationRequest {
-	int32 quest_id = 1;
-	int32 objective_id = 2;
-}
-
-message QuestObjectiveFollowRequest {
-	int32 quest_id = 1;
-	int32 objective_id = 2;
-}
-
-message QuestStepInformationEvent {
-	.com.ankama.dofus.server.game.protocol.quest.QuestActive information = 1;
-	optional int64 player_id = 2;
-}
-
-message GuideModReturnRequest {
-}
-
 message QuestsFollowedOrderRefreshRequest {
 	repeated int32 quests = 1;
 }
 
-message QuestActive {
+message QuestObjectiveUnfollowRequest {
 	int32 quest_id = 1;
-	.com.ankama.dofus.server.game.protocol.quest.QuestActive.Details details = 2;
-
-	message Details {
-		int32 step_id = 1;
-		repeated .com.ankama.dofus.server.game.protocol.quest.QuestObjective objectives = 2;
-	}
+	int32 objective_id = 2;
 }
 
-message QuestValidatedEvent {
+message QuestObjectiveValidationRequest {
 	int32 quest_id = 1;
-}
-
-message QuestsRequest {
+	int32 objective_id = 2;
 }
 
 message QuestStepStartedEvent {
@@ -73,7 +71,19 @@ message QuestStepStartedEvent {
 	int32 step_id = 2;
 }
 
-message QuestStepInformationRequest {
+message QuestStepInformationEvent {
+	.com.ankama.dofus.server.game.protocol.quest.QuestActive information = 1;
+	optional int64 player_id = 2;
+}
+
+message GuideModQuitRequest {
+}
+
+message QuestValidatedEvent {
+	int32 quest_id = 1;
+}
+
+message QuestStartedEvent {
 	int32 quest_id = 1;
 }
 
@@ -82,25 +92,15 @@ message QuestStepValidatedEvent {
 	int32 step_id = 2;
 }
 
-message QuestStartRequest {
-	int32 quest_id = 1;
+message QuestsRequest {
 }
 
-message QuestStartedEvent {
+message QuestStartRequest {
 	int32 quest_id = 1;
 }
 
 message QuestObjectiveValidatedEvent {
 	int32 quest_id = 1;
 	int32 objective_id = 2;
-}
-
-message QuestObjectiveUnfollowRequest {
-	int32 quest_id = 1;
-	int32 objective_id = 2;
-}
-
-message QuestsFollowedEvent {
-	repeated .com.ankama.dofus.server.game.protocol.quest.QuestActive quests = 1;
 }
 

@@ -4,31 +4,6 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.npc;
 
-message PrismDialogQuestionEvent {
-}
-
-message NpcDialogCreationEvent {
-	int64 map_id = 1;
-	int32 npc_id = 2;
-	optional .com.ankama.dofus.server.game.protocol.npc.NpcDialogCreationEvent.PortalType portal_type = 3;
-
-	enum PortalType {
-		UNSUPPORTED = 0;
-		ENUTROSOR = 1;
-		SRAMBAD = 2;
-		XELORIUM = 3;
-		ECAFLIPUS = 4;
-	}
-}
-
-message PlaySpellScriptOnNpcEvent {
-	int32 npc_id = 1;
-	int32 script_id = 2;
-}
-
-message NpcGenericActionFailureEvent {
-}
-
 message TaxCollectorDialogQuestionEvent {
 	.com.ankama.dofus.server.game.protocol.common.AllianceInformation alliance_information = 1;
 	int32 max_pods = 2;
@@ -39,20 +14,12 @@ message TaxCollectorDialogQuestionEvent {
 	int64 looted_items_value = 7;
 }
 
-message NpcGenericActionRequest {
+message PrismDialogQuestionEvent {
+}
+
+message PlayEmoteOnNpcEvent {
 	int32 npc_id = 1;
-	int32 npc_action_id = 2;
-	int64 npc_map_id = 3;
-}
-
-message EntityTalkEvent {
-	int64 entity_id = 1;
-	int32 text_id = 2;
-	repeated string parameters = 3;
-}
-
-message NpcDialogReplyRequest {
-	int32 reply_id = 1;
+	int32 emote_id = 2;
 }
 
 message NpcDialogQuestionEvent {
@@ -71,6 +38,25 @@ message NpcDialogQuestionEvent {
 	}
 }
 
+message NpcGenericActionFailureEvent {
+}
+
+message NpcGenericActionRequest {
+	int32 npc_id = 1;
+	int32 npc_action_id = 2;
+	int64 npc_map_id = 3;
+}
+
+message EntityTalkEvent {
+	int64 entity_id = 1;
+	int32 text_id = 2;
+	repeated string parameters = 3;
+}
+
+message NpcDialogReplyRequest {
+	int32 reply_id = 1;
+}
+
 message NpcsMapQuestStatusUpdateEvent {
 	repeated .com.ankama.dofus.server.game.protocol.npc.NpcsMapQuestStatusUpdateEvent.MapNpcQuest map_information = 1;
 
@@ -86,13 +72,27 @@ message NpcsMapQuestStatusUpdateEvent {
 	}
 }
 
-message PlayEmoteOnNpcEvent {
-	int32 npc_id = 1;
-	int32 emote_id = 2;
-}
-
 message PlayAnimationOnNpcEvent {
 	int32 npc_id = 1;
 	string animation = 2;
+}
+
+message PlaySpellScriptOnNpcEvent {
+	int32 npc_id = 1;
+	int32 script_id = 2;
+}
+
+message NpcDialogCreationEvent {
+	int64 map_id = 1;
+	int32 npc_id = 2;
+	optional .com.ankama.dofus.server.game.protocol.npc.NpcDialogCreationEvent.PortalType portal_type = 3;
+
+	enum PortalType {
+		UNSUPPORTED = 0;
+		ENUTROSOR = 1;
+		SRAMBAD = 2;
+		XELORIUM = 3;
+		ECAFLIPUS = 4;
+	}
 }
 

@@ -4,26 +4,9 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.chat;
 
-message SubscribeMultipleChannelRequest {
-	repeated .com.ankama.dofus.server.game.protocol.chat.Channel channel_enabled = 1;
-	repeated .com.ankama.dofus.server.game.protocol.chat.Channel channel_disabled = 2;
-}
-
-message ChatPrivateMessageRequest {
-	string content = 1;
-	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory object = 2;
-	oneof target {
-		string name = 3;
-		.com.ankama.dofus.server.game.protocol.common.AccountTag tag = 4;
-	}
-}
-
-message ChatPrivateCopyMessageEvent {
-	string content = 1;
-	string date = 2;
-	int64 target_character_id = 3;
-	string target_name = 4;
-	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory object = 5;
+message ChannelUpdateEvent {
+	.com.ankama.dofus.server.game.protocol.chat.Channel channel = 1;
+	bool enable = 2;
 }
 
 enum Channel {
@@ -45,22 +28,6 @@ enum Channel {
 	EXCHANGE = 16;
 }
 
-message ChannelUpdateEvent {
-	.com.ankama.dofus.server.game.protocol.chat.Channel channel = 1;
-	bool enable = 2;
-}
-
-message ChatChannelsEnabledEvent {
-	repeated .com.ankama.dofus.server.game.protocol.chat.Channel active_channels = 1;
-	repeated .com.ankama.dofus.server.game.protocol.chat.Channel disabled_channels = 2;
-}
-
-message ChatChannelMessageRequest {
-	string content = 1;
-	.com.ankama.dofus.server.game.protocol.chat.Channel channel = 2;
-	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory object = 3;
-}
-
 message ChatErrorEvent {
 	.com.ankama.dofus.server.game.protocol.chat.ChatErrorEvent.Error error = 1;
 
@@ -79,6 +46,34 @@ message ChatErrorEvent {
 	}
 }
 
+message ChatPrivateCopyMessageEvent {
+	string content = 1;
+	string date = 2;
+	int64 target_character_id = 3;
+	string target_name = 4;
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory object = 5;
+}
+
+message ChatChannelMessageRequest {
+	string content = 1;
+	.com.ankama.dofus.server.game.protocol.chat.Channel channel = 2;
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory object = 3;
+}
+
+message ChatChannelsEnabledEvent {
+	repeated .com.ankama.dofus.server.game.protocol.chat.Channel active_channels = 1;
+	repeated .com.ankama.dofus.server.game.protocol.chat.Channel disabled_channels = 2;
+}
+
+message ChatPrivateMessageRequest {
+	string content = 1;
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory object = 2;
+	oneof target {
+		string name = 3;
+		.com.ankama.dofus.server.game.protocol.common.AccountTag tag = 4;
+	}
+}
+
 message ChatChannelMessageEvent {
 	string content = 1;
 	.com.ankama.dofus.server.game.protocol.chat.Channel channel = 2;
@@ -90,5 +85,10 @@ message ChatChannelMessageEvent {
 	bool from_admin = 8;
 	optional int32 origin_server_id = 10;
 	repeated .com.ankama.dofus.server.game.protocol.common.ObjectItemInventory object = 9;
+}
+
+message SubscribeMultipleChannelRequest {
+	repeated .com.ankama.dofus.server.game.protocol.chat.Channel channel_enabled = 1;
+	repeated .com.ankama.dofus.server.game.protocol.chat.Channel channel_disabled = 2;
 }
 

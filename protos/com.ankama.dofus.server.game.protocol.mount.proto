@@ -4,31 +4,6 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.mount;
 
-message MountDataErrorEvent {
-	.com.ankama.dofus.server.game.protocol.mount.MountDataErrorEvent.MountDataError reason = 1;
-
-	enum MountDataError {
-		UNKNOWN = 0;
-		NOT_FOUND = 1;
-		SOMEONE_ELSE_PRIVATE_FARM = 2;
-		SOMEONE_ELSE_MOUNT = 3;
-	}
-}
-
-message MountUpdateCharacteristicsEvent {
-	int32 ride_id = 1;
-	repeated .com.ankama.dofus.server.game.protocol.mount.MountUpdateCharacteristicsEvent.MountCharacteristicUpdate updated_characteristics = 2;
-
-	message MountCharacteristicUpdate {
-		.com.ankama.dofus.server.game.protocol.common.MountCharacteristic characteristic = 1;
-		optional int32 int_value = 2;
-	}
-}
-
-message MountHarnessColorsUpdateRequest {
-	bool use_harness_colors = 1;
-}
-
 message MountFeedRequest {
 	int32 mount_id = 1;
 	.com.ankama.dofus.server.game.protocol.mount.MountFeedRequest.MountLocation mount_location = 2;
@@ -43,9 +18,47 @@ message MountFeedRequest {
 	}
 }
 
-message MountRidingEvent {
-	bool is_riding = 1;
-	bool is_auto_pilot = 2;
+message MountEmoteIconUsedEvent {
+	int32 mount_id = 1;
+	int32 reaction = 2;
+}
+
+message MountInformationRequest {
+	int32 mount_id = 1;
+	int64 time = 2;
+}
+
+message MountSterilizeRequest {
+}
+
+message MountHarnessColorsUpdateRequest {
+	bool use_harness_colors = 1;
+}
+
+message MountToggleRidingRequest {
+}
+
+message MountInformationInPaddockRequest {
+	int32 mount_id = 1;
+}
+
+message MountUnequippedEvent {
+}
+
+message DisplayNumericalValuePaddockEvent {
+	int32 mount_id = 1;
+	int32 value = 2;
+	.com.ankama.dofus.server.game.protocol.common.MountCharacteristic type = 3;
+}
+
+message MountSetXpRatioRequest {
+	int32 xp_ratio = 1;
+}
+
+message MountHarnessDissociateRequest {
+}
+
+message MountReleaseRequest {
 }
 
 message MountEquippedEvent {
@@ -56,42 +69,27 @@ message MountDataEvent {
 	.com.ankama.dofus.server.game.protocol.common.MountData mount_data = 1;
 }
 
-message DisplayNumericalValuePaddockEvent {
-	int32 mount_id = 1;
-	int32 value = 2;
-	.com.ankama.dofus.server.game.protocol.common.MountCharacteristic type = 3;
-}
-
-message MountUnequippedEvent {
-}
-
 message MountReleasedEvent {
 	int32 mount_id = 1;
 }
 
-message MountToggleRidingRequest {
+message MountXpRatioEvent {
+	int32 ratio = 1;
 }
 
-message MountEquippedErrorEvent {
-	.com.ankama.dofus.server.game.protocol.mount.MountEquippedErrorEvent.MountEquippedError error = 1;
+message MountUpdateCharacteristicsEvent {
+	int32 ride_id = 1;
+	repeated .com.ankama.dofus.server.game.protocol.mount.MountUpdateCharacteristicsEvent.MountCharacteristicUpdate updated_characteristics = 2;
 
-	enum MountEquippedError {
-		UNEQUIPPED = 0;
-		EQUIPPED = 1;
-		RIDING = 2;
+	message MountCharacteristicUpdate {
+		.com.ankama.dofus.server.game.protocol.common.MountCharacteristic characteristic = 1;
+		optional int32 int_value = 2;
 	}
 }
 
-message MountEmoteIconUsedEvent {
-	int32 mount_id = 1;
-	int32 reaction = 2;
-}
-
-message MountSetXpRatioRequest {
-	int32 xp_ratio = 1;
-}
-
-message MountReleaseRequest {
+message MountRidingEvent {
+	bool is_riding = 1;
+	bool is_auto_pilot = 2;
 }
 
 message MountRenamedErrorEvent {
@@ -112,22 +110,24 @@ message MountRenamedEvent {
 	string name = 2;
 }
 
-message MountInformationRequest {
-	int32 mount_id = 1;
-	int64 time = 2;
+message MountDataErrorEvent {
+	.com.ankama.dofus.server.game.protocol.mount.MountDataErrorEvent.MountDataError reason = 1;
+
+	enum MountDataError {
+		UNKNOWN = 0;
+		NOT_FOUND = 1;
+		SOMEONE_ELSE_PRIVATE_FARM = 2;
+		SOMEONE_ELSE_MOUNT = 3;
+	}
 }
 
-message MountHarnessDissociateRequest {
-}
+message MountEquippedErrorEvent {
+	.com.ankama.dofus.server.game.protocol.mount.MountEquippedErrorEvent.MountEquippedError error = 1;
 
-message MountXpRatioEvent {
-	int32 ratio = 1;
-}
-
-message MountInformationInPaddockRequest {
-	int32 mount_id = 1;
-}
-
-message MountSterilizeRequest {
+	enum MountEquippedError {
+		UNEQUIPPED = 0;
+		EQUIPPED = 1;
+		RIDING = 2;
+	}
 }
 

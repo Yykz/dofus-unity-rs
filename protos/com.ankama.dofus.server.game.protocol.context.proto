@@ -4,12 +4,11 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.context;
 
-message ContextKickRequest {
-	int64 target_id = 1;
+message EntityDispositionErrorEvent {
 }
 
-message ContextRemoveElementEvent {
-	int64 element_id = 1;
+message ContextReadyRequest {
+	int64 map_id = 1;
 }
 
 message RefreshMonsterBoostsEvent {
@@ -17,9 +16,8 @@ message RefreshMonsterBoostsEvent {
 	repeated .com.ankama.dofus.server.game.protocol.context.MonsterBoosts family_boosts = 2;
 }
 
-message ContextRefreshEntityLookEvent {
-	int64 entity_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.EntityLook look = 2;
+message ContextRemoveElementsEvent {
+	repeated int64 element_id = 1;
 }
 
 message ContextCreationEvent {
@@ -31,7 +29,22 @@ message ContextCreationEvent {
 	}
 }
 
-message ContextCreationRequest {
+message MonsterBoosts {
+	int32 id = 1;
+	int32 xp_boost = 2;
+	int32 drop_boost = 3;
+}
+
+message ContextRemoveElementEvent {
+	int64 element_id = 1;
+}
+
+message ContextKickRequest {
+	int64 target_id = 1;
+}
+
+message EntitiesDispositionEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.EntityDisposition dispositions = 1;
 }
 
 message ShowCellEvent {
@@ -39,34 +52,21 @@ message ShowCellEvent {
 	int32 cell_id = 2;
 }
 
+message ShowCellRequest {
+	int32 cell_id = 1;
+}
+
 message ContextDestroyEvent {
-}
-
-message ContextRemoveElementsEvent {
-	repeated int64 element_id = 1;
-}
-
-message EntityDispositionErrorEvent {
 }
 
 message ContextQuitRequest {
 }
 
-message MonsterBoosts {
-	int32 id = 1;
-	int32 xp_boost = 2;
-	int32 drop_boost = 3;
+message ContextRefreshEntityLookEvent {
+	int64 entity_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.EntityLook look = 2;
 }
 
-message ShowCellRequest {
-	int32 cell_id = 1;
-}
-
-message ContextReadyRequest {
-	int64 map_id = 1;
-}
-
-message EntitiesDispositionEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.EntityDisposition dispositions = 1;
+message ContextCreationRequest {
 }
 

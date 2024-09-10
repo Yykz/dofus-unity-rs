@@ -4,20 +4,6 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.prism;
 
-message PrismAttackRequest {
-}
-
-message PrismAttackedEvent {
-	.com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
-}
-
-message PrismRecycleRequest {
-}
-
-message PrismRemoveEvent {
-	.com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
-}
-
 message PrismAttackResultEvent {
 	.com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
 	.com.ankama.dofus.server.game.protocol.prism.PrismAttackResultEvent.PrismAttackResult prism_attack_result = 2;
@@ -28,17 +14,31 @@ message PrismAttackResultEvent {
 	}
 }
 
-message PrismListEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
+message PrismAttackRequest {
+}
+
+message PrismAddOrUpdateEvent {
+	.com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
+}
+
+message PrismAttackedEvent {
+	.com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
 }
 
 message PrismExchangeRequest {
 }
 
-message PrismTeleportationRequest {
+message PrismRecycleRequest {
 }
 
-message PrismAddOrUpdateEvent {
+message PrismRemoveEvent {
 	.com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
+}
+
+message PrismListEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.PrismLocalizedInformation prism_localized_information = 1;
+}
+
+message PrismTeleportationRequest {
 }
 

@@ -4,8 +4,9 @@ import "google/protobuf/any.proto";
 
 package com.ankama.dofus.server.game.protocol;
 
-message Event {
-	.google.protobuf.Any content = 1;
+message Response {
+	int32 uid = 1;
+	.google.protobuf.Any content = 2;
 }
 
 message Message {
@@ -16,9 +17,8 @@ message Message {
 	}
 }
 
-message Response {
-	int32 uid = 1;
-	.google.protobuf.Any content = 2;
+message Event {
+	.google.protobuf.Any content = 1;
 }
 
 message Request {

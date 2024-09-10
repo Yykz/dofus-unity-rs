@@ -8,6 +8,10 @@ message GuestModeEvent {
 	bool effective = 1;
 }
 
+message AccountInformationUpdateEvent {
+	int64 subscription_end_date = 1;
+}
+
 message AccountSubscriptionElapsedDurationUpdateEvent {
 	int64 subscription_elapsed_duration = 1;
 }
@@ -26,6 +30,17 @@ message GuestLimitationEvent {
 	}
 }
 
+message SubscriptionZoneEvent {
+	bool effective = 1;
+}
+
+message AccountCapabilitiesEvent {
+	int64 account_id = 1;
+	bool tutorial_available = 2;
+	.com.ankama.dofus.server.game.protocol.common.Hierarchy status = 3;
+	bool can_create_new_character = 4;
+}
+
 message SubscriptionLimitationEvent {
 	.com.ankama.dofus.server.game.protocol.account.SubscriptionLimitationEvent.SubscriptionRequired reason = 1;
 
@@ -37,20 +52,5 @@ message SubscriptionLimitationEvent {
 		LIMIT_ON_ITEM = 4;
 		LIMIT_ON_HAVEN_BAG = 5;
 	}
-}
-
-message AccountInformationUpdateEvent {
-	int64 subscription_end_date = 1;
-}
-
-message AccountCapabilitiesEvent {
-	int64 account_id = 1;
-	bool tutorial_available = 2;
-	.com.ankama.dofus.server.game.protocol.common.Hierarchy status = 3;
-	bool can_create_new_character = 4;
-}
-
-message SubscriptionZoneEvent {
-	bool effective = 1;
 }
 

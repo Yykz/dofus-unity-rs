@@ -2,21 +2,17 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.emote;
 
+message EmoteAddedEvent {
+	int32 emote_id = 1;
+}
+
 message EmoteMassivePlayEvent {
 	int32 emote_id = 1;
 	int64 emote_start_time = 2;
 	repeated int64 actors_id = 3;
 }
 
-message EmoteAddedEvent {
-	int32 emote_id = 1;
-}
-
-message EmotesEvent {
-	repeated int32 emotes_id = 1;
-}
-
-message EmoteRemovedEvent {
+message EmotePlayErrorEvent {
 	int32 emote_id = 1;
 }
 
@@ -27,12 +23,16 @@ message EmotePlayEvent {
 	int32 account_id = 4;
 }
 
+message EmotesEvent {
+	repeated int32 emotes_id = 1;
+}
+
+message EmoteRemovedEvent {
+	int32 emote_id = 1;
+}
+
 message EmotePlayRequest {
 	int32 emote_id = 1;
 	bool only_play_emote = 2;
-}
-
-message EmotePlayErrorEvent {
-	int32 emote_id = 1;
 }
 

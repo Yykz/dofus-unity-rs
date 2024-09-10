@@ -4,41 +4,19 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.spell;
 
-message ApplySpellModifierEvent {
-	int64 actor_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.SpellModifier modifier = 2;
-}
-
-message ForgettableSpellsEvent {
-	.com.ankama.dofus.server.game.protocol.spell.ForgettableSpellsEvent.Action action = 1;
-	repeated .com.ankama.dofus.server.game.protocol.spell.SpellItem spells = 2;
-
-	enum Action {
-		DISPATCH = 0;
-		UPDATE = 1;
-	}
-}
-
-message ForgettableSpellDeletionEvent {
-	.com.ankama.dofus.server.game.protocol.spell.ForgettableSpellDeletionEvent.DeletionReason reason = 1;
-	repeated int32 spells = 2;
-
-	enum DeletionReason {
-		UNKNOWN = 0;
-		ADMIN_COMMAND_REQUEST = 1;
-		FORGOTTEN = 2;
-		DISABLED = 3;
-		NOT_FOUND = 4;
-	}
-}
-
-message SpellVariantActivationEvent {
-	int32 spell_id = 1;
-	bool effective = 2;
-}
-
 message ForgettableSpellEquipmentSlotsEvent {
 	int32 quantity = 1;
+}
+
+message SpellVariantActivationRequest {
+	int32 spell_id = 1;
+}
+
+message RemoveSpellModifierEvent {
+	int64 actor_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.SpellModifierActionType action_type = 2;
+	.com.ankama.dofus.server.game.protocol.common.SpellModifierType modifier_type = 3;
+	int32 spell_id = 4;
 }
 
 message SpellItem {
@@ -64,14 +42,36 @@ message SpellsEvent {
 	repeated .com.ankama.dofus.server.game.protocol.spell.SpellItem mutant_spells = 3;
 }
 
-message SpellVariantActivationRequest {
-	int32 spell_id = 1;
+message ForgettableSpellDeletionEvent {
+	.com.ankama.dofus.server.game.protocol.spell.ForgettableSpellDeletionEvent.DeletionReason reason = 1;
+	repeated int32 spells = 2;
+
+	enum DeletionReason {
+		UNKNOWN = 0;
+		ADMIN_COMMAND_REQUEST = 1;
+		FORGOTTEN = 2;
+		DISABLED = 3;
+		NOT_FOUND = 4;
+	}
 }
 
-message RemoveSpellModifierEvent {
+message ApplySpellModifierEvent {
 	int64 actor_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.SpellModifierActionType action_type = 2;
-	.com.ankama.dofus.server.game.protocol.common.SpellModifierType modifier_type = 3;
-	int32 spell_id = 4;
+	.com.ankama.dofus.server.game.protocol.common.SpellModifier modifier = 2;
+}
+
+message ForgettableSpellsEvent {
+	.com.ankama.dofus.server.game.protocol.spell.ForgettableSpellsEvent.Action action = 1;
+	repeated .com.ankama.dofus.server.game.protocol.spell.SpellItem spells = 2;
+
+	enum Action {
+		DISPATCH = 0;
+		UPDATE = 1;
+	}
+}
+
+message SpellVariantActivationEvent {
+	int32 spell_id = 1;
+	bool effective = 2;
 }
 

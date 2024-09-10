@@ -4,6 +4,14 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.atlas;
 
+enum CompassType {
+	SIMPLE = 0;
+	SPOUSE = 1;
+	PARTY = 2;
+	PVP_SEEK = 3;
+	QUEST = 4;
+}
+
 message CompassResetEvent {
 	.com.ankama.dofus.server.game.protocol.atlas.CompassType type = 1;
 }
@@ -25,13 +33,5 @@ message CompassUpdateEvent {
 		int64 target_id = 1;
 		string target_name = 2;
 	}
-}
-
-enum CompassType {
-	SIMPLE = 0;
-	SPOUSE = 1;
-	PARTY = 2;
-	PVP_SEEK = 3;
-	QUEST = 4;
 }
 

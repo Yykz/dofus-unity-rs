@@ -2,17 +2,8 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.guild.chest;
 
-message GuildChestTabContributionsEvent {
-	repeated .com.ankama.dofus.server.game.protocol.guild.chest.GuildChestTabContributionsEvent.Contribution contributions = 1;
-
-	message Contribution {
-		int64 contributor_id = 1;
-		string contributor_name = 2;
-		int64 amount = 3;
-	}
-}
-
-message GuildChestStructureStopListeningRequest {
+message GuildChestCurrentListenersAddEvent {
+	string players = 1;
 }
 
 message GuildChestCurrentListenersRemoveEvent {
@@ -20,6 +11,14 @@ message GuildChestCurrentListenersRemoveEvent {
 }
 
 message GuildChestStructureStartListeningRequest {
+}
+
+message GuildChestTabLastContributionDateEvent {
+	int64 last_contribution_date = 1;
+}
+
+message GuildChestTabSelectRequest {
+	int32 tab_number = 1;
 }
 
 message GuildChestTabContributionEvent {
@@ -30,26 +29,30 @@ message GuildChestTabContributionEvent {
 	int64 chest_contribution_delay = 5;
 }
 
-message GuildChestTabContributionsRequest {
-}
-
-message GuildChestTabSelectRequest {
-	int32 tab_number = 1;
-}
-
-message GuildChestTabLastContributionDateEvent {
-	int64 last_contribution_date = 1;
-}
-
-message GuildChestContributionStartRequest {
+message GuildChestContributionStopRequest {
 }
 
 message GuildChestCurrentListenersEvent {
 	repeated string players = 1;
 }
 
-message GuildChestCurrentListenersAddEvent {
-	string players = 1;
+message GuildChestContributionStartRequest {
+}
+
+message GuildChestStructureStopListeningRequest {
+}
+
+message GuildChestTabContributionsRequest {
+}
+
+message GuildChestTabContributionsEvent {
+	repeated .com.ankama.dofus.server.game.protocol.guild.chest.GuildChestTabContributionsEvent.Contribution contributions = 1;
+
+	message Contribution {
+		int64 contributor_id = 1;
+		string contributor_name = 2;
+		int64 amount = 3;
+	}
 }
 
 message GuildChestTabUpdateRequest {
@@ -57,8 +60,5 @@ message GuildChestTabUpdateRequest {
 	string name = 2;
 	int32 picto = 3;
 	repeated int32 drop_type_limitation = 4;
-}
-
-message GuildChestContributionStopRequest {
 }
 

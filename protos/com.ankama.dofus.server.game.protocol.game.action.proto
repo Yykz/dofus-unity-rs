@@ -4,13 +4,45 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.game.action;
 
-message GameActionFightCastOnTargetRequest {
-	int32 spell_id = 1;
-	int64 target_id = 2;
+message GameActionItemConsumedEvent {
+	bool success = 1;
+	int32 action_id = 2;
+	bool automatic_action = 3;
 }
 
-message GameActionItemListEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.GameActionItem actions = 1;
+message SequenceStartEvent {
+	.com.ankama.dofus.server.game.protocol.game.action.SequenceType sequence_type = 1;
+	int64 author_id = 2;
+}
+
+message GameActionItemConsumeRequest {
+	int32 action_id = 1;
+	int64 player_id = 2;
+}
+
+message GameActionSpamEvent {
+	repeated int32 cells = 1;
+}
+
+message SequenceEndEvent {
+	int32 action_id = 1;
+	int64 author_id = 2;
+	.com.ankama.dofus.server.game.protocol.game.action.SequenceType sequence_type = 3;
+}
+
+enum FightSpellCastCritical {
+	NORMAL = 0;
+	CRITICAL_HIT = 1;
+	CRITICAL_FAIL = 2;
+}
+
+message GameActionItemConsumeAllRequest {
+	int64 player_id = 1;
+}
+
+message GameActionFightCastRequest {
+	int32 spell_id = 1;
+	int32 cell = 2;
 }
 
 message GameActionFightEvent {
@@ -259,51 +291,9 @@ message GameActionFightEvent {
 	}
 }
 
-message GameActionItemConsumedEvent {
-	bool success = 1;
-	int32 action_id = 2;
-	bool automatic_action = 3;
-}
-
-message GameActionItemConsumeRequest {
-	int32 action_id = 1;
-	int64 player_id = 2;
-}
-
-enum FightSpellCastCritical {
-	NORMAL = 0;
-	CRITICAL_HIT = 1;
-	CRITICAL_FAIL = 2;
-}
-
-message GameActionItemConsumeAllRequest {
-	int64 player_id = 1;
-}
-
-message GameActionUpdateEffectTriggerCountEvent {
-	repeated .com.ankama.dofus.server.game.protocol.game.action.GameActionUpdateEffectTriggerCountEvent.FightEffectTriggerCount effects_count_on_target = 1;
-
-	message FightEffectTriggerCount {
-		int32 effect_id = 1;
-		int64 target_id = 2;
-		int32 count = 3;
-	}
-}
-
-message GameActionFightCastRequest {
-	int32 spell_id = 1;
-	int32 cell = 2;
-}
-
 message GameActionAcknowledgementRequest {
 	bool valid = 1;
 	int32 action_id = 2;
-}
-
-message SequenceEndEvent {
-	int32 action_id = 1;
-	int64 author_id = 2;
-	.com.ankama.dofus.server.game.protocol.game.action.SequenceType sequence_type = 3;
 }
 
 enum SequenceType {
@@ -316,6 +306,25 @@ enum SequenceType {
 	TURN_START = 6;
 	TURN_END = 7;
 	FIGHT_START = 8;
+}
+
+message GameActionItemListEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.GameActionItem actions = 1;
+}
+
+message GameActionUpdateEffectTriggerCountEvent {
+	repeated .com.ankama.dofus.server.game.protocol.game.action.GameActionUpdateEffectTriggerCountEvent.FightEffectTriggerCount effects_count_on_target = 1;
+
+	message FightEffectTriggerCount {
+		int32 effect_id = 1;
+		int64 target_id = 2;
+		int32 count = 3;
+	}
+}
+
+message GameActionFightCastOnTargetRequest {
+	int32 spell_id = 1;
+	int64 target_id = 2;
 }
 
 message EntitySpawnInformation {
@@ -344,14 +353,5 @@ message EntitySpawnInformation {
 		int64 summoner_id = 3;
 		int64 owner_id = 4;
 	}
-}
-
-message SequenceStartEvent {
-	.com.ankama.dofus.server.game.protocol.game.action.SequenceType sequence_type = 1;
-	int64 author_id = 2;
-}
-
-message GameActionSpamEvent {
-	repeated int32 cells = 1;
 }
 

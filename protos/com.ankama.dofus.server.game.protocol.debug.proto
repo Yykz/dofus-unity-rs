@@ -4,6 +4,11 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.debug;
 
+message DumpedEntityStatsEvent {
+	int64 entity_id = 1;
+	repeated .com.ankama.dofus.server.game.protocol.common.CharacterCharacteristic stats = 2;
+}
+
 message DebugInClientEvent {
 	.com.ankama.dofus.server.game.protocol.debug.DebugInClientEvent.DebugLevel level = 1;
 	string message = 2;
@@ -18,16 +23,11 @@ message DebugInClientEvent {
 	}
 }
 
-message DebugHighlightCellsEvent {
-	int64 color = 1;
-	repeated int32 cells = 2;
-}
-
 message DebugClearHighlightCellsEvent {
 }
 
-message DumpedEntityStatsEvent {
-	int64 entity_id = 1;
-	repeated .com.ankama.dofus.server.game.protocol.common.CharacterCharacteristic stats = 2;
+message DebugHighlightCellsEvent {
+	int64 color = 1;
+	repeated int32 cells = 2;
 }
 

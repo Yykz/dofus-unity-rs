@@ -4,28 +4,21 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.fight.preparation;
 
-message FightSpectatePlayerRequest {
-	int64 player_id = 1;
+message FightLeaveEvent {
+	int64 character_id = 1;
 }
 
-message FightPlacementSwapPositionsAcceptRequest {
-	int32 request_id = 1;
+message FightOptionUpdateEvent {
+	int32 fight_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.Team team = 2;
+	.com.ankama.dofus.server.game.protocol.common.FightOption option = 3;
+	bool state = 4;
 }
 
-message FightOptionToggleRequest {
-	.com.ankama.dofus.server.game.protocol.common.FightOption option = 1;
-}
-
-message FightStartingEvent {
-	.com.ankama.dofus.server.game.protocol.common.FightType fight_type = 1;
-	int32 fight_id = 2;
-	int64 attacker_id = 3;
-	int64 defender_id = 4;
-	bool contain_boss = 5;
-	repeated int32 monsters = 6;
-}
-
-message FightMapRequest {
+message FightTeamRemoveMemberEvent {
+	int32 fight_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.Team team = 2;
+	int64 character_id = 3;
 }
 
 message FightHumanReadyStateEvent {
@@ -33,9 +26,15 @@ message FightHumanReadyStateEvent {
 	bool is_ready = 2;
 }
 
-message FightPlacementPossiblePositionsEvent {
-	.com.ankama.dofus.server.game.protocol.common.FightStartingPositions starting_positions = 1;
-	.com.ankama.dofus.server.game.protocol.common.Team team = 2;
+message FightMapRequest {
+}
+
+message FightPlacementSwapPositionsOfferEvent {
+	int32 request_id = 1;
+	int64 requester_id = 2;
+	int32 requester_cell_id = 3;
+	int64 target_id = 4;
+	int32 target_cell_id = 5;
 }
 
 message FightPlacementSwapPositionsCancelledEvent {
@@ -43,14 +42,18 @@ message FightPlacementSwapPositionsCancelledEvent {
 	int64 canceller_id = 2;
 }
 
+message FightSpectatePlayerRequest {
+	int64 player_id = 1;
+}
+
+message FightPlacementPossiblePositionsEvent {
+	.com.ankama.dofus.server.game.protocol.common.FightStartingPositions starting_positions = 1;
+	.com.ankama.dofus.server.game.protocol.common.Team team = 2;
+}
+
 message FightPlacementPositionRequest {
 	int32 cell_id = 1;
 	int64 entity_id = 2;
-}
-
-message FightTeamUpdateEvent {
-	int32 fight_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.FightTeamInformation team = 2;
 }
 
 message FightJoinEvent {
@@ -62,40 +65,28 @@ message FightJoinEvent {
 	.com.ankama.dofus.server.game.protocol.common.FightType fight_type = 6;
 }
 
-message FightPlacementSwapPositionsErrorEvent {
+message FightOptionToggleRequest {
+	.com.ankama.dofus.server.game.protocol.common.FightOption option = 1;
 }
 
-message FightTeamRemoveMemberEvent {
+message FightTeamUpdateEvent {
 	int32 fight_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.Team team = 2;
-	int64 character_id = 3;
-}
-
-message FightPlacementSwapPositionsEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.EntityDisposition dispositions = 1;
-}
-
-message FightReadyRequest {
-	bool is_ready = 1;
+	.com.ankama.dofus.server.game.protocol.common.FightTeamInformation team = 2;
 }
 
 message FightPlacementSwapPositionsCancelRequest {
 	int32 request_id = 1;
 }
 
-message FightOptionUpdateEvent {
-	int32 fight_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.Team team = 2;
-	.com.ankama.dofus.server.game.protocol.common.FightOption option = 3;
-	bool state = 4;
+message FightPlacementSwapPositionsAcceptRequest {
+	int32 request_id = 1;
 }
 
-message FightPlacementSwapPositionsOfferEvent {
-	int32 request_id = 1;
-	int64 requester_id = 2;
-	int32 requester_cell_id = 3;
-	int64 target_id = 4;
-	int32 target_cell_id = 5;
+message FightPlacementSwapPositionsErrorEvent {
+}
+
+message FightPlacementSwapPositionsEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.EntityDisposition dispositions = 1;
 }
 
 message FightSpectatorJoinEvent {
@@ -111,7 +102,16 @@ message FightJoinRequest {
 	int32 fight_id = 2;
 }
 
-message FightLeaveEvent {
-	int64 character_id = 1;
+message FightReadyRequest {
+	bool is_ready = 1;
+}
+
+message FightStartingEvent {
+	.com.ankama.dofus.server.game.protocol.common.FightType fight_type = 1;
+	int32 fight_id = 2;
+	int64 attacker_id = 3;
+	int64 defender_id = 4;
+	bool contain_boss = 5;
+	repeated int32 monsters = 6;
 }
 

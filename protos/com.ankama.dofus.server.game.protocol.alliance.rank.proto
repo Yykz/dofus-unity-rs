@@ -4,25 +4,7 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.alliance.rank;
 
-message AllianceRankUpdateRequest {
-	.com.ankama.dofus.server.game.protocol.common.RankInformation rank = 1;
-}
-
-message AllianceRankDeletionRequest {
-	int32 rank_id = 1;
-	int32 replacement_rank_id = 2;
-}
-
-message AllianceRanksEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.RankInformation ranks = 1;
-}
-
 message AllianceRanksRequest {
-}
-
-message AllianceRightsUpdateRequest {
-	int32 rank_id = 1;
-	repeated int32 rights = 2;
 }
 
 message AllianceRankCreationRequest {
@@ -31,12 +13,30 @@ message AllianceRankCreationRequest {
 	string name = 3;
 }
 
+message AllianceRanksEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.RankInformation ranks = 1;
+}
+
 message AllianceRankChangeRequest {
 	int64 member_id = 1;
 	int32 rank_id = 2;
 }
 
+message AllianceRightsUpdateRequest {
+	int32 rank_id = 1;
+	repeated int32 rights = 2;
+}
+
 message AllianceRankUpdateAllRequest {
 	repeated .com.ankama.dofus.server.game.protocol.common.RankInformation ranks = 1;
+}
+
+message AllianceRankDeletionRequest {
+	int32 rank_id = 1;
+	int32 replacement_rank_id = 2;
+}
+
+message AllianceRankUpdateRequest {
+	.com.ankama.dofus.server.game.protocol.common.RankInformation rank = 1;
 }
 

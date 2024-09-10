@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.element;
 
+message LockableChangeCodeRequest {
+	string code = 1;
+}
+
 message LockableCodeResultEvent {
 	.com.ankama.dofus.server.game.protocol.element.LockableCodeResultEvent.LockableResult result = 1;
 
@@ -12,6 +16,10 @@ message LockableCodeResultEvent {
 	}
 }
 
+message LockableUseCodeRequest {
+	string code = 1;
+}
+
 message LockableShowCodeDialogEvent {
 	.com.ankama.dofus.server.game.protocol.element.LockableShowCodeDialogEvent.Action action = 1;
 	int32 code_size = 2;
@@ -20,14 +28,6 @@ message LockableShowCodeDialogEvent {
 		CHANGE = 0;
 		USE = 1;
 	}
-}
-
-message LockableChangeCodeRequest {
-	string code = 1;
-}
-
-message LockableUseCodeRequest {
-	string code = 1;
 }
 
 message PurchasableDialogEvent {

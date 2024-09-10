@@ -2,8 +2,9 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.security;
 
-message TrustStatusEvent {
-	bool certified = 1;
+message FileCheckRequest {
+	.com.ankama.dofus.server.game.protocol.security.CheckType check_type = 1;
+	string value = 2;
 }
 
 enum CheckType {
@@ -16,8 +17,7 @@ message FileCheckEvent {
 	.com.ankama.dofus.server.game.protocol.security.CheckType check_type = 2;
 }
 
-message FileCheckRequest {
-	.com.ankama.dofus.server.game.protocol.security.CheckType check_type = 1;
-	string value = 2;
+message TrustStatusEvent {
+	bool certified = 1;
 }
 
