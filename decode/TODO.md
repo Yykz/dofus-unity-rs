@@ -1,0 +1,1 @@
+- different/better output formats, maybe implement serialization on message structs?

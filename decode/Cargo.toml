@@ -1,0 +1,12 @@
+[package]
+name = "decode"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dofus_protocol = { path = "../protocol" }
+clap = { features = ["derive"], version = "4.5.17" }
+prost = "0.13.2"
+prost-types = "0.13.2"
+hex = "0.4.3"
+bytes = "1.7.1"
