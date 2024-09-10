@@ -6,16 +6,6 @@ message OrnamentGainedEvent {
 	int32 ornament_id = 1;
 }
 
-message TitleSelectErrorEvent {
-	.com.ankama.dofus.server.game.protocol.tinsel.TinselSelectError reason = 1;
-}
-
-enum TinselSelectError {
-	UNDEFINED = 0;
-	INVALID = 1;
-	ALREADY = 2;
-}
-
 message OrnamentLostEvent {
 	int32 ornament_id = 1;
 }
@@ -24,8 +14,26 @@ message OrnamentSelectErrorEvent {
 	.com.ankama.dofus.server.game.protocol.tinsel.TinselSelectError reason = 1;
 }
 
+message OrnamentSelectedEvent {
+	int32 ornament_id = 1;
+}
+
+enum TinselSelectError {
+	UNDEFINED = 0;
+	INVALID = 1;
+	ALREADY = 2;
+}
+
+message TitleGainedEvent {
+	int32 title_id = 1;
+}
+
 message TitleLostEvent {
 	int32 title_id = 1;
+}
+
+message TitleSelectErrorEvent {
+	.com.ankama.dofus.server.game.protocol.tinsel.TinselSelectError reason = 1;
 }
 
 message TitleSelectedEvent {
@@ -38,13 +46,5 @@ message TitlesAndOrnamentsEvent {
 }
 
 message TitlesAndOrnamentsRequest {
-}
-
-message OrnamentSelectedEvent {
-	int32 ornament_id = 1;
-}
-
-message TitleGainedEvent {
-	int32 title_id = 1;
 }
 

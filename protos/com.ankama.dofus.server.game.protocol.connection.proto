@@ -2,6 +2,12 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.connection;
 
+message AlreadyConnectedEvent {
+}
+
+message AuthenticationTicketAcceptedEvent {
+}
+
 message AuthenticationTicketRefusedEvent {
 }
 
@@ -10,30 +16,21 @@ message IdentificationRequest {
 	string language_code = 2;
 }
 
-message ReloginRequest {
-}
-
-message ReloginTokenEvent {
-	bool valid_token = 1;
-	string token = 2;
-}
-
-message AuthenticationTicketAcceptedEvent {
-}
-
-message PongEvent {
-	bool quiet = 1;
+message OptionalFeaturesEvent {
+	repeated int32 features = 1;
 }
 
 message PingRequest {
 	bool quiet = 1;
 }
 
-message OptionalFeaturesEvent {
-	repeated int32 features = 1;
+message PongEvent {
+	bool quiet = 1;
 }
 
-message AlreadyConnectedEvent {
+message QueueStatusEvent {
+	int32 position = 1;
+	int32 total = 2;
 }
 
 message ReconnectToGameServerEvent {
@@ -42,8 +39,11 @@ message ReconnectToGameServerEvent {
 	int32 server_id = 3;
 }
 
-message QueueStatusEvent {
-	int32 position = 1;
-	int32 total = 2;
+message ReloginRequest {
+}
+
+message ReloginTokenEvent {
+	bool valid_token = 1;
+	string token = 2;
 }
 

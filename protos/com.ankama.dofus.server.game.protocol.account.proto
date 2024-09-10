@@ -4,8 +4,11 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.account;
 
-message GuestModeEvent {
-	bool effective = 1;
+message AccountCapabilitiesEvent {
+	int64 account_id = 1;
+	bool tutorial_available = 2;
+	.com.ankama.dofus.server.game.protocol.common.Hierarchy status = 3;
+	bool can_create_new_character = 4;
 }
 
 message AccountInformationUpdateEvent {
@@ -30,15 +33,8 @@ message GuestLimitationEvent {
 	}
 }
 
-message SubscriptionZoneEvent {
+message GuestModeEvent {
 	bool effective = 1;
-}
-
-message AccountCapabilitiesEvent {
-	int64 account_id = 1;
-	bool tutorial_available = 2;
-	.com.ankama.dofus.server.game.protocol.common.Hierarchy status = 3;
-	bool can_create_new_character = 4;
 }
 
 message SubscriptionLimitationEvent {
@@ -52,5 +48,9 @@ message SubscriptionLimitationEvent {
 		LIMIT_ON_ITEM = 4;
 		LIMIT_ON_HAVEN_BAG = 5;
 	}
+}
+
+message SubscriptionZoneEvent {
+	bool effective = 1;
 }
 

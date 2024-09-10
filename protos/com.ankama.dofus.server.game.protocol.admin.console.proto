@@ -8,6 +8,10 @@ message Command {
 	string description = 3;
 }
 
+message CommandSummary {
+	repeated .com.ankama.dofus.server.game.protocol.admin.console.Command command = 1;
+}
+
 message ConsoleCommand {
 	string content = 1;
 	bool quiet = 2;
@@ -15,10 +19,6 @@ message ConsoleCommand {
 
 message ConsoleEnd {
 	bool success = 1;
-}
-
-message CommandSummary {
-	repeated .com.ankama.dofus.server.game.protocol.admin.console.Command command = 1;
 }
 
 message ConsoleMessage {

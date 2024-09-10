@@ -2,10 +2,12 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.arena;
 
-message ArenaFighterStatusEvent {
-	int32 fight_id = 1;
-	int64 character_id = 2;
-	bool accepted = 3;
+message ArenaFightAnswerRequest {
+	bool accept = 1;
+}
+
+message ArenaFightAnswerResponse {
+	bool acknowledged = 1;
 }
 
 message ArenaFightPropositionEvent {
@@ -17,16 +19,17 @@ message ArenaFightPropositionEvent {
 message ArenaFighterIdleEvent {
 }
 
-message ArenaSwitchXpRewardsModeRequest {
-	bool xp_rewards = 1;
+message ArenaFighterStatusEvent {
+	int32 fight_id = 1;
+	int64 character_id = 2;
+	bool accepted = 3;
 }
 
-message ArenaFightAnswerResponse {
-	bool acknowledged = 1;
-}
-
-message ArenaRegistrationWarningEvent {
-	.com.ankama.dofus.server.game.protocol.arena.ArenaType battle_mode = 1;
+message ArenaLeagueRewardsEvent {
+	int32 season_id = 1;
+	int32 league_id = 2;
+	int32 ladder_position = 3;
+	bool end_season_reward = 4;
 }
 
 message ArenaPlayerBehavioursEvent {
@@ -35,8 +38,44 @@ message ArenaPlayerBehavioursEvent {
 	repeated string sanctions = 2;
 }
 
-message ArenaFightAnswerRequest {
-	bool accept = 1;
+message ArenaRegisterRequest {
+	.com.ankama.dofus.server.game.protocol.arena.ArenaType arena_type = 1;
+}
+
+message ArenaRegistrationStatusEvent {
+	bool registered = 1;
+	.com.ankama.dofus.server.game.protocol.arena.ArenaRegistrationStatusEvent.Step step = 2;
+	.com.ankama.dofus.server.game.protocol.arena.ArenaType battle_mode = 3;
+
+	enum Step {
+		REGISTERED = 0;
+		WAITING_FIGHT = 1;
+		STARTING_FIGHT = 2;
+		UNREGISTERED = 3;
+	}
+}
+
+message ArenaRegistrationWarningEvent {
+	.com.ankama.dofus.server.game.protocol.arena.ArenaType battle_mode = 1;
+}
+
+message ArenaSwitchToFightServerEvent {
+	string address = 1;
+	string token = 3;
+	repeated int32 ports = 2;
+}
+
+message ArenaSwitchXpRewardsModeRequest {
+	bool xp_rewards = 1;
+}
+
+enum ArenaType {
+	ONE_VS_ONE = 0;
+	TWO_VS_TWO = 1;
+	THREE_VS_THREE = 2;
+}
+
+message ArenaUnregisterRequest {
 }
 
 message ArenaUpdatePlayerInformationEvent {
@@ -63,6 +102,9 @@ message ArenaUpdatePlayerInformationEvent {
 }
 
 message OpponentSurrenderEvent {
+}
+
+message SurrenderInfoRequest {
 }
 
 message SurrenderInfoResponse {
@@ -120,59 +162,17 @@ message SurrenderInfoResponse {
 	}
 }
 
-enum ArenaType {
-	ONE_VS_ONE = 0;
-	TWO_VS_TWO = 1;
-	THREE_VS_THREE = 2;
-}
-
-message ArenaLeagueRewardsEvent {
-	int32 season_id = 1;
-	int32 league_id = 2;
-	int32 ladder_position = 3;
-	bool end_season_reward = 4;
-}
-
-message ArenaRegisterRequest {
-	.com.ankama.dofus.server.game.protocol.arena.ArenaType arena_type = 1;
-}
-
-message ArenaSwitchToFightServerEvent {
-	string address = 1;
-	string token = 3;
-	repeated int32 ports = 2;
-}
-
-message SurrenderVoteUpdateEvent {
-}
-
-message ArenaUnregisterRequest {
+message SurrenderStateEvent {
+	bool permit_surrender = 1;
+	bool permit_vote = 2;
 }
 
 message SurrenderVoteCastRequest {
 	bool vote = 1;
 }
 
-message SurrenderStateEvent {
-	bool permit_surrender = 1;
-	bool permit_vote = 2;
-}
-
 message SurrenderVoteEndEvent {
 	bool vote_result = 1;
-}
-
-message ArenaRegistrationStatusEvent {
-	bool registered = 1;
-	.com.ankama.dofus.server.game.protocol.arena.ArenaRegistrationStatusEvent.Step step = 2;
-	.com.ankama.dofus.server.game.protocol.arena.ArenaType battle_mode = 3;
-
-	enum Step {
-		REGISTERED = 0;
-		WAITING_FIGHT = 1;
-		STARTING_FIGHT = 2;
-		UNREGISTERED = 3;
-	}
 }
 
 message SurrenderVoteStartEvent {
@@ -182,6 +182,6 @@ message SurrenderVoteStartEvent {
 	int32 vote_duration = 4;
 }
 
-message SurrenderInfoRequest {
+message SurrenderVoteUpdateEvent {
 }
 

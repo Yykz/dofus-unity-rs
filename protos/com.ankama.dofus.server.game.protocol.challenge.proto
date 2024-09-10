@@ -4,25 +4,32 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.challenge;
 
-message ChallengeResultEvent {
-	int32 challenge_id = 1;
-	bool success = 2;
-}
-
-message ChallengeValidateRequest {
-	int32 challenge_id = 1;
+message ChallengeAddEvent {
+	.com.ankama.dofus.server.game.protocol.common.Challenge challenge = 1;
 }
 
 message ChallengeBonusChoiceRequest {
 	.com.ankama.dofus.server.game.protocol.common.ChallengeBonus challenge_bonus = 1;
 }
 
-message ChallengeSelectionRequest {
-	int32 challenge_id = 1;
-}
-
 message ChallengeBonusChoiceSelectedEvent {
 	.com.ankama.dofus.server.game.protocol.common.ChallengeBonus challenge_bonus = 1;
+}
+
+message ChallengeListEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.Challenge challenges = 1;
+}
+
+message ChallengeModSelectRequest {
+	.com.ankama.dofus.server.game.protocol.common.ChallengeMod challenge_mod = 1;
+}
+
+message ChallengeModSelectedEvent {
+	.com.ankama.dofus.server.game.protocol.common.ChallengeMod challenge_mod = 1;
+}
+
+message ChallengeNumberEvent {
+	int32 challenge_number = 1;
 }
 
 message ChallengeProposalEvent {
@@ -30,20 +37,21 @@ message ChallengeProposalEvent {
 	repeated .com.ankama.dofus.server.game.protocol.common.Challenge challenge_proposals = 1;
 }
 
-message ChallengeNumberEvent {
-	int32 challenge_number = 1;
-}
-
-message ChallengeModSelectRequest {
-	.com.ankama.dofus.server.game.protocol.common.ChallengeMod challenge_mod = 1;
-}
-
 message ChallengeReadyRequest {
 	.com.ankama.dofus.server.game.protocol.common.ChallengeMod challenge_mod = 1;
 }
 
-message ChallengeAddEvent {
+message ChallengeResultEvent {
+	int32 challenge_id = 1;
+	bool success = 2;
+}
+
+message ChallengeSelectedEvent {
 	.com.ankama.dofus.server.game.protocol.common.Challenge challenge = 1;
+}
+
+message ChallengeSelectionRequest {
+	int32 challenge_id = 1;
 }
 
 message ChallengeTargetsEvent {
@@ -54,15 +62,7 @@ message ChallengeTargetsRequest {
 	int32 challenge_id = 1;
 }
 
-message ChallengeListEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.Challenge challenges = 1;
-}
-
-message ChallengeSelectedEvent {
-	.com.ankama.dofus.server.game.protocol.common.Challenge challenge = 1;
-}
-
-message ChallengeModSelectedEvent {
-	.com.ankama.dofus.server.game.protocol.common.ChallengeMod challenge_mod = 1;
+message ChallengeValidateRequest {
+	int32 challenge_id = 1;
 }
 

@@ -4,16 +4,8 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.alliance.conquest;
 
-message NuggetsListenStartRequest {
-}
-
 message AVAStateUpdateRequest {
 	bool enable = 1;
-}
-
-message AllianceFightReplaceRequest {
-	.com.ankama.dofus.server.game.protocol.common.SocialFightInformation fight_information = 1;
-	int64 to_replace_fighter_id = 2;
 }
 
 message AllianceFightFighterAddedEvent {
@@ -22,30 +14,16 @@ message AllianceFightFighterAddedEvent {
 	.com.ankama.dofus.server.game.protocol.common.Team team = 3;
 }
 
-message AllianceFightStartedEvent {
+message AllianceFightFighterRemovedEvent {
 	.com.ankama.dofus.server.game.protocol.common.SocialFightInformation fight_information = 1;
-	.com.ankama.dofus.server.game.protocol.common.FightPhaseInfo phase = 2;
-}
-
-message NuggetsListenStopRequest {
-}
-
-message AllianceFightListenStartRequest {
-}
-
-message KOTHEndEvent {
-	.com.ankama.dofus.server.game.protocol.common.AllianceInformation winner = 1;
-}
-
-message AllianceFightsInformationEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.SocialFight alliance_fights = 1;
-}
-
-message NuggetsInformationEvent {
-	int32 nuggets_quantity = 1;
+	int64 fighter_id = 2;
 }
 
 message AllianceFightFinishedEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialFightInformation fight_information = 1;
+}
+
+message AllianceFightJoinRequest {
 	.com.ankama.dofus.server.game.protocol.common.SocialFightInformation fight_information = 1;
 }
 
@@ -53,13 +31,7 @@ message AllianceFightLeaveRequest {
 	.com.ankama.dofus.server.game.protocol.common.SocialFightInformation fight_information = 1;
 }
 
-message NuggetsBeneficiary {
-	int64 character_id = 1;
-	int32 nuggets_quantity = 2;
-}
-
-message AllianceFightJoinRequest {
-	.com.ankama.dofus.server.game.protocol.common.SocialFightInformation fight_information = 1;
+message AllianceFightListenStartRequest {
 }
 
 message AllianceFightListenStopRequest {
@@ -70,9 +42,22 @@ message AllianceFightPhaseUpdateEvent {
 	.com.ankama.dofus.server.game.protocol.common.FightPhaseInfo phase = 2;
 }
 
-message AllianceFightFighterRemovedEvent {
+message AllianceFightReplaceRequest {
 	.com.ankama.dofus.server.game.protocol.common.SocialFightInformation fight_information = 1;
-	int64 fighter_id = 2;
+	int64 to_replace_fighter_id = 2;
+}
+
+message AllianceFightStartedEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialFightInformation fight_information = 1;
+	.com.ankama.dofus.server.game.protocol.common.FightPhaseInfo phase = 2;
+}
+
+message AllianceFightsInformationEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.SocialFight alliance_fights = 1;
+}
+
+message KOTHEndEvent {
+	.com.ankama.dofus.server.game.protocol.common.AllianceInformation winner = 1;
 }
 
 message KOTHUpdateEvent {
@@ -106,7 +91,22 @@ message KOTHUpdateEvent {
 	}
 }
 
+message NuggetsBeneficiary {
+	int64 character_id = 1;
+	int32 nuggets_quantity = 2;
+}
+
 message NuggetsDistributionRequest {
 	repeated .com.ankama.dofus.server.game.protocol.alliance.conquest.NuggetsBeneficiary beneficiaries = 1;
+}
+
+message NuggetsInformationEvent {
+	int32 nuggets_quantity = 1;
+}
+
+message NuggetsListenStartRequest {
+}
+
+message NuggetsListenStopRequest {
 }
 

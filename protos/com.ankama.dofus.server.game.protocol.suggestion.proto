@@ -2,15 +2,11 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.suggestion;
 
-message ActivitySuggestionsRequest {
-	int32 min_level = 1;
-	int32 max_level = 2;
-	int32 area_id = 3;
-	int32 activity_category_id = 4;
-	int32 cards_number = 5;
+message ActivityHideRequest {
+	int32 activity_id = 1;
 }
 
-message ActivityHideRequest {
+message ActivityLockRequest {
 	int32 activity_id = 1;
 }
 
@@ -19,7 +15,11 @@ message ActivitySuggestionsEvent {
 	repeated int32 unlocked_activities = 2;
 }
 
-message ActivityLockRequest {
-	int32 activity_id = 1;
+message ActivitySuggestionsRequest {
+	int32 min_level = 1;
+	int32 max_level = 2;
+	int32 area_id = 3;
+	int32 activity_category_id = 4;
+	int32 cards_number = 5;
 }
 

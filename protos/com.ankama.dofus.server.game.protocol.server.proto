@@ -4,6 +4,10 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.server;
 
+message ServerExperienceModifierEvent {
+	int32 experience_percentage = 1;
+}
+
 message ServerSessionConstantsEvent {
 	repeated .com.ankama.dofus.server.game.protocol.server.ServerSessionConstantsEvent.ServerSessionConstant variables = 1;
 
@@ -21,9 +25,5 @@ message ServerSettingsEvent {
 	int32 arena_leave_ban_time = 5;
 	int32 item_max_level = 6;
 	bool has_free_autopilot = 7;
-}
-
-message ServerExperienceModifierEvent {
-	int32 experience_percentage = 1;
 }
 

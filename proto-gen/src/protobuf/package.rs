@@ -29,9 +29,11 @@ pub struct ProtoPackage {
 impl ProtoPackage {
     pub fn new(
         name: String,
-        imports: Vec<ProtoImport>,
-        members: Vec<PackageMember<Resolved>>,
+        mut imports: Vec<ProtoImport>,
+        mut members: Vec<PackageMember<Resolved>>,
     ) -> Self {
+        imports.sort_unstable_by_key(|i| i.to_string());
+        members.sort_unstable_by_key(|m| m.name().to_string());
         Self {
             name,
             imports,

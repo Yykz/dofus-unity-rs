@@ -4,25 +4,9 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.spell;
 
-message ForgettableSpellEquipmentSlotsEvent {
-	int32 quantity = 1;
-}
-
-message SpellVariantActivationRequest {
-	int32 spell_id = 1;
-}
-
-message RemoveSpellModifierEvent {
+message ApplySpellModifierEvent {
 	int64 actor_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.SpellModifierActionType action_type = 2;
-	.com.ankama.dofus.server.game.protocol.common.SpellModifierType modifier_type = 3;
-	int32 spell_id = 4;
-}
-
-message SpellItem {
-	int32 spell_id = 1;
-	int32 spell_level = 2;
-	optional bool available = 3;
+	.com.ankama.dofus.server.game.protocol.common.SpellModifier modifier = 2;
 }
 
 message ForgettableSpellActionRequest {
@@ -34,12 +18,6 @@ message ForgettableSpellActionRequest {
 		EQUIP = 1;
 		REMOVE = 2;
 	}
-}
-
-message SpellsEvent {
-	bool spell_visualisation = 1;
-	repeated .com.ankama.dofus.server.game.protocol.spell.SpellItem human_spells = 2;
-	repeated .com.ankama.dofus.server.game.protocol.spell.SpellItem mutant_spells = 3;
 }
 
 message ForgettableSpellDeletionEvent {
@@ -55,9 +33,8 @@ message ForgettableSpellDeletionEvent {
 	}
 }
 
-message ApplySpellModifierEvent {
-	int64 actor_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.SpellModifier modifier = 2;
+message ForgettableSpellEquipmentSlotsEvent {
+	int32 quantity = 1;
 }
 
 message ForgettableSpellsEvent {
@@ -70,8 +47,31 @@ message ForgettableSpellsEvent {
 	}
 }
 
+message RemoveSpellModifierEvent {
+	int64 actor_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.SpellModifierActionType action_type = 2;
+	.com.ankama.dofus.server.game.protocol.common.SpellModifierType modifier_type = 3;
+	int32 spell_id = 4;
+}
+
+message SpellItem {
+	int32 spell_id = 1;
+	int32 spell_level = 2;
+	optional bool available = 3;
+}
+
 message SpellVariantActivationEvent {
 	int32 spell_id = 1;
 	bool effective = 2;
+}
+
+message SpellVariantActivationRequest {
+	int32 spell_id = 1;
+}
+
+message SpellsEvent {
+	bool spell_visualisation = 1;
+	repeated .com.ankama.dofus.server.game.protocol.spell.SpellItem human_spells = 2;
+	repeated .com.ankama.dofus.server.game.protocol.spell.SpellItem mutant_spells = 3;
 }
 

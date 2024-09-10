@@ -4,15 +4,6 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.shop;
 
-message AccessoryPreviewEvent {
-	.com.ankama.dofus.server.game.protocol.common.EntityLook look = 1;
-}
-
-message AccessoryPreviewRequest {
-	bool show_current_objects = 2;
-	repeated int32 object_gid = 1;
-}
-
 message AccessoryPreviewErrorEvent {
 	.com.ankama.dofus.server.game.protocol.shop.AccessoryPreviewErrorEvent.AccessoryPreviewError error = 1;
 
@@ -21,5 +12,14 @@ message AccessoryPreviewErrorEvent {
 		COOL_DOWN = 1;
 		BAD_ITEM = 2;
 	}
+}
+
+message AccessoryPreviewEvent {
+	.com.ankama.dofus.server.game.protocol.common.EntityLook look = 1;
+}
+
+message AccessoryPreviewRequest {
+	bool show_current_objects = 2;
+	repeated int32 object_gid = 1;
 }
 

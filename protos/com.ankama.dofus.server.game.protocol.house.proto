@@ -4,20 +4,26 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.house;
 
+message HouseAccountEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.House houses = 1;
+}
+
+message HouseBuyRequest {
+	int64 proposed_price = 1;
+}
+
+message HouseBuyResultEvent {
+	int32 house_id = 1;
+	int32 instance_id = 2;
+	bool second_hand = 3;
+	bool bought = 4;
+	int64 price = 5;
+}
+
 message HouseGuildNoneEvent {
 	int32 house_id = 1;
 	int32 instance_id = 2;
 	bool second_hand = 3;
-}
-
-message HouseTeleportRequest {
-	int32 house_id = 1;
-	int32 instance_id = 2;
-}
-
-message HouseInformationRequest {
-	int32 house_id = 1;
-	int64 house_instance_id = 2;
 }
 
 message HouseGuildRightsEvent {
@@ -29,8 +35,46 @@ message HouseGuildRightsEvent {
 	bool is_locked = 6;
 }
 
+message HouseGuildRightsViewRequest {
+	int32 house_id = 1;
+	int32 instance_id = 2;
+}
+
+message HouseGuildShareRequest {
+	int32 house_id = 1;
+	int32 instance_id = 2;
+	bool share = 3;
+	int32 rights = 4;
+}
+
+message HouseInformationRequest {
+	int32 house_id = 1;
+	int64 house_instance_id = 2;
+}
+
+message HouseInformationResponse {
+	.com.ankama.dofus.server.game.protocol.common.HouseInstance house_information = 1;
+}
+
 message HouseKickRequest {
 	int64 player_id = 1;
+}
+
+message HouseLockFromInsideRequest {
+	string code = 1;
+}
+
+message HousePropertiesEvent {
+	int32 house_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.HouseInstance properties = 3;
+	repeated int32 doors_on_map = 2;
+}
+
+message HouseSellRequest {
+	int32 instance_id = 1;
+	int64 amount = 2;
+	bool for_sale = 3;
+	bool is_inside = 4;
 }
 
 message HouseSellingUpdateEvent {
@@ -42,8 +86,9 @@ message HouseSellingUpdateEvent {
 	string buyer_account_tag = 6;
 }
 
-message HouseBuyRequest {
-	int64 proposed_price = 1;
+message HouseTeleportRequest {
+	int32 house_id = 1;
+	int32 instance_id = 2;
 }
 
 message HousesToSellEvent {
@@ -69,34 +114,6 @@ message HousesToSellEvent {
 	}
 }
 
-message HouseSellRequest {
-	int32 instance_id = 1;
-	int64 amount = 2;
-	bool for_sale = 3;
-	bool is_inside = 4;
-}
-
-message HouseInformationResponse {
-	.com.ankama.dofus.server.game.protocol.common.HouseInstance house_information = 1;
-}
-
-message HousePropertiesEvent {
-	int32 house_id = 1;
-	.com.ankama.dofus.server.game.protocol.common.HouseInstance properties = 3;
-	repeated int32 doors_on_map = 2;
-}
-
-message HouseGuildShareRequest {
-	int32 house_id = 1;
-	int32 instance_id = 2;
-	bool share = 3;
-	int32 rights = 4;
-}
-
-message HousesToSellRequest {
-	int32 page_index = 1;
-}
-
 message HousesToSellFiltersRequest {
 	int32 area_id = 1;
 	int32 at_least_room_number = 2;
@@ -106,24 +123,7 @@ message HousesToSellFiltersRequest {
 	.com.ankama.dofus.server.game.protocol.common.RealEstateOrder order_by = 6;
 }
 
-message HouseLockFromInsideRequest {
-	string code = 1;
-}
-
-message HouseAccountEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.House houses = 1;
-}
-
-message HouseBuyResultEvent {
-	int32 house_id = 1;
-	int32 instance_id = 2;
-	bool second_hand = 3;
-	bool bought = 4;
-	int64 price = 5;
-}
-
-message HouseGuildRightsViewRequest {
-	int32 house_id = 1;
-	int32 instance_id = 2;
+message HousesToSellRequest {
+	int32 page_index = 1;
 }
 

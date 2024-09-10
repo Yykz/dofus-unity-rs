@@ -4,30 +4,32 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.game.action;
 
-message GameActionItemConsumedEvent {
-	bool success = 1;
-	int32 action_id = 2;
-	bool automatic_action = 3;
-}
+message EntitySpawnInformation {
+	oneof spawn_information {
+		.com.ankama.dofus.server.game.protocol.game.action.EntitySpawnInformation.Monster monster = 1;
+		.com.ankama.dofus.server.game.protocol.game.action.EntitySpawnInformation.Character character = 2;
+		.com.ankama.dofus.server.game.protocol.game.action.EntitySpawnInformation.Companion companion = 3;
+	}
 
-message SequenceStartEvent {
-	.com.ankama.dofus.server.game.protocol.game.action.SequenceType sequence_type = 1;
-	int64 author_id = 2;
-}
+	message Monster {
+		int32 monster_gid = 1;
+		oneof invocation_information {
+			int32 grade = 2;
+			int32 level = 3;
+		}
+	}
 
-message GameActionItemConsumeRequest {
-	int32 action_id = 1;
-	int64 player_id = 2;
-}
+	message Character {
+		string name = 1;
+		int32 level = 2;
+	}
 
-message GameActionSpamEvent {
-	repeated int32 cells = 1;
-}
-
-message SequenceEndEvent {
-	int32 action_id = 1;
-	int64 author_id = 2;
-	.com.ankama.dofus.server.game.protocol.game.action.SequenceType sequence_type = 3;
+	message Companion {
+		int32 model_id = 1;
+		int32 level = 2;
+		int64 summoner_id = 3;
+		int64 owner_id = 4;
+	}
 }
 
 enum FightSpellCastCritical {
@@ -36,8 +38,14 @@ enum FightSpellCastCritical {
 	CRITICAL_FAIL = 2;
 }
 
-message GameActionItemConsumeAllRequest {
-	int64 player_id = 1;
+message GameActionAcknowledgementRequest {
+	bool valid = 1;
+	int32 action_id = 2;
+}
+
+message GameActionFightCastOnTargetRequest {
+	int32 spell_id = 1;
+	int64 target_id = 2;
 }
 
 message GameActionFightCastRequest {
@@ -291,25 +299,27 @@ message GameActionFightEvent {
 	}
 }
 
-message GameActionAcknowledgementRequest {
-	bool valid = 1;
-	int32 action_id = 2;
+message GameActionItemConsumeAllRequest {
+	int64 player_id = 1;
 }
 
-enum SequenceType {
-	SPELL = 0;
-	WEAPON = 1;
-	GLYPH_TRAP = 2;
-	TRIGGERED = 3;
-	MOVE = 4;
-	CHARACTER_DEATH = 5;
-	TURN_START = 6;
-	TURN_END = 7;
-	FIGHT_START = 8;
+message GameActionItemConsumeRequest {
+	int32 action_id = 1;
+	int64 player_id = 2;
+}
+
+message GameActionItemConsumedEvent {
+	bool success = 1;
+	int32 action_id = 2;
+	bool automatic_action = 3;
 }
 
 message GameActionItemListEvent {
 	repeated .com.ankama.dofus.server.game.protocol.common.GameActionItem actions = 1;
+}
+
+message GameActionSpamEvent {
+	repeated int32 cells = 1;
 }
 
 message GameActionUpdateEffectTriggerCountEvent {
@@ -322,36 +332,26 @@ message GameActionUpdateEffectTriggerCountEvent {
 	}
 }
 
-message GameActionFightCastOnTargetRequest {
-	int32 spell_id = 1;
-	int64 target_id = 2;
+message SequenceEndEvent {
+	int32 action_id = 1;
+	int64 author_id = 2;
+	.com.ankama.dofus.server.game.protocol.game.action.SequenceType sequence_type = 3;
 }
 
-message EntitySpawnInformation {
-	oneof spawn_information {
-		.com.ankama.dofus.server.game.protocol.game.action.EntitySpawnInformation.Monster monster = 1;
-		.com.ankama.dofus.server.game.protocol.game.action.EntitySpawnInformation.Character character = 2;
-		.com.ankama.dofus.server.game.protocol.game.action.EntitySpawnInformation.Companion companion = 3;
-	}
+message SequenceStartEvent {
+	.com.ankama.dofus.server.game.protocol.game.action.SequenceType sequence_type = 1;
+	int64 author_id = 2;
+}
 
-	message Monster {
-		int32 monster_gid = 1;
-		oneof invocation_information {
-			int32 grade = 2;
-			int32 level = 3;
-		}
-	}
-
-	message Character {
-		string name = 1;
-		int32 level = 2;
-	}
-
-	message Companion {
-		int32 model_id = 1;
-		int32 level = 2;
-		int64 summoner_id = 3;
-		int64 owner_id = 4;
-	}
+enum SequenceType {
+	SPELL = 0;
+	WEAPON = 1;
+	GLYPH_TRAP = 2;
+	TRIGGERED = 3;
+	MOVE = 4;
+	CHARACTER_DEATH = 5;
+	TURN_START = 6;
+	TURN_END = 7;
+	FIGHT_START = 8;
 }
 

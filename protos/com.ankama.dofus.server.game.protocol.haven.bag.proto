@@ -4,44 +4,10 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.haven.bag;
 
-message HavenBagEnterRequest {
-	int64 owner = 1;
-}
-
-message HavenBagEditRequest {
-}
-
-message HavenBagInvitationClosedEvent {
-	.com.ankama.dofus.server.game.protocol.common.Character host_information = 1;
-}
-
-message HavenBagInvitationEvent {
-	.com.ankama.dofus.server.game.protocol.common.Character guest_information = 1;
-	bool accepted = 2;
-}
-
-message HavenBagEditStartEvent {
-}
-
-message HavenBagKickRequest {
-	int64 guest_id = 1;
-}
-
-message HavenBagFurnitureOpenRequest {
-}
-
-message HavenBagInvitationRequest {
-	int64 guest_id = 1;
-}
-
 message Element {
 	int32 cell_id = 1;
 	int32 element_id = 2;
 	int32 orientation = 3;
-}
-
-message HavenBagInvitationAnswerRequest {
-	bool accepted = 1;
 }
 
 message HavenBagChangeRoomRequest {
@@ -59,25 +25,50 @@ message HavenBagDailyLotteryEvent {
 	}
 }
 
-message HavenBagThemeChangeRequest {
-	int32 theme = 1;
+message HavenBagEditCancelRequest {
 }
 
-message HavenBagEditCancelRequest {
+message HavenBagEditFinishedEvent {
+}
+
+message HavenBagEditRequest {
+}
+
+message HavenBagEditStartEvent {
+}
+
+message HavenBagEnterRequest {
+	int64 owner = 1;
 }
 
 message HavenBagExitRequest {
 }
 
-message HavenBagEditFinishedEvent {
+message HavenBagFurnitureCloseRequest {
 }
 
 message HavenBagFurnitureEvent {
 	repeated .com.ankama.dofus.server.game.protocol.haven.bag.Element furniture = 1;
 }
 
-message HavenBagPackListEvent {
-	repeated int32 packs_id = 1;
+message HavenBagFurnitureOpenRequest {
+}
+
+message HavenBagFurnitureRequest {
+	repeated .com.ankama.dofus.server.game.protocol.haven.bag.Element furniture = 1;
+}
+
+message HavenBagInvitationAnswerRequest {
+	bool accepted = 1;
+}
+
+message HavenBagInvitationClosedEvent {
+	.com.ankama.dofus.server.game.protocol.common.Character host_information = 1;
+}
+
+message HavenBagInvitationEvent {
+	.com.ankama.dofus.server.game.protocol.common.Character guest_information = 1;
+	bool accepted = 2;
 }
 
 message HavenBagInvitationOfferedEvent {
@@ -85,8 +76,16 @@ message HavenBagInvitationOfferedEvent {
 	int64 time_before_cancel = 2;
 }
 
-message HavenBagFurnitureRequest {
-	repeated .com.ankama.dofus.server.game.protocol.haven.bag.Element furniture = 1;
+message HavenBagInvitationRequest {
+	int64 guest_id = 1;
+}
+
+message HavenBagKickRequest {
+	int64 guest_id = 1;
+}
+
+message HavenBagPackListEvent {
+	repeated int32 packs_id = 1;
 }
 
 message HavenBagPermissionsUpdateEvent {
@@ -95,9 +94,6 @@ message HavenBagPermissionsUpdateEvent {
 
 message HavenBagPermissionsUpdateRequest {
 	int32 permissions = 1;
-}
-
-message HavenBagFurnitureCloseRequest {
 }
 
 message HavenBagRoomUpdateEvent {
@@ -113,5 +109,9 @@ message HavenBagRoomUpdateEvent {
 		int32 room_id = 1;
 		int32 theme_id = 2;
 	}
+}
+
+message HavenBagThemeChangeRequest {
+	int32 theme = 1;
 }
 

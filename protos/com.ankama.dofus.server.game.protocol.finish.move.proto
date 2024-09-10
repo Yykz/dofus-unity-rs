@@ -2,9 +2,6 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.finish.move;
 
-message FinishMovesRequest {
-}
-
 message FinishMoveSetRequest {
 	int32 finish_move_id = 1;
 	bool effective = 2;
@@ -17,5 +14,8 @@ message FinishMovesEvent {
 		int32 finish_move_id = 1;
 		bool effective = 2;
 	}
+}
+
+message FinishMovesRequest {
 }
 

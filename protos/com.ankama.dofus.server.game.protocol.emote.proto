@@ -23,16 +23,16 @@ message EmotePlayEvent {
 	int32 account_id = 4;
 }
 
-message EmotesEvent {
-	repeated int32 emotes_id = 1;
+message EmotePlayRequest {
+	int32 emote_id = 1;
+	bool only_play_emote = 2;
 }
 
 message EmoteRemovedEvent {
 	int32 emote_id = 1;
 }
 
-message EmotePlayRequest {
-	int32 emote_id = 1;
-	bool only_play_emote = 2;
+message EmotesEvent {
+	repeated int32 emotes_id = 1;
 }
 

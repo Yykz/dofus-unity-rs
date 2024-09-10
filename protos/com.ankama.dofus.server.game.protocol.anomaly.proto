@@ -6,7 +6,10 @@ message AnomalyOpenedEvent {
 	int32 subarea_id = 1;
 }
 
-message AnomalySubareaInformationRequest {
+message AnomalyStateEvent {
+	int32 subarea_id = 1;
+	bool open = 2;
+	int64 closing_time = 3;
 }
 
 message AnomalySubareaInformationEvent {
@@ -20,9 +23,6 @@ message AnomalySubareaInformationEvent {
 	}
 }
 
-message AnomalyStateEvent {
-	int32 subarea_id = 1;
-	bool open = 2;
-	int64 closing_time = 3;
+message AnomalySubareaInformationRequest {
 }
 

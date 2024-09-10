@@ -4,53 +4,13 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.alliance.recruitment;
 
-message AllianceApplicationListenRequest {
-	bool state = 1;
-}
-
-message AllianceApplicationDeletedEvent {
-	bool success = 1;
-}
-
-message AllianceRecruitmentInformationRequest {
-}
-
-message AllianceApplicationReceivedEvent {
-	string player_name = 1;
-	int64 player_id = 2;
-}
-
-message AllianceApplicationRequest {
-}
-
-message AllianceApplicationListEvent {
-	int64 offset = 1;
-	int64 count = 2;
-	int64 total = 3;
-	repeated .com.ankama.dofus.server.game.protocol.common.SocialApplicationInformation applies = 4;
-}
-
 message AllianceApplicationAnswerRequest {
 	int64 player_id = 1;
 	bool accepted = 2;
 }
 
-message AllianceApplicationModifiedEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialApplicationInformation apply = 1;
-	.com.ankama.dofus.server.game.protocol.common.SocialApplicationState state = 2;
-	int64 player_id = 3;
-}
-
-message AllianceApplicationListRequest {
-	int64 offset = 1;
-	int64 count = 2;
-}
-
-message AllianceRecruitmentAutomaticJoinRequest {
-	string alliance_uid = 1;
-}
-
-message AllianceRecruitmentInvalidateEvent {
+message AllianceApplicationDeletedEvent {
+	bool success = 1;
 }
 
 message AllianceApplicationDeletionRequest {
@@ -61,22 +21,26 @@ message AllianceApplicationInformationEvent {
 	.com.ankama.dofus.server.game.protocol.common.SocialApplicationInformation application_information = 2;
 }
 
-message AllianceApplicationResponseEvent {
-	bool accepted = 1;
-	.com.ankama.dofus.server.game.protocol.common.AllianceInformation alliance_information = 2;
+message AllianceApplicationListEvent {
+	int64 offset = 1;
+	int64 count = 2;
+	int64 total = 3;
+	repeated .com.ankama.dofus.server.game.protocol.common.SocialApplicationInformation applies = 4;
 }
 
-message AllianceRecruitmentUpdateRequest {
-	.com.ankama.dofus.server.game.protocol.common.AllianceRecruitmentInformation information = 1;
+message AllianceApplicationListRequest {
+	int64 offset = 1;
+	int64 count = 2;
 }
 
-message AllianceRecruitmentInformationEvent {
-	.com.ankama.dofus.server.game.protocol.common.AllianceRecruitmentInformation information = 1;
+message AllianceApplicationListenRequest {
+	bool state = 1;
 }
 
-message AllianceApplicationSubmitRequest {
-	string alliance_uid = 1;
-	string text = 2;
+message AllianceApplicationModifiedEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialApplicationInformation apply = 1;
+	.com.ankama.dofus.server.game.protocol.common.SocialApplicationState state = 2;
+	int64 player_id = 3;
 }
 
 message AllianceApplicationNoInformationEvent {
@@ -86,11 +50,47 @@ message AllianceApplicationPresenceEvent {
 	bool presence = 1;
 }
 
+message AllianceApplicationPresenceRequest {
+}
+
+message AllianceApplicationReceivedEvent {
+	string player_name = 1;
+	int64 player_id = 2;
+}
+
+message AllianceApplicationRequest {
+}
+
+message AllianceApplicationResponseEvent {
+	bool accepted = 1;
+	.com.ankama.dofus.server.game.protocol.common.AllianceInformation alliance_information = 2;
+}
+
+message AllianceApplicationSubmitRequest {
+	string alliance_uid = 1;
+	string text = 2;
+}
+
 message AllianceApplicationUpdateRequest {
 	string alliance_uid = 1;
 	string text = 2;
 }
 
-message AllianceApplicationPresenceRequest {
+message AllianceRecruitmentAutomaticJoinRequest {
+	string alliance_uid = 1;
+}
+
+message AllianceRecruitmentInformationEvent {
+	.com.ankama.dofus.server.game.protocol.common.AllianceRecruitmentInformation information = 1;
+}
+
+message AllianceRecruitmentInformationRequest {
+}
+
+message AllianceRecruitmentInvalidateEvent {
+}
+
+message AllianceRecruitmentUpdateRequest {
+	.com.ankama.dofus.server.game.protocol.common.AllianceRecruitmentInformation information = 1;
 }
 

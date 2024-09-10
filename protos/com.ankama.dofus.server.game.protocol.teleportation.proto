@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.teleportation;
 
-message TeleportToBuddyAnswerRequest {
+message GroupTeleportPlayerAnswerRequest {
 	bool accept = 1;
 }
 
@@ -18,6 +18,20 @@ message GroupTeleportPlayerOfferEvent {
 	int32 time_left = 4;
 	int64 requester_id = 5;
 	string requester_name = 6;
+}
+
+message TeleportBuddiesAnswerRequest {
+	bool accept = 1;
+}
+
+message TeleportBuddiesEvent {
+	int32 dungeon_id = 1;
+}
+
+message TeleportBuddiesRequestedEvent {
+	int32 dungeon_id = 1;
+	int64 inviter_id = 2;
+	repeated int64 invalid_buddies_id = 3;
 }
 
 message TeleportDestination {
@@ -36,43 +50,6 @@ message TeleportDestination {
 	}
 }
 
-message GroupTeleportPlayerAnswerRequest {
-	bool accept = 1;
-}
-
-message TeleportPlayerOfferEvent {
-	int64 map_id = 1;
-	string message = 2;
-	int32 time_left = 3;
-	int64 requester_id = 4;
-}
-
-enum Teleporter {
-	TELEPORTER_ZAAP = 0;
-	TELEPORTER_SUBWAY = 1;
-	TELEPORTER_PRISM = 2;
-	TELEPORTER_HAVEN_BAG = 3;
-	TELEPORTER_ANOMALY = 4;
-}
-
-message TeleportBuddiesAnswerRequest {
-	bool accept = 1;
-}
-
-message ZaapRespawnSaveRequest {
-}
-
-message TeleportPlayerClosedEvent {
-	int64 map_id = 1;
-	int64 requester_id = 2;
-}
-
-message TeleportBuddiesRequestedEvent {
-	int32 dungeon_id = 1;
-	int64 inviter_id = 2;
-	repeated int64 invalid_buddies_id = 3;
-}
-
 message TeleportDestinationsEvent {
 	.com.ankama.dofus.server.game.protocol.teleportation.Teleporter type = 1;
 	optional int64 spawn_map_id = 3;
@@ -83,16 +60,26 @@ message TeleportPlayerAnswerRequest {
 	bool accept = 1;
 }
 
-message TeleportBuddiesEvent {
-	int32 dungeon_id = 1;
-}
-
-message ZaapRespawnUpdatedEvent {
+message TeleportPlayerClosedEvent {
 	int64 map_id = 1;
+	int64 requester_id = 2;
 }
 
-message ZaapKnownListEvent {
-	repeated int64 destinations = 1;
+message TeleportPlayerOfferEvent {
+	int64 map_id = 1;
+	string message = 2;
+	int32 time_left = 3;
+	int64 requester_id = 4;
+}
+
+message TeleportRequest {
+	.com.ankama.dofus.server.game.protocol.teleportation.Teleporter source_type = 1;
+	.com.ankama.dofus.server.game.protocol.teleportation.Teleporter destination_type = 2;
+	int64 map_id = 3;
+}
+
+message TeleportToBuddyAnswerRequest {
+	bool accept = 1;
 }
 
 message TeleportToBuddyClosedEvent {
@@ -106,9 +93,22 @@ message TeleportToBuddyOfferEvent {
 	int32 time_left = 3;
 }
 
-message TeleportRequest {
-	.com.ankama.dofus.server.game.protocol.teleportation.Teleporter source_type = 1;
-	.com.ankama.dofus.server.game.protocol.teleportation.Teleporter destination_type = 2;
-	int64 map_id = 3;
+enum Teleporter {
+	TELEPORTER_ZAAP = 0;
+	TELEPORTER_SUBWAY = 1;
+	TELEPORTER_PRISM = 2;
+	TELEPORTER_HAVEN_BAG = 3;
+	TELEPORTER_ANOMALY = 4;
+}
+
+message ZaapKnownListEvent {
+	repeated int64 destinations = 1;
+}
+
+message ZaapRespawnSaveRequest {
+}
+
+message ZaapRespawnUpdatedEvent {
+	int64 map_id = 1;
 }
 

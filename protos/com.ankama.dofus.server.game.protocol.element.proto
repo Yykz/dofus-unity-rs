@@ -16,10 +16,6 @@ message LockableCodeResultEvent {
 	}
 }
 
-message LockableUseCodeRequest {
-	string code = 1;
-}
-
 message LockableShowCodeDialogEvent {
 	.com.ankama.dofus.server.game.protocol.element.LockableShowCodeDialogEvent.Action action = 1;
 	int32 code_size = 2;
@@ -28,6 +24,17 @@ message LockableShowCodeDialogEvent {
 		CHANGE = 0;
 		USE = 1;
 	}
+}
+
+message LockableStateUpdateHouseDoorEvent {
+	int32 house_id = 1;
+	int32 house_instance_id = 2;
+	bool second_hand = 3;
+	bool locked = 4;
+}
+
+message LockableUseCodeRequest {
+	string code = 1;
 }
 
 message PurchasableDialogEvent {
@@ -41,12 +48,5 @@ message PurchasableDialogEvent {
 		BUY = 0;
 		SELL = 1;
 	}
-}
-
-message LockableStateUpdateHouseDoorEvent {
-	int32 house_id = 1;
-	int32 house_instance_id = 2;
-	bool second_hand = 3;
-	bool locked = 4;
 }
 

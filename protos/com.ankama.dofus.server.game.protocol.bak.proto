@@ -2,7 +2,39 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.bak;
 
-message BakConsumeBufferRequest {
+message BakActionEvent {
+	int64 kamas = 1;
+	int64 amount = 2;
+	int32 rate = 3;
+	.com.ankama.dofus.server.game.protocol.bak.BidAction bid_action = 4;
+	string transaction_uuid = 5;
+}
+
+message BakActionRequest {
+	int64 kamas = 1;
+	int64 ogrines = 2;
+	int32 rate = 3;
+	.com.ankama.dofus.server.game.protocol.bak.BidAction bid_action = 4;
+}
+
+message BakApiKeyEvent {
+	string token = 1;
+}
+
+message BakApiTokenRequest {
+}
+
+message BakBufferListEvent {
+	repeated .com.ankama.dofus.server.game.protocol.bak.BufferInformation buffers = 1;
+}
+
+message BakBufferListRequest {
+}
+
+message BakBuyValidationEvent {
+	.com.ankama.dofus.server.game.protocol.bak.BakTransactionValidationEvent transaction_validation = 1;
+	int64 amount = 2;
+	string email = 3;
 }
 
 message BakCancelBidRequest {
@@ -16,46 +48,14 @@ message BakCancelBidRequest {
 	}
 }
 
-message BakApiKeyEvent {
-	string token = 1;
-}
-
-message BakActionEvent {
-	int64 kamas = 1;
-	int64 amount = 2;
-	int32 rate = 3;
-	.com.ankama.dofus.server.game.protocol.bak.BidAction bid_action = 4;
-	string transaction_uuid = 5;
-}
-
-message BakBufferListRequest {
-}
-
-message BakApiTokenRequest {
-}
-
-message BakActionRequest {
-	int64 kamas = 1;
-	int64 ogrines = 2;
-	int32 rate = 3;
-	.com.ankama.dofus.server.game.protocol.bak.BidAction bid_action = 4;
-}
-
-message BufferInformation {
-	int64 buffer_id = 1;
-	int64 buffer_amount = 2;
+message BakConsumeBufferRequest {
 }
 
 message BakShopTokenEvent {
 	string token = 1;
 }
 
-message BakTransactionValidationRequest {
-	string transaction_uuid = 1;
-}
-
-message BakBufferListEvent {
-	repeated .com.ankama.dofus.server.game.protocol.bak.BufferInformation buffers = 1;
+message BakShopTokenRequest {
 }
 
 message BakTransactionValidationEvent {
@@ -76,6 +76,10 @@ message BakTransactionValidationEvent {
 	}
 }
 
+message BakTransactionValidationRequest {
+	string transaction_uuid = 1;
+}
+
 enum BidAction {
 	BID_INVALID_ACTION = 0;
 	BID_CONSUME_BUFF = 1;
@@ -86,12 +90,8 @@ enum BidAction {
 	BID_BUY_OGRINE = 6;
 }
 
-message BakShopTokenRequest {
-}
-
-message BakBuyValidationEvent {
-	.com.ankama.dofus.server.game.protocol.bak.BakTransactionValidationEvent transaction_validation = 1;
-	int64 amount = 2;
-	string email = 3;
+message BufferInformation {
+	int64 buffer_id = 1;
+	int64 buffer_amount = 2;
 }
 

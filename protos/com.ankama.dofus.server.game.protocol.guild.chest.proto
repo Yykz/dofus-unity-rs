@@ -2,8 +2,18 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.guild.chest;
 
+message GuildChestContributionStartRequest {
+}
+
+message GuildChestContributionStopRequest {
+}
+
 message GuildChestCurrentListenersAddEvent {
 	string players = 1;
+}
+
+message GuildChestCurrentListenersEvent {
+	repeated string players = 1;
 }
 
 message GuildChestCurrentListenersRemoveEvent {
@@ -13,12 +23,7 @@ message GuildChestCurrentListenersRemoveEvent {
 message GuildChestStructureStartListeningRequest {
 }
 
-message GuildChestTabLastContributionDateEvent {
-	int64 last_contribution_date = 1;
-}
-
-message GuildChestTabSelectRequest {
-	int32 tab_number = 1;
+message GuildChestStructureStopListeningRequest {
 }
 
 message GuildChestTabContributionEvent {
@@ -29,22 +34,6 @@ message GuildChestTabContributionEvent {
 	int64 chest_contribution_delay = 5;
 }
 
-message GuildChestContributionStopRequest {
-}
-
-message GuildChestCurrentListenersEvent {
-	repeated string players = 1;
-}
-
-message GuildChestContributionStartRequest {
-}
-
-message GuildChestStructureStopListeningRequest {
-}
-
-message GuildChestTabContributionsRequest {
-}
-
 message GuildChestTabContributionsEvent {
 	repeated .com.ankama.dofus.server.game.protocol.guild.chest.GuildChestTabContributionsEvent.Contribution contributions = 1;
 
@@ -53,6 +42,17 @@ message GuildChestTabContributionsEvent {
 		string contributor_name = 2;
 		int64 amount = 3;
 	}
+}
+
+message GuildChestTabContributionsRequest {
+}
+
+message GuildChestTabLastContributionDateEvent {
+	int64 last_contribution_date = 1;
+}
+
+message GuildChestTabSelectRequest {
+	int32 tab_number = 1;
 }
 
 message GuildChestTabUpdateRequest {

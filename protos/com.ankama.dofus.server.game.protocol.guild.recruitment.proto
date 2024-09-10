@@ -8,10 +8,10 @@ message GuildRecruitmentEvent {
 	.com.ankama.dofus.server.game.protocol.common.GuildRecruitmentInformation recruitment = 1;
 }
 
-message GuildRecruitmentUpdateRequest {
-	.com.ankama.dofus.server.game.protocol.common.GuildRecruitmentInformation recruitment = 1;
+message GuildRecruitmentInvalidateEvent {
 }
 
-message GuildRecruitmentInvalidateEvent {
+message GuildRecruitmentUpdateRequest {
+	.com.ankama.dofus.server.game.protocol.common.GuildRecruitmentInformation recruitment = 1;
 }
 

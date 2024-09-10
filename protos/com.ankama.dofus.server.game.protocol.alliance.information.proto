@@ -4,17 +4,37 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.alliance.information;
 
-message AllianceEmblemModificationValidRequest {
-	.com.ankama.dofus.server.game.protocol.common.SocialEmblem alliance_emblem = 1;
+message AllianceBulletinEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialNoticeInformation bulletin_info = 1;
 }
 
-message AllianceModificationValidRequest {
+message AllianceBulletinSetErrorEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialNoticeError reason = 1;
+}
+
+message AllianceBulletinSetRequest {
+	string content = 1;
+}
+
+message AllianceCreationResultEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialGroupOperationResult result = 1;
+}
+
+message AllianceCreationStartedEvent {
+}
+
+message AllianceCreationValidRequest {
 	string alliance_name = 1;
 	string alliance_tag = 2;
 	.com.ankama.dofus.server.game.protocol.common.SocialEmblem alliance_emblem = 3;
 }
 
-message AllianceMemberStartWarningOnConnectionRequest {
+message AllianceEmblemModificationValidRequest {
+	.com.ankama.dofus.server.game.protocol.common.SocialEmblem alliance_emblem = 1;
+}
+
+message AllianceFactsErrorEvent {
+	string alliance_uuid = 1;
 }
 
 message AllianceFactsEvent {
@@ -25,30 +45,8 @@ message AllianceFactsEvent {
 	repeated int32 controlled_subarea_ids = 3;
 }
 
-message AllianceBulletinEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialNoticeInformation bulletin_info = 1;
-}
-
-message AllianceMotdSetErrorEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialNoticeError reason = 1;
-}
-
-message AllianceBulletinSetRequest {
-	string content = 1;
-}
-
 message AllianceFactsRequest {
 	string alliance_uuid = 1;
-}
-
-message AllianceInsiderInformationRequest {
-}
-
-message AllianceSummaryEvent {
-	int64 offset = 1;
-	int64 count = 2;
-	int64 total = 3;
-	repeated .com.ankama.dofus.server.game.protocol.common.AllianceInformation alliances = 4;
 }
 
 message AllianceInsiderInformationEvent {
@@ -58,23 +56,13 @@ message AllianceInsiderInformationEvent {
 	repeated .com.ankama.dofus.server.game.protocol.common.TaxCollectorInformation tax_collectors = 4;
 }
 
-message AllianceMotdEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialNoticeInformation motd_info = 1;
+message AllianceInsiderInformationRequest {
 }
 
-message AllianceNameAndTagModificationValidRequest {
-	string alliance_name = 1;
-	string alliance_tag = 2;
+message AllianceMemberStartWarningOnConnectionRequest {
 }
 
-message AllianceMotdSetRequest {
-	string content = 1;
-}
-
-message AllianceCreationValidRequest {
-	string alliance_name = 1;
-	string alliance_tag = 2;
-	.com.ankama.dofus.server.game.protocol.common.SocialEmblem alliance_emblem = 3;
+message AllianceMemberStopWarningOnConnectionRequest {
 }
 
 message AllianceModificationResultEvent {
@@ -85,6 +73,36 @@ message AllianceModificationStartedEvent {
 	bool can_change_name = 1;
 	bool can_change_tag = 2;
 	bool can_change_emblem = 3;
+}
+
+message AllianceModificationValidRequest {
+	string alliance_name = 1;
+	string alliance_tag = 2;
+	.com.ankama.dofus.server.game.protocol.common.SocialEmblem alliance_emblem = 3;
+}
+
+message AllianceMotdEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialNoticeInformation motd_info = 1;
+}
+
+message AllianceMotdSetErrorEvent {
+	.com.ankama.dofus.server.game.protocol.common.SocialNoticeError reason = 1;
+}
+
+message AllianceMotdSetRequest {
+	string content = 1;
+}
+
+message AllianceNameAndTagModificationValidRequest {
+	string alliance_name = 1;
+	string alliance_tag = 2;
+}
+
+message AllianceSummaryEvent {
+	int64 offset = 1;
+	int64 count = 2;
+	int64 total = 3;
+	repeated .com.ankama.dofus.server.game.protocol.common.AllianceInformation alliances = 4;
 }
 
 message AllianceSummaryRequest {
@@ -114,23 +132,5 @@ message AllianceSummaryRequest {
 		SORT_BY_NB_TERRITORIES = 2;
 		SORT_BY_ALLIANCE_NB_MEMBERS = 3;
 	}
-}
-
-message AllianceMemberStopWarningOnConnectionRequest {
-}
-
-message AllianceCreationStartedEvent {
-}
-
-message AllianceBulletinSetErrorEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialNoticeError reason = 1;
-}
-
-message AllianceFactsErrorEvent {
-	string alliance_uuid = 1;
-}
-
-message AllianceCreationResultEvent {
-	.com.ankama.dofus.server.game.protocol.common.SocialGroupOperationResult result = 1;
 }
 

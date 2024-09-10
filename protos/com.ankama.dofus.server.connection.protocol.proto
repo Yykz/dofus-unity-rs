@@ -2,30 +2,30 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.connection.protocol;
 
-message LoginRequest {
-	string login = 1;
+message AcquaintanceServersRequest {
+	string name = 1;
+	string tag = 2;
 }
 
-message Server {
-	int32 id = 1;
-	.com.ankama.dofus.server.connection.protocol.Server.Status status = 2;
-	bool mono_account = 3;
-
-	enum Status {
-		ONLINE = 0;
-		MAINTENANCE = 1;
+message AcquaintanceServersResponse {
+	oneof result {
+		.com.ankama.dofus.server.connection.protocol.AcquaintanceServersResponse.Servers servers = 1;
+		.com.ankama.dofus.server.connection.protocol.AcquaintanceServersResponse.Error error = 2;
 	}
-}
 
-message Response {
-	string uuid = 1;
-	oneof content {
-		.com.ankama.dofus.server.connection.protocol.Pong pong = 2;
-		.com.ankama.dofus.server.connection.protocol.IdentificationResponse identification = 3;
-		.com.ankama.dofus.server.connection.protocol.SelectServerResponse select_server = 4;
-		.com.ankama.dofus.server.connection.protocol.ForceAccountResponse force_account = 5;
-		.com.ankama.dofus.server.connection.protocol.FriendListResponse friend_list = 6;
-		.com.ankama.dofus.server.connection.protocol.AcquaintanceServersResponse acquaintance_servers_response = 7;
+	message Servers {
+		repeated int32 servers = 1;
+	}
+
+	message Error {
+		.com.ankama.dofus.server.connection.protocol.AcquaintanceServersResponse.Error.Reason reason = 1;
+
+		enum Reason {
+			UNKNOWN = 0;
+			NO_RESULT = 1;
+			FLOOD = 2;
+			INVALID_ACCOUNT = 3;
+		}
 	}
 }
 
@@ -64,26 +64,58 @@ message CharacterInformation {
 	}
 }
 
-message ServerInformation {
-	.com.ankama.dofus.server.connection.protocol.Server server = 1;
-	.com.ankama.dofus.server.connection.protocol.ServerInformation.Accessibility accessibility = 2;
-	repeated .com.ankama.dofus.server.connection.protocol.CharacterInformation characters = 3;
-
-	enum Accessibility {
-		ACCESSIBLE = 0;
-		SUBSCRIBE_RESTRICTION = 1;
-		MONO_ACCOUNT_RESTRICTION = 2;
-		UNKNOWN = 3;
+message Event {
+	oneof content {
+		.com.ankama.dofus.server.connection.protocol.Server server = 1;
+		.com.ankama.dofus.server.connection.protocol.UpdateServerEvent update_server_event = 2;
 	}
 }
 
-message AcquaintanceServersRequest {
-	string name = 1;
-	string tag = 2;
+message ForceAccountError {
 }
 
 message ForceAccountRequest {
 	int64 account_id = 1;
+}
+
+message ForceAccountResponse {
+	oneof content {
+		.com.ankama.dofus.server.connection.protocol.ForceAccountStatus success = 2;
+		.com.ankama.dofus.server.connection.protocol.ForceAccountError error = 3;
+	}
+}
+
+message ForceAccountStatus {
+	bool is_forced = 1;
+	int64 forced_account_id = 2;
+	string forced_account_nickname = 3;
+	string forced_account_tag = 4;
+	.com.ankama.dofus.server.connection.protocol.ServerList server_list = 5;
+}
+
+message FriendListRequest {
+}
+
+message FriendListResponse {
+	oneof result {
+		.com.ankama.dofus.server.connection.protocol.FriendListResponse.FriendList friends = 1;
+		.com.ankama.dofus.server.connection.protocol.FriendListResponse.Error error = 2;
+	}
+
+	enum Error {
+		UNKNOWN = 0;
+		FLOODING = 1;
+	}
+
+	message FriendList {
+		repeated .com.ankama.dofus.server.connection.protocol.FriendListResponse.FriendList.Friend friends = 1;
+
+		message Friend {
+			string account_name = 1;
+			string account_tag = 2;
+			repeated int32 servers = 3;
+		}
+	}
 }
 
 message IdentificationRequest {
@@ -92,19 +124,6 @@ message IdentificationRequest {
 	oneof identification_type {
 		.com.ankama.dofus.server.connection.protocol.TokenRequest token_request = 3;
 		.com.ankama.dofus.server.connection.protocol.LoginRequest login_request = 4;
-	}
-}
-
-message ServerList {
-	int32 max_slot_by_type = 2;
-	repeated .com.ankama.dofus.server.connection.protocol.ServerInformation servers = 1;
-}
-
-message Message {
-	oneof content {
-		.com.ankama.dofus.server.connection.protocol.Request request = 1;
-		.com.ankama.dofus.server.connection.protocol.Response response = 2;
-		.com.ankama.dofus.server.connection.protocol.Event event = 3;
 	}
 }
 
@@ -156,68 +175,25 @@ message IdentificationResponse {
 	}
 }
 
-message ForceAccountStatus {
-	bool is_forced = 1;
-	int64 forced_account_id = 2;
-	string forced_account_nickname = 3;
-	string forced_account_tag = 4;
-	.com.ankama.dofus.server.connection.protocol.ServerList server_list = 5;
+message LoginRequest {
+	string login = 1;
 }
 
-message ReleaseAccountRequest {
+message Message {
+	oneof content {
+		.com.ankama.dofus.server.connection.protocol.Request request = 1;
+		.com.ankama.dofus.server.connection.protocol.Response response = 2;
+		.com.ankama.dofus.server.connection.protocol.Event event = 3;
+	}
 }
 
 message Ping {
 }
 
-message FriendListResponse {
-	oneof result {
-		.com.ankama.dofus.server.connection.protocol.FriendListResponse.FriendList friends = 1;
-		.com.ankama.dofus.server.connection.protocol.FriendListResponse.Error error = 2;
-	}
-
-	enum Error {
-		UNKNOWN = 0;
-		FLOODING = 1;
-	}
-
-	message FriendList {
-		repeated .com.ankama.dofus.server.connection.protocol.FriendListResponse.FriendList.Friend friends = 1;
-
-		message Friend {
-			string account_name = 1;
-			string account_tag = 2;
-			repeated int32 servers = 3;
-		}
-	}
+message Pong {
 }
 
-message UpdateServerEvent {
-	.com.ankama.dofus.server.connection.protocol.ServerInformation server_information = 1;
-}
-
-message SelectServerRequest {
-	int32 server = 1;
-}
-
-message Event {
-	oneof content {
-		.com.ankama.dofus.server.connection.protocol.Server server = 1;
-		.com.ankama.dofus.server.connection.protocol.UpdateServerEvent update_server_event = 2;
-	}
-}
-
-message FriendListRequest {
-}
-
-message TokenRequest {
-	string token = 1;
-	.com.ankama.dofus.server.connection.protocol.TokenRequest.Shield shield = 2;
-
-	message Shield {
-		int64 certificate_id = 1;
-		string certificate_hash = 2;
-	}
+message ReleaseAccountRequest {
 }
 
 message Request {
@@ -233,36 +209,20 @@ message Request {
 	}
 }
 
-message AcquaintanceServersResponse {
-	oneof result {
-		.com.ankama.dofus.server.connection.protocol.AcquaintanceServersResponse.Servers servers = 1;
-		.com.ankama.dofus.server.connection.protocol.AcquaintanceServersResponse.Error error = 2;
-	}
-
-	message Servers {
-		repeated int32 servers = 1;
-	}
-
-	message Error {
-		.com.ankama.dofus.server.connection.protocol.AcquaintanceServersResponse.Error.Reason reason = 1;
-
-		enum Reason {
-			UNKNOWN = 0;
-			NO_RESULT = 1;
-			FLOOD = 2;
-			INVALID_ACCOUNT = 3;
-		}
-	}
-}
-
-message ForceAccountResponse {
+message Response {
+	string uuid = 1;
 	oneof content {
-		.com.ankama.dofus.server.connection.protocol.ForceAccountStatus success = 2;
-		.com.ankama.dofus.server.connection.protocol.ForceAccountError error = 3;
+		.com.ankama.dofus.server.connection.protocol.Pong pong = 2;
+		.com.ankama.dofus.server.connection.protocol.IdentificationResponse identification = 3;
+		.com.ankama.dofus.server.connection.protocol.SelectServerResponse select_server = 4;
+		.com.ankama.dofus.server.connection.protocol.ForceAccountResponse force_account = 5;
+		.com.ankama.dofus.server.connection.protocol.FriendListResponse friend_list = 6;
+		.com.ankama.dofus.server.connection.protocol.AcquaintanceServersResponse acquaintance_servers_response = 7;
 	}
 }
 
-message Pong {
+message SelectServerRequest {
+	int32 server = 1;
 }
 
 message SelectServerResponse {
@@ -285,6 +245,46 @@ message SelectServerResponse {
 	}
 }
 
-message ForceAccountError {
+message Server {
+	int32 id = 1;
+	.com.ankama.dofus.server.connection.protocol.Server.Status status = 2;
+	bool mono_account = 3;
+
+	enum Status {
+		ONLINE = 0;
+		MAINTENANCE = 1;
+	}
+}
+
+message ServerInformation {
+	.com.ankama.dofus.server.connection.protocol.Server server = 1;
+	.com.ankama.dofus.server.connection.protocol.ServerInformation.Accessibility accessibility = 2;
+	repeated .com.ankama.dofus.server.connection.protocol.CharacterInformation characters = 3;
+
+	enum Accessibility {
+		ACCESSIBLE = 0;
+		SUBSCRIBE_RESTRICTION = 1;
+		MONO_ACCOUNT_RESTRICTION = 2;
+		UNKNOWN = 3;
+	}
+}
+
+message ServerList {
+	int32 max_slot_by_type = 2;
+	repeated .com.ankama.dofus.server.connection.protocol.ServerInformation servers = 1;
+}
+
+message TokenRequest {
+	string token = 1;
+	.com.ankama.dofus.server.connection.protocol.TokenRequest.Shield shield = 2;
+
+	message Shield {
+		int64 certificate_id = 1;
+		string certificate_hash = 2;
+	}
+}
+
+message UpdateServerEvent {
+	.com.ankama.dofus.server.connection.protocol.ServerInformation server_information = 1;
 }
 

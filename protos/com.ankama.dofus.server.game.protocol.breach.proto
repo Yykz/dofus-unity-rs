@@ -4,39 +4,48 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.breach;
 
-message BreachRewardBuyRequest {
-	int32 reward_id = 1;
-}
-
-message BreachRewardsEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.BreachReward rewards = 1;
-}
-
-message BreachSavedEvent {
-	bool saved = 1;
-}
-
-message BreachTeleportRequest {
-}
-
 message BreachBonusEvent {
 	.com.ankama.dofus.server.game.protocol.common.ObjectEffect bonus = 1;
 }
 
-message BreachRoomUnlockRequest {
-	int32 room_id = 1;
-}
-
-message BreachTeleportResultEvent {
-	bool teleported = 1;
+message BreachBranchesEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.BreachBranch branches = 1;
 }
 
 message BreachBudgetEvent {
 	int32 budget = 1;
 }
 
-message BreachBranchesEvent {
-	repeated .com.ankama.dofus.server.game.protocol.common.BreachBranch branches = 1;
+message BreachCharactersEvent {
+	repeated int64 players = 1;
+}
+
+message BreachEnterEvent {
+	int64 owner = 1;
+}
+
+message BreachExitRequest {
+}
+
+message BreachExitResultEvent {
+	bool exited = 1;
+}
+
+message BreachInvitationAnswerRequest {
+	bool accepted = 1;
+}
+
+message BreachInvitationCloseEvent {
+	.com.ankama.dofus.server.game.protocol.common.Character host = 1;
+}
+
+message BreachInvitationOfferEvent {
+	.com.ankama.dofus.server.game.protocol.common.Character host = 1;
+	int32 time_left_before_cancel = 2;
+}
+
+message BreachInvitationRequest {
+	repeated int64 guests = 1;
 }
 
 message BreachKickRequest {
@@ -48,27 +57,19 @@ message BreachRewardBoughtEvent {
 	bool bought = 2;
 }
 
-message BreachStateEvent {
-	.com.ankama.dofus.server.game.protocol.common.Character owner = 1;
-	int32 budget = 3;
-	bool saved = 4;
-	repeated .com.ankama.dofus.server.game.protocol.common.ObjectEffect bonuses = 2;
+message BreachRewardBuyRequest {
+	int32 reward_id = 1;
 }
 
-message BreachExitResultEvent {
-	bool exited = 1;
+message BreachRewardsEvent {
+	repeated .com.ankama.dofus.server.game.protocol.common.BreachReward rewards = 1;
 }
 
-message BreachInvitationAnswerRequest {
-	bool accepted = 1;
+message BreachRoomLockedEvent {
 }
 
-message BreachInvitationOfferEvent {
-	.com.ankama.dofus.server.game.protocol.common.Character host = 1;
-	int32 time_left_before_cancel = 2;
-}
-
-message BreachExitRequest {
+message BreachRoomUnlockRequest {
+	int32 room_id = 1;
 }
 
 message BreachRoomUnlockResultEvent {
@@ -81,22 +82,21 @@ message BreachRoomUnlockResultEvent {
 	}
 }
 
-message BreachRoomLockedEvent {
+message BreachSavedEvent {
+	bool saved = 1;
 }
 
-message BreachInvitationCloseEvent {
-	.com.ankama.dofus.server.game.protocol.common.Character host = 1;
+message BreachStateEvent {
+	.com.ankama.dofus.server.game.protocol.common.Character owner = 1;
+	int32 budget = 3;
+	bool saved = 4;
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectEffect bonuses = 2;
 }
 
-message BreachEnterEvent {
-	int64 owner = 1;
+message BreachTeleportRequest {
 }
 
-message BreachCharactersEvent {
-	repeated int64 players = 1;
-}
-
-message BreachInvitationRequest {
-	repeated int64 guests = 1;
+message BreachTeleportResultEvent {
+	bool teleported = 1;
 }
 

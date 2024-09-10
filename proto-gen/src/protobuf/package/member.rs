@@ -15,6 +15,15 @@ pub enum PackageMember<State> {
 }
 impl_display_via_display_with_tabs!(PackageMember<Resolved>);
 
+impl<State> PackageMember<State> {
+    pub fn name(&self) -> &str {
+        match self {
+            PackageMember::Enum(e) => &e.name,
+            PackageMember::Message(m) => &m.name,
+        }
+    }
+}
+
 impl PackageMember<Unresolved> {
     pub fn resolve(
         self,

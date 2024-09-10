@@ -4,6 +4,81 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.social;
 
+message AdditionalSmileyEvent {
+	repeated int32 pack_id = 1;
+}
+
+message AlignmentRankUpdateEvent {
+	int32 alignment_rank = 1;
+	bool verbose = 2;
+}
+
+message DiceRollRequest {
+	int32 dice = 1;
+	int32 faces = 2;
+}
+
+message JoinFriendRequest {
+	int64 actor_id = 1;
+}
+
+message JoinSpouseRequest {
+}
+
+message MoodUpdateEvent {
+	int64 account_id = 1;
+	int64 character_id = 2;
+	int32 smiley_id = 3;
+}
+
+message PlayersMapAttackableStatusUpdateEvent {
+	repeated .com.ankama.dofus.server.game.protocol.social.PlayersMapAttackableStatusUpdateEvent.AttackableStatus pvp_players = 1;
+
+	message AttackableStatus {
+		int64 character_id = 1;
+		.com.ankama.dofus.server.game.protocol.common.AttackableStatus status = 2;
+		int32 koth_role = 3;
+		optional int32 picto_score = 4;
+	}
+}
+
+message PvpEnableSetRequest {
+	bool enable = 1;
+}
+
+message SelfAttackableStatusUpdateEvent {
+	.com.ankama.dofus.server.game.protocol.common.AttackableStatus status = 1;
+	int64 probation_time = 2;
+	int32 koth_role = 3;
+	int32 picto_score = 4;
+}
+
+message SetMoodEvent {
+	.com.ankama.dofus.server.game.protocol.social.SetMoodEvent.Result result = 1;
+	int32 smiley_id = 2;
+
+	enum Result {
+		OK = 0;
+		ERROR_UNKNOWN = 1;
+		ERROR_FLOOD = 2;
+	}
+}
+
+message SetMoodRequest {
+	int32 smiley_id = 1;
+}
+
+message SmileyEvent {
+	int64 entity_id = 1;
+	int32 smiley_id = 2;
+	optional int64 account_id = 3;
+	optional int32 cell_id = 4;
+}
+
+message SmileyRequest {
+	int32 smiley_id = 1;
+}
+
 message SpouseInformationEvent {
 	int64 account_id = 1;
 	int64 character_id = 2;
@@ -26,89 +101,14 @@ message SpouseInformationEvent {
 	}
 }
 
-message JoinSpouseRequest {
-}
-
-message SubscribeSpouseCompassRequest {
-	bool enable = 1;
+message SpouseInformationRequest {
 }
 
 message SpouseStatusEvent {
 	bool has_spouse = 1;
 }
 
-message MoodUpdateEvent {
-	int64 account_id = 1;
-	int64 character_id = 2;
-	int32 smiley_id = 3;
-}
-
-message PvpEnableSetRequest {
+message SubscribeSpouseCompassRequest {
 	bool enable = 1;
-}
-
-message AdditionalSmileyEvent {
-	repeated int32 pack_id = 1;
-}
-
-message JoinFriendRequest {
-	int64 actor_id = 1;
-}
-
-message PlayersMapAttackableStatusUpdateEvent {
-	repeated .com.ankama.dofus.server.game.protocol.social.PlayersMapAttackableStatusUpdateEvent.AttackableStatus pvp_players = 1;
-
-	message AttackableStatus {
-		int64 character_id = 1;
-		.com.ankama.dofus.server.game.protocol.common.AttackableStatus status = 2;
-		int32 koth_role = 3;
-		optional int32 picto_score = 4;
-	}
-}
-
-message SmileyEvent {
-	int64 entity_id = 1;
-	int32 smiley_id = 2;
-	optional int64 account_id = 3;
-	optional int32 cell_id = 4;
-}
-
-message DiceRollRequest {
-	int32 dice = 1;
-	int32 faces = 2;
-}
-
-message SelfAttackableStatusUpdateEvent {
-	.com.ankama.dofus.server.game.protocol.common.AttackableStatus status = 1;
-	int64 probation_time = 2;
-	int32 koth_role = 3;
-	int32 picto_score = 4;
-}
-
-message SpouseInformationRequest {
-}
-
-message SmileyRequest {
-	int32 smiley_id = 1;
-}
-
-message SetMoodEvent {
-	.com.ankama.dofus.server.game.protocol.social.SetMoodEvent.Result result = 1;
-	int32 smiley_id = 2;
-
-	enum Result {
-		OK = 0;
-		ERROR_UNKNOWN = 1;
-		ERROR_FLOOD = 2;
-	}
-}
-
-message AlignmentRankUpdateEvent {
-	int32 alignment_rank = 1;
-	bool verbose = 2;
-}
-
-message SetMoodRequest {
-	int32 smiley_id = 1;
 }
 

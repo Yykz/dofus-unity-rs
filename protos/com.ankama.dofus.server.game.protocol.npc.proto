@@ -4,22 +4,24 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.npc;
 
-message TaxCollectorDialogQuestionEvent {
-	.com.ankama.dofus.server.game.protocol.common.AllianceInformation alliance_information = 1;
-	int32 max_pods = 2;
-	int32 prospecting = 3;
-	int32 tax_collectors_count = 4;
-	optional int32 possible_attack = 5;
-	int32 looted_pods = 6;
-	int64 looted_items_value = 7;
+message EntityTalkEvent {
+	int64 entity_id = 1;
+	int32 text_id = 2;
+	repeated string parameters = 3;
 }
 
-message PrismDialogQuestionEvent {
-}
+message NpcDialogCreationEvent {
+	int64 map_id = 1;
+	int32 npc_id = 2;
+	optional .com.ankama.dofus.server.game.protocol.npc.NpcDialogCreationEvent.PortalType portal_type = 3;
 
-message PlayEmoteOnNpcEvent {
-	int32 npc_id = 1;
-	int32 emote_id = 2;
+	enum PortalType {
+		UNSUPPORTED = 0;
+		ENUTROSOR = 1;
+		SRAMBAD = 2;
+		XELORIUM = 3;
+		ECAFLIPUS = 4;
+	}
 }
 
 message NpcDialogQuestionEvent {
@@ -38,6 +40,10 @@ message NpcDialogQuestionEvent {
 	}
 }
 
+message NpcDialogReplyRequest {
+	int32 reply_id = 1;
+}
+
 message NpcGenericActionFailureEvent {
 }
 
@@ -45,16 +51,6 @@ message NpcGenericActionRequest {
 	int32 npc_id = 1;
 	int32 npc_action_id = 2;
 	int64 npc_map_id = 3;
-}
-
-message EntityTalkEvent {
-	int64 entity_id = 1;
-	int32 text_id = 2;
-	repeated string parameters = 3;
-}
-
-message NpcDialogReplyRequest {
-	int32 reply_id = 1;
 }
 
 message NpcsMapQuestStatusUpdateEvent {
@@ -77,22 +73,26 @@ message PlayAnimationOnNpcEvent {
 	string animation = 2;
 }
 
+message PlayEmoteOnNpcEvent {
+	int32 npc_id = 1;
+	int32 emote_id = 2;
+}
+
 message PlaySpellScriptOnNpcEvent {
 	int32 npc_id = 1;
 	int32 script_id = 2;
 }
 
-message NpcDialogCreationEvent {
-	int64 map_id = 1;
-	int32 npc_id = 2;
-	optional .com.ankama.dofus.server.game.protocol.npc.NpcDialogCreationEvent.PortalType portal_type = 3;
+message PrismDialogQuestionEvent {
+}
 
-	enum PortalType {
-		UNSUPPORTED = 0;
-		ENUTROSOR = 1;
-		SRAMBAD = 2;
-		XELORIUM = 3;
-		ECAFLIPUS = 4;
-	}
+message TaxCollectorDialogQuestionEvent {
+	.com.ankama.dofus.server.game.protocol.common.AllianceInformation alliance_information = 1;
+	int32 max_pods = 2;
+	int32 prospecting = 3;
+	int32 tax_collectors_count = 4;
+	optional int32 possible_attack = 5;
+	int32 looted_pods = 6;
+	int64 looted_items_value = 7;
 }
 

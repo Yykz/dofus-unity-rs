@@ -4,20 +4,22 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.treasure.hunt;
 
-message TreasureHuntFinishedEvent {
-	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
-}
-
-message TreasureHuntLegendaryRequest {
-	int32 legendary_id = 1;
-}
-
-message TreasureHuntGiveUpRequest {
-	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
-}
-
 message PortalUseRequest {
 	int32 portal_id = 1;
+}
+
+message TreasureHuntAnswerEvent {
+	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
+	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntAnswerEvent.Result result = 2;
+
+	enum Result {
+		ERROR_UNDEFINED = 0;
+		ERROR_NO_QUEST_FOUND = 1;
+		ERROR_ALREADY_HAVE_QUEST = 2;
+		ERROR_NOT_AVAILABLE = 3;
+		ERROR_DAILY_LIMIT_EXCEEDED = 4;
+		OK = 5;
+	}
 }
 
 message TreasureHuntDigAnswerEvent {
@@ -36,33 +38,8 @@ message TreasureHuntDigAnswerEvent {
 	}
 }
 
-message TreasureHuntAnswerEvent {
-	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
-	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntAnswerEvent.Result result = 2;
-
-	enum Result {
-		ERROR_UNDEFINED = 0;
-		ERROR_NO_QUEST_FOUND = 1;
-		ERROR_ALREADY_HAVE_QUEST = 2;
-		ERROR_NOT_AVAILABLE = 3;
-		ERROR_DAILY_LIMIT_EXCEEDED = 4;
-		OK = 5;
-	}
-}
-
 message TreasureHuntDigRequest {
 	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
-}
-
-enum TreasureHuntType {
-	CLASSIC = 0;
-	PORTAL = 1;
-	LEGENDARY = 2;
-}
-
-message TreasureHuntFlagRemoveRequest {
-	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
-	int32 index = 2;
 }
 
 message TreasureHuntEvent {
@@ -118,6 +95,10 @@ message TreasureHuntEvent {
 	}
 }
 
+message TreasureHuntFinishedEvent {
+	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
+}
+
 message TreasureHuntFlagAnswerEvent {
 	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
 	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntFlagAnswerEvent.FlagResult result = 2;
@@ -134,12 +115,31 @@ message TreasureHuntFlagAnswerEvent {
 	}
 }
 
+message TreasureHuntFlagRemoveRequest {
+	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
+	int32 index = 2;
+}
+
 message TreasureHuntFlagRequest {
 	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
 	int32 index = 2;
 }
 
+message TreasureHuntGiveUpRequest {
+	.com.ankama.dofus.server.game.protocol.treasure.hunt.TreasureHuntType quest_type = 1;
+}
+
 message TreasureHuntLegendaryEvent {
 	repeated int32 available_legendary_ids = 1;
+}
+
+message TreasureHuntLegendaryRequest {
+	int32 legendary_id = 1;
+}
+
+enum TreasureHuntType {
+	CLASSIC = 0;
+	PORTAL = 1;
+	LEGENDARY = 2;
 }
 

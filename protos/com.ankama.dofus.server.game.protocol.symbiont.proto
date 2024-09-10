@@ -6,6 +6,15 @@ message MimicryFreeRequest {
 	int32 host_uid = 1;
 }
 
+message MimicryFreeResponse {
+	bool success = 1;
+}
+
+message MimicryRequest {
+	int32 symbiont_uid = 1;
+	int32 host_uid = 2;
+}
+
 message MimicryResponse {
 	.com.ankama.dofus.server.game.protocol.symbiont.MimicryResponse.Result result = 1;
 
@@ -17,15 +26,6 @@ message MimicryResponse {
 		DUPLICATE = 4;
 		SUCCESS = 5;
 	}
-}
-
-message MimicryRequest {
-	int32 symbiont_uid = 1;
-	int32 host_uid = 2;
-}
-
-message MimicryFreeResponse {
-	bool success = 1;
 }
 
 message WrapperObjectDissociateRequest {

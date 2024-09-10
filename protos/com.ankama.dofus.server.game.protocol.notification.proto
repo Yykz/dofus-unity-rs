@@ -2,10 +2,6 @@ syntax = "proto3";
 
 package com.ankama.dofus.server.game.protocol.notification;
 
-message NotificationUpdateFlagRequest {
-	int32 index = 1;
-}
-
 message NotificationEvent {
 	int32 id = 1;
 	bool force = 3;
@@ -13,6 +9,10 @@ message NotificationEvent {
 }
 
 message NotificationResetRequest {
+}
+
+message NotificationUpdateFlagRequest {
+	int32 index = 1;
 }
 
 message NotificationsEvent {
