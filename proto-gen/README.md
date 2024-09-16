@@ -1,4 +1,4 @@
-# protocol
+# proto-gen
 
 This crate generates [.proto](../protos) files for the Dofus Unity protocol based on the `dump.cs` file from [Il2CppDumper](https://github.com/Perfare/Il2CppDumper).
 
