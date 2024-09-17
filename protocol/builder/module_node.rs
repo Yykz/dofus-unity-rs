@@ -2,7 +2,7 @@ use std::{collections::HashMap, io::Write};
 
 #[derive(Debug, Default)]
 pub struct ModuleNode {
-    childs: HashMap<String, ModuleNode>,
+    children: HashMap<String, ModuleNode>,
     messages: Vec<String>,
 }
 
@@ -43,7 +43,7 @@ impl ModuleNode {
     ) {
         match package.next() {
             Some(e) => {
-                let child = self.childs.entry(e.to_string()).or_default();
+                let child = self.children.entry(e.to_string()).or_default();
                 child.add(package, message_type)
             }
             None => self
@@ -97,7 +97,7 @@ impl ModuleNode {
             }
         }
 
-        for (child_name, child_node) in self.childs.iter() {
+        for (child_name, child_node) in self.children.iter() {
             if child_name == "google" {
                 continue;
             }
