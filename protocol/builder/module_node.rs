@@ -35,25 +35,6 @@ fn convert_case(s: &str) -> String {
     r
 }
 
-fn longest_common_prefix_len(namespaces: &[Vec<String>]) -> usize {
-    let parts = namespaces[0].iter();
-    let mut parts_ite: Vec<_> = namespaces[1..]
-        .iter()
-        .map(|strings| strings.iter())
-        .collect();
-    let mut index = 0;
-    for part in parts {
-        if parts_ite
-            .iter_mut()
-            .any(|iparts| iparts.next() != Some(part))
-        {
-            break;
-        }
-        index += 1;
-    }
-    index
-}
-
 impl ModuleNode {
     fn add<'a, I: Iterator<Item = &'a str>>(
         &mut self,
