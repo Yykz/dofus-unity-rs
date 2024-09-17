@@ -27,8 +27,8 @@ pub fn decode(protocol: &str, input: &str) -> String {
             s.join("\n")
         }
         (_, Err(_e)) => {
-            format!("Invalid hexstream")
+            "Invalid hexstream".to_string()
         }
-        _ => format!("protocol dont exist"),
+        _ => "protocol dont exist".to_string(),
     }
 }
