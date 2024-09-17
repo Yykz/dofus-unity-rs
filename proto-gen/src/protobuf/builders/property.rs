@@ -1,4 +1,5 @@
 use convert_case::Case;
+use crate::IsNoneOr;
 
 use crate::{
     parser::{
@@ -137,14 +138,15 @@ pub struct PropertySpec<S: AsRef<str>> {
 #[allow(dead_code)]
 impl<S: AsRef<str>> PropertySpec<S> {
     pub fn matches(&self, p: &Property) -> bool {
-        self.visibility.is_none_or(|v| v.eq(&p.visibility))
+        // TODO use is_none_or from std when stabilized
+        self.visibility.is_none_or_(|v| v.eq(&p.visibility))
             && self.name.iter().all(|spec| spec.matches(&p.name))
             && self.ty.iter().all(|spec| spec.matches(&p.ty))
             && self
                 .modifiers
                 .as_ref()
-                .is_none_or(|modifiers| modifiers == &p.modifiers)
-            && self.kinds.as_ref().is_none_or(|kinds| kinds == &p.kinds)
+                .is_none_or_(|modifiers| modifiers == &p.modifiers)
+            && self.kinds.as_ref().is_none_or_(|kinds| kinds == &p.kinds)
     }
 
     pub fn ty(mut self, spec: StringSpec<S>) -> Self {

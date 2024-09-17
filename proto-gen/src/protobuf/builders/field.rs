@@ -1,4 +1,5 @@
 use convert_case::{Case, Casing};
+use crate::IsNoneOr;
 
 use std::fmt::Debug;
 
@@ -41,17 +42,18 @@ pub struct FieldSpec<S: AsRef<str> + Debug> {
 
 impl<S: AsRef<str> + Debug> FieldSpec<S> {
     pub fn matches(&self, f: &parser::data_structs::Field) -> bool {
-        self.visibility.is_none_or(|v| v.eq(&f.visibility))
+        // TODO use is_none_or from std when stabilized
+        self.visibility.is_none_or_(|v| v.eq(&f.visibility))
             && self.name.iter().all(|spec| spec.matches(&f.name))
             && self.ty.iter().all(|spec| spec.matches(&f.ty))
             && self
                 .assign_value
                 .as_ref()
-                .is_none_or(|spec| spec.matches(&f.assign_value))
+                .is_none_or_(|spec| spec.matches(&f.assign_value))
             && self
                 .modifiers
                 .as_ref()
-                .is_none_or(|modifiers| modifiers == &f.modifiers)
+                .is_none_or_(|modifiers| modifiers == &f.modifiers)
     }
 
     pub fn ty(mut self, spec: StringSpec<S>) -> Self {

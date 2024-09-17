@@ -40,5 +40,20 @@ pub(crate) mod protobuf {
     }
 }
 
+// TODO use is_none_or from std when stabilized
+trait IsNoneOr<T> {
+    #[allow(clippy::wrong_self_convention)]
+    fn is_none_or_(self, f: impl FnOnce(T) -> bool) -> bool;
+}
+
+impl<T> IsNoneOr<T> for Option<T> {
+    fn is_none_or_(self, f: impl FnOnce(T) -> bool) -> bool {
+        match self {
+            None => true,
+            Some(x) => f(x),
+        }
+    }
+}
+
 pub use parser::file::ParsedFile;
 pub use protobuf::package::ProtoPackages;
