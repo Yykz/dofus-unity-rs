@@ -1,5 +1,5 @@
-use convert_case::Case;
 use crate::IsNoneOr;
+use convert_case::Case;
 
 use crate::{
     parser::{

@@ -1,8 +1,8 @@
 use std::marker::PhantomData;
 
+use bytes::BytesMut;
 use dofus_protocol::{connection, game, unpack_any};
 use prost::{DecodeError, Message};
-use bytes::BytesMut;
 
 #[derive(Debug, Clone)]
 pub struct Decoder<T> {
@@ -59,9 +59,10 @@ pub fn decode_game(bytes: Vec<u8>) -> Vec<Result<String, String>> {
                         unpack_any(&content.unwrap())
                     )))
                 }
-                game::message::Content::Event(game::Event { content }) => {
-                    v.push(Ok(format!("Event {{ {:?} }}", unpack_any(&content.unwrap()))))
-                }
+                game::message::Content::Event(game::Event { content }) => v.push(Ok(format!(
+                    "Event {{ {:?} }}",
+                    unpack_any(&content.unwrap())
+                ))),
             },
             Err(e) => v.push(Err(format!("{e}"))),
         }

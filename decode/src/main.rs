@@ -18,11 +18,9 @@ fn main() {
             Some(hex_str) => hex::decode(hex_str).expect("Invalid hexstream"),
             None => {
                 let mut input = String::new();
-                
+
                 match stdin().lock().read_line(&mut input) {
-                    Ok(_) => {
-                        hex::decode(input.trim_end()).expect("Invalid hexstream")
-                    }
+                    Ok(_) => hex::decode(input.trim_end()).expect("Invalid hexstream"),
                     Err(err) => {
                         panic!("Failed to read stdin: {}", err);
                     }
@@ -32,17 +30,13 @@ fn main() {
     };
 
     match protocol {
-        cli::Protocol::Game => {
-            decode_game(bytes).iter().for_each(|r| match r {
-                Ok(m) => println!("{m}"),
-                Err(e) => eprintln!("{e}"),
-            })
-        }
-        cli::Protocol::Connection => {
-            decode_connection(bytes).iter().for_each(|r| match r {
-                Ok(m) => println!("{m}"),
-                Err(e) => eprintln!("{e}"),
-            })
-        }
+        cli::Protocol::Game => decode_game(bytes).iter().for_each(|r| match r {
+            Ok(m) => println!("{m}"),
+            Err(e) => eprintln!("{e}"),
+        }),
+        cli::Protocol::Connection => decode_connection(bytes).iter().for_each(|r| match r {
+            Ok(m) => println!("{m}"),
+            Err(e) => eprintln!("{e}"),
+        }),
     }
 }

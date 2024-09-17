@@ -1,5 +1,5 @@
-use convert_case::{Case, Casing};
 use crate::IsNoneOr;
+use convert_case::{Case, Casing};
 
 use std::fmt::Debug;
 

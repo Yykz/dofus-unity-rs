@@ -5,13 +5,17 @@ pub struct Comment(pub String);
 
 impl Comment {
     pub fn try_extract_namespace(&self) -> Option<&str> {
-        let trimed = self.0.trim_start_matches('/').trim();
-        trimed.strip_prefix("Namespace: ")
+        self.0
+            .trim_start_matches('/')
+            .trim()
+            .strip_prefix("Namespace: ")
     }
 
     pub fn extract_type_index(&self) -> Option<&str> {
-        let trimed = self.0.trim_start_matches('/').trim();
-        trimed.strip_prefix("TypeDefIndex: ")
+        self.0
+            .trim_start_matches('/')
+            .trim()
+            .strip_prefix("TypeDefIndex: ")
     }
 }
 
