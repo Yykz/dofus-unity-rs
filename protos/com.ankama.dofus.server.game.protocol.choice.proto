@@ -25,6 +25,12 @@ message CurrentGlobalChoiceSelectionEvent {
 	repeated .com.ankama.dofus.server.game.protocol.choice.VotedChoice choices = 2;
 }
 
+message FightChoiceSelectionEvent {
+	int32 selection_id = 1;
+	int64 target_protocol_id = 2;
+	repeated .com.ankama.dofus.server.game.protocol.choice.Choice choices = 3;
+}
+
 message GlobalChoiceSelectedEvent {
 	int32 position = 1;
 }

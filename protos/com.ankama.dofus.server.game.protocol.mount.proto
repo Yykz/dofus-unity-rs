@@ -97,7 +97,6 @@ message MountRenamedEvent {
 
 message MountRidingEvent {
 	bool is_riding = 1;
-	bool is_auto_pilot = 2;
 }
 
 message MountSetXpRatioRequest {

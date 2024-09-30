@@ -4,6 +4,13 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.exchange;
 
+message BidItem {
+	int32 uid = 1;
+	int32 quantity = 2;
+	int64 gid = 3;
+	repeated .com.ankama.dofus.server.game.protocol.common.ObjectEffect effects = 4;
+}
+
 message DecraftResultEvent {
 	repeated .com.ankama.dofus.server.game.protocol.exchange.DecraftResultEvent.DecraftedItem results = 1;
 
@@ -28,13 +35,13 @@ message ExchangeBidBuyerStartedEvent {
 }
 
 message ExchangeBidHouseBuyRequest {
-	int32 object_uid = 1;
+	int32 bid_item_uid = 1;
 	int32 quantity = 2;
 	int64 price = 3;
 }
 
 message ExchangeBidHouseBuyResultEvent {
-	int32 object_uid = 1;
+	int32 bid_item_uid = 1;
 	bool bought = 2;
 }
 
@@ -47,7 +54,7 @@ message ExchangeBidHouseGenericItemRemovedEvent {
 }
 
 message ExchangeBidHouseInListAddedEvent {
-	int32 object_uid = 1;
+	int32 bid_item_uid = 1;
 	int32 object_gid = 2;
 	int32 object_type = 3;
 	repeated .com.ankama.dofus.server.game.protocol.common.ObjectEffect effects = 4;
@@ -55,13 +62,13 @@ message ExchangeBidHouseInListAddedEvent {
 }
 
 message ExchangeBidHouseInListRemovedEvent {
-	int32 object_uid = 1;
+	int32 bid_item_uid = 1;
 	int32 object_gid = 2;
 	int32 object_type = 3;
 }
 
 message ExchangeBidHouseInListUpdatedEvent {
-	int32 object_uid = 1;
+	int32 bid_item_uid = 1;
 	int32 object_gid = 2;
 	int32 object_type = 3;
 	repeated .com.ankama.dofus.server.game.protocol.common.ObjectEffect effects = 4;
@@ -69,7 +76,7 @@ message ExchangeBidHouseInListUpdatedEvent {
 }
 
 message ExchangeBidHouseItemAddedEvent {
-	.com.ankama.dofus.server.game.protocol.common.ObjectItem item = 1;
+	.com.ankama.dofus.server.game.protocol.exchange.BidItem item = 1;
 	int64 price = 2;
 	int64 unsold_delay = 3;
 }
@@ -118,10 +125,10 @@ message ExchangeBidPriceEvent {
 
 message ExchangeBidSellerStartedEvent {
 	.com.ankama.dofus.server.game.protocol.exchange.SellingConditions selling_conditions = 1;
-	repeated .com.ankama.dofus.server.game.protocol.exchange.ExchangeBidSellerStartedEvent.ObjectItemToSelInBid objects = 2;
+	repeated .com.ankama.dofus.server.game.protocol.exchange.ExchangeBidSellerStartedEvent.ItemToSellInBid items = 2;
 
-	message ObjectItemToSelInBid {
-		.com.ankama.dofus.server.game.protocol.common.ObjectItem object = 1;
+	message ItemToSellInBid {
+		.com.ankama.dofus.server.game.protocol.exchange.BidItem item = 1;
 		int64 price = 2;
 		int32 unsold_delay = 3;
 	}
@@ -374,7 +381,7 @@ message ExchangeObjectPutInBagEvent {
 
 message ExchangeObjectRemovedEvent {
 	bool remote = 1;
-	int32 object_uid = 2;
+	int32 bid_item_uid = 2;
 }
 
 message ExchangeObjectRemovedFromBagEvent {
@@ -428,7 +435,7 @@ message ExchangeObjectsModifiedEvent {
 
 message ExchangeObjectsRemovedEvent {
 	bool remote = 1;
-	repeated int32 objects_uid = 2;
+	repeated int32 bid_items_uid = 2;
 }
 
 message ExchangeObjectsSellRequest {
@@ -565,9 +572,9 @@ message ExchangeTypesItemsExchangerDescriptionForUserEvent {
 	repeated .com.ankama.dofus.server.game.protocol.exchange.ExchangeTypesItemsExchangerDescriptionForUserEvent.BidExchangerObject item_descriptions = 3;
 
 	message BidExchangerObject {
-		int32 object_uid = 1;
-		int32 object_gid = 2;
-		int32 object_type = 3;
+		int32 uid = 1;
+		int32 gid = 2;
+		int32 type = 3;
 		repeated .com.ankama.dofus.server.game.protocol.common.ObjectEffect effects = 4;
 		repeated int64 prices = 5;
 	}

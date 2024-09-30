@@ -4,6 +4,23 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.dialog;
 
+message ChangeAppearanceDialogLeave {
+}
+
+message ChangeAppearanceDialogResult {
+	bool success = 1;
+}
+
+message ChangeAppearanceDialogStart {
+	.com.ankama.dofus.server.game.protocol.dialog.ChangeAppearanceDialogStart.AppearanceType type = 1;
+
+	enum AppearanceType {
+		BODY = 0;
+		FACE = 1;
+		COLORS = 2;
+	}
+}
+
 message DialogLeaveEvent {
 	.com.ankama.dofus.server.game.protocol.common.DialogType dialog_type = 1;
 }

@@ -142,8 +142,9 @@ message FightTurnEndEvent {
 
 message FightTurnEvent {
 	int64 character_id = 1;
-	int32 wait_time = 2;
-	optional int32 remaining_time = 3;
+	int32 base_time = 2;
+	int32 extra_time = 3;
+	optional int32 remaining_time = 4;
 }
 
 message FightTurnFinishRequest {

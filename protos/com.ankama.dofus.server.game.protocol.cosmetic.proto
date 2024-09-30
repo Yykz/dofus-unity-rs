@@ -4,6 +4,33 @@ import "com.ankama.dofus.server.game.protocol.common.proto";
 
 package com.ankama.dofus.server.game.protocol.cosmetic;
 
+message CharacterAppearanceCollectionEvent {
+	.com.ankama.dofus.server.game.protocol.cosmetic.CharacterFaces character_faces = 1;
+}
+
+message CharacterAppearancesRequest {
+}
+
+message CharacterAppearancesResponse {
+	.com.ankama.dofus.server.game.protocol.cosmetic.CharacterFaces character_faces = 1;
+}
+
+message CharacterFaceUpdatedEvent {
+	int32 face_id = 1;
+	int32 slot = 2;
+}
+
+message CharacterFaces {
+	int32 slots = 1;
+	int32 max_slots = 3;
+	repeated int32 faces = 2;
+}
+
+message CharacterUpdateFaceRequest {
+	int32 face_id = 1;
+	int32 slot = 2;
+}
+
 message CosmeticInventoryAddObjectRequest {
 	int32 uid = 1;
 }
@@ -83,6 +110,7 @@ message Outfit {
 	.com.ankama.dofus.server.game.protocol.common.EntityLook entity_look = 8;
 	bool favorite = 9;
 	string last_modified = 10;
+	int32 face_id = 11;
 	map<int32, .com.ankama.dofus.server.game.protocol.cosmetic.Outfit.SkinOutfit> objects = 4;
 
 	message SkinOutfit {
@@ -98,6 +126,7 @@ message OutfitAuraChangedEvent {
 message OutfitCreateEmptyRequest {
 	string name = 1;
 	int32 pictogram_id = 2;
+	int32 face_id = 3;
 }
 
 message OutfitCreationResponse {
@@ -121,6 +150,14 @@ message OutfitEquipAuraRequest {
 }
 
 message OutfitEquipAuraResponse {
+	bool success = 1;
+}
+
+message OutfitEquipFaceRequest {
+	int32 face_id = 1;
+}
+
+message OutfitEquipFaceResponse {
 	bool success = 1;
 }
 

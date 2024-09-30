@@ -286,6 +286,27 @@ enum AttackableStatus {
 	AVA_PREQUALIFIED_ATTACKABLE = 6;
 }
 
+message BidActivitiesRequest {
+}
+
+message BidActivity {
+	int32 bid_id = 1;
+	.com.ankama.dofus.server.game.protocol.common.BidActivity.Type type = 2;
+	string created_at = 3;
+	.com.ankama.dofus.server.game.protocol.common.ItemMinimalInformation object = 4;
+	int64 price = 5;
+
+	enum Type {
+		SELL = 0;
+		BUY = 1;
+		EXPIRE = 2;
+	}
+}
+
+message BidActivityResponse {
+	repeated .com.ankama.dofus.server.game.protocol.common.BidActivity bid_activities = 1;
+}
+
 message BreachBranch {
 	int32 room = 1;
 	int32 element = 2;
@@ -1302,11 +1323,19 @@ message ObjectEffect {
 		int32 value_int = 3;
 		.com.ankama.dofus.server.game.protocol.common.ObjectEffect.ObjectEffectMinMaxValue min_max = 4;
 		.com.ankama.dofus.server.game.protocol.common.ObjectEffect.ObjectEffectDiceValue dice = 5;
-		string date = 6;
+		.com.ankama.dofus.server.game.protocol.common.ObjectEffect.DofusDate date = 6;
 		int64 duration_minute = 7;
 		int32 creature_family = 8;
 		.com.ankama.dofus.server.game.protocol.common.ObjectEffect.MonsterCount monster_count = 9;
 		.com.ankama.dofus.server.game.protocol.common.ObjectEffect.ObjectEffectMountValue mount = 10;
+	}
+
+	message DofusDate {
+		int32 year = 1;
+		int32 month = 2;
+		int32 day = 3;
+		int32 hour = 4;
+		int32 minute = 5;
 	}
 
 	message ObjectEffectMinMaxValue {
@@ -1864,6 +1893,7 @@ enum Team {
 	TEAM_CHALLENGER = 0;
 	TEAM_DEFENDER = 1;
 	TEAM_SPECTATOR = 2;
+	TEAM_NEUTRAL = 3;
 }
 
 enum TeamType {
