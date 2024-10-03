@@ -296,8 +296,24 @@ impl Ord for PathSim {
 }
 
 pub fn find_closest<'a>(paths: &'a [PathKind], current_namespace: &str) -> &'a PathKind {
-    paths
-        .iter()
-        .max_by_key(|path| PathSim::sim(path, current_namespace))
-        .unwrap()
+    let first = paths.first().unwrap();
+    let mut best_sim = PathSim::sim(first, current_namespace);
+    let mut best: Vec<&'a PathKind> = vec![first];
+
+    for path in &paths[1..] {
+        let sim = PathSim::sim(path, current_namespace);
+        match sim.cmp(&best_sim) {
+            std::cmp::Ordering::Less => {}
+            std::cmp::Ordering::Equal => best.push(path),
+            std::cmp::Ordering::Greater => {
+                best_sim = sim;
+                best = vec![path];
+            }
+        }
+    }
+    best.sort_by_key(|p| match p {
+        PathKind::Extern(n, _) => n,
+        PathKind::Local(n) => n,
+    });
+    best[0]
 }
