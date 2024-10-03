@@ -295,6 +295,7 @@ impl Ord for PathSim {
     }
 }
 
+// TODO refractor namespace prioritization
 pub fn find_closest<'a>(paths: &'a [PathKind], current_namespace: &str) -> &'a PathKind {
     let first = paths.first().unwrap();
     let mut best_sim = PathSim::sim(first, current_namespace);
